@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="./assets/sa-hero.jpg" data-resource-id="heroImg" />
+<meta name="ext-resource-dependency" content="./assets/sa-meditation.jpg" data-resource-id="medImg" />
+<meta name="ext-resource-dependency" content="./assets/sa-crowd.jpg" data-resource-id="crowdImg" />
+<meta name="ext-resource-dependency" content="./assets/logo.jpeg" data-resource-id="logoImg" />
+<meta name="ext-resource-dependency" content="./assets/score.wav" data-resource-id="scoreAud" />
+<meta name="ext-resource-dependency" content="./assets/aum-chant.wav" data-resource-id="omAud" />
+<meta name="ext-resource-dependency" content="./assets/impacts.wav" data-resource-id="impactsAud" />
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#332c63">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#332c63"/>
+    <circle cx="600" cy="400" r="220" fill="none" stroke="#e8c877" stroke-width="3" opacity="0.5"/>
+    <circle cx="600" cy="400" r="150" fill="none" stroke="#e8c877" stroke-width="3" opacity="0.7"/>
+    <circle cx="600" cy="400" r="90" fill="#e8c877" opacity="0.18"/>
+    <text x="600" y="440" font-family="serif" font-size="120" fill="#f5dfa4" text-anchor="middle">ॐ</text>
+  </svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #332c63; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; }
+  a { color: #e8c877; text-decoration: none; }
+  a:hover { color: #f5dfa4; }
+</style>
+<script>window.OM_SCENES = '[{"name":"Opening","dur":4},{"name":"Silence","dur":6},{"name":"Breath","dur":7},{"name":"Crown","dur":7},{"name":"Kundalini","dur":7},{"name":"Oneness","dur":5},{"name":"FortyDays","dur":6},{"name":"Within","dur":6},{"name":"Together","dur":6},{"name":"SatyaYugam","dur":12},{"name":"Invitation","dur":4}]';</script>
+<script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+<script>window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "captions": true,
+  "music": true,
+  "omChant": true,
+  "impacts": true,
+  "narration": true,
+  "motionEditor": true
+}/*EDITMODE-END*/;</script>
+</helmet>
+<div style="min-height: 100vh; background: #332c63; display: flex; flex-direction: column">
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 22px">
+    <a href="Home.dc.html" style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #9a927f">← Back to goldenagewisdom.org</a>
+    <span style="font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.08em; color: #d8c896">WHAT MEDITATION AWAKENS · 70s</span>
+  </div>
+  <x-import component-from-global-scope="IntroFilm" from="./tweaks-panel.jsx ./animations-v2.jsx ./intro-film-sa.jsx" hint-size="100%,720px"></x-import>
+</div>
+</x-dc>
+</body>
+</html>

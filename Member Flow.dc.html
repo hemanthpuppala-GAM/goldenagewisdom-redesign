@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #0d0a1c; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; }
+  a { color: #e8c877; text-decoration: none; }
+  a:hover { color: #f5dfa4; }
+  * { box-sizing: border-box; }
+  input::placeholder, textarea::placeholder { color: #7d7666; }
+  @media (max-width: 820px) {
+    .r-shell { flex-direction: column !important; }
+    .r-sidebar { width: 100% !important; height: auto !important; position: static !important; flex-direction: row !important; flex-wrap: wrap !important; align-items: center !important; gap: 6px !important; padding: 12px 14px !important; }
+    .r-sidebar .r-side-brand { padding: 0 8px 0 0 !important; }
+    .r-sidebar .r-side-note, .r-sidebar .r-side-spacer { display: none !important; }
+    .r-main { padding: 24px 18px !important; }
+    .r-grid-3 { grid-template-columns: 1fr !important; }
+    .r-grid-2 { grid-template-columns: 1fr !important; }
+    .r-grid-gallery { grid-template-columns: repeat(2, 1fr) !important; }
+    .r-dash-head { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+  }
+  @media (max-width: 960px) {
+    .r-login-visual { display: none !important; }
+  }
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #0d0a1c">
+  <!-- LOGIN SCREEN -->
+  <sc-if value="{{ showLogin }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Sign in" style="position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; gap: 60px; padding: 40px 24px; overflow: hidden; background: radial-gradient(ellipse at 50% 120%, #8a7ab8 0%, #4a4183 55%, #332c63 100%); flex-wrap: wrap">
+      <sc-for list="{{ loginStars }}" as="st" hint-placeholder-count="10">
+        <div style="position: absolute; left: {{ st.x }}%; top: {{ st.y }}%; width: {{ st.s }}px; height: {{ st.s }}px; border-radius: 50%; background: #f5ecd6; opacity: {{ st.o }}"></div>
+      </sc-for>
+      <div class="r-login-visual" style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 26px; padding: 20px">
+        <div style="position: absolute; inset: -40px; border-radius: 50%; background: radial-gradient(circle, rgba(245,223,164,0.14), rgba(245,223,164,0) 70%)"></div>
+        <div style="display: flex; align-items: baseline; gap: 12px">
+          <span style="font-family: 'Marcellus', serif; font-size: 96px; line-height: 1; color: #e8c877; text-shadow: 0 2px 40px rgba(232,200,119,0.4)">40</span>
+          <span style="font-family: 'Marcellus', serif; font-size: 30px; color: #cfc8ba">days</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(10, 16px); gap: 8px">
+          <sc-for list="{{ loginDots }}" as="d" hint-placeholder-count="40">
+            <div style="width: 16px; height: 16px; border-radius: 50%; background: {{ d.bg }}; border: 1px solid rgba(232,200,119,0.4); box-shadow: {{ d.glow }}"></div>
+          </sc-for>
+        </div>
+        <div style="max-width: 380px; text-align: center; padding: 14px 24px; border-radius: 18px; background: rgba(51,44,99,0.65); backdrop-filter: blur(10px); border: 1px solid rgba(232,200,119,0.3)">
+          <div style="font-family: 'Marcellus', serif; font-size: 19px; color: #fdf8ec">Give us 40 days — a 30-minute sit in silence.</div>
+          <div style="font-size: 12.5px; font-weight: 300; color: #c4bcab; margin-top: 5px; line-height: 1.5">No kriyas, no breath techniques. Close your eyes and watch the breath — that's all.</div>
+        </div>
+      </div>
+      <div style="position: relative; width: min(420px, 100%); padding: 44px 38px; border-radius: 28px; background: rgba(42,36,82,0.55); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(232,200,119,0.3); box-shadow: 0 30px 80px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center">
+        <img src="assets/logo.jpeg" alt="Golden Age Wisdom" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(232,200,119,0.5)">
+        <div>
+          <h1 style="font-family: 'Marcellus', serif; font-size: 28px; margin: 0 0 8px; color: #f7f1e3">Welcome back, seeker</h1>
+          <p style="margin: 0; font-size: 14.5px; font-weight: 300; color: #b9b1a0">Continue your journey with one tap. No passwords to remember.</p>
+        </div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 12px">
+          <button onClick="{{ signIn }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.95); color: #1f1f1f; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer"><span style="font-weight: 700; font-size: 16px; background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853); -webkit-background-clip: text; background-clip: text; color: transparent">G</span> Continue with Google</button>
+          <button onClick="{{ signIn }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(232,200,119,0.5)"><span style="color: #8ab4f8; font-weight: 700">f</span> Continue with Facebook</button>
+          <button onClick="{{ signIn }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(232,200,119,0.5)"> Continue with Apple</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; width: 100%; color: #7d7666; font-size: 12px"><div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1)"></div>secured by OAuth 2.0<div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1)"></div></div>
+        <p style="margin: 0; font-size: 12.5px; font-weight: 300; line-height: 1.6; color: #8a8371">We never see or store your password. Your data is encrypted and never sold. <a href="#" style="font-size: 12.5px">Privacy policy</a></p>
+        <a href="Home.dc.html" style="font-size: 13px; color: #9a927f">← Back to goldenagewisdom.org</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- DASHBOARD -->
+  <sc-if value="{{ showDash }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Member dashboard" class="r-shell" style="min-height: 100vh; display: flex">
+      <!-- SIDEBAR -->
+      <aside class="r-sidebar" style="width: 250px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; padding: 28px 18px; display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,0.03); border-right: 1px solid rgba(255,255,255,0.08)">
+        <a href="Home.dc.html" class="r-side-brand" style="display: flex; align-items: center; gap: 10px; padding: 0 10px 22px">
+          <img src="assets/logo.jpeg" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(232,200,119,0.5)">
+          <span style="font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.04em; color: #f2e3bb">GOLDEN AGE</span>
+        </a>
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+          <button onClick="{{ n.go }}" style="display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 14px; border: none; text-align: left; font-family: 'Outfit', sans-serif; font-size: 14.5px; cursor: pointer; background: {{ n.bg }}; color: {{ n.color }}; font-weight: {{ n.weight }}">{{ n.icon }} {{ n.label }}</button>
+        </sc-for>
+        <div class="r-side-spacer" style="flex: 1"></div>
+        <div class="r-side-note" style="padding: 16px; border-radius: 18px; background: rgba(232,200,119,0.08); border: 1px solid rgba(232,200,119,0.2); font-size: 13px; font-weight: 300; color: #b9b1a0; line-height: 1.55">Our teachings stay free because of members like you. <a href="#" style="font-size: 13px">Support the mission ♡</a></div>
+        <button onClick="{{ signOut }}" style="display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 14px; border: none; background: none; text-align: left; font-family: 'Outfit', sans-serif; font-size: 13.5px; color: #7d7666; cursor: pointer" style-hover="color: #d8d2c4">↩ Sign out</button>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="r-main" style="flex: 1; padding: 36px 40px; max-width: 1060px">
+        <!-- Overview tab -->
+        <sc-if value="{{ tabOverview }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 26px">
+            <div class="r-dash-head" style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+              <div>
+                <h1 style="font-family: 'Marcellus', serif; font-size: 30px; margin: 0; color: #f7f1e3">Namaste, {{ memberName }} 🙏</h1>
+                <p style="margin: 6px 0 0; font-size: 14.5px; font-weight: 300; color: #9a927f">Day 21 of your journey · The breath is becoming quiet.</p>
+              </div>
+              <button onClick="{{ startSession }}" style="padding: 13px 28px; border-radius: 999px; border: none; background: linear-gradient(135deg, #e8c877, #c99a3f); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px; cursor: pointer; box-shadow: 0 4px 24px rgba(232,200,119,0.4)">▶ Meditate now</button>
+            </div>
+            <div class="r-grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px">
+              <div style="padding: 26px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(232,200,119,0.3)">
+                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #c99a3f">Current streak</div>
+                <div style="font-family: 'Marcellus', serif; font-size: 44px; color: #f5dfa4; margin: 8px 0 2px">21 <span style="font-size: 18px; color: #b9b1a0">days</span></div>
+                <div style="font-size: 13px; font-weight: 300; color: #9a927f">Best: 34 days</div>
+              </div>
+              <div style="padding: 26px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
+                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #c99a3f">Total stillness</div>
+                <div style="font-family: 'Marcellus', serif; font-size: 44px; color: #f2e9d8; margin: 8px 0 2px">18<span style="font-size: 18px; color: #b9b1a0">h</span> 40<span style="font-size: 18px; color: #b9b1a0">m</span></div>
+                <div style="font-size: 13px; font-weight: 300; color: #9a927f">Across 56 sessions</div>
+              </div>
+              <div style="padding: 26px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
+                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #c99a3f">Journey stage</div>
+                <div style="font-family: 'Marcellus', serif; font-size: 26px; color: #f2e9d8; margin: 12px 0 8px">Deepening Silence</div>
+                <div style="height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08)"><div style="width: 42%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #e8c877, #c99a3f)"></div></div>
+              </div>
+            </div>
+            <div style="padding: 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px">
+                <h2 style="font-family: 'Marcellus', serif; font-size: 21px; margin: 0; color: #f2e9d8">This week</h2>
+                <span style="font-size: 13px; color: #9a927f">5 of 7 days</span>
+              </div>
+              <div style="display: flex; gap: 12px">
+                <sc-for list="{{ week }}" as="d" hint-placeholder-count="7">
+                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px">
+                    <div style="width: 100%; max-width: 54px; aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; background: {{ d.bg }}; border: 1px solid {{ d.border }}; color: {{ d.color }}">{{ d.mark }}</div>
+                    <span style="font-size: 12px; color: #7d7666">{{ d.label }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="r-grid-2" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px">
+              <div style="padding: 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 14px">
+                <h2 style="font-family: 'Marcellus', serif; font-size: 21px; margin: 0; color: #f2e9d8">Continue practicing</h2>
+                <sc-for list="{{ meditations }}" as="m" hint-placeholder-count="3">
+                  <div style="display: flex; align-items: center; gap: 14px; padding: 13px 16px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07)" style-hover="border-color: rgba(232,200,119,0.4)">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(232,200,119,0.14); border: 1px solid rgba(232,200,119,0.35); color: #f5dfa4; font-size: 13px">▶</div>
+                    <div style="flex: 1"><div style="font-weight: 500; font-size: 15px; color: #ece5d5">{{ m.title }}</div><div style="font-size: 12.5px; font-weight: 300; color: #9a927f">{{ m.description }}</div></div>
+                    <span style="font-size: 12.5px; color: #c99a3f">{{ m.duration }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="padding: 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 14px">
+                <h2 style="font-family: 'Marcellus', serif; font-size: 21px; margin: 0; color: #f2e9d8">Your gatherings</h2>
+                <sc-for list="{{ events }}" as="e" hint-placeholder-count="2">
+                  <div style="display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07)">
+                    <div style="flex-shrink: 0; width: 52px; text-align: center; padding: 7px 0; border-radius: 12px; background: rgba(232,200,119,0.1); border: 1px solid rgba(232,200,119,0.3)">
+                      <div style="font-family: 'Marcellus', serif; font-size: 18px; color: #f5dfa4; line-height: 1.1">{{ e.day }}</div>
+                      <div style="font-size: 10.5px; letter-spacing: 0.1em; color: #c99a3f">{{ e.month }}</div>
+                    </div>
+                    <div style="flex: 1"><div style="font-weight: 500; font-size: 14.5px; color: #ece5d5">{{ e.title }}</div><div style="font-size: 12.5px; font-weight: 300; color: #9a927f">{{ e.meta }}</div></div>
+                    <button onClick="{{ e.toggle }}" style="padding: 8px 16px; border-radius: 999px; font-family: 'Outfit', sans-serif; font-size: 12.5px; cursor: pointer; border: 1px solid {{ e.btnBorder }}; background: {{ e.btnBg }}; color: {{ e.btnColor }}; font-weight: 500">{{ e.btnLabel }}</button>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Journal tab -->
+        <sc-if value="{{ tabJournal }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 24px; max-width: 760px">
+            <div>
+              <h1 style="font-family: 'Marcellus', serif; font-size: 30px; margin: 0; color: #f7f1e3">Private journal</h1>
+              <p style="margin: 6px 0 0; font-size: 14.5px; font-weight: 300; color: #9a927f">Only you can read these. Encrypted at rest.</p>
+            </div>
+            <div style="padding: 24px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(232,200,119,0.25); display: flex; flex-direction: column; gap: 14px">
+              <textarea value="{{ journalDraft }}" onChange="{{ onJournalInput }}" placeholder="What arose in today's sitting?" rows="4" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.6; resize: vertical; outline: none"></textarea>
+              <div style="display: flex; justify-content: flex-end"><button onClick="{{ saveJournal }}" style="padding: 11px 26px; border-radius: 999px; border: none; background: linear-gradient(135deg, #e8c877, #c99a3f); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer">Save entry</button></div>
+            </div>
+            <sc-for list="{{ journalEntries }}" as="j" hint-placeholder-count="2">
+              <div style="padding: 22px 26px; border-radius: 20px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08)">
+                <div style="font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #c99a3f; margin-bottom: 8px">{{ j.date }}</div>
+                <p style="margin: 0; font-size: 15px; font-weight: 300; line-height: 1.65; color: #cfc8ba">{{ j.text }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- Gallery tab -->
+        <sc-if value="{{ tabGallery }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 24px">
+            <div>
+              <h1 style="font-family: 'Marcellus', serif; font-size: 30px; margin: 0; color: #f7f1e3">Your gallery</h1>
+              <p style="margin: 6px 0 0; font-size: 14.5px; font-weight: 300; color: #9a927f">Photos from gatherings & moments on your path. Drag images onto any tile to upload.</p>
+            </div>
+            <div class="r-grid-gallery" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px">
+              <div style="aspect-ratio: 4/3"><image-slot id="member-photo-1" shape="rounded" radius="20" placeholder="Drop a photo — retreat, altar, sunrise…"></image-slot></div>
+              <div style="aspect-ratio: 4/3"><image-slot id="member-photo-2" shape="rounded" radius="20" placeholder="Drop a photo"></image-slot></div>
+              <div style="aspect-ratio: 4/3"><image-slot id="member-photo-3" shape="rounded" radius="20" placeholder="Drop a photo"></image-slot></div>
+              <div style="aspect-ratio: 4/3"><image-slot id="member-photo-4" shape="rounded" radius="20" placeholder="Drop a photo"></image-slot></div>
+              <div style="aspect-ratio: 4/3"><image-slot id="member-photo-5" shape="rounded" radius="20" placeholder="Drop a photo"></image-slot></div>
+              <div style="aspect-ratio: 4/3"><image-slot id="member-photo-6" shape="rounded" radius="20" placeholder="Drop a photo"></image-slot></div>
+            </div>
+            <p style="margin: 0; font-size: 12.5px; font-weight: 300; color: #7d7666">Uploads are scanned, resized and stripped of location metadata before storing — see the security handoff for implementation.</p>
+          </div>
+        </sc-if>
+      </main>
+    </div>
+  </sc-if>
+
+  <!-- WISDOM GUIDE BOT -->
+  <sc-if value="{{ showDash }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position: fixed; bottom: 96px; right: 24px; z-index: 90; width: 350px; max-height: min(480px, calc(100vh - 120px)); display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: rgba(22,17,44,0.88); backdrop-filter: blur(24px); border: 1px solid rgba(232,200,119,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.5)">
+        <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 10px">
+          <div style="width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #f5dfa4, #c99a3f); display: flex; align-items: center; justify-content: center; color: #241b06; font-family: 'Marcellus', serif">ॐ</div>
+          <div><div style="font-weight: 600; font-size: 14.5px; color: #f2e9d8">Wisdom Guide</div><div style="font-size: 12px; color: #9a927f">Knows your journey · asks back</div></div>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{ chatMessages }}" as="msg" hint-placeholder-count="1">
+            <div style="max-width: 86%; padding: 10px 14px; border-radius: 16px; font-size: 13.5px; font-weight: 300; line-height: 1.5; align-self: {{ msg.align }}; background: {{ msg.bg }}; color: {{ msg.color }}">{{ msg.text }}</div>
+          </sc-for>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{ chatChips }}" as="c" hint-placeholder-count="2">
+              <button onClick="{{ c.pick }}" style="padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(232,200,119,0.35); background: rgba(232,200,119,0.08); color: #e8c877; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">{{ c.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="padding: 12px; display: flex; gap: 8px; border-top: 1px solid rgba(255,255,255,0.08)">
+          <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Ask anything…" style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 10px 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 13.5px; outline: none">
+          <button onClick="{{ sendChat }}" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: linear-gradient(135deg, #e8c877, #c99a3f); color: #241b06; font-size: 15px; cursor: pointer">↑</button>
+        </div>
+      </div>
+    </sc-if>
+    <button onClick="{{ toggleChat }}" style="position: fixed; bottom: 24px; right: 24px; z-index: 90; width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(232,200,119,0.5); background: radial-gradient(circle at 35% 35%, #f5dfa4, #c99a3f); color: #241b06; font-size: 24px; cursor: pointer; box-shadow: 0 8px 30px rgba(232,200,119,0.45); font-family: 'Marcellus', serif">{{ chatIcon }}</button>
+  </sc-if>
+
+  <!-- SESSION OVERLAY -->
+  <sc-if value="{{ sessionOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 100; background: rgba(13,10,28,0.92); backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px">
+      <div style="width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(232,200,119,0.35), rgba(232,200,119,0.02) 70%); border: 1px solid rgba(232,200,119,0.4); display: flex; align-items: center; justify-content: center; transform: scale({{ breathScale }}); transition: transform 4s ease-in-out">
+        <span style="font-family: 'Marcellus', serif; font-size: 40px; color: #f5dfa4">ॐ</span>
+      </div>
+      <div style="text-align: center">
+        <div style="font-family: 'Marcellus', serif; font-size: 26px; color: #f2e9d8">{{ breathLabel }}</div>
+        <div style="font-size: 14px; font-weight: 300; color: #9a927f; margin-top: 8px">Breath of Stillness · {{ sessionClock }}</div>
+      </div>
+      <button onClick="{{ endSession }}" style="padding: 11px 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.25); background: none; color: #d8d2c4; font-family: 'Outfit', sans-serif; font-size: 14px; cursor: pointer">End session</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1280px&quot;,&quot;height&quot;:&quot;800px&quot;},&quot;startOnDashboard&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;memberName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Harikrishna&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+class Component extends DCLogic {
+  state = {
+    screen: 'login', tab: 'overview', sessionOpen: false, breathIn: true, sessionSecs: 0,
+    chatOpen: false, chatInput: '',
+    chatMessages: [{ from: 'bot', text: 'Namaste 🙏 I\u2019m your Wisdom Guide. I know your streak, your gatherings and your practice — ask me anything, or tap a suggestion below.' }],
+    journalDraft: '',
+    journalEntries: [
+      { date: 'July 21, 2026', text: 'Twenty minutes felt like five. Toward the end, the breath became so thin I could not tell where it began. A soft warmth at the crown.' },
+      { date: 'July 19, 2026', text: 'Restless start — but Master\u2019s words came back: "do not fight the mind, keep the body still and the mind follows." It did.' },
+    ],
+    registered: { 0: true, 1: false },
+  };
+  // --- lightweight self-NLP: tokenize, stem, score intents, track context ---
+  nlp(q) {
+    const stem = w => w.replace(/(ing|ed|s|ly)$/, '');
+    const toks = q.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean).map(stem);
+    const intents = [
+      { id: 'streak', kw: ['streak', 'day', 'progress', 'journey', 'track', 'consist'], },
+      { id: 'begin', kw: ['begin', 'start', 'new', 'how', 'learn', 'first', 'beginner'] },
+      { id: 'kundalini', kw: ['kundalini', 'awaken', 'chakra', 'energy', 'prana', 'sahasrara', 'crown'] },
+      { id: 'silence', kw: ['silence', 'silent', 'quiet', 'still', 'thought', 'mind', 'restless', 'focus'] },
+      { id: 'event', kw: ['event', 'retreat', 'workshop', 'session', 'register', 'gather', 'live', 'group'] },
+      { id: 'journal', kw: ['journal', 'write', 'entry', 'diary', 'note', 'privat'] },
+      { id: 'stress', kw: ['stress', 'anxiety', 'anxiou', 'sleep', 'tired', 'restles', 'worr', 'sad', 'depres', 'angr'] },
+      { id: 'forty', kw: ['40', 'forty', 'challenge', 'commit', '30', 'minute'] },
+      { id: 'donate', kw: ['donat', 'support', 'money', 'pay', 'free', 'cost'] },
+      { id: 'experience', kw: ['experience', 'feel', 'felt', 'vision', 'light', 'tingl', 'goose', 'saw', 'sensation', 'vibrat'] },
+      { id: 'volunteer', kw: ['volunteer', 'seva', 'serve', 'contribut', 'team', 'spread', 'share'] },
+      { id: 'gratitude', kw: ['thank', 'namaste', 'love', 'great', 'nice', 'good'] },
+    ];
+    let best = null, bestScore = 0;
+    for (const it of intents) {
+      const score = it.kw.reduce((n, k) => n + (toks.some(t => t.startsWith(stem(k))) ? 1 : 0), 0);
+      if (score > bestScore) { best = it.id; bestScore = score; }
+    }
+    return { intent: bestScore > 0 ? best : (this.chatCtx ? this.chatCtx + '_follow' : null), toks };
+  }
+  botReply(q) {
+    const { intent } = this.nlp(q);
+    const name = this.props.memberName ?? 'Ananya';
+    const answers = {
+      streak: `You're on day 21, ${name} — your best is 34. You've sat 5 of 7 days this week. One gentle sit today keeps the flame alive. Shall I start a 12-minute Breath of Stillness?`,
+      begin: 'Beautiful. Sit comfortably, close your eyes, and simply watch the breath — no kriyas, no techniques. Start with "Breath of Stillness" (12 min) from your Overview. The first week, consistency matters more than duration.',
+      kundalini: 'Kundalini is the dormant life-energy at the base of the spine. As your practice deepens, breath refines, prana is received through the sahasrara, and the energy rises chakra by chakra — bringing stillness and oneness. Our intro film shows this in 70 seconds.',
+      silence: 'When thoughts race, don\u2019t fight them — keep the body still and watch the breath; the mind follows. In your last journal you wrote the breath became "so thin" — that is the doorway. Tonight, try the 30-minute Silence Immersion.',
+      event: 'Your gatherings: Online Meditation Session on Jun 22 (you\u2019re going ✓) and the Kundalini Workshop in Bangalore on Jul 5 (not registered yet). Want me to take you to Events to register?',
+      journal: 'Your journal is private and encrypted — only you can read it. Writing right after a sit captures what the mind forgets in minutes. Open the Journal tab and note even one line about today\u2019s sitting.',
+      stress: `I hear you, ${name}. Stress softens fastest in silence: sit now for just 5 minutes, eyes closed, watching the breath — nothing else. Your streak shows the healing is already working. Shall I open a session?`,
+      forty: 'The 40-day invitation: one 30-minute sit in silence daily. No kriyas, no breath practices — close your eyes and watch the breath, that\u2019s it. After 40 days, see how well you act and how deeply mind and body heal. You\u2019re on day 21 — past the halfway mark.',
+      donate: 'Every teaching here is free — we are a non-profit. If our work moves you, the "Support the mission ♡" link in your sidebar keeps it free for all. Never an obligation.',
+      experience: 'Sensations of light, tingling at the crown, or deep stillness are common as prana refines — welcome them without chasing them. Masters explain these experiences here: youtube.com/watch?v=_7xG_Y0RBUo. Note what you felt in your Journal while it\u2019s fresh.',
+      volunteer: `Wonderful, ${name} — meditators who complete the 40 days often feel called to give back. As a volunteer you can host group sits, welcome new members, and help at retreats. You can also support the mission with a donation or join our live events — everything stays free for all.`,
+      gratitude: `Namaste, ${name} 🙏 The light in me honors the light in you. Is there anything on your practice I can help with?`,
+    };
+    const fallback = `Tell me more — do you want help with your practice, your streak, an event, or how you\u2019re feeling today? I learn from what you ask.`;
+    if (intent && intent.endsWith('_follow')) {
+      const base = intent.replace('_follow', '');
+      this.chatCtx = base;
+      return 'On ' + base + ' — ' + (answers[base] || fallback);
+    }
+    this.chatCtx = intent;
+    return answers[intent] || fallback;
+  }
+  sendChat(text) {
+    const q = (text != null ? text : this.state.chatInput).trim();
+    if (!q) return;
+    this.setState(s => ({ chatMessages: [...s.chatMessages, { from: 'user', text: q }], chatInput: '' }));
+    setTimeout(() => this.setState(s => ({ chatMessages: [...s.chatMessages, { from: 'bot', text: this.botReply(q) }] })), 550);
+  }
+  componentDidMount() {
+    this.breathTimer = setInterval(() => { if (this.state.sessionOpen) this.setState(s => ({ breathIn: !s.breathIn })); }, 4000);
+    this.clockTimer = setInterval(() => { if (this.state.sessionOpen) this.setState(s => ({ sessionSecs: s.sessionSecs + 1 })); }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.breathTimer); clearInterval(this.clockTimer); }
+  renderVals() {
+    const s = this.state;
+    const tab = s.tab;
+    const navDefs = [
+      { key: 'overview', icon: '☀', label: 'Overview' },
+      { key: 'meditate', icon: '▶', label: 'Meditate' },
+      { key: 'journal', icon: '✎', label: 'Journal' },
+      { key: 'gallery', icon: '❖', label: 'Gallery' },
+      { key: 'events', icon: '◈', label: 'Events' },
+    ];
+    const mins = String(Math.floor(s.sessionSecs / 60)).padStart(2, '0');
+    const secs = String(s.sessionSecs % 60).padStart(2, '0');
+    const eventDefs = [
+      { day: '22', month: 'JUN', title: 'Online Meditation Session', meta: '7:00 PM IST · Online' },
+      { day: '05', month: 'JUL', title: 'Kundalini Workshop', meta: 'Bangalore' },
+    ];
+    const screen = this.props.startOnDashboard && s.screen === 'login' ? 'dash' : s.screen;
+    return {
+      memberName: this.props.memberName ?? 'Ananya',
+      loginStars: Array.from({ length: 40 }, (_, i) => ({ x: (i * 137.508) % 100, y: (i * 61.803) % 100, s: 1 + (i % 3), o: 0.12 + ((i * 37) % 45) / 100 })),
+      loginDots: Array.from({ length: 40 }, (_, i) => {
+        const done = i < 21;
+        return { bg: done ? '#e8c877' : 'rgba(255,255,255,0.08)', glow: done ? '0 0 8px rgba(232,200,119,0.5)' : 'none' };
+      }),
+      showLogin: screen === 'login',
+      showDash: screen === 'dash',
+      signIn: () => this.setState({ screen: 'dash' }),
+      signOut: () => this.setState({ screen: 'login' }),
+      tabOverview: tab === 'overview' || tab === 'events',
+      tabJournal: tab === 'journal',
+      tabGallery: tab === 'gallery',
+      navItems: navDefs.map(n => ({
+        icon: n.icon, label: n.label,
+        go: () => { if (n.key === 'meditate') { this.setState({ sessionOpen: true, sessionSecs: 0 }); } else { this.setState({ tab: n.key }); } },
+        bg: tab === n.key ? 'rgba(232,200,119,0.14)' : 'transparent',
+        color: tab === n.key ? '#f5dfa4' : '#b9b1a0',
+        weight: tab === n.key ? '600' : '400',
+      })),
+      week: ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((label, i) => {
+        const done = i < 5;
+        return { label, mark: done ? '✓' : (i === 5 ? '·' : ''), bg: done ? 'rgba(232,200,119,0.16)' : 'rgba(255,255,255,0.04)', border: done ? 'rgba(232,200,119,0.45)' : 'rgba(255,255,255,0.09)', color: done ? '#f5dfa4' : '#7d7666' };
+      }),
+      meditations: [
+        { title: 'Root to Crown Awakening', description: 'All seven chakras · resumes at 8:40', duration: '20 min' },
+        { title: 'Breath of Stillness', description: 'Gentle breath awareness', duration: '12 min' },
+        { title: 'Silence Immersion', description: 'Unguided with soft bells', duration: '30 min' },
+      ],
+      events: eventDefs.map((e, i) => {
+        const reg = !!s.registered[i];
+        return { ...e,
+          toggle: () => this.setState(st => ({ registered: { ...st.registered, [i]: !st.registered[i] } })),
+          btnLabel: reg ? '✓ Going' : 'Register',
+          btnBg: reg ? 'rgba(232,200,119,0.16)' : 'transparent',
+          btnBorder: reg ? 'rgba(232,200,119,0.5)' : 'rgba(255,255,255,0.2)',
+          btnColor: reg ? '#f5dfa4' : '#b9b1a0',
+        };
+      }),
+      journalDraft: s.journalDraft,
+      onJournalInput: (e) => this.setState({ journalDraft: e.target.value }),
+      saveJournal: () => {
+        const text = s.journalDraft.trim();
+        if (!text) return;
+        const date = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        this.setState(st => ({ journalEntries: [{ date, text }, ...st.journalEntries], journalDraft: '' }));
+      },
+      journalEntries: s.journalEntries,
+      chatOpen: s.chatOpen,
+      chatIcon: s.chatOpen ? '×' : 'ॐ',
+      toggleChat: () => this.setState(st => ({ chatOpen: !st.chatOpen })),
+      chatInput: s.chatInput,
+      onChatInput: (e) => this.setState({ chatInput: e.target.value }),
+      onChatKey: (e) => { if (e.key === 'Enter') this.sendChat(); },
+      sendChat: () => this.sendChat(),
+      chatMessages: s.chatMessages.map(m => ({
+        text: m.text,
+        align: m.from === 'user' ? 'flex-end' : 'flex-start',
+        bg: m.from === 'user' ? 'linear-gradient(135deg, #e8c877, #c99a3f)' : 'rgba(255,255,255,0.07)',
+        color: m.from === 'user' ? '#241b06' : '#d8d2c4',
+      })),
+      chatChips: ['How is my streak?', 'I feel stressed', 'About the 40 days', 'Upcoming events'].map(label => ({ label, pick: () => this.sendChat(label) })),
+      startSession: () => this.setState({ sessionOpen: true, sessionSecs: 0 }),
+      endSession: () => this.setState({ sessionOpen: false }),
+      sessionOpen: s.sessionOpen,
+      breathScale: s.breathIn ? 1.18 : 0.86,
+      breathLabel: s.breathIn ? 'Breathe in…' : 'Release…',
+      sessionClock: mins + ':' + secs,
+    };
+  }
+}
+</script>
+</body>
+</html>

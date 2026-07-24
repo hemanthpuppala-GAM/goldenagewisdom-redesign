@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #0d0a1c; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; }
+  a { color: #e8c877; text-decoration: none; }
+  a:hover { color: #f5dfa4; }
+  * { box-sizing: border-box; }
+</style>
+</helmet>
+<div style="min-height: 100vh; background: radial-gradient(ellipse at 50% -20%, #241a3f, #0d0a1c 60%); padding: 60px 24px">
+  <div style="max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px">
+    <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px">
+      <img src="assets/logo.jpeg" alt="" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(232,200,119,0.5)">
+      <h1 style="font-family: 'Marcellus', serif; font-size: 40px; margin: 0; color: #f7f1e3">Golden Age Wisdom — Redesign Demo</h1>
+      <p style="margin: 0; max-width: 560px; font-size: 16px; font-weight: 300; line-height: 1.6; color: #b9b1a0">A world-class concept for goldenagewisdom.org: new public site, cinematic intro film, and a secure member area. Walk through in this order:</p>
+    </div>
+    <sc-for list="{{ stops }}" as="s" hint-placeholder-count="4">
+      <a href="{{ s.href }}" style="display: flex; gap: 22px; align-items: center; padding: 26px 30px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)" style-hover="border-color: rgba(232,200,119,0.5)">
+        <div style="flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(232,200,119,0.35), rgba(201,154,63,0.12)); border: 1px solid rgba(232,200,119,0.4); font-family: 'Marcellus', serif; font-size: 20px; color: #f5dfa4">{{ s.num }}</div>
+        <div style="flex: 1">
+          <div style="font-family: 'Marcellus', serif; font-size: 21px; color: #f2e9d8">{{ s.title }}</div>
+          <div style="font-size: 14px; font-weight: 300; line-height: 1.55; color: #9a927f; margin-top: 4px">{{ s.desc }}</div>
+        </div>
+        <div style="color: #c99a3f; font-size: 20px">→</div>
+      </a>
+    </sc-for>
+    <div style="padding: 24px 30px; border-radius: 24px; background: rgba(232,200,119,0.07); border: 1px solid rgba(232,200,119,0.25); font-size: 14px; font-weight: 300; line-height: 1.65; color: #cfc8ba">
+      <strong style="color: #f2e3bb; font-weight: 600">Demo tips:</strong> On the sign-in screen, any provider button enters the dashboard (prototype — real OAuth per the handoff). In the dashboard, try the ॐ chat bot ("How is my streak?", "I feel stressed"), write a journal entry, register for an event, and press "Meditate now". In the film, press play once for sound. Engineering plan: see HANDOFF.md in the project.
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      stops: [
+        { num: '1', href: 'Home.dc.html', title: 'Public homepage', desc: 'Golden cosmic glassmorphism, meditation benefits, guided sessions, events, mission-first donations, language switcher, and the Wisdom Guide chat bot.' },
+        { num: '2', href: 'Intro Film.dc.html', title: 'Cinematic intro film (70s)', desc: 'What meditation awakens — silence, breath and prana, sahasrara, kundalini, the 40-day invitation, live group sessions, and the dawn of Satya Yugam. Score, impact sounds and narration included.' },
+        { num: '3', href: 'Member Flow.dc.html', title: 'Member area — OAuth sign-in → dashboard', desc: 'Google / Facebook / Apple sign-in, meditation streaks, weekly tracker, private encrypted journal, photo gallery uploads, event registration, live session overlay, and a member-aware bot.' },
+        { num: '4', href: 'Demo Video.dc.html', title: 'Demo video — a seeker\u2019s journey (62s)', desc: 'The whole flow as a film: landing on the site \u2192 intro film \u2192 one-tap sign up \u2192 40-day challenge tracking \u2192 asking the bot about meditation experiences \u2192 journal \u2192 volunteering, donating, live events.' },
+        { num: '5', href: 'HANDOFF.md', title: 'Engineering handoff', desc: 'Laravel Socialite OAuth setup, database schema, full security checklist (upload hardening, encrypted journals, headers, rate limits), and GoDaddy/DNS deployment notes.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
