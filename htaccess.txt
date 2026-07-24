@@ -1,0 +1,25 @@
+Options -Indexes -MultiViews
+RewriteEngine On
+
+# --- Redirect .dc.html URLs to clean paths (what visitors see) ---
+RewriteCond %{THE_REQUEST} \s/Home\.dc\.html [NC]
+RewriteRule ^ / [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Intro(%20|\+|\s)Film\.dc\.html [NC]
+RewriteRule ^ /film [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Member(%20|\+|\s)Flow\.dc\.html [NC]
+RewriteRule ^ /join [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Demo\.dc\.html [NC]
+RewriteRule ^ /demo [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Demo(%20|\+|\s)Video\.dc\.html [NC]
+RewriteRule ^ /demo-video [R=301,L]
+
+# --- Serve the real files for clean paths (internal, invisible) ---
+RewriteRule ^film/?$ "Intro Film.dc.html" [L]
+RewriteRule ^join/?$ "Member Flow.dc.html" [L]
+RewriteRule ^demo/?$ "Demo.dc.html" [L]
+RewriteRule ^demo-video/?$ "Demo Video.dc.html" [L]
+RewriteRule ^$ "Home.dc.html" [L]
+
+# --- Force HTTPS ---
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
