@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; }
+  a { color: #d5b77c; text-decoration: none; }
+  a:hover { color: #e6d3a8; }
+  * { box-sizing: border-box; }
+  doc-page:not(:defined) { visibility: hidden; }
+</style>
+<script src="./doc-page.js"></script>
+</helmet>
+<doc-page>
+  <section class="page" id="p1" data-screen-label="QR Poster" style="position: relative; background: #0d0a1c; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center">
+    <img src="assets/meditation.png" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4">
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,10,28,0.82) 0%, rgba(13,10,28,0.45) 42%, rgba(13,10,28,0.97) 78%, #0d0a1c 100%)"></div>
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 40px 56px 36px; height: 100%; width: 100%">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <img src="assets/logo.jpeg" alt="Golden Age Wisdom" style="width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.55)">
+        <span style="font-family: 'Marcellus', serif; font-size: 21px; letter-spacing: 0.1em; color: #ecdcb4">GOLDEN AGE WISDOM</span>
+      </div>
+      <div style="display: inline-flex; padding: 7px 20px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.4); font-size: 12.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #d5b77c; background: rgba(20,15,40,0.5)">A non-profit for inner awakening</div>
+      <h1 style="font-family: 'Marcellus', serif; font-size: 54px; line-height: 1.08; margin: 4px 0 0; color: #f7f1e3">Quiet the mind.<br><span style="background: linear-gradient(120deg, #e6d3a8, #b89758); -webkit-background-clip: text; background-clip: text; color: transparent">Return to stillness.</span></h1>
+      <p style="max-width: 480px; margin: 0; font-size: 17px; font-weight: 300; line-height: 1.65; color: #d8d2c4">Free guided kundalini meditation, ancient wisdom and a 40-day challenge — for every age and every seeker.</p>
+      <div style="flex: 1"></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px 36px; border-radius: 26px; background: rgba(255,255,255,0.06); border: 1px solid rgba(213,183,124,0.35); box-shadow: 0 10px 50px rgba(0,0,0,0.45)">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=440x440&color=241b06&bgcolor=f2e3bb&data=https%3A%2F%2Fgoldenagewisdom.org%2Fjoin" alt="Scan to join" style="width: 190px; height: 190px; border-radius: 14px">
+        <div style="font-family: 'Marcellus', serif; font-size: 22px; color: #e6d3a8; letter-spacing: 0.04em">Scan to begin — it's free</div>
+        <div style="font-size: 14px; font-weight: 300; color: #b9b1a0">goldenagewisdom.org/join</div>
+      </div>
+      <div style="flex: 1"></div>
+      <div style="font-size: 12px; font-weight: 300; color: #6f6a5c">Golden Age Wisdom is a registered non-profit &nbsp;·&nbsp; info@goldenagewisdom.org</div>
+    </div>
+  </section>
+</doc-page>
+</x-dc>
+</body>
+</html>

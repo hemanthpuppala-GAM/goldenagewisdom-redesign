@@ -12,13 +12,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
+<script src="https://accounts.google.com/gsi/client" async></script>
 <style>
   html, body { margin: 0; padding: 0; background: #0d0a1c; }
   body { font-family: 'Outfit', sans-serif; color: #efe9dc; }
-  a { color: #e8c877; text-decoration: none; }
-  a:hover { color: #f5dfa4; }
+  a { color: #d5b77c; text-decoration: none; }
+  a:hover { color: #e6d3a8; }
   * { box-sizing: border-box; }
   input::placeholder, textarea::placeholder { color: #7d7666; }
+  @keyframes sessSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes rippleOut { 0% { transform: scale(0.72); opacity: 0; } 15% { opacity: 0.5; } 100% { transform: scale(1.9); opacity: 0; } }
+  @keyframes fadeSlow { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 820px) {
     .r-shell { flex-direction: column !important; }
     .r-sidebar { width: 100% !important; height: auto !important; position: static !important; flex-direction: row !important; flex-wrap: wrap !important; align-items: center !important; gap: 6px !important; padding: 12px 14px !important; }
@@ -38,40 +42,48 @@
 <div style="min-height: 100vh; background: #0d0a1c">
   <!-- LOGIN SCREEN -->
   <sc-if value="{{ showLogin }}" hint-placeholder-val="{{ true }}">
-    <div data-screen-label="Sign in" style="position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; gap: 60px; padding: 40px 24px; overflow: hidden; background: radial-gradient(ellipse at 50% 120%, #8a7ab8 0%, #4a4183 55%, #332c63 100%); flex-wrap: wrap">
+    <div data-screen-label="Sign in" style="position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; gap: 60px; padding: 40px 24px; overflow: hidden; background: #0d0a1c; flex-wrap: wrap">
+      <img src="assets/meditator-cosmic-crop.png" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; opacity: 0.5">
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 50% 90% at 50% 42%, rgba(74,65,131,0.2) 0%, rgba(13,10,28,0.5) 60%, rgba(13,10,28,0.8) 85%, rgba(13,10,28,0.95) 100%)"></div>
       <sc-for list="{{ loginStars }}" as="st" hint-placeholder-count="10">
         <div style="position: absolute; left: {{ st.x }}%; top: {{ st.y }}%; width: {{ st.s }}px; height: {{ st.s }}px; border-radius: 50%; background: #f5ecd6; opacity: {{ st.o }}"></div>
       </sc-for>
       <div class="r-login-visual" style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 26px; padding: 20px">
         <div style="position: absolute; inset: -40px; border-radius: 50%; background: radial-gradient(circle, rgba(245,223,164,0.14), rgba(245,223,164,0) 70%)"></div>
         <div style="display: flex; align-items: baseline; gap: 12px">
-          <span style="font-family: 'Marcellus', serif; font-size: 96px; line-height: 1; color: #e8c877; text-shadow: 0 2px 40px rgba(232,200,119,0.4)">40</span>
+          <span style="font-family: 'Marcellus', serif; font-size: 96px; line-height: 1; color: #d5b77c; text-shadow: 0 2px 40px rgba(213,183,124,0.4)">41</span>
           <span style="font-family: 'Marcellus', serif; font-size: 30px; color: #cfc8ba">days</span>
         </div>
         <div style="display: grid; grid-template-columns: repeat(10, 16px); gap: 8px">
           <sc-for list="{{ loginDots }}" as="d" hint-placeholder-count="40">
-            <div style="width: 16px; height: 16px; border-radius: 50%; background: {{ d.bg }}; border: 1px solid rgba(232,200,119,0.4); box-shadow: {{ d.glow }}"></div>
+            <div style="width: 16px; height: 16px; border-radius: 50%; background: {{ d.bg }}; border: 1px solid rgba(213,183,124,0.4); box-shadow: {{ d.glow }}"></div>
           </sc-for>
         </div>
-        <div style="max-width: 380px; text-align: center; padding: 14px 24px; border-radius: 18px; background: rgba(51,44,99,0.65); backdrop-filter: blur(10px); border: 1px solid rgba(232,200,119,0.3)">
-          <div style="font-family: 'Marcellus', serif; font-size: 19px; color: #fdf8ec">Give us 40 days — a 30-minute sit in silence.</div>
+        <div style="max-width: 380px; text-align: center; padding: 14px 24px; border-radius: 18px; background: rgba(20,15,40,0.65); backdrop-filter: blur(10px); border: 1px solid rgba(213,183,124,0.3)">
+          <div style="font-family: 'Marcellus', serif; font-size: 19px; color: #fdf8ec">Give us 41 days — a 30-minute sit in silence.</div>
           <div style="font-size: 12.5px; font-weight: 300; color: #c4bcab; margin-top: 5px; line-height: 1.5">No kriyas, no breath techniques. Close your eyes and watch the breath — that's all.</div>
         </div>
       </div>
-      <div style="position: relative; width: min(420px, 100%); padding: 44px 38px; border-radius: 28px; background: rgba(42,36,82,0.55); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(232,200,119,0.3); box-shadow: 0 30px 80px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center">
-        <img src="assets/logo.jpeg" alt="Golden Age Wisdom" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(232,200,119,0.5)">
+      <div style="position: relative; width: min(420px, 100%); padding: 44px 38px; border-radius: 28px; background: rgba(20,15,40,0.62); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(213,183,124,0.3); box-shadow: 0 30px 80px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center">
+        <img src="assets/logo.jpeg" alt="Golden Age Wisdom" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
         <div>
           <h1 style="font-family: 'Marcellus', serif; font-size: 28px; margin: 0 0 8px; color: #f7f1e3">Welcome back, seeker</h1>
           <p style="margin: 0; font-size: 14.5px; font-weight: 300; color: #b9b1a0">Continue your journey with one tap. No passwords to remember.</p>
         </div>
         <div style="width: 100%; display: flex; flex-direction: column; gap: 12px">
-          <button onClick="{{ signIn }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.95); color: #1f1f1f; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer"><span style="font-weight: 700; font-size: 16px; background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853); -webkit-background-clip: text; background-clip: text; color: transparent">G</span> Continue with Google</button>
-          <button onClick="{{ signIn }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(232,200,119,0.5)"><span style="color: #8ab4f8; font-weight: 700">f</span> Continue with Facebook</button>
-          <button onClick="{{ signIn }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(232,200,119,0.5)"> Continue with Apple</button>
+          <button onClick="{{ signInGoogle }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.95); color: #1f1f1f; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer"><span style="font-weight: 700; font-size: 16px; background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853); -webkit-background-clip: text; background-clip: text; color: transparent">G</span> Continue with Google</button>
+          <sc-if value="{{ hasOauthNote }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size: 12px; font-weight: 300; line-height: 1.5; color: #c9b98a; padding: 0 6px">{{ oauthNote }}</div>
+          </sc-if>
+          <button onClick="{{ signInMicrosoft }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5)"><svg viewBox="0 0 21 21" style="width: 15px; height: 15px"><rect x="0" y="0" width="10" height="10" fill="#f25022"></rect><rect x="11" y="0" width="10" height="10" fill="#7fba00"></rect><rect x="0" y="11" width="10" height="10" fill="#00a4ef"></rect><rect x="11" y="11" width="10" height="10" fill="#ffb900"></rect></svg> Continue with Microsoft</button>
+          <button onClick="{{ signInFacebook }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5)"><span style="color: #8ab4f8; font-weight: 700">f</span> Continue with Facebook</button>
+          <button onClick="{{ signInApple }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5)"> Continue with Apple</button>
         </div>
-        <div style="display: flex; align-items: center; gap: 12px; width: 100%; color: #7d7666; font-size: 12px"><div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1)"></div>secured by OAuth 2.0<div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1)"></div></div>
-        <p style="margin: 0; font-size: 12.5px; font-weight: 300; line-height: 1.6; color: #8a8371">We never see or store your password. Your data is encrypted and never sold. <a href="#" style="font-size: 12.5px">Privacy policy</a></p>
-        <a href="Home.dc.html" style="font-size: 13px; color: #9a927f">← Back to goldenagewisdom.org</a>
+        <div style="width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-radius: 18px; border: 1px solid rgba(213,183,124,0.3); background: rgba(213,183,124,0.06); text-align: left">
+          <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; flex-shrink: 0"><path d="M12 2l8 3.5v5c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11v-5L12 2z" fill="none" stroke="#d5b77c" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8.5 12l2.5 2.5 4.5-4.7" fill="none" stroke="#d5b77c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span style="font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #b9b1a0">We never see, store or handle passwords. Sign-in happens entirely with Google, Microsoft, Facebook or Apple — we only receive your name and email. <a href="mailto:info@goldenagewisdom.org?subject=Privacy%20policy" style="font-size: 12.5px">Privacy policy</a></span>
+        </div>
+        <a href="Home Mandala.dc.html" style="font-size: 13px; color: #9a927f">← Back to goldenagewisdom.org</a>
       </div>
     </div>
   </sc-if>
@@ -81,15 +93,15 @@
     <div data-screen-label="Member dashboard" class="r-shell" style="min-height: 100vh; display: flex">
       <!-- SIDEBAR -->
       <aside class="r-sidebar" style="width: 250px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; padding: 28px 18px; display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,0.03); border-right: 1px solid rgba(255,255,255,0.08)">
-        <a href="Home.dc.html" class="r-side-brand" style="display: flex; align-items: center; gap: 10px; padding: 0 10px 22px">
-          <img src="assets/logo.jpeg" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(232,200,119,0.5)">
-          <span style="font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.04em; color: #f2e3bb">GOLDEN AGE</span>
+        <a href="Home Mandala.dc.html" class="r-side-brand" style="display: flex; align-items: center; gap: 10px; padding: 0 10px 22px">
+          <img src="assets/logo.jpeg" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
+          <span style="font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.04em; color: #ecdcb4">GOLDEN AGE</span>
         </a>
         <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
           <button onClick="{{ n.go }}" style="display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 14px; border: none; text-align: left; font-family: 'Outfit', sans-serif; font-size: 14.5px; cursor: pointer; background: {{ n.bg }}; color: {{ n.color }}; font-weight: {{ n.weight }}">{{ n.icon }} {{ n.label }}</button>
         </sc-for>
         <div class="r-side-spacer" style="flex: 1"></div>
-        <div class="r-side-note" style="padding: 16px; border-radius: 18px; background: rgba(232,200,119,0.08); border: 1px solid rgba(232,200,119,0.2); font-size: 13px; font-weight: 300; color: #b9b1a0; line-height: 1.55">Our teachings stay free because of members like you. <a href="#" style="font-size: 13px">Support the mission ♡</a></div>
+        <div class="r-side-note" style="padding: 16px; border-radius: 18px; background: rgba(213,183,124,0.08); border: 1px solid rgba(213,183,124,0.2); font-size: 13px; font-weight: 300; color: #b9b1a0; line-height: 1.55; display: flex; flex-direction: column; gap: 8px">Our teachings stay free because of members like you. <button onClick="{{ openDonate }}" style="background: none; border: none; padding: 0; text-align: left; font-family: 'Outfit', sans-serif; font-size: 13px; color: #d5b77c; cursor: pointer" style-hover="color: #e6d3a8">Support the mission ♡</button><button onClick="{{ becomeVolunteer }}" style="background: none; border: none; padding: 0; text-align: left; font-family: 'Outfit', sans-serif; font-size: 13px; color: #d5b77c; cursor: pointer" style-hover="color: #e6d3a8">{{ volLabel }}</button></div>
         <button onClick="{{ signOut }}" style="display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 14px; border: none; background: none; text-align: left; font-family: 'Outfit', sans-serif; font-size: 13.5px; color: #7d7666; cursor: pointer" style-hover="color: #d8d2c4">↩ Sign out</button>
       </aside>
 
@@ -98,28 +110,38 @@
         <!-- Overview tab -->
         <sc-if value="{{ tabOverview }}" hint-placeholder-val="{{ true }}">
           <div style="display: flex; flex-direction: column; gap: 26px">
+            <sc-if value="{{ demoBanner }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-radius: 16px; border: 1px solid rgba(213,183,124,0.4); background: rgba(213,183,124,0.09)">
+                <span style="font-size: 14px; color: #d5b77c">✦</span>
+                <span style="flex: 1; font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #c9b98a">You're in a demo session — real OAuth activates once the provider app is registered (see HANDOFF.md).</span>
+                <button onClick="{{ dismissDemoBanner }}" style="background: none; border: none; color: #9a927f; font-size: 16px; cursor: pointer; padding: 0 4px" style-hover="color: #e6d3a8">×</button>
+              </div>
+            </sc-if>
             <div class="r-dash-head" style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
               <div>
-                <h1 style="font-family: 'Marcellus', serif; font-size: 30px; margin: 0; color: #f7f1e3">Namaste, {{ memberName }} 🙏</h1>
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+                  <h1 style="font-family: 'Marcellus', serif; font-size: 30px; margin: 0; color: #f7f1e3">Namaste, {{ memberName }} 🙏</h1>
+                  <span style="padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.4); background: rgba(213,183,124,0.08); font-size: 11.5px; letter-spacing: 0.12em; color: #d5b77c; white-space: nowrap">{{ memberId }}</span>
+                </div>
                 <p style="margin: 6px 0 0; font-size: 14.5px; font-weight: 300; color: #9a927f">Day 21 of your journey · The breath is becoming quiet.</p>
               </div>
-              <button onClick="{{ startSession }}" style="padding: 13px 28px; border-radius: 999px; border: none; background: linear-gradient(135deg, #e8c877, #c99a3f); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px; cursor: pointer; box-shadow: 0 4px 24px rgba(232,200,119,0.4)">▶ Meditate now</button>
+              <button onClick="{{ startSession }}" style="padding: 13px 28px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px; cursor: pointer; box-shadow: 0 4px 24px rgba(213,183,124,0.4)">▶ Meditate now</button>
             </div>
             <div class="r-grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px">
-              <div style="padding: 26px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(232,200,119,0.3)">
-                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #c99a3f">Current streak</div>
-                <div style="font-family: 'Marcellus', serif; font-size: 44px; color: #f5dfa4; margin: 8px 0 2px">21 <span style="font-size: 18px; color: #b9b1a0">days</span></div>
+              <div style="padding: 26px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.3)">
+                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #b89758">Current streak</div>
+                <div style="font-family: 'Marcellus', serif; font-size: 44px; color: #e6d3a8; margin: 8px 0 2px">21 <span style="font-size: 18px; color: #b9b1a0">days</span></div>
                 <div style="font-size: 13px; font-weight: 300; color: #9a927f">Best: 34 days</div>
               </div>
               <div style="padding: 26px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
-                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #c99a3f">Total stillness</div>
+                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #b89758">Total stillness</div>
                 <div style="font-family: 'Marcellus', serif; font-size: 44px; color: #f2e9d8; margin: 8px 0 2px">18<span style="font-size: 18px; color: #b9b1a0">h</span> 40<span style="font-size: 18px; color: #b9b1a0">m</span></div>
                 <div style="font-size: 13px; font-weight: 300; color: #9a927f">Across 56 sessions</div>
               </div>
               <div style="padding: 26px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
-                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #c99a3f">Journey stage</div>
+                <div style="font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #b89758">Journey stage</div>
                 <div style="font-family: 'Marcellus', serif; font-size: 26px; color: #f2e9d8; margin: 12px 0 8px">Deepening Silence</div>
-                <div style="height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08)"><div style="width: 42%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #e8c877, #c99a3f)"></div></div>
+                <div style="height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08)"><div style="width: 42%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #d5b77c, #b89758)"></div></div>
               </div>
             </div>
             <div style="padding: 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
@@ -140,10 +162,10 @@
               <div style="padding: 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 14px">
                 <h2 style="font-family: 'Marcellus', serif; font-size: 21px; margin: 0; color: #f2e9d8">Continue practicing</h2>
                 <sc-for list="{{ meditations }}" as="m" hint-placeholder-count="3">
-                  <div style="display: flex; align-items: center; gap: 14px; padding: 13px 16px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07)" style-hover="border-color: rgba(232,200,119,0.4)">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(232,200,119,0.14); border: 1px solid rgba(232,200,119,0.35); color: #f5dfa4; font-size: 13px">▶</div>
+                  <div style="display: flex; align-items: center; gap: 14px; padding: 13px 16px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07)" style-hover="border-color: rgba(213,183,124,0.4)">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(213,183,124,0.14); border: 1px solid rgba(213,183,124,0.35); color: #e6d3a8; font-size: 13px">▶</div>
                     <div style="flex: 1"><div style="font-weight: 500; font-size: 15px; color: #ece5d5">{{ m.title }}</div><div style="font-size: 12.5px; font-weight: 300; color: #9a927f">{{ m.description }}</div></div>
-                    <span style="font-size: 12.5px; color: #c99a3f">{{ m.duration }}</span>
+                    <span style="font-size: 12.5px; color: #b89758">{{ m.duration }}</span>
                   </div>
                 </sc-for>
               </div>
@@ -151,9 +173,9 @@
                 <h2 style="font-family: 'Marcellus', serif; font-size: 21px; margin: 0; color: #f2e9d8">Your gatherings</h2>
                 <sc-for list="{{ events }}" as="e" hint-placeholder-count="2">
                   <div style="display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07)">
-                    <div style="flex-shrink: 0; width: 52px; text-align: center; padding: 7px 0; border-radius: 12px; background: rgba(232,200,119,0.1); border: 1px solid rgba(232,200,119,0.3)">
-                      <div style="font-family: 'Marcellus', serif; font-size: 18px; color: #f5dfa4; line-height: 1.1">{{ e.day }}</div>
-                      <div style="font-size: 10.5px; letter-spacing: 0.1em; color: #c99a3f">{{ e.month }}</div>
+                    <div style="flex-shrink: 0; width: 52px; text-align: center; padding: 7px 0; border-radius: 12px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.3)">
+                      <div style="font-family: 'Marcellus', serif; font-size: 18px; color: #e6d3a8; line-height: 1.1">{{ e.day }}</div>
+                      <div style="font-size: 10.5px; letter-spacing: 0.1em; color: #b89758">{{ e.month }}</div>
                     </div>
                     <div style="flex: 1"><div style="font-weight: 500; font-size: 14.5px; color: #ece5d5">{{ e.title }}</div><div style="font-size: 12.5px; font-weight: 300; color: #9a927f">{{ e.meta }}</div></div>
                     <button onClick="{{ e.toggle }}" style="padding: 8px 16px; border-radius: 999px; font-family: 'Outfit', sans-serif; font-size: 12.5px; cursor: pointer; border: 1px solid {{ e.btnBorder }}; background: {{ e.btnBg }}; color: {{ e.btnColor }}; font-weight: 500">{{ e.btnLabel }}</button>
@@ -171,13 +193,13 @@
               <h1 style="font-family: 'Marcellus', serif; font-size: 30px; margin: 0; color: #f7f1e3">Private journal</h1>
               <p style="margin: 6px 0 0; font-size: 14.5px; font-weight: 300; color: #9a927f">Only you can read these. Encrypted at rest.</p>
             </div>
-            <div style="padding: 24px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(232,200,119,0.25); display: flex; flex-direction: column; gap: 14px">
+            <div style="padding: 24px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.25); display: flex; flex-direction: column; gap: 14px">
               <textarea value="{{ journalDraft }}" onChange="{{ onJournalInput }}" placeholder="What arose in today's sitting?" rows="4" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.6; resize: vertical; outline: none"></textarea>
-              <div style="display: flex; justify-content: flex-end"><button onClick="{{ saveJournal }}" style="padding: 11px 26px; border-radius: 999px; border: none; background: linear-gradient(135deg, #e8c877, #c99a3f); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer">Save entry</button></div>
+              <div style="display: flex; justify-content: flex-end"><button onClick="{{ saveJournal }}" style="padding: 11px 26px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer">Save entry</button></div>
             </div>
             <sc-for list="{{ journalEntries }}" as="j" hint-placeholder-count="2">
               <div style="padding: 22px 26px; border-radius: 20px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08)">
-                <div style="font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #c99a3f; margin-bottom: 8px">{{ j.date }}</div>
+                <div style="font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #b89758; margin-bottom: 8px">{{ j.date }}</div>
                 <p style="margin: 0; font-size: 15px; font-weight: 300; line-height: 1.65; color: #cfc8ba">{{ j.text }}</p>
               </div>
             </sc-for>
@@ -209,9 +231,15 @@
   <!-- WISDOM GUIDE BOT -->
   <sc-if value="{{ showDash }}" hint-placeholder-val="{{ false }}">
     <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
-      <div style="position: fixed; bottom: 96px; right: 24px; z-index: 90; width: 350px; max-height: min(480px, calc(100vh - 120px)); display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: rgba(22,17,44,0.88); backdrop-filter: blur(24px); border: 1px solid rgba(232,200,119,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.5)">
+      <div style="position: fixed; bottom: 96px; right: 24px; z-index: 90; width: 350px; max-height: min(480px, calc(100vh - 120px)); display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: rgba(22,17,44,0.88); backdrop-filter: blur(24px); border: 1px solid rgba(213,183,124,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.5)">
         <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 10px">
-          <div style="width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #f5dfa4, #c99a3f); display: flex; align-items: center; justify-content: center; color: #241b06; font-family: 'Marcellus', serif">ॐ</div>
+          <div style="width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #e6d3a8, #b89758); display: flex; align-items: center; justify-content: center">
+            <svg viewBox="0 0 64 64" style="width: 21px; height: 21px; display: block">
+              <circle cx="32" cy="14" r="6.5" fill="#241b06"></circle>
+              <path d="M32 24c-6.5 0-10.5 4-12.5 10l-2 6h29l-2-6c-2-6-6-10-12.5-10z" fill="#241b06"></path>
+              <path d="M12 46c2-4.5 9-7 20-7s18 2.5 20 7c0.8 1.8-0.5 3.5-2.5 3.5h-35c-2 0-3.3-1.7-2.5-3.5z" fill="#241b06"></path>
+            </svg>
+          </div>
           <div><div style="font-weight: 600; font-size: 14.5px; color: #f2e9d8">Wisdom Guide</div><div style="font-size: 12px; color: #9a927f">Knows your journey · asks back</div></div>
         </div>
         <div style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px">
@@ -220,39 +248,111 @@
           </sc-for>
           <div style="display: flex; flex-wrap: wrap; gap: 6px">
             <sc-for list="{{ chatChips }}" as="c" hint-placeholder-count="2">
-              <button onClick="{{ c.pick }}" style="padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(232,200,119,0.35); background: rgba(232,200,119,0.08); color: #e8c877; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">{{ c.label }}</button>
+              <button onClick="{{ c.pick }}" style="padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.35); background: rgba(213,183,124,0.08); color: #d5b77c; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">{{ c.label }}</button>
             </sc-for>
           </div>
         </div>
         <div style="padding: 12px; display: flex; gap: 8px; border-top: 1px solid rgba(255,255,255,0.08)">
           <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Ask anything…" style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 10px 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 13.5px; outline: none">
-          <button onClick="{{ sendChat }}" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: linear-gradient(135deg, #e8c877, #c99a3f); color: #241b06; font-size: 15px; cursor: pointer">↑</button>
+          <button onClick="{{ sendChat }}" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-size: 15px; cursor: pointer">↑</button>
         </div>
       </div>
     </sc-if>
-    <button onClick="{{ toggleChat }}" style="position: fixed; bottom: 24px; right: 24px; z-index: 90; width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(232,200,119,0.5); background: radial-gradient(circle at 35% 35%, #f5dfa4, #c99a3f); color: #241b06; font-size: 24px; cursor: pointer; box-shadow: 0 8px 30px rgba(232,200,119,0.45); font-family: 'Marcellus', serif">{{ chatIcon }}</button>
+    <button onClick="{{ toggleChat }}" title="Wisdom Guide" style="position: fixed; bottom: 24px; right: 24px; z-index: 90; width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(213,183,124,0.5); background: radial-gradient(circle at 35% 35%, #e6d3a8, #b89758); color: #241b06; font-size: 24px; cursor: pointer; box-shadow: 0 8px 30px rgba(213,183,124,0.45); font-family: 'Marcellus', serif; display: flex; align-items: center; justify-content: center">
+      <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}"><span style="font-size: 26px; line-height: 1">×</span></sc-if>
+      <sc-if value="{{ chatClosed }}" hint-placeholder-val="{{ true }}">
+        <svg viewBox="0 0 64 64" style="width: 32px; height: 32px; display: block">
+          <circle cx="32" cy="14" r="6.5" fill="#241b06"></circle>
+          <path d="M32 24c-6.5 0-10.5 4-12.5 10l-2 6h29l-2-6c-2-6-6-10-12.5-10z" fill="#241b06"></path>
+          <path d="M12 46c2-4.5 9-7 20-7s18 2.5 20 7c0.8 1.8-0.5 3.5-2.5 3.5h-35c-2 0-3.3-1.7-2.5-3.5z" fill="#241b06"></path>
+        </svg>
+      </sc-if>
+    </button>
   </sc-if>
 
   <!-- SESSION OVERLAY -->
+  <sc-if value="{{ donateOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 110; background: rgba(13,10,28,0.85); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; padding: 24px">
+      <div style="width: min(440px, 100%); padding: 36px 34px; border-radius: 28px; background: rgba(42,36,82,0.75); backdrop-filter: blur(28px); border: 1px solid rgba(213,183,124,0.35); box-shadow: 0 30px 80px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 18px; text-align: center">
+        <div style="font-family: 'Marcellus', serif; font-size: 24px; color: #f7f1e3">Support the mission ♡</div>
+        <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.6; color: #b9b1a0">Every teaching stays free because of you. Donations are processed securely by Stripe — we use your member info ({{ memberName }}), nothing to re-enter.</p>
+        <div style="display: flex; gap: 10px; justify-content: center">
+          <sc-for list="{{ donPresets }}" as="dp" hint-placeholder-count="3">
+            <button onClick="{{ dp.pick }}" style="flex: 1; padding: 12px 0; border-radius: 16px; border: 1px solid {{ dp.border }}; background: {{ dp.bg }}; color: {{ dp.color }}; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer">₹{{ dp.label }}</button>
+          </sc-for>
+        </div>
+        <input value="{{ donCustom }}" onChange="{{ onDonCustom }}" type="number" min="50" placeholder="Custom amount (₹)" style="width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 12px 18px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; text-align: center">
+        <button onClick="{{ submitDonate }}" style="width: 100%; padding: 13px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; opacity: {{ donOpacity }}">{{ donButtonLabel }}</button>
+        <sc-if value="{{ donHasStatus }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size: 13px; font-weight: 300; line-height: 1.5; color: {{ donStatusColor }}">{{ donStatus }}</div>
+        </sc-if>
+        <button onClick="{{ closeDonate }}" style="background: none; border: none; font-family: 'Outfit', sans-serif; font-size: 13px; color: #9a927f; cursor: pointer" style-hover="color: #d8d2c4">Not now</button>
+      </div>
+    </div>
+  </sc-if>
   <sc-if value="{{ sessionOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position: fixed; inset: 0; z-index: 100; background: rgba(13,10,28,0.92); backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px">
-      <div style="width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(232,200,119,0.35), rgba(232,200,119,0.02) 70%); border: 1px solid rgba(232,200,119,0.4); display: flex; align-items: center; justify-content: center; transform: scale({{ breathScale }}); transition: transform 4s ease-in-out">
-        <span style="font-family: 'Marcellus', serif; font-size: 40px; color: #f5dfa4">ॐ</span>
+    <div style="position: fixed; inset: 0; z-index: 100; background: radial-gradient(ellipse 70% 60% at 50% 44%, #171130 0%, #0d0a1c 60%, #080614 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; overflow: hidden">
+      <sc-for list="{{ loginStars }}" as="st" hint-placeholder-count="10">
+        <div style="position: absolute; left: {{ st.x }}%; top: {{ st.y }}%; width: {{ st.s }}px; height: {{ st.s }}px; border-radius: 50%; background: #f5ecd6; opacity: {{ st.o }}"></div>
+      </sc-for>
+      <div style="position: absolute; width: min(620px, 130vw); height: min(620px, 130vw); border-radius: 50%; border: 1px dashed rgba(213,183,124,0.1); animation: sessSpin 120s linear infinite"></div>
+      <div style="position: absolute; width: min(460px, 105vw); height: min(460px, 105vw); border-radius: 50%; border: 1px solid rgba(213,183,124,0.07); animation: sessSpin 80s linear infinite reverse"></div>
+      <div style="position: relative; width: min(320px, 80vw); height: min(320px, 80vw); flex-shrink: 0; display: flex; align-items: center; justify-content: center">
+        <svg viewBox="0 0 320 320" style="position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg)">
+          <circle cx="160" cy="160" r="152" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"></circle>
+          <circle cx="160" cy="160" r="152" fill="none" stroke="rgba(213,183,124,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="955" stroke-dashoffset="{{ progOffset }}" style="transition: stroke-dashoffset 1s linear"></circle>
+        </svg>
+        <div style="position: absolute; width: 66%; height: 66%; border-radius: 50%; border: 1px solid rgba(230,211,168,0.4); animation: rippleOut 10s cubic-bezier(0.2, 0.6, 0.4, 1) infinite; pointer-events: none"></div>
+        <div style="position: absolute; width: 66%; height: 66%; border-radius: 50%; border: 1px solid rgba(230,211,168,0.28); animation: rippleOut 10s cubic-bezier(0.2, 0.6, 0.4, 1) 5s infinite; pointer-events: none"></div>
+        <div style="width: 62%; height: 62%; border-radius: 50%; background: radial-gradient(circle at 40% 34%, rgba(230,211,168,0.4), rgba(213,183,124,0.1) 55%, rgba(213,183,124,0.02)); border: 1px solid rgba(213,183,124,0.45); box-shadow: 0 0 80px rgba(213,183,124,0.25), inset 0 0 40px rgba(213,183,124,0.12); display: flex; align-items: center; justify-content: center; transform: scale({{ breathScale }}); transition: transform {{ breathSecs }}s cubic-bezier(0.37, 0, 0.63, 1)">
+          <svg viewBox="0 0 64 64" style="width: 34%; height: 34%; opacity: 0.9; filter: drop-shadow(0 2px 18px rgba(230,211,168,0.55))">
+            <circle cx="32" cy="14" r="6.5" fill="#f2e3bb"></circle>
+            <path d="M32 24c-6.5 0-10.5 4-12.5 10l-2 6h29l-2-6c-2-6-6-10-12.5-10z" fill="#f2e3bb"></path>
+            <path d="M12 46c2-4.5 9-7 20-7s18 2.5 20 7c0.8 1.8-0.5 3.5-2.5 3.5h-35c-2 0-3.3-1.7-2.5-3.5z" fill="#f2e3bb"></path>
+          </svg>
+        </div>
       </div>
-      <div style="text-align: center">
-        <div style="font-family: 'Marcellus', serif; font-size: 26px; color: #f2e9d8">{{ breathLabel }}</div>
-        <div style="font-size: 14px; font-weight: 300; color: #9a927f; margin-top: 8px">Breath of Stillness · {{ sessionClock }}</div>
+      <div style="position: relative; text-align: center; display: flex; flex-direction: column; gap: 9px; align-items: center">
+        <div style="font-family: 'Marcellus', serif; font-size: 27px; letter-spacing: 0.04em; color: #f2e9d8">{{ breathLabel }}</div>
+        <div style="min-height: 20px; font-size: 13.5px; font-weight: 300; font-style: italic; color: #9a927f; animation: fadeSlow 1.4s ease both">{{ guidance }}</div>
+        <div style="display: flex; align-items: center; gap: 14px; margin-top: 6px; padding: 7px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); font-size: 12.5px; color: #b9b1a0">
+          <span style="font-family: 'Marcellus', serif; font-size: 14px; color: #e6d3a8">{{ sessionClock }}</span>
+          <span style="width: 1px; height: 12px; background: rgba(255,255,255,0.15)"></span>
+          <span>goal 30:00</span>
+          <span style="width: 1px; height: 12px; background: rgba(255,255,255,0.15)"></span>
+          <span>Day 21 of 41</span>
+        </div>
       </div>
-      <button onClick="{{ endSession }}" style="padding: 11px 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.25); background: none; color: #d8d2c4; font-family: 'Outfit', sans-serif; font-size: 14px; cursor: pointer">End session</button>
+      <div style="position: relative; display: flex; align-items: center; gap: 12px">
+        <button onClick="{{ toggleOm }}" title="Aum drone on/off" style="width: 42px; height: 42px; border-radius: 50%; border: 1px solid {{ omBorder }}; background: {{ omBg }}; color: #e6d3a8; font-family: 'Marcellus', serif; font-size: 17px; cursor: pointer">ॐ</button>
+        <button onClick="{{ endSession }}" style="padding: 11px 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: none; color: #d8d2c4; font-family: 'Outfit', sans-serif; font-size: 14px; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5); color: #e6d3a8">End session</button>
+      </div>
+      <sc-if value="{{ omOn }}" hint-placeholder-val="{{ false }}"><audio src="assets/om-deep.wav" loop="{{ true }}" autoPlay="{{ true }}"></audio></sc-if>
+    </div>
+  </sc-if>
+  <sc-if value="{{ doneOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 100; background: radial-gradient(ellipse 70% 60% at 50% 44%, #171130 0%, #0d0a1c 60%, #080614 100%); display: flex; align-items: center; justify-content: center; padding: 24px">
+      <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; animation: fadeSlow 1s ease both">
+        <div style="width: 74px; height: 74px; border-radius: 50%; background: radial-gradient(circle at 38% 34%, rgba(230,211,168,0.45), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.5); box-shadow: 0 0 60px rgba(213,183,124,0.3); display: flex; align-items: center; justify-content: center">
+          <svg viewBox="0 0 64 64" style="width: 30px; height: 30px"><circle cx="32" cy="14" r="6.5" fill="#f2e3bb"></circle><path d="M32 24c-6.5 0-10.5 4-12.5 10l-2 6h29l-2-6c-2-6-6-10-12.5-10z" fill="#f2e3bb"></path><path d="M12 46c2-4.5 9-7 20-7s18 2.5 20 7c0.8 1.8-0.5 3.5-2.5 3.5h-35c-2 0-3.3-1.7-2.5-3.5z" fill="#f2e3bb"></path></svg>
+        </div>
+        <div style="font-family: 'Marcellus', serif; font-size: clamp(26px, 4vw, 34px); color: #f7f1e3">Well sat, {{ memberName }}.</div>
+        <div style="font-size: 14.5px; font-weight: 300; color: #b9b1a0">{{ doneMins }} of stillness · Day 21 of your 41-day journey</div>
+        <div style="width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(213,183,124,0.6), transparent)"></div>
+        <div style="font-size: 13px; font-weight: 300; font-style: italic; color: #9a927f">The silence you touched stays with you.</div>
+        <button onClick="{{ closeDone }}" style="margin-top: 8px; padding: 12px 30px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-size: 14.5px; font-weight: 600; cursor: pointer">Return to dashboard</button>
+      </div>
     </div>
   </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1280px&quot;,&quot;height&quot;:&quot;800px&quot;},&quot;startOnDashboard&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;memberName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Harikrishna&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1280px&quot;,&quot;height&quot;:&quot;800px&quot;},&quot;startOnDashboard&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;memberName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Harikrishna&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;googleClientId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;927688395054-3b3praeptn0muruff5v90hr5t6n121lk.apps.googleusercontent.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;OAuth&quot;}}">
 class Component extends DCLogic {
   state = {
     screen: 'login', tab: 'overview', sessionOpen: false, breathIn: true, sessionSecs: 0,
     chatOpen: false, chatInput: '',
+    suName: '', suEmail: '', suHoney: '', suBusy: false, suStatus: '', suOk: false, suRole: 'member',
+    donateOpen: false, donAmount: 1000, donCustom: '', donBusy: false, donStatus: '', donOk: false, volState: 'idle',
     chatMessages: [{ from: 'bot', text: 'Namaste 🙏 I\u2019m your Wisdom Guide. I know your streak, your gatherings and your practice — ask me anything, or tap a suggestion below.' }],
     journalDraft: '',
     journalEntries: [
@@ -273,7 +373,7 @@ class Component extends DCLogic {
       { id: 'event', kw: ['event', 'retreat', 'workshop', 'session', 'register', 'gather', 'live', 'group'] },
       { id: 'journal', kw: ['journal', 'write', 'entry', 'diary', 'note', 'privat'] },
       { id: 'stress', kw: ['stress', 'anxiety', 'anxiou', 'sleep', 'tired', 'restles', 'worr', 'sad', 'depres', 'angr'] },
-      { id: 'forty', kw: ['40', 'forty', 'challenge', 'commit', '30', 'minute'] },
+      { id: 'forty', kw: ['41', '40', 'forty', 'challenge', 'commit', '30', 'minute'] },
       { id: 'donate', kw: ['donat', 'support', 'money', 'pay', 'free', 'cost'] },
       { id: 'experience', kw: ['experience', 'feel', 'felt', 'vision', 'light', 'tingl', 'goose', 'saw', 'sensation', 'vibrat'] },
       { id: 'volunteer', kw: ['volunteer', 'seva', 'serve', 'contribut', 'team', 'spread', 'share'] },
@@ -297,10 +397,10 @@ class Component extends DCLogic {
       event: 'Your gatherings: Online Meditation Session on Jun 22 (you\u2019re going ✓) and the Kundalini Workshop in Bangalore on Jul 5 (not registered yet). Want me to take you to Events to register?',
       journal: 'Your journal is private and encrypted — only you can read it. Writing right after a sit captures what the mind forgets in minutes. Open the Journal tab and note even one line about today\u2019s sitting.',
       stress: `I hear you, ${name}. Stress softens fastest in silence: sit now for just 5 minutes, eyes closed, watching the breath — nothing else. Your streak shows the healing is already working. Shall I open a session?`,
-      forty: 'The 40-day invitation: one 30-minute sit in silence daily. No kriyas, no breath practices — close your eyes and watch the breath, that\u2019s it. After 40 days, see how well you act and how deeply mind and body heal. You\u2019re on day 21 — past the halfway mark.',
+      forty: 'The 41-day invitation: one 30-minute sit in silence daily. No kriyas, no breath practices — close your eyes and watch the breath, that\u2019s it. After 41 days, see how well you act and how deeply mind and body heal. You\u2019re on day 21 — past the halfway mark.',
       donate: 'Every teaching here is free — we are a non-profit. If our work moves you, the "Support the mission ♡" link in your sidebar keeps it free for all. Never an obligation.',
       experience: 'Sensations of light, tingling at the crown, or deep stillness are common as prana refines — welcome them without chasing them. Masters explain these experiences here: youtube.com/watch?v=_7xG_Y0RBUo. Note what you felt in your Journal while it\u2019s fresh.',
-      volunteer: `Wonderful, ${name} — meditators who complete the 40 days often feel called to give back. As a volunteer you can host group sits, welcome new members, and help at retreats. You can also support the mission with a donation or join our live events — everything stays free for all.`,
+      volunteer: `Wonderful, ${name} — meditators who complete the 41 days often feel called to give back. As a volunteer you can host group sits, welcome new members, and help at retreats. You can also support the mission with a donation or join our live events — everything stays free for all.`,
       gratitude: `Namaste, ${name} 🙏 The light in me honors the light in you. Is there anything on your practice I can help with?`,
     };
     const fallback = `Tell me more — do you want help with your practice, your streak, an event, or how you\u2019re feeling today? I learn from what you ask.`;
@@ -312,17 +412,138 @@ class Component extends DCLogic {
     this.chatCtx = intent;
     return answers[intent] || fallback;
   }
+  async submitSignup() {
+    const { suName, suEmail, suHoney, suBusy } = this.state;
+    if (suBusy) return;
+    if (!suName.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(suEmail.trim())) {
+      this.setState({ suStatus: 'Please enter your name and a valid email.', suOk: false });
+      return;
+    }
+    this.setState({ suBusy: true, suStatus: '' });
+    try {
+      const body = new URLSearchParams({ name: suName.trim(), email: suEmail.trim(), website: suHoney, lang: 'EN', role: this.state.suRole });
+      const r = await fetch('signup.php', { method: 'POST', body });
+      const j = await r.json();
+      if (j.ok) {
+        this.setState({ suBusy: false, suOk: true, suStatus: j.message || 'Welcome to the community! Check your inbox.', suName: '', suEmail: '' });
+        this.setSession({ name: suName.trim(), email: suEmail.trim(), role: this.state.suRole, memberId: j.member_id });
+      }
+      else this.setState({ suBusy: false, suOk: false, suStatus: j.error || 'Something went wrong — please try again.' });
+    } catch (e) {
+      // preview fallback: no PHP server here — create the account locally and sign in
+      this.setState({ suBusy: false, suOk: true, suStatus: 'Welcome to the community!' });
+      this.setSession({ name: suName.trim(), email: suEmail.trim(), role: this.state.suRole });
+    }
+  }
+  memberEmail() { const u = this.state.sessionUser; return (u && u.email) || this.props.memberEmail || 'ananya@example.com'; }
+  async submitDonate() {
+    if (this.state.donBusy) return;
+    const amount = this.state.donCustom ? parseInt(this.state.donCustom, 10) : this.state.donAmount;
+    if (!amount || amount < 50) { this.setState({ donStatus: 'Minimum donation is ₹50.', donOk: false }); return; }
+    this.setState({ donBusy: true, donStatus: '' });
+    try {
+      const body = new URLSearchParams({ amount: String(amount), currency: 'inr', name: this.props.memberName ?? 'Ananya', email: this.memberEmail() });
+      const r = await fetch('donate.php', { method: 'POST', body });
+      const j = await r.json();
+      if (j.ok && j.url) { this.setState({ donBusy: false, donOk: true, donStatus: 'Redirecting to Stripe…' }); window.location.href = j.url; }
+      else this.setState({ donBusy: false, donOk: false, donStatus: j.error || 'Could not start the payment.' });
+    } catch (e) {
+      this.setState({ donBusy: false, donOk: false, donStatus: 'Could not reach the payment server. On the live site this opens Stripe Checkout once donate.php and your Stripe key are set up.' });
+    }
+  }
+  async becomeVolunteer() {
+    if (this.state.volState !== 'idle') return;
+    this.setState({ volState: 'busy' });
+    try {
+      const body = new URLSearchParams({ name: this.props.memberName ?? 'Ananya', email: this.memberEmail(), lang: 'EN', role: 'volunteer', website: '' });
+      const r = await fetch('signup.php', { method: 'POST', body });
+      const j = await r.json();
+      this.setState({ volState: j.ok ? 'done' : 'idle' });
+    } catch (e) { this.setState({ volState: 'done' }); } // preview fallback: mark done locally
+  }
   sendChat(text) {
     const q = (text != null ? text : this.state.chatInput).trim();
     if (!q) return;
     this.setState(s => ({ chatMessages: [...s.chatMessages, { from: 'user', text: q }], chatInput: '' }));
     setTimeout(() => this.setState(s => ({ chatMessages: [...s.chatMessages, { from: 'bot', text: this.botReply(q) }] })), 550);
   }
+  demoProvider(name) {
+    if (this.state.oauthBusy) return;
+    this.setState({ oauthBusy: true, oauthNote: 'Demo sign-in (preview). Real ' + name + ' OAuth activates once the ' + name + ' app is registered — see HANDOFF.md.' });
+    setTimeout(() => {
+      this.setState({ oauthBusy: false });
+      this.setSession({ name: this.props.memberName ?? 'Ananya', email: this.memberEmail(), role: 'member', provider: name.toLowerCase() + '-demo' });
+    }, 1800);
+  }
+  signInGoogle() {
+    const cid = this.props.googleClientId ?? '';
+    if (cid && window.google && google.accounts && google.accounts.oauth2) {
+      try {
+        const tc = google.accounts.oauth2.initTokenClient({
+          client_id: cid,
+          scope: 'openid email profile',
+          callback: async (tok) => {
+            try {
+              const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + tok.access_token } });
+              const u = await r.json();
+              this.setSession({ name: u.name || 'Seeker', email: u.email || '', role: 'member', provider: 'google' });
+            } catch (e) { this.setState({ oauthNote: 'Google sign-in could not fetch your profile — try again.' }); }
+          },
+          error_callback: () => this.setState({ oauthNote: 'Google sign-in was cancelled or blocked.' }),
+        });
+        tc.requestAccessToken();
+        return;
+      } catch (e) { /* fall through to demo */ }
+    }
+    if (this.state.oauthBusy) return;
+    this.setState({ oauthBusy: true, oauthNote: cid ? 'Google SDK not loaded — signed you in as a demo member.' : 'Demo sign-in (preview). Real Google OAuth activates once your Google Client ID is set — see HANDOFF.md.' });
+    setTimeout(() => {
+      this.setState({ oauthBusy: false });
+      this.setSession({ name: this.props.memberName ?? 'Ananya', email: this.memberEmail(), role: 'member', provider: 'google-demo' });
+    }, 1800);
+  }
+  session() {
+    try { return JSON.parse(localStorage.getItem('gaw_session') || 'null'); } catch (e) { return null; }
+  }
+  setSession(user) {
+    if (!user.memberId) {
+      let seq = 100000;
+      try { seq = parseInt(localStorage.getItem('gaw_member_seq') || '100000', 10) || 100000; } catch (e) {}
+      seq += 1;
+      try { localStorage.setItem('gaw_member_seq', String(seq)); } catch (e) {}
+      user.memberId = 'GAW-' + seq;
+    }
+    try { localStorage.setItem('gaw_session', JSON.stringify(user)); } catch (e) {}
+    this.setState({ screen: 'dash', sessionUser: user });
+  }
+  clearSession() {
+    try { localStorage.removeItem('gaw_session'); } catch (e) {}
+    this.setState({ screen: 'login', sessionUser: null });
+  }
   componentDidMount() {
-    this.breathTimer = setInterval(() => { if (this.state.sessionOpen) this.setState(s => ({ breathIn: !s.breathIn })); }, 4000);
+    const u = this.session();
+    if (u) this.setState({ screen: 'dash', sessionUser: u });
+    // breath rhythm: 4s in, 6s out (natural exhale is longer)
     this.clockTimer = setInterval(() => { if (this.state.sessionOpen) this.setState(s => ({ sessionSecs: s.sessionSecs + 1 })); }, 1000);
   }
-  componentWillUnmount() { clearInterval(this.breathTimer); clearInterval(this.clockTimer); }
+  componentWillUnmount() { clearTimeout(this.breathT); clearInterval(this.clockTimer); }
+  breathe() {
+    if (!this.state.sessionOpen) return;
+    const goingIn = this.state.breathPhase !== 'in';
+    this.setState({ breathPhase: goingIn ? 'in' : 'out' });
+    this.breathT = setTimeout(() => this.breathe(), goingIn ? 4000 : 6000);
+  }
+  startSit() {
+    clearTimeout(this.breathT);
+    this.setState({ sessionOpen: true, sessionSecs: 0, breathPhase: 'out' }, () => this.breathe());
+  }
+  endSit() {
+    clearTimeout(this.breathT);
+    const secs = this.state.sessionSecs;
+    const mins = Math.max(1, Math.round(secs / 60));
+    if (secs >= 60) this.setState({ sessionOpen: false, doneOpen: true, doneMins: mins + (mins === 1 ? ' minute' : ' minutes') });
+    else this.setState({ sessionOpen: false });
+  }
   renderVals() {
     const s = this.state;
     const tab = s.tab;
@@ -341,29 +562,38 @@ class Component extends DCLogic {
     ];
     const screen = this.props.startOnDashboard && s.screen === 'login' ? 'dash' : s.screen;
     return {
-      memberName: this.props.memberName ?? 'Ananya',
+      memberName: (s.sessionUser && s.sessionUser.name) || this.props.memberName || 'Ananya',
+      memberId: (s.sessionUser && s.sessionUser.memberId) || 'GAW-100001',
       loginStars: Array.from({ length: 40 }, (_, i) => ({ x: (i * 137.508) % 100, y: (i * 61.803) % 100, s: 1 + (i % 3), o: 0.12 + ((i * 37) % 45) / 100 })),
-      loginDots: Array.from({ length: 40 }, (_, i) => {
+      loginDots: Array.from({ length: 41 }, (_, i) => {
         const done = i < 21;
-        return { bg: done ? '#e8c877' : 'rgba(255,255,255,0.08)', glow: done ? '0 0 8px rgba(232,200,119,0.5)' : 'none' };
+        return { bg: done ? '#d5b77c' : 'rgba(255,255,255,0.08)', glow: done ? '0 0 8px rgba(213,183,124,0.5)' : 'none' };
       }),
       showLogin: screen === 'login',
       showDash: screen === 'dash',
-      signIn: () => this.setState({ screen: 'dash' }),
-      signOut: () => this.setState({ screen: 'login' }),
+      signIn: () => this.setSession({ name: this.props.memberName ?? 'Ananya', email: this.memberEmail(), role: 'member' }),
+      signInGoogle: () => this.signInGoogle(),
+      demoBanner: !!(s.sessionUser && /demo/.test(s.sessionUser.provider || '') && !s.demoBannerDismissed),
+      dismissDemoBanner: () => this.setState({ demoBannerDismissed: true }),
+      signInMicrosoft: () => this.demoProvider('Microsoft'),
+      signInFacebook: () => this.demoProvider('Facebook'),
+      signInApple: () => this.demoProvider('Apple'),
+      oauthNote: s.oauthNote || '',
+      hasOauthNote: !!s.oauthNote,
+      signOut: () => this.clearSession(),
       tabOverview: tab === 'overview' || tab === 'events',
       tabJournal: tab === 'journal',
       tabGallery: tab === 'gallery',
       navItems: navDefs.map(n => ({
         icon: n.icon, label: n.label,
-        go: () => { if (n.key === 'meditate') { this.setState({ sessionOpen: true, sessionSecs: 0 }); } else { this.setState({ tab: n.key }); } },
-        bg: tab === n.key ? 'rgba(232,200,119,0.14)' : 'transparent',
-        color: tab === n.key ? '#f5dfa4' : '#b9b1a0',
+        go: () => { if (n.key === 'meditate') { this.startSit(); } else { this.setState({ tab: n.key }); } },
+        bg: tab === n.key ? 'rgba(213,183,124,0.14)' : 'transparent',
+        color: tab === n.key ? '#e6d3a8' : '#b9b1a0',
         weight: tab === n.key ? '600' : '400',
       })),
       week: ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((label, i) => {
         const done = i < 5;
-        return { label, mark: done ? '✓' : (i === 5 ? '·' : ''), bg: done ? 'rgba(232,200,119,0.16)' : 'rgba(255,255,255,0.04)', border: done ? 'rgba(232,200,119,0.45)' : 'rgba(255,255,255,0.09)', color: done ? '#f5dfa4' : '#7d7666' };
+        return { label, mark: done ? '✓' : (i === 5 ? '·' : ''), bg: done ? 'rgba(213,183,124,0.16)' : 'rgba(255,255,255,0.04)', border: done ? 'rgba(213,183,124,0.45)' : 'rgba(255,255,255,0.09)', color: done ? '#e6d3a8' : '#7d7666' };
       }),
       meditations: [
         { title: 'Root to Crown Awakening', description: 'All seven chakras · resumes at 8:40', duration: '20 min' },
@@ -375,9 +605,9 @@ class Component extends DCLogic {
         return { ...e,
           toggle: () => this.setState(st => ({ registered: { ...st.registered, [i]: !st.registered[i] } })),
           btnLabel: reg ? '✓ Going' : 'Register',
-          btnBg: reg ? 'rgba(232,200,119,0.16)' : 'transparent',
-          btnBorder: reg ? 'rgba(232,200,119,0.5)' : 'rgba(255,255,255,0.2)',
-          btnColor: reg ? '#f5dfa4' : '#b9b1a0',
+          btnBg: reg ? 'rgba(213,183,124,0.16)' : 'transparent',
+          btnBorder: reg ? 'rgba(213,183,124,0.5)' : 'rgba(255,255,255,0.2)',
+          btnColor: reg ? '#e6d3a8' : '#b9b1a0',
         };
       }),
       journalDraft: s.journalDraft,
@@ -390,8 +620,48 @@ class Component extends DCLogic {
       },
       journalEntries: s.journalEntries,
       chatOpen: s.chatOpen,
-      chatIcon: s.chatOpen ? '×' : 'ॐ',
+      chatClosed: !s.chatOpen,
       toggleChat: () => this.setState(st => ({ chatOpen: !st.chatOpen })),
+      pickRoleMember: () => this.setState({ suRole: 'member' }),
+      pickRoleVolunteer: () => this.setState({ suRole: 'volunteer' }),
+      roleMemberBg: s.suRole === 'member' ? 'rgba(213,183,124,0.18)' : 'rgba(255,255,255,0.05)',
+      roleMemberBorder: s.suRole === 'member' ? 'rgba(213,183,124,0.6)' : 'rgba(255,255,255,0.15)',
+      roleMemberColor: s.suRole === 'member' ? '#e6d3a8' : '#b9b1a0',
+      roleVolBg: s.suRole === 'volunteer' ? 'rgba(213,183,124,0.18)' : 'rgba(255,255,255,0.05)',
+      roleVolBorder: s.suRole === 'volunteer' ? 'rgba(213,183,124,0.6)' : 'rgba(255,255,255,0.15)',
+      roleVolColor: s.suRole === 'volunteer' ? '#e6d3a8' : '#b9b1a0',
+      donateOpen: s.donateOpen,
+      openDonate: () => this.setState({ donateOpen: true, donStatus: '' }),
+      closeDonate: () => this.setState({ donateOpen: false }),
+      donPresets: [500, 1000, 2500].map(a => ({
+        label: a.toLocaleString('en-IN'),
+        pick: () => this.setState({ donAmount: a, donCustom: '' }),
+        bg: s.donAmount === a && !s.donCustom ? 'rgba(213,183,124,0.18)' : 'rgba(255,255,255,0.05)',
+        border: s.donAmount === a && !s.donCustom ? 'rgba(213,183,124,0.6)' : 'rgba(255,255,255,0.15)',
+        color: s.donAmount === a && !s.donCustom ? '#e6d3a8' : '#d8d2c4',
+      })),
+      donCustom: s.donCustom,
+      onDonCustom: (e) => this.setState({ donCustom: e.target.value }),
+      submitDonate: () => this.submitDonate(),
+      donOpacity: s.donBusy ? 0.6 : 1,
+      donButtonLabel: s.donBusy ? 'Opening Stripe…' : 'Donate securely with Stripe',
+      donHasStatus: !!s.donStatus,
+      donStatus: s.donStatus,
+      donStatusColor: s.donOk ? '#a8d5a2' : '#e0a3a3',
+      becomeVolunteer: () => this.becomeVolunteer(),
+      volLabel: s.volState === 'done' ? 'You are a volunteer ✓' : s.volState === 'busy' ? 'Registering…' : 'Become a volunteer →',
+      suName: s.suName, suEmail: s.suEmail, suHoney: s.suHoney,
+      onSuName: (e) => this.setState({ suName: e.target.value }),
+      onSuEmail: (e) => this.setState({ suEmail: e.target.value }),
+      onSuHoney: (e) => this.setState({ suHoney: e.target.value }),
+      onSuKey: (e) => { if (e.key === 'Enter') this.submitSignup(); },
+      submitSignup: () => this.submitSignup(),
+      suBusy: s.suBusy,
+      suOpacity: s.suBusy ? 0.6 : 1,
+      suButtonLabel: s.suBusy ? 'Joining…' : 'Join free',
+      suHasStatus: !!s.suStatus,
+      suStatus: s.suStatus,
+      suStatusColor: s.suOk ? '#a8d5a2' : '#e0a3a3',
       chatInput: s.chatInput,
       onChatInput: (e) => this.setState({ chatInput: e.target.value }),
       onChatKey: (e) => { if (e.key === 'Enter') this.sendChat(); },
@@ -399,15 +669,32 @@ class Component extends DCLogic {
       chatMessages: s.chatMessages.map(m => ({
         text: m.text,
         align: m.from === 'user' ? 'flex-end' : 'flex-start',
-        bg: m.from === 'user' ? 'linear-gradient(135deg, #e8c877, #c99a3f)' : 'rgba(255,255,255,0.07)',
+        bg: m.from === 'user' ? 'linear-gradient(135deg, #d5b77c, #b89758)' : 'rgba(255,255,255,0.07)',
         color: m.from === 'user' ? '#241b06' : '#d8d2c4',
       })),
-      chatChips: ['How is my streak?', 'I feel stressed', 'About the 40 days', 'Upcoming events'].map(label => ({ label, pick: () => this.sendChat(label) })),
-      startSession: () => this.setState({ sessionOpen: true, sessionSecs: 0 }),
-      endSession: () => this.setState({ sessionOpen: false }),
+      chatChips: ['How is my streak?', 'I feel stressed', 'About the 41 days', 'Upcoming events'].map(label => ({ label, pick: () => this.sendChat(label) })),
+      startSession: () => this.startSit(),
+      endSession: () => this.endSit(),
       sessionOpen: s.sessionOpen,
-      breathScale: s.breathIn ? 1.18 : 0.86,
-      breathLabel: s.breathIn ? 'Breathe in…' : 'Release…',
+      breathScale: s.breathPhase === 'in' ? 1.16 : 0.8,
+      breathSecs: s.breathPhase === 'in' ? 4 : 6,
+      breathLabel: s.breathPhase === 'in' ? 'Breathe in…' : 'Let go…',
+      guidance: [
+        'Settle into your seat — let the body be still.',
+        'Rest your attention where the breath touches the nostrils.',
+        'Thoughts will come. Watch them pass like clouds.',
+        'There is nothing to achieve. Only this breath.',
+        'If the mind wanders, gently return — that is the practice.',
+        'Sink beneath the breath, into the silence that holds it.',
+      ][Math.floor(s.sessionSecs / 45) % 6],
+      progOffset: Math.round(955 * (1 - Math.min(s.sessionSecs / 1800, 1))),
+      omOn: !!s.omOn,
+      toggleOm: () => this.setState(st => ({ omOn: !st.omOn })),
+      omBorder: s.omOn ? 'rgba(213,183,124,0.7)' : 'rgba(255,255,255,0.18)',
+      omBg: s.omOn ? 'rgba(213,183,124,0.15)' : 'transparent',
+      doneOpen: !!s.doneOpen,
+      doneMins: s.doneMins || '1 minute',
+      closeDone: () => this.setState({ doneOpen: false }),
       sessionClock: mins + ':' + secs,
     };
   }
