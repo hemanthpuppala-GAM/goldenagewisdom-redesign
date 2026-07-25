@@ -6,9 +6,8 @@ Redesigned experience for **goldenagewisdom.org** — a non-profit meditation pl
 | File | Purpose |
 |---|---|
 | `Home.dc.html` | Public homepage (golden cosmic + glassmorphism, chatbot, events, meditations) |
-| `Intro Film.dc.html` + `intro-film.jsx` | 70s animated intro film (silence → breath → sahasrara → kundalini → oneness → 40-day challenge → Satya Yugam) |
+| `Intro Film.dc.html` + `intro-film.jsx` | 70s animated intro film (silence → breath → sahasrara → kundalini → oneness → 41-day challenge → Satya Yugam) |
 | `Member Flow.dc.html` | OAuth sign-in → member dashboard (streaks, journal, gallery, events) |
-| `Demo Video.dc.html` + `demo-video.jsx` | 62s product walkthrough video |
 | `Golden Age Wisdom - Intro Film.html` | Standalone offline build of the intro film |
 | `HANDOFF.md` | Engineering plan: Laravel Socialite OAuth, DB schema, full security checklist, GoDaddy/DNS |
 | `assets/` | Images + generated audio |

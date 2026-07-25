@@ -89,3 +89,57 @@ Owned: .ORG domain (2 yrs) · Full Domain Protection · **Web Hosting Deluxe (1 
 
 ## 8. Suggested repo plan (for the team pitch)
 Branch `redesign-2026`: commit these design files + this doc under `/design`, open a PR titled "World-class redesign concept — homepage, intro film, member area, security plan" so the team can review the concept before implementation.
+
+## 8. Phase-2 additions (requested Jul 2026)
+**Volunteer database**
+```
+volunteers  id, user_id FK UNIQUE, status(applied|active|paused), skills TEXT,
+            city, availability, joined_at, notes  -- admin-only notes
+```
+Rule: volunteer signup unlocks after the member completes the 41-day challenge (check sessions_log streak >= 41 server-side).
+
+**Donations** — table exists in §3. Use Razorpay (INR) or Stripe; store only `provider_ref`, never card data (PCI stays with the provider). Send receipts from info@goldenagewisdom.org. For 80G tax receipts, capture PAN optionally.
+
+**QR signup** — the homepage now shows a QR pointing to https://goldenagewisdom.org/join. For print posters, generate at higher DPI. Optionally add `?src=qr-<event>` so signups are attributable per event/poster.
+
+**User journey tracking (privacy-first)**
+```
+journey_events  id, user_id nullable, anon_id (cookie uuid), event(name), meta JSON, created_at
+```
+Log: page_view, film_played, film_completed, signup_started, signup_completed(src), day_marked(n), challenge_completed, volunteer_applied, donation(status). No third-party trackers; a nightly rollup powers the admin dashboard (signups by source, film completion %, day-drop-off curve). This same table feeds the predictive bot's suggestions server-side later.
+
+**Real signup handling** — the static site's forms are demo-only. Wire them to Laravel: POST /register (rate-limited, honeypot field, email verification via Microsoft 365 SMTP), OAuth per §2. Never accept role/status fields from the client.
+
+**Support email** — info@goldenagewisdom.org (Microsoft 365 Essentials, §7). Use for: OAuth consent screens, donation receipts, event confirmations, password resets.
+
+**Security leak check (static site, done)** — no secrets/keys in the repo or pages; receipt PDF and uploads excluded from deploy; forms post nowhere yet (no data to leak); external calls: Google Fonts + qrserver QR image only. The full backend checklist is §4.
+
+**Adaptive UI (AUI) roadmap** — already responsive (mobile nav, stacked grids). Next: returning-member homepage variant (localStorage flag → "Continue day N" hero), language auto-pick from browser locale, reduced-motion respect for the film page.
+
+
+## Daily live sessions (Events)
+- Brahmamuhurtham meditation: 4:10–5:10 AM IST daily
+- Online meditation: 8:00–9:00 PM IST daily
+- Wisdom/knowledge session with Dr. Hari: 9:00–10:00 PM IST daily
+- Sundays: no sessions
+- Public: YouTube live — https://www.youtube.com/@GoldenAgeGurus/streams (channel: https://youtube.com/@goldenagegurus?si=xTzK1H3NEm1kbfSX)
+- MEMBERS ONLY (show after login only — never render publicly): Zoom https://us05web.zoom.us/j/81783627692?pwd=gassAOQsZh3OCvmNRhPwKHyaFBV83H.1 · Meeting ID 817 8362 7692 · Passcode 11111
+- Member benefit: 1:1 interaction with Dr. Hari for open spiritual questions
+
+
+## Google OAuth setup (Member Flow sign-in)
+The "Continue with Google" button runs REAL Google OAuth (Google Identity Services, token flow) once configured:
+1. Google Cloud Console → APIs & Services → Credentials → Create OAuth Client ID (type: Web application).
+2. Authorized JavaScript origins: https://goldenagewisdom.org (and any staging domain).
+3. Client ID (configured): 927688395054-3b3praeptn0muruff5v90hr5t6n121lk.apps.googleusercontent.com — set as the Member Flow googleClientId default.
+Without a Client ID (e.g. in preview) the button falls back to a clearly-labeled demo sign-in.
+Facebook/Apple buttons are demo-only until their SDKs are registered the same way (Meta for Developers / Apple Developer). For production, exchange the Google token server-side (Laravel Socialite) per the backend plan.
+
+
+## OAuth-only sign-in policy (decided)
+No passwords or self-hosted credentials — authentication routes entirely to third-party OAuth (Google, Microsoft, Facebook, Apple). The site never sees or stores passwords; only name + email come back from the provider.
+- Google: wired client-side (GIS token flow) — paste Client ID into the Member Flow googleClientId tweak / prop.
+- Microsoft: register at Microsoft Entra (portal.azure.com) — one app covers Hotmail, Outlook.com, Live, MSN, Office 365.
+- Facebook: developers.facebook.com → Facebook Login product.
+- Apple: Apple Developer ($99/yr) → Sign in with Apple. Optional until an iOS app ships.
+Production: verify provider tokens server-side with Laravel Socialite, create/lookup the member row (GAW-ID sequence), issue an HTTP-only session cookie. The email signup form was removed from the login page per this policy; signup.php remains for volunteer role additions and server-side member records.

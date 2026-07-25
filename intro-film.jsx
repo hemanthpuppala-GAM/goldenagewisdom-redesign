@@ -232,7 +232,7 @@ function SceneFortyDays() {
           ))}
         </div>
       </div>
-      <Caption text="Give us 40 days — a 30-minute sit in silence." sub="No kriyas, no breath techniques. Close your eyes and watch the breath — that’s all. Then see how well you act, and how deeply mind and body heal." />
+      <Caption text="Give us 41 days — a 30-minute sit in silence." sub="No kriyas, no breath techniques. Close your eyes and watch the breath — that’s all. Then see how well you act, and how deeply mind and body heal." />
     </div>
   );
 }
@@ -395,7 +395,37 @@ function FilmVoice({ enabled }) {
   return null;
 }
 
-const AudioBus = { ctx: null, buffers: {} };
+const AudioBus = { ctx: null, buffers: {}, unlocked: false };
+function SoundUnlock() {
+  const [gone, setGone] = React.useState(() => AudioBus.unlocked);
+  const isTouch = typeof window !== 'undefined' && ('ontouchstart' in window);
+  React.useEffect(() => {
+    if (gone) return;
+    const onDown = () => { setGone(true); AudioBus.unlocked = true; };
+    window.addEventListener('pointerdown', onDown, true);
+    return () => window.removeEventListener('pointerdown', onDown, true);
+  }, [gone]);
+  const unlock = () => {
+    const ctx = ensureCtx();
+    ctx.resume();
+    if (window.speechSynthesis) {
+      // iOS/Android: speaking a silent utterance inside the tap unlocks speech for later
+      const u = new SpeechSynthesisUtterance(' ');
+      u.volume = 0; speechSynthesis.speak(u); speechSynthesis.resume();
+    }
+    AudioBus.unlocked = true; setGone(true);
+  };
+  if (gone) return null;
+  return (
+    <div onClick={unlock} onTouchEnd={unlock} style={{ position: 'absolute', inset: 0, zIndex: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(30,24,56,0.55)', backdropFilter: 'blur(4px)', cursor: 'pointer' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, padding: '28px 40px', borderRadius: 20, background: 'rgba(51,44,99,0.9)', border: '1px solid rgba(232,200,119,0.5)', boxShadow: '0 8px 60px rgba(0,0,0,0.4)' }}>
+        <div style={{ fontSize: 44 }}>🔊</div>
+        <div style={{ fontFamily: 'Marcellus, serif', fontSize: 24, color: '#f5dfa4' }}>Tap to begin with sound</div>
+        {isTouch ? <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 14, fontWeight: 300, color: '#c9bfe0' }}>On iPhone, turn the silent switch off to hear music</div> : null}
+      </div>
+    </div>
+  );
+}
 function ensureCtx() {
   if (!AudioBus.ctx) {
     AudioBus.ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -453,7 +483,7 @@ window.IntroFilm = function IntroFilm() {
   return (
     <div style={{ position: 'relative', width: '100%', height: 'calc(100vh - 64px)', minHeight: 420, background: BG }}>
       <SceneStage width={1280} height={720} bg={BG} scenes={window.OM_SCENES} playback={window.OM_PLAYBACK}
-                  persistent={<React.Fragment><FilmScore src="assets/score.wav" enabled={t.music} volume={0.95} /><FilmScore src="assets/om-scroll.mp3" enabled={t.omChant} volume={0.5} /><FilmScore src="assets/impacts.wav" enabled={t.impacts} volume={0.9} /><FilmVoice enabled={t.narration} /><CinematicFrame /></React.Fragment>}>
+                  persistent={<React.Fragment><FilmScore src="assets/score.wav" enabled={t.music} volume={0.95} /><FilmScore src="assets/om-scroll.mp3" enabled={t.omChant} volume={0.5} /><FilmScore src="assets/impacts.wav" enabled={t.impacts} volume={0.9} /><FilmVoice enabled={t.narration} /><CinematicFrame /><SoundUnlock /></React.Fragment>}>
         {{
           Opening: SceneOpening, Silence: SceneSilence, Breath: SceneBreath,
           Crown: SceneCrown, Kundalini: SceneKundalini, Oneness: SceneOneness,

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #0d0a1c; height: 100%; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; }
+  a { color: #d5b77c; text-decoration: none; }
+  a:hover { color: #e6d3a8; }
+  * { box-sizing: border-box; }
+  @keyframes floatOrb { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-18px); } }
+  @keyframes glowPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  @keyframes viewIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  ::selection { background: rgba(213,183,124,0.3); }
+  @media (max-width: 760px) {
+    .r-navlinks { display: none !important; }
+    .r-grid-2 { grid-template-columns: 1fr !important; }
+    .r-challenge { flex-direction: column !important; padding: 28px 20px !important; }
+    nav.r-nav { padding: 10px 14px !important; }
+    .r-navbrand { font-size: 15px !important; }
+  }
+</style>
+</helmet>
+<div style="height: 100vh; background: #0d0a1c; overflow: hidden; display: flex; flex-direction: column; position: relative">
+  <img src="assets/hero.png" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,10,28,0.8) 0%, rgba(13,10,28,0.55) 45%, rgba(13,10,28,0.95) 100%)"></div>
+  <!-- NAV -->
+  <nav class="r-nav" style="position: relative; z-index: 50; margin: 16px auto 0; width: min(1180px, calc(100% - 32px)); display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 20px; border-radius: 999px; background: rgba(20,15,40,0.55); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(213,183,124,0.18); box-shadow: 0 8px 32px rgba(0,0,0,0.35); flex-shrink: 0">
+    <button onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 10px; background: none; border: none; cursor: pointer; padding: 0">
+      <img src="assets/logo.jpeg" alt="Golden Age Wisdom" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
+      <span style="font-family: 'Marcellus', serif; font-size: 18px; letter-spacing: 0.06em; color: #ecdcb4" class="r-navbrand">GOLDEN AGE WISDOM</span>
+    </button>
+    <div class="r-navlinks" style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.go }}" style="background: {{ n.bg }}; border: none; border-radius: 999px; padding: 8px 16px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; color: {{ n.color }}; cursor: pointer" style-hover="color: #e6d3a8">{{ n.label }}</button>
+      </sc-for>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px">
+      <div style="position: relative">
+        <button onClick="{{ toggleLangMenu }}" style="display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid rgba(255,255,255,0.18); color: #d8d2c4; border-radius: 999px; padding: 7px 14px; font-family: 'Outfit', sans-serif; font-size: 13px; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5); color: #e6d3a8">{{ langLabel }} <span style="font-size: 9px; opacity: 0.7">▼</span></button>
+        <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position: absolute; top: calc(100% + 10px); right: 0; z-index: 70; min-width: 140px; display: flex; flex-direction: column; padding: 6px; border-radius: 16px; background: rgba(22,17,44,0.92); backdrop-filter: blur(24px); border: 1px solid rgba(213,183,124,0.3); box-shadow: 0 16px 48px rgba(0,0,0,0.5)">
+            <sc-for list="{{ langOptions }}" as="lo" hint-placeholder-count="5">
+              <button onClick="{{ lo.pick }}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: {{ lo.bg }}; border: none; border-radius: 10px; padding: 9px 12px; font-family: 'Outfit', sans-serif; font-size: 13.5px; text-align: left; color: {{ lo.color }}; cursor: pointer" style-hover="background: rgba(213,183,124,0.14)">{{ lo.label }} <span style="font-size: 11px; color: #d5b77c">{{ lo.check }}</span></button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <a href="Member Flow.dc.html" style="display: inline-block; padding: 9px 22px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 14px; box-shadow: 0 4px 18px rgba(213,183,124,0.35)" style-hover="box-shadow: 0 4px 26px rgba(213,183,124,0.6); color: #241b06">{{ t.signIn }}</a>
+    </div>
+  </nav>
+
+  <!-- CONTENT AREA -->
+  <main style="position: relative; z-index: 10; flex: 1; min-height: 0; display: flex; align-items: stretch; justify-content: center; padding: 20px 24px 12px">
+
+    <!-- HOME -->
+    <sc-if value="{{ viewHome }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="Home" style="width: min(1180px, 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 24px; animation: viewIn 0.5s ease">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 7px 18px; border-radius: 999px; background: rgba(255,255,255,0.07); backdrop-filter: blur(12px); border: 1px solid rgba(213,183,124,0.25); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #d5b77c">{{ t.badge }}</div>
+        <h1 style="font-family: 'Marcellus', serif; font-size: clamp(40px, 6vw, 74px); line-height: 1.06; margin: 0; color: #f7f1e3; text-shadow: 0 2px 40px rgba(213,183,124,0.25)"><span style="display: inline-block; text-align: left"><span style="display: block; white-space: nowrap; line-height: 1.3"><span style="font-size: 1.5em; line-height: 1; color: #e6d3a8; text-shadow: 0 2px 40px rgba(213,183,124,0.4)">{{ heroFirst }}</span>{{ heroRest }}</span><span style="display: block; white-space: nowrap; background: linear-gradient(120deg, #e6d3a8, #b89758); -webkit-background-clip: text; background-clip: text; color: transparent">{{ t.hero2 }}</span></span></h1>
+        <p style="max-width: 560px; font-size: 17px; font-weight: 300; line-height: 1.6; color: #cfc8ba; margin: 0">{{ t.sub }}</p>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center">
+          <button onClick="{{ goFilm }}" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 16px; font-family: 'Outfit', sans-serif; cursor: pointer; box-shadow: 0 6px 30px rgba(213,183,124,0.4)" style-hover="box-shadow: 0 6px 44px rgba(213,183,124,0.7)"><span style="font-size: 13px">▶</span> {{ t.ctaFilm }}</button>
+          <a href="Member Flow.dc.html" style="display: inline-flex; align-items: center; padding: 14px 30px; border-radius: 999px; background: rgba(255,255,255,0.07); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.22); color: #f2ecdd; font-weight: 500; font-size: 16px" style-hover="border-color: rgba(213,183,124,0.6); color: #e6d3a8">{{ t.ctaBegin }}</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 18px; margin-top: 6px; padding: 16px 26px; border-radius: 22px; background: rgba(213,183,124,0.08); border: 1px solid rgba(213,183,124,0.3); backdrop-filter: blur(14px)">
+          <div style="text-align: left">
+            <div style="font-family: 'Marcellus', serif; font-size: 18px; color: #f2e9d8">{{ t.ch40 }}</div>
+            <div style="font-size: 13.5px; font-weight: 300; color: #b9b1a0">{{ t.ch40sub }}</div>
+          </div>
+          <button onClick="{{ goMission }}" style="flex-shrink: 0; padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); background: none; color: #e6d3a8; font-family: 'Outfit', sans-serif; font-size: 13.5px; cursor: pointer" style-hover="background: rgba(213,183,124,0.12)">{{ t.learnMore }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- MEDITATION -->
+    <sc-if value="{{ viewPractice }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Meditation" style="width: min(1180px, 100%); display: flex; flex-direction: column; justify-content: safe center; gap: 32px; animation: viewIn 0.5s ease; overflow-y: auto">
+        <div style="text-align: center">
+          <div style="font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; margin-bottom: 12px">{{ t.pathLabel }}</div>
+          <h2 style="font-family: 'Marcellus', serif; font-size: clamp(30px, 3.6vw, 42px); margin: 0; color: #f2e9d8">{{ t.pathTitle }}</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px">
+          <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+            <div style="padding: 28px 24px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 12px; transition: border-color 0.3s, transform 0.3s" style-hover="border-color: rgba(213,183,124,0.45); transform: translateY(-4px)">
+              <div style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.35), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.35); font-family: 'Marcellus', serif; font-size: 19px; color: #e6d3a8">{{ b.num }}</div>
+              <h3 style="font-family: 'Marcellus', serif; font-size: 20px; margin: 0; color: #f2e9d8">{{ b.title }}</h3>
+              <p style="margin: 0; font-size: 14.5px; font-weight: 300; line-height: 1.6; color: #b9b1a0">{{ b.body }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <div style="text-align: center"><a href="Member Flow.dc.html" style="display: inline-flex; padding: 13px 28px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 15px" style-hover="color: #241b06">{{ t.take40 }}</a></div>
+      </div>
+    </sc-if>
+
+    <!-- FILM -->
+    <sc-if value="{{ viewFilm }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Intro Film" style="width: min(980px, 100%); display: flex; flex-direction: column; justify-content: center; animation: viewIn 0.5s ease">
+        <a href="Intro Film.dc.html" style="position: relative; display: block; border-radius: 32px; overflow: hidden; border: 1px solid rgba(213,183,124,0.25)" style-hover="border-color: rgba(213,183,124,0.6)">
+          <img src="assets/meditation.png" alt="Intro film still" style="width: 100%; height: min(56vh, 480px); object-fit: cover; display: block; opacity: 0.75">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,10,28,0.15), rgba(13,10,28,0.85)); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; padding: 24px">
+            <div style="width: 84px; height: 84px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(213,183,124,0.5); display: flex; align-items: center; justify-content: center; font-size: 26px; color: #e6d3a8; animation: glowPulse 3s ease-in-out infinite">▶</div>
+            <div>
+              <h2 style="font-family: 'Marcellus', serif; font-size: clamp(26px, 3.4vw, 38px); margin: 0 0 10px; color: #f7f1e3">{{ t.filmTitle }}</h2>
+              <p style="margin: 0; font-size: 16px; font-weight: 300; color: #cfc8ba">{{ t.filmSub }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </sc-if>
+
+    <!-- EVENTS -->
+    <sc-if value="{{ viewEvents }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Events" class="r-grid-2" style="width: min(1180px, 100%); display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; align-content: safe center; animation: viewIn 0.5s ease; overflow-y: auto">
+        <div style="padding: 30px 28px; border-radius: 28px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
+          <div style="display: flex; align-items: baseline; justify-content: space-between">
+            <h2 style="font-family: 'Marcellus', serif; font-size: 25px; margin: 0; color: #f2e9d8">{{ t.guided }}</h2>
+            <a href="Member Flow.dc.html" style="font-size: 13.5px">{{ t.allSessions }}</a>
+          </div>
+          <sc-for list="{{ meditations }}" as="m" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 16px; padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07)" style-hover="border-color: rgba(213,183,124,0.4)">
+              <div style="width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(213,183,124,0.14); border: 1px solid rgba(213,183,124,0.35); color: #e6d3a8; font-size: 14px">▶</div>
+              <div style="flex: 1">
+                <div style="font-weight: 500; font-size: 15.5px; color: #ece5d5">{{ m.title }}</div>
+                <div style="font-size: 13px; font-weight: 300; color: #9a927f">{{ m.description }}</div>
+              </div>
+              <div style="font-size: 13px; color: #b89758; white-space: nowrap">{{ m.duration }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding: 30px 28px; border-radius: 28px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
+          <h2 style="font-family: 'Marcellus', serif; font-size: 25px; margin: 0; color: #f2e9d8">{{ t.gatherings }}</h2>
+          <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
+            <div style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07)">
+              <div style="flex-shrink: 0; width: 56px; text-align: center; padding: 7px 0; border-radius: 14px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.3)">
+                <div style="font-family: 'Marcellus', serif; font-size: 20px; color: #e6d3a8; line-height: 1.1">{{ e.day }}</div>
+                <div style="font-size: 11px; letter-spacing: 0.1em; color: #b89758">{{ e.month }}</div>
+              </div>
+              <div>
+                <div style="font-weight: 500; font-size: 15px; color: #ece5d5">{{ e.title }}</div>
+                <div style="font-size: 13px; font-weight: 300; color: #9a927f; margin-top: 3px">{{ e.meta }}</div>
+              </div>
+            </div>
+          </sc-for>
+          <a href="Member Flow.dc.html" style="font-size: 13.5px">{{ t.register }}</a>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- MISSION -->
+    <sc-if value="{{ viewMission }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Our Mission" style="width: min(880px, 100%); display: flex; flex-direction: column; align-items: center; justify-content: safe center; text-align: center; gap: 20px; animation: viewIn 0.5s ease; overflow-y: auto">
+        <div style="font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">{{ t.missionLabel }}</div>
+        <h2 style="font-family: 'Marcellus', serif; font-size: clamp(26px, 3.4vw, 38px); margin: 0; color: #f2e9d8; line-height: 1.25">{{ t.missionTitle }}</h2>
+        <p style="max-width: 560px; margin: 0; font-size: 16px; font-weight: 300; line-height: 1.65; color: #b9b1a0">{{ t.missionBody }}</p>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 24px; border-radius: 22px; background: rgba(255,255,255,0.05); backdrop-filter: blur(14px); border: 1px solid rgba(213,183,124,0.3)">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=241b06&bgcolor=f2e3bb&data=https%3A%2F%2Fgoldenagewisdom.org%2Fjoin" alt="Scan to join" style="width: 130px; height: 130px; border-radius: 14px; border: 4px solid #ecdcb4">
+          <div style="font-size: 12.5px; font-weight: 300; color: #b9b1a0">{{ t.scan }}</div>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center">
+          <a href="Member Flow.dc.html" style="display: inline-flex; padding: 13px 28px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 15px" style-hover="color: #241b06; box-shadow: 0 4px 28px rgba(213,183,124,0.5)">{{ t.joinBtn }}</a>
+          <a href="#" style="display: inline-flex; padding: 13px 28px; border-radius: 999px; border: 1px solid rgba(184,143,160,0.45); color: #c7a8b8; font-weight: 400; font-size: 15px" style-hover="border-color: rgba(184,143,160,0.8); color: #d8c2ce; background: rgba(184,143,160,0.08)">{{ t.supportBtn }}</a>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="position: relative; z-index: 10; flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.08); padding: 14px 24px; display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; font-size: 12.5px; font-weight: 300; color: #7d7666">
+    <span style="font-family: 'Marcellus', serif; letter-spacing: 0.08em; color: #d5b77c">GOLDEN AGE WISDOM</span>
+    <span>A registered non-profit · © 2026</span>
+    <a href="mailto:info@goldenagewisdom.org">info@goldenagewisdom.org</a>
+  </footer>
+
+  <!-- CHATBOT -->
+  <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; bottom: 96px; right: 24px; z-index: 60; width: 340px; max-height: min(460px, calc(100vh - 120px)); display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: rgba(22,17,44,0.85); backdrop-filter: blur(24px); border: 1px solid rgba(213,183,124,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.5)">
+      <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 10px">
+        <div style="width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #e6d3a8, #b89758); display: flex; align-items: center; justify-content: center; color: #241b06; font-family: 'Marcellus', serif">ॐ</div>
+        <div><div style="font-weight: 600; font-size: 14.5px; color: #f2e9d8">Wisdom Guide</div><div style="font-size: 12px; color: #9a927f">Ask about meditation & events</div></div>
+      </div>
+      <div style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{ chatMessages }}" as="msg" hint-placeholder-count="1">
+          <div style="max-width: 85%; padding: 10px 14px; border-radius: 16px; font-size: 13.5px; font-weight: 300; line-height: 1.5; align-self: {{ msg.align }}; background: {{ msg.bg }}; color: {{ msg.color }}">{{ msg.text }}</div>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; padding: 0 16px 10px">
+        <sc-for list="{{ chatSuggestions }}" as="s" hint-placeholder-count="2">
+          <button onClick="{{ s.send }}" style="background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.35); color: #d5b77c; border-radius: 999px; padding: 6px 13px; font-family: 'Outfit', sans-serif; font-size: 12.5px; cursor: pointer" style-hover="background: rgba(213,183,124,0.22)">{{ s.label }}</button>
+        </sc-for>
+      </div>
+      <div style="padding: 12px; display: flex; gap: 8px; border-top: 1px solid rgba(255,255,255,0.08)">
+        <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Ask anything…" style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 10px 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 13.5px; outline: none">
+        <button onClick="{{ sendChat }}" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-size: 15px; cursor: pointer">↑</button>
+      </div>
+    </div>
+  </sc-if>
+  <button onClick="{{ toggleChat }}" style="position: fixed; bottom: 24px; right: 24px; z-index: 60; width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(213,183,124,0.5); background: radial-gradient(circle at 35% 35%, #e6d3a8, #b89758); color: #241b06; font-size: 24px; cursor: pointer; box-shadow: 0 8px 30px rgba(213,183,124,0.45); font-family: 'Marcellus', serif; animation: floatOrb 5s ease-in-out infinite">{{ chatIcon }}</button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  I18N = {
+    'EN': { nav: ['Home','Meditation','Intro Film','Events','Our Mission'], heroWords: ['Awaken the light within.','Align breath and being.','Ascend into stillness.'], hero2: 'Return to stillness.', badge: 'A non-profit for inner awakening', sub: 'Guided kundalini meditation, ancient wisdom and a global community — free, for every age and every seeker.', ctaFilm: 'Watch the intro film', ctaBegin: 'Begin your journey — free', ch40: 'The 41-Day Challenge', ch40sub: '30 minutes of silence a day. Day 21 of 40 — thousands sitting with you.', learnMore: 'Learn more', pathLabel: 'The Path', pathTitle: 'What meditation awakens in you', take40: 'Take the 41-day challenge', filmTitle: 'From silence to oneness', filmSub: 'A 90-second journey through what meditation truly does — breath, prana, sahasrara, awakening.', guided: 'Guided meditations', allSessions: 'All sessions →', gatherings: 'Upcoming gatherings', register: 'Register as a member →', missionLabel: 'Our Mission', missionTitle: 'Wisdom belongs to everyone. Every teaching, session and retreat is offered freely.', missionBody: 'Golden Age Wisdom is a registered non-profit. Members share journals, photos from gatherings, and hold each other in daily practice. If our work moves you, you may choose to support it.', scan: 'Scan to join — share this at gatherings', joinBtn: 'Join the community', supportBtn: 'Support our mission ♡', signIn: 'Sign in',
+      benefits: [
+        { num: 'I', title: 'Enter true silence', body: 'Meditation settles the restless mind until you rest in deep, natural silence — the ground of all healing.' },
+        { num: 'II', title: 'Soften the breath', body: 'As stillness deepens, prana refines and the gap between breaths widens — the body needs less, receives more.' },
+        { num: 'III', title: 'Receive from the crown', body: 'In deep absorption, prana is drawn directly through the sahasrara — the thousand-petaled crown — nourishing body and spirit.' },
+        { num: 'IV', title: 'Awaken kundalini', body: 'The dormant energy rises, and you meet the universe as yourself — oneness, stillness, boundless peace.' },
+      ] },
+    'తెలుగు': { nav: ['హోమ్','ధ్యానం','పరిచయ చిత్రం','ఈవెంట్లు','మా లక్ష్యం'], heroWords: ['లోపలి వెలుగును మేల్కొలపండి.','శ్వాసతో ఏకమవ్వండి.','నిశ్శబ్దంలోకి ఎదగండి.'], hero2: 'నిశ్చలతకు తిరిగి రండి.', badge: 'అంతర జాగృతికి ఒక స్వచ్ఛంద సంస్థ', sub: 'మార్గదర్శక కుండలిని ధ్యానం, ప్రాచీన జ్ఞానం, ప్రపంచవ్యాప్త సమాజం — ప్రతి వయసుకు, ప్రతి సాధకుడికి ఉచితం.', ctaFilm: 'పరిచయ చిత్రం చూడండి', ctaBegin: 'మీ ప్రయాణం ప్రారంభించండి — ఉచితం', ch40: '40-రోజుల సవాలు', ch40sub: 'రోజుకు 30 నిమిషాల నిశ్శబ్దం. 40లో 21వ రోజు — వేలమంది మీతో కూర్చున్నారు.', learnMore: 'మరింత తెలుసుకోండి', pathLabel: 'మార్గం', pathTitle: 'ధ్యానం మీలో ఏమి మేల్కొల్పుతుంది', take40: '40-రోజుల సవాలు స్వీకరించండి', filmTitle: 'నిశ్శబ్దం నుండి ఏకత్వానికి', filmSub: 'ధ్యానం నిజంగా ఏమి చేస్తుందో 90 సెకన్ల ప్రయాణం — శ్వాస, ప్రాణ, సహస్రార, జాగృతి.', guided: 'మార్గదర్శక ధ్యానాలు', allSessions: 'అన్ని సెషన్లు →', gatherings: 'రాబోయే సమావేశాలు', register: 'సభ్యులుగా నమోదు అవ్వండి →', missionLabel: 'మా లక్ష్యం', missionTitle: 'జ్ఞానం అందరిదీ. ప్రతి బోధన, సెషన్, రిట్రీట్ ఉచితంగా అందించబడుతుంది.', missionBody: 'గోల్డెన్ ఏజ్ విజ్డమ్ నమోదిత స్వచ్ఛంద సంస్థ. సభ్యులు డైరీలు, సమావేశాల ఫోటోలు పంచుకుంటూ, రోజువారీ సాధనలో ఒకరినొకరు నిలబెడతారు. మా కృషి మిమ్మల్ని కదిలిస్తే, మీరు మద్దతివ్వవచ్చు.', scan: 'చేరడానికి స్కాన్ చేయండి — సమావేశాల్లో పంచుకోండి', joinBtn: 'సమాజంలో చేరండి', supportBtn: 'మా లక్ష్యానికి మద్దతివ్వండి ♡', signIn: 'సైన్ ఇన్',
+      benefits: [
+        { num: 'I', title: 'నిజమైన నిశ్శబ్దంలోకి', body: 'ధ్యానం చంచల మనసును శాంతపరిచి, లోతైన సహజ నిశ్శబ్దంలో నిలుపుతుంది — సర్వ స్వస్థతకు మూలం.' },
+        { num: 'II', title: 'శ్వాసను మృదువుగా', body: 'నిశ్చలత లోతవుతున్న కొద్దీ ప్రాణం సూక్ష్మమవుతుంది, శ్వాసల మధ్య అంతరం పెరుగుతుంది — శరీరానికి తక్కువ అవసరం, ఎక్కువ లభిస్తుంది.' },
+        { num: 'III', title: 'సహస్రారం నుండి స్వీకరణ', body: 'గాఢ ధ్యానంలో ప్రాణశక్తి నేరుగా సహస్రారం — వేయి రేకుల కిరీటం — ద్వారా శరీరాన్ని, ఆత్మను పోషిస్తుంది.' },
+        { num: 'IV', title: 'కుండలిని జాగృతి', body: 'నిద్రాణ శక్తి మేల్కొంటుంది, విశ్వాన్ని మీరుగా కలుసుకుంటారు — ఏకత్వం, నిశ్చలత, అనంత శాంతి.' },
+      ] },
+    'हिंदी': { nav: ['होम','ध्यान','परिचय फ़िल्म','कार्यक्रम','हमारा उद्देश्य'], heroWords: ['भीतर के प्रकाश को जगाएँ.','श्वास से एक हों.','स्थिरता में उठें.'], hero2: 'स्थिरता में लौटें.', badge: 'आंतरिक जागरण के लिए एक गैर-लाभकारी संस्था', sub: 'निर्देशित कुंडलिनी ध्यान, प्राचीन ज्ञान और एक वैश्विक समुदाय — हर आयु, हर साधक के लिए निःशुल्क.', ctaFilm: 'परिचय फ़िल्म देखें', ctaBegin: 'अपनी यात्रा शुरू करें — निःशुल्क', ch40: '40-दिन की चुनौती', ch40sub: 'रोज़ 30 मिनट मौन. 40 में से 21वाँ दिन — हज़ारों आपके साथ बैठे हैं.', learnMore: 'और जानें', pathLabel: 'मार्ग', pathTitle: 'ध्यान आपमें क्या जगाता है', take40: '40-दिन की चुनौती लें', filmTitle: 'मौन से एकत्व तक', filmSub: 'ध्यान वास्तव में क्या करता है — श्वास, प्राण, सहस्रार, जागरण — 90 सेकंड की यात्रा.', guided: 'निर्देशित ध्यान', allSessions: 'सभी सत्र →', gatherings: 'आगामी सभाएँ', register: 'सदस्य के रूप में पंजीकरण करें →', missionLabel: 'हमारा उद्देश्य', missionTitle: 'ज्ञान सबका है. हर शिक्षा, सत्र और रिट्रीट निःशुल्क है.', missionBody: 'गोल्डन एज विज़डम एक पंजीकृत गैर-लाभकारी संस्था है. सदस्य डायरी, सभाओं की तस्वीरें साझा करते हैं और दैनिक साधना में एक-दूसरे का साथ देते हैं. यदि हमारा कार्य आपको छूता है, तो आप सहयोग कर सकते हैं.', scan: 'जुड़ने के लिए स्कैन करें — सभाओं में साझा करें', joinBtn: 'समुदाय से जुड़ें', supportBtn: 'हमारे उद्देश्य का समर्थन करें ♡', signIn: 'साइन इन',
+      benefits: [
+        { num: 'I', title: 'सच्चे मौन में प्रवेश', body: 'ध्यान चंचल मन को शांत कर गहरे, सहज मौन में स्थिर करता है — समस्त उपचार की भूमि.' },
+        { num: 'II', title: 'श्वास कोमल हो', body: 'स्थिरता गहराने पर प्राण सूक्ष्म होता है और श्वासों के बीच का अंतराल बढ़ता है — शरीर को कम चाहिए, अधिक मिलता है.' },
+        { num: 'III', title: 'सहस्रार से ग्रहण', body: 'गहन ध्यान में प्राण सीधे सहस्रार — सहस्र-दल मुकुट — से खिंचकर तन और आत्मा को पोषित करता है.' },
+        { num: 'IV', title: 'कुंडलिनी जागरण', body: 'सुप्त ऊर्जा जागती है और आप ब्रह्मांड से स्वयं के रूप में मिलते हैं — एकत्व, स्थिरता, असीम शांति.' },
+      ] },
+    'ಕನ್ನಡ': { nav: ['ಮುಖಪುಟ','ಧ್ಯಾನ','ಪರಿಚಯ ಚಿತ್ರ','ಕಾರ್ಯಕ್ರಮಗಳು','ನಮ್ಮ ಧ್ಯೇಯ'], heroWords: ['ಒಳಗಿನ ಬೆಳಕನ್ನು ಎಚ್ಚರಿಸಿ.','ಉಸಿರಿನೊಂದಿಗೆ ಒಂದಾಗಿ.','ನಿಶ್ಚಲತೆಯಲ್ಲಿ ಏರಿರಿ.'], hero2: 'ನಿಶ್ಚಲತೆಗೆ ಮರಳಿರಿ.', badge: 'ಆಂತರಿಕ ಜಾಗೃತಿಗಾಗಿ ಒಂದು ಲಾಭರಹಿತ ಸಂಸ್ಥೆ', sub: 'ಮಾರ್ಗದರ್ಶಿತ ಕುಂಡಲಿನಿ ಧ್ಯಾನ, ಪ್ರಾಚೀನ ಜ್ಞಾನ ಮತ್ತು ಜಾಗತಿಕ ಸಮುದಾಯ — ಪ್ರತಿ ವಯಸ್ಸಿಗೂ, ಪ್ರತಿ ಸಾಧಕನಿಗೂ ಉಚಿತ.', ctaFilm: 'ಪರಿಚಯ ಚಿತ್ರ ನೋಡಿ', ctaBegin: 'ನಿಮ್ಮ ಪಯಣ ಆರಂಭಿಸಿ — ಉಚಿತ', ch40: '40-ದಿನಗಳ ಸವಾಲು', ch40sub: 'ದಿನಕ್ಕೆ 30 ನಿಮಿಷ ಮೌನ. 40ರಲ್ಲಿ 21ನೇ ದಿನ — ಸಾವಿರಾರು ಜನರು ನಿಮ್ಮೊಂದಿಗೆ ಕುಳಿತಿದ್ದಾರೆ.', learnMore: 'ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ', pathLabel: 'ಮಾರ್ಗ', pathTitle: 'ಧ್ಯಾನ ನಿಮ್ಮಲ್ಲಿ ಏನನ್ನು ಎಚ್ಚರಿಸುತ್ತದೆ', take40: '40-ದಿನಗಳ ಸವಾಲು ಸ್ವೀಕರಿಸಿ', filmTitle: 'ಮೌನದಿಂದ ಏಕತ್ವದೆಡೆಗೆ', filmSub: 'ಧ್ಯಾನ ನಿಜವಾಗಿ ಏನು ಮಾಡುತ್ತದೆ — ಉಸಿರು, ಪ್ರಾಣ, ಸಹಸ್ರಾರ, ಜಾಗೃತಿ — 90 ಸೆಕೆಂಡುಗಳ ಪಯಣ.', guided: 'ಮಾರ್ಗದರ್ಶಿತ ಧ್ಯಾನಗಳು', allSessions: 'ಎಲ್ಲಾ ಸೆಷನ್‌ಗಳು →', gatherings: 'ಮುಂಬರುವ ಸಮಾವೇಶಗಳು', register: 'ಸದಸ್ಯರಾಗಿ ನೋಂದಾಯಿಸಿ →', missionLabel: 'ನಮ್ಮ ಧ್ಯೇಯ', missionTitle: 'ಜ್ಞಾನ ಎಲ್ಲರಿಗೂ ಸೇರಿದ್ದು. ಪ್ರತಿ ಬೋಧನೆ, ಸೆಷನ್ ಮತ್ತು ರಿಟ್ರೀಟ್ ಉಚಿತವಾಗಿ ನೀಡಲಾಗುತ್ತದೆ.', missionBody: 'ಗೋಲ್ಡನ್ ಏಜ್ ವಿಸ್ಡಮ್ ನೋಂದಾಯಿತ ಲಾಭರಹಿತ ಸಂಸ್ಥೆ. ಸದಸ್ಯರು ದಿನಚರಿಗಳು, ಸಮಾವೇಶಗಳ ಫೋಟೋಗಳನ್ನು ಹಂಚಿಕೊಂಡು, ದೈನಂದಿನ ಸಾಧನೆಯಲ್ಲಿ ಪರಸ್ಪರ ಬೆಂಬಲಿಸುತ್ತಾರೆ. ನಮ್ಮ ಕಾರ್ಯ ನಿಮ್ಮನ್ನು ಸ್ಪರ್ಶಿಸಿದರೆ, ನೀವು ಬೆಂಬಲಿಸಬಹುದು.', scan: 'ಸೇರಲು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ — ಸಮಾವೇಶಗಳಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ', joinBtn: 'ಸಮುದಾಯಕ್ಕೆ ಸೇರಿ', supportBtn: 'ನಮ್ಮ ಧ್ಯೇಯವನ್ನು ಬೆಂಬಲಿಸಿ ♡', signIn: 'ಸೈನ್ ಇನ್',
+      benefits: [
+        { num: 'I', title: 'ನಿಜವಾದ ಮೌನಕ್ಕೆ ಪ್ರವೇಶ', body: 'ಧ್ಯಾನ ಚಂಚಲ ಮನಸ್ಸನ್ನು ಶಾಂತಗೊಳಿಸಿ, ಆಳವಾದ ಸಹಜ ಮೌನದಲ್ಲಿ ನೆಲೆಗೊಳಿಸುತ್ತದೆ — ಎಲ್ಲಾ ಗುಣಪಡಿಸುವಿಕೆಯ ನೆಲೆ.' },
+        { num: 'II', title: 'ಉಸಿರು ಮೃದುವಾಗುತ್ತದೆ', body: 'ನಿಶ್ಚಲತೆ ಆಳವಾದಂತೆ ಪ್ರಾಣ ಸೂಕ್ಷ್ಮವಾಗಿ, ಉಸಿರುಗಳ ನಡುವಿನ ಅಂತರ ವಿಸ್ತರಿಸುತ್ತದೆ — ದೇಹಕ್ಕೆ ಕಡಿಮೆ ಬೇಕು, ಹೆಚ್ಚು ಸಿಗುತ್ತದೆ.' },
+        { num: 'III', title: 'ಸಹಸ್ರಾರದಿಂದ ಸ್ವೀಕಾರ', body: 'ಗಾಢ ಧ್ಯಾನದಲ್ಲಿ ಪ್ರಾಣ ನೇರವಾಗಿ ಸಹಸ್ರಾರ — ಸಾವಿರ ದಳಗಳ ಕಿರೀಟ — ಮೂಲಕ ದೇಹ ಮತ್ತು ಆತ್ಮವನ್ನು ಪೋಷಿಸುತ್ತದೆ.' },
+        { num: 'IV', title: 'ಕುಂಡಲಿನಿ ಜಾಗೃತಿ', body: 'ನಿದ್ರಿತ ಶಕ್ತಿ ಎದ್ದು, ವಿಶ್ವವನ್ನು ನೀವೇ ಆಗಿ ಭೇಟಿಯಾಗುತ್ತೀರಿ — ಏಕತ್ವ, ನಿಶ್ಚಲತೆ, ಅಪಾರ ಶಾಂತಿ.' },
+      ] },
+    'தமிழ்': { nav: ['முகப்பு','தியானம்','அறிமுகப் படம்','நிகழ்வுகள்','எங்கள் நோக்கம்'], heroWords: ['உள் ஒளியை எழுப்புங்கள்.','மூச்சுடன் ஒன்றாகுங்கள்.','அமைதியில் உயருங்கள்.'], hero2: 'அமைதிக்குத் திரும்புங்கள்.', badge: 'அக விழிப்புக்கான இலாப நோக்கற்ற அமைப்பு', sub: 'வழிகாட்டப்பட்ட குண்டலினி தியானம், பண்டைய ஞானம், உலகளாவிய சமூகம் — ஒவ்வொரு வயதுக்கும், ஒவ்வொரு தேடலுக்கும் இலவசம்.', ctaFilm: 'அறிமுகப் படத்தைப் பாருங்கள்', ctaBegin: 'உங்கள் பயணத்தைத் தொடங்குங்கள் — இலவசம்', ch40: '40-நாள் சவால்', ch40sub: 'நாளொன்றுக்கு 30 நிமிட மௌனம். 40-இல் 21-ஆம் நாள் — ஆயிரக்கணக்கானோர் உங்களுடன் அமர்ந்துள்ளனர்.', learnMore: 'மேலும் அறிய', pathLabel: 'பாதை', pathTitle: 'தியானம் உங்களில் எதை எழுப்புகிறது', take40: '40-நாள் சவாலை ஏற்றுக்கொள்ளுங்கள்', filmTitle: 'மௌனத்திலிருந்து ஒருமைக்கு', filmSub: 'தியானம் உண்மையில் என்ன செய்கிறது — மூச்சு, பிராணன், சஹஸ்ராரம், விழிப்பு — 90 வினாடி பயணம்.', guided: 'வழிகாட்டப்பட்ட தியானங்கள்', allSessions: 'அனைத்து அமர்வுகள் →', gatherings: 'வரவிருக்கும் கூட்டங்கள்', register: 'உறுப்பினராகப் பதிவு செய்யுங்கள் →', missionLabel: 'எங்கள் நோக்கம்', missionTitle: 'ஞானம் அனைவருக்கும் உரியது. ஒவ்வொரு போதனையும், அமர்வும், தவக்காலமும் இலவசமாக வழங்கப்படுகிறது.', missionBody: 'கோல்டன் ஏஜ் விஸ்டம் பதிவு செய்யப்பட்ட இலாப நோக்கற்ற அமைப்பு. உறுப்பினர்கள் நாட்குறிப்புகள், கூட்டங்களின் புகைப்படங்களைப் பகிர்ந்து, தினசரி பயிற்சியில் ஒருவரை ஒருவர் தாங்குகின்றனர். எங்கள் பணி உங்களைத் தொட்டால், நீங்கள் ஆதரிக்கலாம்.', scan: 'சேர ஸ்கேன் செய்யுங்கள் — கூட்டங்களில் பகிருங்கள்', joinBtn: 'சமூகத்தில் சேருங்கள்', supportBtn: 'எங்கள் நோக்கத்தை ஆதரியுங்கள் ♡', signIn: 'உள்நுழைய',
+      benefits: [
+        { num: 'I', title: 'உண்மையான மௌனத்தில் நுழைக', body: 'தியானம் அலைபாயும் மனதை அமைதிப்படுத்தி, ஆழ்ந்த இயல்பான மௌனத்தில் நிலைநிறுத்துகிறது — எல்லா குணமாதலின் அடித்தளம்.' },
+        { num: 'II', title: 'மூச்சு மென்மையாகும்', body: 'அமைதி ஆழமாகும்போது பிராணன் நுட்பமாகி, மூச்சுகளுக்கிடையிலான இடைவெளி விரிகிறது — உடலுக்கு குறைவே தேவை, அதிகம் கிடைக்கிறது.' },
+        { num: 'III', title: 'சஹஸ்ராரத்திலிருந்து பெறுதல்', body: 'ஆழ்ந்த தியானத்தில் பிராணன் நேரடியாக சஹஸ்ராரம் — ஆயிரம் இதழ் மகுடம் — வழியே உடலையும் ஆன்மாவையும் ஊட்டுகிறது.' },
+        { num: 'IV', title: 'குண்டலினி விழிப்பு', body: 'உறங்கும் சக்தி எழுகிறது, பிரபஞ்சத்தை நீங்களாகவே சந்திக்கிறீர்கள் — ஒருமை, அமைதி, எல்லையற்ற அமைதி.' },
+      ] },
+  };
+  state = {
+    view: 'home', chatOpen: false, chatInput: '', heroIdx: 0, langIdx: 0,
+    chatMessages: [{ from: 'bot', text: 'Namaste 🙏 I can help you find a meditation, an event, or explain how to begin. What brings you here today?' }],
+  };
+  componentDidMount() {
+    this.heroTimer = setInterval(() => this.setState(s => ({ heroIdx: (s.heroIdx + 1) % 3 })), 3200);
+  }
+  componentWillUnmount() { clearInterval(this.heroTimer); }
+  nextSuggestions(q) {
+    const t = q.toLowerCase();
+    if (t.includes('event') || t.includes('retreat')) return ['Register as a member', 'What should I bring?', 'Online sessions?'];
+    if (t.includes('begin') || t.includes('start') || t.includes('new')) return ['Take the 41-day challenge', 'Guided meditations', 'What is kundalini?'];
+    if (t.includes('kundalini') || t.includes('awaken')) return ['Watch the intro film', 'Is it safe?', 'How do I begin?'];
+    if (t.includes('donat') || t.includes('support')) return ['Volunteer instead', 'Where do donations go?', 'Upcoming events'];
+    if (t.includes('experienc') || t.includes('feel') || t.includes('during')) return ['Sensations are normal?', 'Talk to a master', 'Join live sessions'];
+    return ['How do I begin?', 'Upcoming events', 'What is kundalini?'];
+  }
+  botReply(q) {
+    const t = q.toLowerCase();
+    if (t.includes('volunteer')) return 'Wonderful! After completing your 41-day challenge, you can join as a volunteer — helping at gatherings, guiding newcomers, or supporting online sessions. Sign up as a member first, then choose "Volunteer" in your dashboard.';
+    if (t.includes('safe') || t.includes('sensation') || t.includes('normal')) return 'Yes — simply watching the breath is completely safe. Warmth, tingling or lightness during meditation are normal signs of settling energy. If anything feels intense, open your eyes gently and rest. Our masters answer questions in every live session.';
+    if (t.includes('event') || t.includes('retreat')) return 'Our next gatherings: an online session on Jun 22, a Kundalini workshop in Bangalore on Jul 5, and a 7-day silent retreat in Rishikesh from Aug 15. Members can register with one tap.';
+    if (t.includes('begin') || t.includes('start') || t.includes('new')) return 'Beautiful. Start with "Breath of Stillness" — a gentle 12-minute practice. Just sit comfortably, close your eyes, and watch the breath. Would you like me to guide you to sign up? It is free.';
+    if (t.includes('kundalini') || t.includes('awaken')) return 'Kundalini is the dormant life-energy at the base of the spine. Through regular meditation the breath softens, prana rises, and one experiences stillness and oneness. Our intro film explains this in 90 seconds.';
+    if (t.includes('donat') || t.includes('support')) return 'We are a non-profit — every teaching is free. If you wish to support us, there is a "Support our mission" link in the Mission section. Every contribution keeps the teachings free for all.';
+    return 'Meditation begins with silence — sitting quietly and watching the breath. Explore our guided sessions, or ask me about events, kundalini, or how to begin.';
+  }
+  go(view) { this.setState({ view }); }
+  firstGrapheme(w) {
+    // grapheme-safe split so Telugu/Hindi/Kannada/Tamil conjuncts don't break
+    if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+      const it = new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(w)[Symbol.iterator]().next();
+      if (!it.done) return it.value.segment;
+    }
+    return w[0];
+  }
+  renderVals() {
+    const langs = ['EN', 'తెలుగు', 'हिंदी', 'ಕನ್ನಡ', 'தமிழ்'];
+    const L = this.I18N[langs[this.state.langIdx]];
+    const heroWords = L.heroWords;
+    const v = this.state.view;
+    const keys = ['home', 'practice', 'film', 'events', 'mission'];
+    const items = keys.map((k, i) => [k, L.nav[i]]);
+    return {
+      viewHome: v === 'home', viewPractice: v === 'practice', viewFilm: v === 'film', viewEvents: v === 'events', viewMission: v === 'mission',
+      goHome: () => this.go('home'), goFilm: () => this.go('film'), goMission: () => this.go('practice'),
+      navItems: items.map(([key, label]) => ({
+        label,
+        go: () => this.go(key),
+        bg: v === key ? 'rgba(213,183,124,0.16)' : 'none',
+        color: v === key ? '#e6d3a8' : '#d8d2c4',
+      })),
+      t: L,
+      heroFirst: this.firstGrapheme(heroWords[this.state.heroIdx]),
+      heroRest: heroWords[this.state.heroIdx].slice(this.firstGrapheme(heroWords[this.state.heroIdx]).length),
+      langLabel: langs[this.state.langIdx],
+      langMenuOpen: !!this.state.langMenuOpen,
+      toggleLangMenu: () => this.setState(s => ({ langMenuOpen: !s.langMenuOpen })),
+      langOptions: langs.map((label, i) => ({
+        label,
+        pick: () => this.setState({ langIdx: i, langMenuOpen: false }),
+        bg: i === this.state.langIdx ? 'rgba(213,183,124,0.16)' : 'none',
+        color: i === this.state.langIdx ? '#e6d3a8' : '#d8d2c4',
+        check: i === this.state.langIdx ? '✓' : '',
+      })),
+      chatOpen: this.state.chatOpen,
+      chatIcon: this.state.chatOpen ? '×' : 'ॐ',
+      toggleChat: () => this.setState(s => ({ chatOpen: !s.chatOpen })),
+      chatInput: this.state.chatInput,
+      onChatInput: (e) => this.setState({ chatInput: e.target.value }),
+      onChatKey: (e) => { if (e.key === 'Enter') this.sendChat(); },
+      sendChat: () => this.sendChat(),
+      chatSuggestions: (this.state.suggestions || ['How do I begin?', 'Upcoming events', 'What is kundalini?']).map(label => ({
+        label, send: () => this.sendChat(label),
+      })),
+      chatMessages: this.state.chatMessages.map(m => ({
+        text: m.text,
+        align: m.from === 'user' ? 'flex-end' : 'flex-start',
+        bg: m.from === 'user' ? 'linear-gradient(135deg, #d5b77c, #b89758)' : 'rgba(255,255,255,0.07)',
+        color: m.from === 'user' ? '#241b06' : '#d8d2c4',
+      })),
+      benefits: L.benefits,
+      meditations: [
+        { title: 'Root to Crown Awakening', description: 'A guided journey through all seven chakras.', duration: '20 min' },
+        { title: 'Breath of Stillness', description: 'Gentle breath awareness — ideal for beginners.', duration: '12 min' },
+        { title: 'Silence Immersion', description: 'Deep unguided sitting with soft bells.', duration: '30 min' },
+      ],
+      events: [
+        { day: '22', month: 'JUN', title: 'Online Meditation Session', meta: '7:00–8:30 PM IST · Online' },
+        { day: '05', month: 'JUL', title: 'Kundalini Awakening Workshop', meta: '10 AM–5 PM · Bangalore' },
+        { day: '15', month: 'AUG', title: '7-Day Silent Retreat', meta: 'All day · Rishikesh' },
+      ],
+    };
+  }
+  sendChat(preset) {
+    const q = (preset || this.state.chatInput).trim();
+    if (!q) return;
+    this.setState(s => ({ chatMessages: [...s.chatMessages, { from: 'user', text: q }], chatInput: '' }));
+    setTimeout(() => this.setState(s => ({
+      chatMessages: [...s.chatMessages, { from: 'bot', text: this.botReply(q) }],
+      suggestions: this.nextSuggestions(q),
+    })), 600);
+  }
+}
+</script>
+</body>
+</html>
