@@ -1,8 +1,11 @@
 Options -Indexes -MultiViews
+DirectoryIndex index.html
 RewriteEngine On
 
 # --- Redirect .dc.html URLs to clean paths (what visitors see) ---
 RewriteCond %{THE_REQUEST} \s/Home\.dc\.html [NC]
+RewriteRule ^ / [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Home(%20|\+|\s)Mandala\.dc\.html [NC]
 RewriteRule ^ / [R=301,L]
 RewriteCond %{THE_REQUEST} \s/Intro(%20|\+|\s)Film\.dc\.html [NC]
 RewriteRule ^ /film [R=301,L]
@@ -18,7 +21,7 @@ RewriteRule ^film/?$ "Intro Film.dc.html" [L]
 RewriteRule ^join/?$ "Member Flow.dc.html" [L]
 RewriteRule ^demo/?$ "Demo.dc.html" [L]
 RewriteRule ^demo-video/?$ "Demo Video.dc.html" [L]
-RewriteRule ^$ "Home.dc.html" [L]
+RewriteRule ^$ "index.html" [L]
 
 # --- Force HTTPS ---
 RewriteCond %{HTTPS} !=on

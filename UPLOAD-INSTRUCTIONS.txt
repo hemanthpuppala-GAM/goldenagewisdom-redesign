@@ -1,0 +1,17 @@
+UPLOAD TO cPanel - public_html (July 25, 2026 - evening batch)
+
+Overwrite these in public_html:
+1. index.html
+2. Home Mandala.dc.html
+3. Intro Film.dc.html
+4. intro-film.jsx
+5. htaccess.txt  -> upload, then RENAME to  .htaccess  (fixes the 404 at goldenagewisdom.org)
+
+New file - put inside the assets folder:
+6. assets/narration-master-50s.wav   (the new narration + music soundtrack)
+
+Then hard-refresh (Ctrl+Shift+R) or test in incognito.
+
+Included in this batch: root 404 fix, tagline redesign, bigger logo + banner cleanup,
+mandala nudges, chakra swap (Wellness/Events), signup QR, inline intro film with
+ElevenLabs narration + BGM, synced captions, play/pause + fullscreen, sound auto-unlock.
