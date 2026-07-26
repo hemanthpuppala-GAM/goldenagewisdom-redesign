@@ -232,7 +232,7 @@ function SceneFortyDays() {
           ))}
         </div>
       </div>
-      <Caption text="Give us 41 days — a 30-minute sit in silence." sub="No kriyas, no breath techniques. Close your eyes and watch the breath — that’s all. Then see how well you act, and how deeply mind and body heal." />
+      <Caption text="Give us 40 days — a 30-minute sit in silence." sub="No kriyas, no breath techniques. Close your eyes and watch the breath — that’s all. Then see how well you act, and how deeply mind and body heal." />
     </div>
   );
 }
