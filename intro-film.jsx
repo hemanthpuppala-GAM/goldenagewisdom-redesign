@@ -1,3 +1,9 @@
+/* Scene list, playback and tweak defaults live with the film itself — the
+   landing page must not declare a timeline (it makes the editor show a scrubber). */
+window.OM_SCENES = window.OM_SCENES || '[{"name":"Opening","dur":6.4},{"name":"Silence","dur":6},{"name":"Breath","dur":5.5},{"name":"Kundalini","dur":5.1},{"name":"Oneness","dur":5.2},{"name":"FortyDays","dur":5.3},{"name":"Within","dur":3.3},{"name":"SatyaYugam","dur":4.6},{"name":"Invitation","dur":8.6}]';
+window.OM_PLAYBACK = window.OM_PLAYBACK || '{"mode":"loop"}';
+window.TWEAK_DEFAULTS = window.TWEAK_DEFAULTS || {"captions":true,"music":true,"omChant":false,"impacts":false,"narration":false,"motionEditor":false};
+window.OM_HIDE_PLAYBAR = true;
 /* Intro film — "What Meditation Awakens" — built on animations-v2 SceneStage */
 const { SceneStage, useScene, clamp } = window;
 const { useTweaks, TweaksPanel, TweakSection, TweakToggle } = window;
@@ -331,7 +337,7 @@ function SceneInvitation() {
     <div style={{ position: 'absolute', inset: 0 }}>
       <Backdrop />
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 22 }}>
-        <img src="assets/logo.jpeg" style={{ width: 96, height: 96, borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(232,200,119,0.6)', boxShadow: '0 0 60px rgba(232,200,119,0.35)', opacity: logoO }} />
+        <img src="assets/logo-128.webp" style={{ width: 96, height: 96, borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(232,200,119,0.6)', boxShadow: '0 0 60px rgba(232,200,119,0.35)', opacity: logoO }} />
         <div style={{ textAlign: 'center', opacity: textO }}>
           <div style={{ fontFamily: 'Marcellus, serif', fontSize: 46, color: CREAM }}>Begin your journey.</div>
           <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 21, fontWeight: 300, color: GOLD, marginTop: 12, letterSpacing: '0.06em' }}>goldenagewisdom.org — free, for every seeker</div>
@@ -405,7 +411,7 @@ window.GAW_UNLOCK = function () {
   } catch (e) {}
 };
 function SoundUnlock() {
-  const [gone, setGone] = React.useState(() => AudioBus.unlocked || !!(navigator.userActivation && navigator.userActivation.hasBeenActive));
+  const [gone, setGone] = React.useState(() => AudioBus.unlocked || !!(window.__gawCtx && window.__gawCtx.state === 'running') || !!(navigator.userActivation && navigator.userActivation.hasBeenActive));
   React.useEffect(() => {
     if (gone && !AudioBus.unlocked) { try { ensureCtx().resume(); } catch (e) {} AudioBus.unlocked = true; }
   }, []);
@@ -439,7 +445,8 @@ function SoundUnlock() {
 }
 function ensureCtx() {
   if (!AudioBus.ctx) {
-    AudioBus.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    AudioBus.ctx = window.__gawCtx || new (window.AudioContext || window.webkitAudioContext)();
+    window.__gawCtx = AudioBus.ctx;
     const resume = () => { AudioBus.ctx.resume(); if (window.speechSynthesis) speechSynthesis.resume(); };
     window.addEventListener('pointerdown', resume, true);
     window.addEventListener('keydown', resume, true);
@@ -488,13 +495,39 @@ function FilmScore({ src, enabled, volume = 1 }) {
     style={{ position: 'absolute', width: 2, height: 2, opacity: 0, pointerEvents: 'none' }} />;
 }
 
+function FilmClockBridge() {
+  const tl = window.useTimeline();
+  window.__filmTL = tl;
+  return null;
+}
 window.IntroFilm = function IntroFilm(props) {
   const [t, setTweak] = useTweaks(window.TWEAK_DEFAULTS);
   SHOW_CAPTIONS = t.captions;
+  // Always open on the first frame, held still, until the viewer chooses to begin.
+  const [started, setStarted] = React.useState(() => {
+    try { localStorage.setItem('animstage:t', '0'); } catch (e) {}
+    return false;
+  });
+  const begin = () => {
+    try { window.GAW_UNLOCK && window.GAW_UNLOCK(); } catch (e) {}
+    const play = () => {
+      const tl = window.__filmTL;
+      if (tl && tl.setPlaying) { try { tl.setTime(0); tl.setPlaying(true); return; } catch (e) {} }
+      // fallback: the stage listens for Space on document, not window
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space', bubbles: true }));
+    };
+    const running = () => { const tl = window.__filmTL; return !!(tl && (tl.playing || tl.time > 0.05)); };
+    play();
+    setTimeout(() => {
+      if (running()) { setStarted(true); return; }
+      play();
+      setTimeout(() => { if (running()) setStarted(true); }, 500);
+    }, 320);
+  };
   return (
     <div style={{ position: 'relative', width: '100%', height: (props && props.embed) ? '100%' : 'calc(100vh - 64px)', minHeight: (props && props.embed) ? 0 : 420, background: BG }}>
-      <SceneStage width={1280} height={720} bg={BG} scenes={window.OM_SCENES} playback={window.OM_PLAYBACK}
-                  persistent={<React.Fragment><FilmScore src="assets/narration-master-50s.wav" enabled={t.music} volume={1.0} /><FilmScore src="assets/om-scroll.mp3" enabled={t.omChant} volume={0.5} /><FilmScore src="assets/impacts.wav" enabled={t.impacts} volume={0.9} /><FilmVoice enabled={t.narration} /><CinematicFrame /><SoundUnlock /></React.Fragment>}>
+      <SceneStage width={1280} height={720} bg={BG} autoplay={false} scenes={window.OM_SCENES} playback={window.OM_PLAYBACK}
+                  persistent={<React.Fragment><FilmScore src="assets/narration-master-50s.wav" enabled={t.music} volume={1.0} /><FilmScore src="assets/om-scroll.mp3" enabled={t.omChant} volume={0.5} /><FilmScore src="assets/impacts.wav" enabled={t.impacts} volume={0.9} /><FilmVoice enabled={t.narration} /><CinematicFrame /><SoundUnlock /><FilmClockBridge /></React.Fragment>}>
         {{
           Opening: SceneOpening, Silence: SceneSilence, Breath: SceneBreath,
           Crown: SceneCrown, Kundalini: SceneKundalini, Oneness: SceneOneness,
@@ -502,6 +535,26 @@ window.IntroFilm = function IntroFilm(props) {
           SatyaYugam: SceneSatyaYugam, Invitation: SceneInvitation,
         }}
       </SceneStage>
+      {started && (
+        <div onClick={() => { const tl = window.__filmTL; if (tl && tl.setPlaying) tl.setPlaying(!tl.playing); }}
+          title="Tap to pause or resume"
+          style={{ position: 'absolute', inset: 0, zIndex: 40, cursor: 'pointer', background: 'transparent' }} />
+      )}
+      {!started && (
+        <div onClick={begin} style={{ position: 'absolute', inset: 0, zIndex: 60, cursor: 'pointer',
+          background: 'radial-gradient(ellipse 60% 60% at 50% 46%, rgba(13,10,28,0.55), rgba(8,6,20,0.86))',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(8px, 2.2cqh, 18px)',
+          containerType: 'size', fontFamily: "'Outfit', sans-serif", textAlign: 'center', padding: 'clamp(10px, 3cqh, 24px)' }}>
+          <div style={{ fontSize: 'clamp(9px, 1.4cqh, 11px)', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#b89758', flexShrink: 0 }}>Golden Age Wisdom</div>
+          <div style={{ fontFamily: "'Marcellus', serif", fontSize: 'clamp(16px, 6cqh, 34px)', color: '#f7f1e3', lineHeight: 1.25, flexShrink: 0 }}>What Meditation Awakens</div>
+          <button onClick={begin} aria-label="Play the film" style={{ width: 'clamp(46px, 14cqh, 74px)', aspectRatio: '1 / 1', flexShrink: 0, borderRadius: '50%', border: '1px solid rgba(213,183,124,0.6)',
+            background: 'radial-gradient(circle at 38% 34%, rgba(230,211,168,0.45), rgba(184,151,88,0.16))', color: '#f7f1e3', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 40px rgba(213,183,124,0.28)' }}>
+            <svg viewBox="0 0 24 24" style={{ width: '36%', height: '36%', marginLeft: '4%' }}><path d="M8 5.2v13.6L19 12z" fill="#f7f1e3" /></svg>
+          </button>
+          <div style={{ fontSize: 'clamp(10px, 2.4cqh, 12.5px)', fontWeight: 300, color: '#9a927f', flexShrink: 0 }}>50 seconds · sound on · tap to begin</div>
+        </div>
+      )}
       <TweaksPanel>
         <TweakSection label="Film" />
         <TweakToggle label="Built-in browser voice" value={t.narration} onChange={(v) => setTweak('narration', v)} />

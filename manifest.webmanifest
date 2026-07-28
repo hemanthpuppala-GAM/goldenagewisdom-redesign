@@ -1,0 +1,59 @@
+{
+  "name": "Golden Age Wisdom",
+  "short_name": "Golden Age",
+  "description": "Free daily live meditation and Upanishadic wisdom with Dr Hari Krishna.",
+  "start_url": "/?src=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d0a1c",
+  "theme_color": "#0d0a1c",
+  "lang": "en",
+  "categories": [
+    "health",
+    "lifestyle",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Sit & Scribe",
+      "short_name": "Sit",
+      "url": "/join?go=solo",
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Join live",
+      "short_name": "Live",
+      "url": "/join?go=live",
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
