@@ -2,15 +2,23 @@ Options -Indexes -MultiViews
 DirectoryIndex index.html
 RewriteEngine On
 
+# --- Force HTTPS (first, so redirects below land on https) ---
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
 # --- Redirect .dc.html URLs to clean paths (what visitors see) ---
 RewriteCond %{THE_REQUEST} \s/Home\.dc\.html [NC]
 RewriteRule ^ / [R=301,L]
 RewriteCond %{THE_REQUEST} \s/Home(%20|\+|\s)Mandala\.dc\.html [NC]
 RewriteRule ^ / [R=301,L]
+RewriteCond %{THE_REQUEST} \s/index\.html [NC]
+RewriteRule ^ / [R=301,L]
 RewriteCond %{THE_REQUEST} \s/Intro(%20|\+|\s)Film\.dc\.html [NC]
 RewriteRule ^ /film [R=301,L]
 RewriteCond %{THE_REQUEST} \s/Member(%20|\+|\s)Flow\.dc\.html [NC]
 RewriteRule ^ /join [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Privacy\.dc\.html [NC]
+RewriteRule ^ /privacy [R=301,L]
 RewriteCond %{THE_REQUEST} \s/Demo\.dc\.html [NC]
 RewriteRule ^ /demo [R=301,L]
 RewriteCond %{THE_REQUEST} \s/Demo(%20|\+|\s)Video\.dc\.html [NC]
@@ -19,10 +27,57 @@ RewriteRule ^ /demo-video [R=301,L]
 # --- Serve the real files for clean paths (internal, invisible) ---
 RewriteRule ^film/?$ "Intro Film.dc.html" [L]
 RewriteRule ^join/?$ "Member Flow.dc.html" [L]
+RewriteRule ^privacy/?$ "Privacy.dc.html" [L]
 RewriteRule ^demo/?$ "Demo.dc.html" [L]
 RewriteRule ^demo-video/?$ "Demo Video.dc.html" [L]
 RewriteRule ^$ "index.html" [L]
 
-# --- Force HTTPS ---
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# --- Branded 404 ---
+ErrorDocument 404 /404.html
+
+# --- Security headers ---
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+  # Google sign-in, YouTube embeds and the QR image are the only third parties.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://apis.google.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.googleusercontent.com https://i.ytimg.com https://api.qrserver.com; media-src 'self'; frame-src https://accounts.google.com https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://accounts.google.com https://www.googleapis.com https://api.anthropic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://accounts.google.com; upgrade-insecure-requests"
+  # Never cache the pages themselves, but do cache the assets.
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  # Images, fonts and audio never change in place — safe to freeze.
+  <FilesMatch "\.(webp|png|jpe?g|svg|ico|woff2?|mp3|wav|m4a)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Code must be able to change: an hour, revalidated. No hashed filenames yet.
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+  # Roles live here — a revoked admin must lose access on their next load.
+  <Files "gaw-config.js">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </Files>
+</IfModule>
+
+# --- Compression ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Correct types ---
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType application/json .json
+  AddType font/woff2 .woff2
+</IfModule>
+
+# --- Keep private files out of reach ---
+<FilesMatch "\.(md|json)$">
+  Require all denied
+</FilesMatch>
+<Files "gaw-config.js">
+  Require all granted
+</Files>

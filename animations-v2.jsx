@@ -825,6 +825,7 @@ function Stage({
 // Uses fixed-width time fields so layout doesn't thrash.
 
 function PlaybackBar({ time, duration, playing, onPlayPause, onReset, onSeek, onHover }) {
+  if (typeof window !== 'undefined' && window.OM_HIDE_PLAYBAR) return null;
   const trackRef = React.useRef(null);
   const [dragging, setDragging] = React.useState(false);
 
