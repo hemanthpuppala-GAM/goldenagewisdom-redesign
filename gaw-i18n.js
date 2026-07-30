@@ -63,3 +63,7 @@ window.GAW_SET_LANG = function (code) {
   window.GAW_LANG = code;
   try { document.documentElement.lang = code; } catch (e) {}
 };
+
+/* Apply the stored language to <html lang> on boot (drives per-script fonts,
+   screen-reader voice selection and language detection) — lang on boot. */
+try { document.documentElement.lang = window.GAW_LANG || 'en'; } catch (e) {}

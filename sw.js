@@ -1,17 +1,19 @@
 /* Golden Age Wisdom — offline shell.
    Cache-first for assets, network-first for pages, so content stays fresh
    but the app still opens on a bad connection. */
-const V = 'gaw-v20';
+const V = 'gaw-v36';
 const SHELL = [
   '/', '/index.html', '/manifest.webmanifest',
-  '/assets/logo-128.webp', '/assets/meditator-quiet.webp',
+  '/assets/logo-128.webp', '/assets/meditator-clear.webp',
   '/assets/icon-192.png', '/assets/icon-512.png',
   '/gaw-i18n.js', '/offline.html'
 ];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(V).then(c => c.addAll(SHELL.map(u => new Request(u, { cache: 'reload' }))))
-    .catch(() => {}).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(V).then(c => Promise.all(SHELL.map(u =>
+      c.add(new Request(u, { cache: 'reload' }))
+        .catch(err => console.warn('[sw] precache failed', u, err))
+    ))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (e) => {
@@ -25,6 +27,14 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;              // never touch YouTube, Zoom, fonts
   if (url.pathname.endsWith('.php')) return;               // never cache the server helpers
+
+  // Config carries the launch moment — always fresh, fall back to cache offline.
+  if (url.pathname.endsWith('gaw-config.js')) {
+    e.respondWith(fetch(req)
+      .then(r => { const copy = r.clone(); caches.open(V).then(c => c.put(req, copy)); return r; })
+      .catch(() => caches.match(req)));
+    return;
+  }
 
   const isPage = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
   if (isPage) {

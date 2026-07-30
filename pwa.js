@@ -1,4 +1,5 @@
-/* Installable app: service worker + a quiet "add to home screen" invitation. */
+/* Installable app: service worker, standalone-mode polish, and a quiet
+   "add to home screen" invitation. Loaded on every page. */
 (function () {
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
     window.addEventListener('load', function () {
@@ -6,8 +7,54 @@
     });
   }
 
+  var standalone = window.matchMedia('(display-mode: standalone)').matches ||
+                   window.matchMedia('(display-mode: fullscreen)').matches ||
+                   window.navigator.standalone === true ||
+                   /[?&]appview=1/.test(location.search); // test hook: append ?appview=1
+
+  /* ---- Launched from the home screen: make it behave like an app ---------
+     The status bar is translucent on iOS, so without safe-area padding the
+     nav slides under the clock. Rubber-band scroll, tap highlights, the
+     long-press callout and stray text selection all read as "web page". */
+  if (standalone) {
+    document.documentElement.setAttribute('data-standalone', '');
+    var css = document.createElement('style');
+    css.textContent = [
+      'html[data-standalone] body { overscroll-behavior: none; }',
+      'html[data-standalone] { -webkit-tap-highlight-color: transparent; }',
+      /* clear the notch / status bar — pad the inner scroll containers only.
+         .r-shell is a 100vh border-box with 100vh children, so padding it
+         would push the children's bottoms off-screen behind overflow:hidden. */
+      'html[data-standalone] .m-nav { margin-top: calc(16px + env(safe-area-inset-top)) !important; }',
+      'html[data-standalone] .r-sidebar { padding-top: calc(18px + env(safe-area-inset-top)) !important; }',
+      'html[data-standalone] .r-main { padding-top: env(safe-area-inset-top) !important; }',
+      /* chrome is furniture, not text: no callout, no accidental selection */
+      'html[data-standalone] button, html[data-standalone] a, html[data-standalone] nav, html[data-standalone] [role="button"] {',
+      '  -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }',
+      /* prose and anything typed into stays selectable */
+      'html[data-standalone] p, html[data-standalone] input, html[data-standalone] textarea,',
+      'html[data-standalone] [contenteditable] { -webkit-user-select: text; user-select: text; }',
+      /* a touch of press feedback in place of a native ripple */
+      'html[data-standalone] button:active, html[data-standalone] [role="button"]:active {',
+      '  transform: scale(0.975); transition: transform .08s ease; }',
+    ].join('\n');
+    (document.head || document.documentElement).appendChild(css);
+
+    /* Off-site links leave for the system browser rather than stranding the
+       member in a chrome-less window with no way back. */
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href]');
+      if (!a || a.target === '_blank') return;
+      var url;
+      try { url = new URL(a.href, location.href); } catch (err) { return; }
+      if (url.protocol.startsWith('http') && url.host !== location.host) {
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      }
+    }, true);
+  }
+
   var KEY = 'gaw_install_dismissed';
-  var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   var dismissed = false;
   try { dismissed = localStorage.getItem(KEY) === '1'; } catch (e) {}
   if (standalone || dismissed) return;
@@ -16,7 +63,7 @@
     var el = document.createElement('div');
     el.setAttribute('role', 'dialog');
     el.setAttribute('aria-label', 'Install Golden Age Wisdom');
-    el.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:9999;' +
+    el.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);top:78px;z-index:9999;' +
       'display:flex;align-items:center;gap:12px;padding:10px 12px 10px 14px;border-radius:999px;' +
       'background:rgba(23,17,48,0.94);border:1px solid rgba(213,183,124,0.35);' +
       'box-shadow:0 12px 40px rgba(0,0,0,0.5);backdrop-filter:blur(12px);' +
