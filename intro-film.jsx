@@ -488,8 +488,13 @@ function FilmScore({ src, enabled, volume = 1 }) {
   }, [time, active, enabled, volume, src]);
   React.useEffect(() => () => { const st = ref.current; if (st.source) { try { st.source.stop(); } catch (e) {} } }, []);
   // hidden media element so video export still embeds this track's audio
-  // (not muted: it never plays in live mode — WebAudio handles that — but the exporter reads its audio track)
-  return <video src={src} playsInline preload="auto"
+  // (not muted: it never plays in live mode — WebAudio handles that — but the exporter reads its audio track).
+  // iOS caps how many media elements a page may hold open and older iPhones
+  // exhaust the audio decoder with several preloading at once — which made the
+  // film start on some Apple devices and not others. On touch devices we let
+  // WebAudio do all the work and never preload these.
+  const noPreload = typeof window !== 'undefined' && ('ontouchstart' in window);
+  return <video src={src} playsInline preload={noPreload ? 'none' : 'auto'}
     data-om-exportable-video-play-start={0}
     data-om-exportable-video-play-end={90}
     style={{ position: 'absolute', width: 2, height: 2, opacity: 0, pointerEvents: 'none' }} />;
@@ -510,19 +515,29 @@ window.IntroFilm = function IntroFilm(props) {
   });
   const begin = () => {
     try { window.GAW_UNLOCK && window.GAW_UNLOCK(); } catch (e) {}
+    // The viewer tapped — dismiss the poster immediately. Never gate this on
+    // the timeline reporting back: on slower iPhones, and on any device in Low
+    // Power Mode (Safari throttles requestAnimationFrame hard), the clock can
+    // take well over a second to advance, which used to leave the poster stuck
+    // up forever and made the film look broken on some Apple devices.
+    setStarted(true);
     const play = () => {
       const tl = window.__filmTL;
-      if (tl && tl.setPlaying) { try { tl.setTime(0); tl.setPlaying(true); return; } catch (e) {} }
-      // fallback: the stage listens for Space on document, not window
+      if (tl && tl.setPlaying) { try { tl.setTime(0); tl.setPlaying(true); return true; } catch (e) {} }
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space', bubbles: true }));
+      return false;
     };
-    const running = () => { const tl = window.__filmTL; return !!(tl && (tl.playing || tl.time > 0.05)); };
-    play();
-    setTimeout(() => {
-      if (running()) { setStarted(true); return; }
+    // Keep nudging until the clock actually moves; gives a slow device up to ~5s
+    // and survives the case where the timeline bridge has not mounted yet.
+    let tries = 0;
+    const tick = () => {
+      const tl = window.__filmTL;
+      if (tl && (tl.playing || tl.time > 0.05)) return;
+      if (tries++ > 16) return;
       play();
-      setTimeout(() => { if (running()) setStarted(true); }, 500);
-    }, 320);
+      setTimeout(tick, tries < 4 ? 150 : 400);
+    };
+    tick();
   };
   return (
     <div style={{ position: 'relative', width: '100%', height: (props && props.embed) ? '100%' : 'calc(100vh - 64px)', minHeight: (props && props.embed) ? 0 : 420, background: BG }}>
@@ -545,14 +560,14 @@ window.IntroFilm = function IntroFilm(props) {
           background: 'radial-gradient(ellipse 60% 60% at 50% 46%, rgba(13,10,28,0.55), rgba(8,6,20,0.86))',
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(8px, 2.2cqh, 18px)',
           containerType: 'size', fontFamily: "'Outfit', sans-serif", textAlign: 'center', padding: 'clamp(10px, 3cqh, 24px)' }}>
-          <div style={{ fontSize: 'clamp(9px, 1.4cqh, 11px)', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#b89758', flexShrink: 0 }}>Golden Age Wisdom</div>
-          <div style={{ fontFamily: "'Marcellus', serif", fontSize: 'clamp(16px, 6cqh, 34px)', color: '#f7f1e3', lineHeight: 1.25, flexShrink: 0 }}>What Meditation Awakens</div>
-          <button onClick={begin} aria-label="Play the film" style={{ width: 'clamp(46px, 14cqh, 74px)', aspectRatio: '1 / 1', flexShrink: 0, borderRadius: '50%', border: '1px solid rgba(213,183,124,0.6)',
+          <div style={{ fontSize: 'clamp(10px, 1.4cqh, 11px)', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#b89758', flexShrink: 0 }}>Golden Age Wisdom</div>
+          <div style={{ fontFamily: "'Marcellus', serif", fontSize: 'clamp(22px, 6cqh, 34px)', color: '#f7f1e3', lineHeight: 1.25, flexShrink: 0 }}>What Meditation Awakens</div>
+          <button onClick={begin} aria-label="Play the film" style={{ width: 'clamp(58px, 14cqh, 74px)', aspectRatio: '1 / 1', flexShrink: 0, borderRadius: '50%', border: '1px solid rgba(213,183,124,0.6)',
             background: 'radial-gradient(circle at 38% 34%, rgba(230,211,168,0.45), rgba(184,151,88,0.16))', color: '#f7f1e3', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 40px rgba(213,183,124,0.28)' }}>
             <svg viewBox="0 0 24 24" style={{ width: '36%', height: '36%', marginLeft: '4%' }}><path d="M8 5.2v13.6L19 12z" fill="#f7f1e3" /></svg>
           </button>
-          <div style={{ fontSize: 'clamp(10px, 2.4cqh, 12.5px)', fontWeight: 300, color: '#9a927f', flexShrink: 0 }}>50 seconds · sound on · tap to begin</div>
+          <div style={{ fontSize: 'clamp(11.5px, 2.4cqh, 12.5px)', fontWeight: 300, color: '#9a927f', flexShrink: 0 }}>50 seconds · sound on · tap to begin</div>
         </div>
       )}
       <TweaksPanel>

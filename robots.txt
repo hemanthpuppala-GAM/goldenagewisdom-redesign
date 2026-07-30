@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /Admin%20Panel.dc.html
 
 Sitemap: https://goldenagewisdom.org/sitemap.xml

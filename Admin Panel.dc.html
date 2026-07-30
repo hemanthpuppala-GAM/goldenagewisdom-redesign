@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golden Age Wisdom · Golden Age Wisdom</title>
+<meta name="description" content="Golden Age Wisdom.">
+<link rel="canonical" href="https://goldenagewisdom.org/">
+<meta name="theme-color" content="#0d0a1c">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Golden Age Wisdom">
+<meta property="og:title" content="Golden Age Wisdom">
+<meta property="og:description" content="Golden Age Wisdom.">
+<meta property="og:image" content="https://goldenagewisdom.org/assets/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://goldenagewisdom.org/">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Golden Age Wisdom">
+<meta name="twitter:description" content="Golden Age Wisdom.">
+<meta name="twitter:image" content="https://goldenagewisdom.org/assets/og-default.jpg">
+<link rel="icon" href="assets/logo-128.webp" type="image/webp">
+<link rel="apple-touch-icon" href="assets/logo-128.webp">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Golden Age">
+<meta name="mobile-web-app-capable" content="yes">
+<script defer src="pwa.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="./gaw-config.js"></script>
+<script src="./telemetry.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #0d0a1c; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; }
+  * { box-sizing: border-box; }
+  :focus-visible { outline: 2px solid #e6d3a8; outline-offset: 3px; border-radius: 6px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  }
+  a { color: #d5b77c; text-decoration: none; }
+  a:hover { color: #e6d3a8; }
+  table { border-collapse: collapse; }
+  @keyframes pulseDot { 0%, 100% { box-shadow: 0 0 0 0 rgba(224,132,132,0.45); } 50% { box-shadow: 0 0 0 7px rgba(224,132,132,0); } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .a-scroll { scrollbar-width: thin; scrollbar-color: rgba(213,183,124,0.3) transparent; }
+  .a-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+  .a-scroll::-webkit-scrollbar-thumb { background: rgba(213,183,124,0.3); border-radius: 3px; }
+  @media (max-width: 900px) {
+    .a-shell { flex-direction: column !important; }
+    .a-side { width: 100% !important; height: auto !important; position: static !important; flex-direction: row !important; overflow-x: auto !important; }
+    .a-main { height: auto !important; overflow: visible !important; padding: 20px 16px 40px !important; }
+    .a-two { grid-template-columns: 1fr !important; }
+  }
+</style>
+</helmet>
+
+<div class="a-shell" style="display: flex; height: 100vh; overflow: hidden; background: radial-gradient(ellipse 70% 60% at 18% 0%, #171130 0%, #0d0a1c 55%, #080614 100%)">
+
+  <sc-if value="{{ allowed }}" hint-placeholder-val="{{ false }}">
+  <aside class="a-side a-scroll" style="width: 232px; flex-shrink: 0; height: 100vh; overflow-y: auto; padding: 24px 16px; display: flex; flex-direction: column; gap: 6px; background: rgba(255,255,255,0.03); border-right: 1px solid rgba(255,255,255,0.1)">
+    <a href="Member Flow.dc.html" style="display: flex; align-items: center; gap: 10px; padding: 0 8px 20px">
+      <img src="assets/logo-128.webp" alt="" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
+      <span style="display: flex; flex-direction: column; gap: 1px">
+        <span style="font-family: 'Marcellus', serif; font-size: 14px; letter-spacing: 0.05em; color: #ecdcb4">GOLDEN AGE</span>
+        <span style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">Admin</span>
+      </span>
+    </a>
+    <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+      <button onClick="{{ n.go }}" style="display: flex; align-items: center; gap: 11px; padding: 10px 13px; border-radius: 12px; border: none; cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; font-size: 14px; white-space: nowrap; background: {{ n.bg }}; color: {{ n.color }}; font-weight: {{ n.weight }}">{{ n.icon }} {{ n.label }}</button>
+    </sc-for>
+    <div style="flex: 1; min-height: 10px"></div>
+    <div style="padding: 13px; border-radius: 12px; border: 1px solid rgba(213,183,124,0.26); background: rgba(213,183,124,0.06); display: flex; flex-direction: column; gap: 5px">
+      <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">Signed in as</span>
+      <span style="font-size: 13px; color: #f2e9d8">{{ whoName }}</span>
+      <span style="font-size: 11px; font-weight: 300; color: #9a927f; word-break: break-all">{{ whoEmail }}</span>
+      <span style="margin-top: 3px; align-self: flex-start; padding: 3px 9px; border-radius: 999px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; background: {{ roleBg }}; color: {{ roleColor }}">{{ roleLabel }}</span>
+    </div>
+    <a href="Member Flow.dc.html" style="padding: 10px 13px; font-size: 13px; color: #7d7666">↩ Member dashboard</a>
+  </aside>
+  </sc-if>
+
+  <main class="a-main a-scroll" style="flex: 1; height: 100vh; overflow-y: auto; padding: 30px 34px 44px">
+
+    <sc-if value="{{ denied }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width: 460px; margin: 12vh auto 0; padding: 32px 30px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 14px; text-align: center">
+        <div style="font-size: 26px; color: #b89758">✧</div>
+        <h1 style="font-family: 'Marcellus', serif; font-size: 23px; margin: 0; color: #f7f1e3">Page not found</h1>
+        <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.65; color: #b9b1a0">This page is not available. Let’s take you back to the teachings.</p>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap">
+          <a href="index.html" style="padding: 10px 20px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 13px">Golden Age Wisdom</a>
+          <a href="Member Flow.dc.html" style="padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.45); font-size: 13px">Member dashboard</a>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ allowed }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 24px; max-width: 1120px; animation: riseIn 0.4s ease both">
+
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap">
+          <div>
+            <div style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #b89758">{{ tabEyebrow }}</div>
+            <h1 style="font-family: 'Marcellus', serif; font-size: 29px; margin: 5px 0 0; color: #f7f1e3">{{ tabTitle }}</h1>
+            <p style="margin: 6px 0 0; font-size: 13.5px; font-weight: 300; color: #9a927f">{{ tabSub }}</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px">
+            <span style="display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); font-size: 12px; color: #b9b1a0"><span style="width: 7px; height: 7px; border-radius: 50%; background: #e08484; animation: pulseDot 2.4s ease-out infinite"></span>{{ liveNow }} on site now</span>
+            <button onClick="{{ refresh }}" title="Recompute from stored events" style="padding: 8px 15px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.45); background: none; color: #e6d3a8; font-family: 'Outfit', sans-serif; font-size: 12.5px; cursor: pointer">↻ Refresh</button>
+          </div>
+        </div>
+
+        <!-- INSIGHTS -->
+        <sc-if value="{{ tabInsights }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 22px">
+            <div class="a-kpis" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(172px, 1fr)); gap: 14px">
+              <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="5">
+                <div style="padding: 17px 18px; border-radius: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 7px">
+                  <span style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #9a927f">{{ k.label }}</span>
+                  <span style="font-family: 'Marcellus', serif; font-size: 27px; line-height: 1; color: #f7f1e3">{{ k.value }}</span>
+                  <span style="font-size: 11px; font-weight: 300; color: {{ k.deltaColor }}">{{ k.delta }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="padding: 22px 24px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap">
+                <span style="font-family: 'Marcellus', serif; font-size: 18px; color: #f2e9d8">Traffic, last 14 days</span>
+                <span style="display: flex; gap: 14px; font-size: 11px; color: #9a927f">
+                  <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 9px; height: 2px; background: #d5b77c"></span>page views</span>
+                  <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 9px; height: 2px; background: #8f7fd6"></span>unique visitors</span>
+                  <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 9px; height: 2px; background: #7fbf9a"></span>signed-in members</span>
+                </span>
+              </div>
+              <svg viewBox="0 0 720 200" preserveAspectRatio="none" style="width: 100%; height: 190px; display: block; overflow: visible">
+                <sc-for list="{{ gridLines }}" as="g" hint-placeholder-count="4">
+                  <line x1="0" y1="{{ g.y }}" x2="720" y2="{{ g.y }}" stroke="rgba(255,255,255,0.07)" stroke-width="1"></line>
+                </sc-for>
+                <path d="{{ areaPath }}" fill="rgba(213,183,124,0.14)" stroke="none"></path>
+                <path d="{{ viewsPath }}" fill="none" stroke="#d5b77c" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                <path d="{{ visitorsPath }}" fill="none" stroke="#8f7fd6" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></path>
+                <path d="{{ membersPath }}" fill="none" stroke="#7fbf9a" stroke-width="1.8" stroke-dasharray="4 4" stroke-linejoin="round"></path>
+              </svg>
+              <div style="display: flex; justify-content: space-between; font-size: 10.5px; color: #7d7666">
+                <sc-for list="{{ dayTicks }}" as="d" hint-placeholder-count="5">
+                  <span>{{ d.label }}</span>
+                </sc-for>
+              </div>
+              <sc-if value="{{ noData }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size: 12.5px; font-weight: 300; color: #c9b98a">No visits recorded yet. Telemetry starts the moment a visitor accepts analytics — nothing is collected before consent.</div>
+              </sc-if>
+            </div>
+
+            <div class="a-two" style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px">
+              <div style="padding: 20px 22px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 14px">
+                <span style="font-family: 'Marcellus', serif; font-size: 17px; color: #f2e9d8">Most visited</span>
+                <sc-for list="{{ pages }}" as="p" hint-placeholder-count="4">
+                  <div style="display: flex; flex-direction: column; gap: 5px">
+                    <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #cfc8ba"><span>{{ p.page }}</span><span style="color: #9a927f">{{ p.views }}</span></div>
+                    <div style="height: 6px; border-radius: 999px; background: rgba(255,255,255,0.06)"><div style="height: 100%; width: {{ p.pct }}%; border-radius: 999px; background: linear-gradient(90deg, #b89758, #e6d3a8)"></div></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="padding: 20px 22px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 14px">
+                <span style="font-family: 'Marcellus', serif; font-size: 17px; color: #f2e9d8">Devices</span>
+                <sc-for list="{{ devices }}" as="d" hint-placeholder-count="3">
+                  <div style="display: flex; flex-direction: column; gap: 5px">
+                    <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #cfc8ba"><span>{{ d.device }}</span><span style="color: #9a927f">{{ d.pct }}%</span></div>
+                    <div style="height: 6px; border-radius: 999px; background: rgba(255,255,255,0.06)"><div style="height: 100%; width: {{ d.pct }}%; border-radius: 999px; background: linear-gradient(90deg, #6f62b8, #a99ae8)"></div></div>
+                  </div>
+                </sc-for>
+                <span style="margin-top: 4px; font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #7d7666">Derived from viewport width at load — no fingerprinting, no user agent stored.</span>
+              </div>
+            </div>
+
+            <div style="padding: 20px 22px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 12px">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+                <span style="font-family: 'Marcellus', serif; font-size: 17px; color: #f2e9d8">When seekers arrive</span>
+                <span style="font-size: 11.5px; font-weight: 300; color: #9a927f">Local hours · peak {{ peakHour }}</span>
+              </div>
+              <div style="display: flex; gap: 3px; align-items: flex-end; height: 78px">
+                <sc-for list="{{ hours }}" as="h" hint-placeholder-count="24">
+                  <div title="{{ h.title }}" style="flex: 1; height: {{ h.pct }}%; min-height: 3px; border-radius: 3px 3px 1px 1px; background: {{ h.bg }}"></div>
+                </sc-for>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 10px; color: #7d7666"><span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11 PM</span></div>
+            </div>
+
+            <div style="padding: 22px 24px; border-radius: 24px; background: linear-gradient(135deg, rgba(213,183,124,0.1), rgba(255,255,255,0.03)); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 12px">
+              <span style="font-family: 'Marcellus', serif; font-size: 18px; color: #f7f1e3">What the numbers are saying</span>
+              <sc-for list="{{ signals }}" as="s" hint-placeholder-count="3">
+                <div style="display: flex; gap: 12px; align-items: flex-start">
+                  <span style="width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.45); font-size: 11px; color: #e6d3a8">{{ s.icon }}</span>
+                  <span style="font-size: 13.5px; font-weight: 300; line-height: 1.55; color: #cfc8ba">{{ s.text }}</span>
+                </div>
+              </sc-for>
+              <span style="font-size: 11.5px; font-weight: 300; color: #7d7666">Read-outs are computed from stored events only — never estimated or modelled.</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- MEMBERS -->
+        <sc-if value="{{ tabMembers }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 16px">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+              <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="Search name, email or GAW id…" style="flex: 1 1 260px; padding: 11px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 13.5px; outline: none">
+              <span style="font-size: 12.5px; color: #9a927f">{{ memberCount }}</span>
+            </div>
+            <sc-if value="{{ noMembers }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 26px; border-radius: 24px; border: 1px dashed rgba(213,183,124,0.26); font-size: 13.5px; font-weight: 300; color: #b9b1a0">No members registered on this device yet. Every OAuth sign-in adds a row here; the Laravel backend will make the list global.</div>
+            </sc-if>
+            <sc-for list="{{ members }}" as="u" hint-placeholder-count="3">
+              <div style="padding: 16px 18px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
+                <span style="width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600">{{ u.initial }}</span>
+                <span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 190px; min-width: 0">
+                  <span style="font-size: 14.5px; color: #f2e9d8">{{ u.name }}</span>
+                  <span style="font-size: 11.5px; font-weight: 300; color: #9a927f; overflow: hidden; text-overflow: ellipsis">{{ u.email }}</span>
+                </span>
+                <span style="display: flex; flex-direction: column; gap: 2px; flex: 0 1 130px">
+                  <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #7d7666">Member ID</span>
+                  <span style="font-family: 'Marcellus', serif; font-size: 14px; color: #e6d3a8">{{ u.memberId }}</span>
+                </span>
+                <span style="display: flex; flex-direction: column; gap: 2px; flex: 0 1 110px">
+                  <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #7d7666">Practice</span>
+                  <span style="font-size: 13px; color: #cfc8ba">{{ u.practice }}</span>
+                </span>
+                <span style="padding: 4px 11px; border-radius: 999px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; background: {{ u.roleBg }}; color: {{ u.roleColor }}">{{ u.role }}</span>
+                <span style="display: flex; gap: 7px; flex-wrap: wrap">
+                  <button onClick="{{ u.clean }}" title="Trim empty journal entries and duplicate sits" style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: none; color: #d8d2c4; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">Clean up</button>
+                  <button onClick="{{ u.reset }}" title="Erase this member's practice history on this device" style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(224,132,132,0.4); background: none; color: #e8a9a9; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">Reset data</button>
+                  <sc-if value="{{ superUser }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ u.remove }}" title="Remove the profile and its stored data" style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(224,132,132,0.55); background: rgba(224,132,132,0.1); color: #f0c4c4; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">Remove</button>
+                  </sc-if>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- CLEANUP -->
+        <sc-if value="{{ tabCleanup }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 16px">
+            <sc-if value="{{ cleanClear }}" hint-placeholder-val="{{ true }}">
+              <div style="padding: 26px; border-radius: 24px; border: 1px solid rgba(127,191,154,0.35); background: rgba(127,191,154,0.07); display: flex; align-items: center; gap: 14px">
+                <span style="font-size: 20px; color: #7fbf9a">✓</span>
+                <span style="font-size: 13.5px; font-weight: 300; color: #cfc8ba">Nothing to tidy. Every profile has a name, a valid email and no orphaned practice data.</span>
+              </div>
+            </sc-if>
+            <sc-for list="{{ cleanupItems }}" as="c" hint-placeholder-count="2">
+              <div style="padding: 18px 20px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid {{ c.border }}; display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
+                <span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid {{ c.border }}; color: {{ c.color }}; font-size: 13px">{{ c.icon }}</span>
+                <span style="display: flex; flex-direction: column; gap: 3px; flex: 1 1 240px">
+                  <span style="font-size: 14px; color: #f2e9d8">{{ c.title }}</span>
+                  <span style="font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #9a927f">{{ c.detail }}</span>
+                </span>
+                <button onClick="{{ c.fix }}" style="padding: 9px 18px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 12.5px; cursor: pointer">{{ c.action }}</button>
+              </div>
+            </sc-for>
+            <sc-if value="{{ superUser }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 18px 20px; border-radius: 24px; border: 1px solid rgba(224,132,132,0.35); background: rgba(224,132,132,0.06); display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+                <span style="flex: 1 1 240px; font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #c9b98a">Danger zone — clears every telemetry event stored in this browser. Member profiles and journals are untouched.</span>
+                <button onClick="{{ wipeTelemetry }}" style="padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(224,132,132,0.55); background: rgba(224,132,132,0.12); color: #f0c4c4; font-family: 'Outfit', sans-serif; font-size: 12.5px; cursor: pointer">Erase telemetry</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ hasNote }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size: 12.5px; color: #a8d5a2">{{ note }}</div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- ACCESS -->
+        <sc-if value="{{ tabAccess }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 16px; max-width: 760px">
+            <div style="padding: 20px 22px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 12px">
+              <span style="font-family: 'Marcellus', serif; font-size: 17px; color: #f2e9d8">Who holds which keys</span>
+              <sc-for list="{{ roleRows }}" as="r" hint-placeholder-count="3">
+                <div style="display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1)">
+                  <span style="padding: 4px 11px; border-radius: 999px; flex-shrink: 0; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; background: {{ r.bg }}; color: {{ r.color }}">{{ r.role }}</span>
+                  <span style="display: flex; flex-direction: column; gap: 4px">
+                    <span style="font-size: 13px; color: #cfc8ba">{{ r.can }}</span>
+                    <span style="font-size: 11.5px; font-weight: 300; color: #7d7666">{{ r.who }}</span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="padding: 20px 22px; border-radius: 24px; border: 1px solid rgba(213,183,124,0.26); background: rgba(213,183,124,0.06); display: flex; flex-direction: column; gap: 10px">
+              <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #b89758">Granting access</span>
+              <span style="font-size: 13px; font-weight: 300; line-height: 1.6; color: #cfc8ba">Add the person's exact sign-in email to <span style="color: #e6d3a8">superAdminEmails</span> or <span style="color: #e6d3a8">adminEmails</span> in <span style="color: #e6d3a8">gaw-config.js</span>, then re-upload that one file. Access takes effect on their next page load — no rebuild, no database.</span>
+              <span style="font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #9a927f">Roll-back is the same edit in reverse: remove the email and the panel closes to them immediately.</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- PRIVACY -->
+        <sc-if value="{{ tabPrivacy }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 16px; max-width: 760px">
+            <div style="padding: 20px 22px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 12px">
+              <span style="font-family: 'Marcellus', serif; font-size: 17px; color: #f2e9d8">Consent on this device</span>
+              <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+                <span style="padding: 5px 13px; border-radius: 999px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; background: {{ consentBg }}; color: {{ consentColor }}">{{ consentState }}</span>
+                <span style="font-size: 12.5px; font-weight: 300; color: #9a927f">{{ consentWhen }}</span>
+              </div>
+              <span style="font-size: 12.5px; font-weight: 300; line-height: 1.6; color: #b9b1a0">Analytics are off until a visitor accepts. We store no cookies at all — the consent choice and the events live in the browser's own storage and never leave the device until the backend endpoint exists.</span>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap">
+                <button onClick="{{ revokeConsent }}" style="padding: 9px 17px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: none; color: #d8d2c4; font-family: 'Outfit', sans-serif; font-size: 12.5px; cursor: pointer">Revoke &amp; erase my analytics</button>
+                <a href="Privacy.dc.html" style="padding: 9px 17px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.45); font-size: 12.5px">Read the privacy notice →</a>
+              </div>
+            </div>
+            <div style="padding: 20px 22px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); display: flex; flex-direction: column; gap: 10px">
+              <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #b89758">Retention</span>
+              <span style="font-size: 13px; font-weight: 300; line-height: 1.6; color: #cfc8ba">Events older than <span style="color: #e6d3a8">{{ retention }} days</span> are pruned automatically on every page load, and the store is capped so it can never grow unbounded.</span>
+              <span style="font-size: 12.5px; font-weight: 300; color: #7d7666">Change the window in gaw-config.js → telemetryRetentionDays.</span>
+            </div>
+          </div>
+        </sc-if>
+
+      </div>
+    </sc-if>
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1280px&quot;,&quot;height&quot;:&quot;820px&quot;}}">
+class Component extends DCLogic {
+  state = { tab: 'insights', query: '', tick: 0, note: '' };
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.setState(s => ({ tick: s.tick + 1 })), 30000);
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.noteT); }
+
+  T() { return window.GAWTelemetry || null; }
+  session() { try { return JSON.parse(localStorage.getItem('gaw_session') || 'null'); } catch (e) { return null; } }
+  role() {
+    const s = this.session();
+    return window.GAW_ROLE ? window.GAW_ROLE(s && s.email) : 'member';
+  }
+  registry() { try { return JSON.parse(localStorage.getItem('gaw_users') || '[]'); } catch (e) { return []; } }
+  saveRegistry(l) { try { localStorage.setItem('gaw_users', JSON.stringify(l)); } catch (e) {} }
+  dataKey(id) { return 'gaw_data_' + id; }
+  memberData(id) {
+    try { const d = JSON.parse(localStorage.getItem(this.dataKey(id)) || 'null'); return (d && d.sits) ? d : { sits: [], journal: [] }; }
+    catch (e) { return { sits: [], journal: [] }; }
+  }
+  flash(msg) {
+    this.setState({ note: msg });
+    clearTimeout(this.noteT);
+    this.noteT = setTimeout(() => this.setState({ note: '' }), 2800);
+  }
+
+  setPreviewRole(r) {
+    try { r ? localStorage.setItem('gaw_role_preview', r) : localStorage.removeItem('gaw_role_preview'); } catch (e) {}
+    this.setState(s => ({ tick: s.tick + 1 }));
+  }
+
+  /* ---------- cleanup detection ---------- */
+  cleanup() {
+    const users = this.registry(), items = [];
+    const noName = users.filter(u => !String(u.name || '').trim());
+    if (noName.length) items.push({
+      key: 'noname', icon: '✎', title: noName.length + ' profile' + (noName.length === 1 ? '' : 's') + ' without a name',
+      detail: 'The provider returned no display name. They will be greeted as “Seeker” until fixed.',
+      action: 'Name them Seeker', border: 'rgba(213,183,124,0.35)', color: '#e6d3a8',
+      fix: () => { const l = this.registry(); l.forEach(u => { if (!String(u.name || '').trim()) u.name = 'Seeker'; }); this.saveRegistry(l); this.flash('Named ' + noName.length + ' profile(s).'); },
+    });
+
+    const emails = {};
+    users.forEach(u => { const e = String(u.email || '').toLowerCase(); if (e) emails[e] = (emails[e] || 0) + 1; });
+    const dupes = Object.keys(emails).filter(e => emails[e] > 1);
+    if (dupes.length) items.push({
+      key: 'dupe', icon: '⧉', title: dupes.length + ' duplicated email' + (dupes.length === 1 ? '' : 's'),
+      detail: 'The same person holds more than one member ID: ' + dupes.join(', '),
+      action: 'Merge to earliest ID', border: 'rgba(224,132,132,0.4)', color: '#e8a9a9',
+      fix: () => {
+        const l = this.registry(), seen = {}, keep = [];
+        l.sort((a, b) => (a.joined || 0) - (b.joined || 0)).forEach(u => {
+          const e = String(u.email || '').toLowerCase();
+          if (e && seen[e]) { try { localStorage.removeItem(this.dataKey(u.memberId)); } catch (er) {} return; }
+          if (e) seen[e] = true;
+          keep.push(u);
+        });
+        this.saveRegistry(keep); this.flash('Merged duplicate profiles.');
+      },
+    });
+
+    const known = users.map(u => this.dataKey(u.memberId));
+    const orphans = [];
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.indexOf('gaw_data_') === 0 && known.indexOf(k) === -1) orphans.push(k);
+      }
+    } catch (e) {}
+    if (orphans.length) items.push({
+      key: 'orphan', icon: '⌫', title: orphans.length + ' orphaned practice record' + (orphans.length === 1 ? '' : 's'),
+      detail: 'Practice data with no matching profile — left behind by removed or guest sessions.',
+      action: 'Remove orphans', border: 'rgba(213,183,124,0.35)', color: '#e6d3a8',
+      fix: () => { orphans.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} }); this.flash('Removed ' + orphans.length + ' orphaned record(s).'); this.setState(s => ({ tick: s.tick + 1 })); },
+    });
+
+    const blanks = users.filter(u => this.memberData(u.memberId).journal.some(j => !String(j.text || '').trim()));
+    if (blanks.length) items.push({
+      key: 'blank', icon: '✂', title: 'Empty journal entries on ' + blanks.length + ' profile' + (blanks.length === 1 ? '' : 's'),
+      detail: 'Entries saved with no words. Removing them keeps the streak view honest.',
+      action: 'Trim empties', border: 'rgba(213,183,124,0.35)', color: '#e6d3a8',
+      fix: () => { blanks.forEach(u => this.cleanMember(u.memberId, true)); this.flash('Trimmed empty entries.'); },
+    });
+
+    return items;
+  }
+
+  cleanMember(id, silent) {
+    const d = this.memberData(id);
+    const before = d.journal.length + d.sits.length;
+    d.journal = d.journal.filter(j => String(j.text || '').trim());
+    const seen = {};
+    d.sits = d.sits.filter(s => {
+      const k = s.date + '|' + s.mins;
+      if (seen[k]) return false;
+      seen[k] = true;
+      return (s.mins || 0) > 0;
+    });
+    try { localStorage.setItem(this.dataKey(id), JSON.stringify(d)); } catch (e) {}
+    const removed = before - (d.journal.length + d.sits.length);
+    if (!silent) this.flash(removed ? 'Cleaned ' + removed + ' stray record(s).' : 'Nothing to clean on that profile.');
+    this.setState(s => ({ tick: s.tick + 1 }));
+  }
+  resetMember(id) {
+    try { localStorage.setItem(this.dataKey(id), JSON.stringify({ sits: [], journal: [] })); } catch (e) {}
+    this.flash('Practice history reset.');
+    this.setState(s => ({ tick: s.tick + 1 }));
+  }
+  removeMember(id) {
+    this.saveRegistry(this.registry().filter(u => u.memberId !== id));
+    try { localStorage.removeItem(this.dataKey(id)); } catch (e) {}
+    this.flash('Profile removed.');
+    this.setState(s => ({ tick: s.tick + 1 }));
+  }
+
+  /* ---------- chart maths ---------- */
+  paths(daily) {
+    const W = 720, H = 200, n = Math.max(1, daily.length);
+    const max = Math.max(4, ...daily.map(d => d.views), ...daily.map(d => d.visitors));
+    const x = i => (n === 1 ? W / 2 : (i / (n - 1)) * W);
+    const y = v => H - (v / max) * (H - 12) - 4;
+    const line = key => daily.map((d, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(d[key]).toFixed(1)).join(' ');
+    const area = line('views') + ' L' + W + ' ' + H + ' L0 ' + H + ' Z';
+    return { views: line('views'), visitors: line('visitors'), members: line('members'), area, max };
+  }
+
+  renderVals() {
+    const s = this.state, T = this.T(), role = this.role();
+    const isSuper = role === 'super_admin', isAdmin = role === 'admin' || isSuper;
+    const who = this.session() || {};
+    const daily = T ? T.daily(14) : [];
+    const totals = T ? T.totals() : { views: 0, visitors: 0, members: 0, last24: 0, live: 0 };
+    const p = this.paths(daily);
+    const pages = T ? T.byPage().slice(0, 6) : [];
+    const pageMax = Math.max(1, ...pages.map(x => x.views));
+    const devices = T ? T.byDevice() : [];
+    const devTotal = Math.max(1, devices.reduce((n, d) => n + d.views, 0));
+    const hours = T ? T.byHour() : [];
+    const hourMax = Math.max(1, ...hours.map(h => h.views));
+    const peak = hours.reduce((a, b) => (b.views > a.views ? b : a), { hour: 0, views: 0 });
+    const users = this.registry();
+
+    const week = (from, to) => daily.slice(from, to).reduce((n, d) => n + d.views, 0);
+    const thisWeek = week(7, 14), lastWeek = week(0, 7);
+    const growth = lastWeek ? Math.round(((thisWeek - lastWeek) / lastWeek) * 100) : (thisWeek ? 100 : 0);
+    const sitTotals = users.reduce((n, u) => n + this.memberData(u.memberId).sits.reduce((m, x) => m + (x.mins || 0), 0), 0);
+    const satMembers = users.filter(u => this.memberData(u.memberId).sits.length).length;
+
+    const tabDefs = [
+      { key: 'insights', icon: '◈', label: 'Insights', superOnly: true },
+      { key: 'members', icon: '☰', label: 'Members' },
+      { key: 'cleanup', icon: '✧', label: 'Cleanup' },
+      { key: 'access', icon: '✦', label: 'Access' },
+      { key: 'privacy', icon: '❋', label: 'Privacy', superOnly: true },
+    ].filter(t => !t.superOnly || isSuper);
+    let tab = s.tab;
+    if (!tabDefs.some(t => t.key === tab)) tab = tabDefs.length ? tabDefs[0].key : 'members';
+
+    const meta = {
+      insights: ['Telemetry', 'Insights', 'First-party, consent-gated, computed on the device.'],
+      members: ['Community', 'Members', 'Every seeker who has signed in, with their practice at a glance.'],
+      cleanup: ['Hygiene', 'Profile cleanup', 'Detected problems only — nothing is changed without your tap.'],
+      access: ['Governance', 'Access & roles', 'Who can open which room, and how to roll it back.'],
+      privacy: ['Trust', 'Privacy & consent', 'What we collect, for how long, and how to erase it.'],
+    }[tab] || ['', '', ''];
+
+    const roleChip = r => ({
+      super_admin: { bg: 'rgba(213,183,124,0.2)', color: '#f2e3bb', label: 'Super admin' },
+      admin: { bg: 'rgba(143,127,214,0.2)', color: '#c9bdf5', label: 'Admin' },
+      member: { bg: 'rgba(255,255,255,0.08)', color: '#b9b1a0', label: 'Member' },
+    }[r] || { bg: 'rgba(255,255,255,0.08)', color: '#b9b1a0', label: r });
+    const mine = roleChip(role);
+
+    const q = s.query.trim().toLowerCase();
+    const list = users
+      .filter(u => !q || [u.name, u.email, u.memberId].some(v => String(v || '').toLowerCase().includes(q)))
+      .sort((a, b) => String(a.memberId).localeCompare(String(b.memberId)))
+      .map(u => {
+        const d = this.memberData(u.memberId);
+        const mins = d.sits.reduce((n, x) => n + (x.mins || 0), 0);
+        const chip = roleChip(window.GAW_ROLE ? window.GAW_ROLE(u.email) : 'member');
+        return {
+          name: u.name || 'Seeker', email: u.email || '—', memberId: u.memberId,
+          initial: (String(u.name || 'S').trim()[0] || 'S').toUpperCase(),
+          practice: d.sits.length ? d.sits.length + ' sits · ' + mins + ' min' : 'no sits yet',
+          role: chip.label, roleBg: chip.bg, roleColor: chip.color,
+          clean: () => this.cleanMember(u.memberId),
+          reset: () => this.resetMember(u.memberId),
+          remove: () => this.removeMember(u.memberId),
+        };
+      });
+
+    const cleanupItems = this.cleanup();
+    const consent = T ? T.consentRecord() : null;
+
+    const signals = [];
+    if (!totals.views) signals.push({ icon: '◦', text: 'No events yet — the graph fills in as soon as visitors accept analytics.' });
+    else {
+      signals.push({ icon: '↗', text: growth === 0 ? 'Traffic is flat week over week at ' + thisWeek + ' views.' : 'Views are ' + (growth > 0 ? 'up ' : 'down ') + Math.abs(growth) + '% this week (' + thisWeek + ' vs ' + lastWeek + ').' });
+      if (pages[0]) signals.push({ icon: '★', text: '“' + pages[0].page + '” draws ' + Math.round((pages[0].views / Math.max(1, totals.views)) * 100) + '% of all views — the strongest doorway into the movement.' });
+      signals.push({ icon: '◔', text: 'Arrivals peak around ' + (peak.hour % 12 === 0 ? 12 : peak.hour % 12) + (peak.hour < 12 ? ' AM' : ' PM') + ' local time — worth timing announcements to it.' });
+      if (users.length) signals.push({ icon: '❋', text: satMembers + ' of ' + users.length + ' members have logged a sit (' + Math.round((satMembers / users.length) * 100) + '%), ' + sitTotals + ' minutes of stillness in total.' });
+      if (devices[0]) signals.push({ icon: '▢', text: Math.round((devices[0].views / devTotal) * 100) + '% of views come from ' + devices[0].device + ' — design decisions should follow that first.' });
+    }
+
+    return {
+      allowed: isAdmin, denied: !isAdmin,
+      previewMode: !!(window.GAW_CONFIG && window.GAW_CONFIG.previewMode),
+      superUser: isSuper,
+      becomeSuper: () => {}, becomeAdmin: () => {}, clearPreview: () => {},
+      refresh: () => this.setState(x => ({ tick: x.tick + 1 })),
+
+      whoName: who.name || 'Not signed in',
+      whoEmail: who.email || 'sign in from the member dashboard',
+      roleLabel: mine.label, roleBg: mine.bg, roleColor: mine.color,
+
+      navItems: (isAdmin ? tabDefs : []).map(t => ({
+        icon: t.icon, label: t.label,
+        go: () => this.setState({ tab: t.key }),
+        bg: tab === t.key ? 'rgba(213,183,124,0.16)' : 'transparent',
+        color: tab === t.key ? '#f7f1e3' : '#b9b1a0',
+        weight: tab === t.key ? 600 : 400,
+      })),
+      tabInsights: tab === 'insights', tabMembers: tab === 'members',
+      tabCleanup: tab === 'cleanup', tabAccess: tab === 'access', tabPrivacy: tab === 'privacy',
+      tabEyebrow: meta[0], tabTitle: meta[1], tabSub: meta[2],
+
+      liveNow: totals.live,
+      kpis: [
+        { label: 'Views · 24h', value: totals.last24, delta: totals.views + ' all time', deltaColor: '#7d7666' },
+        { label: 'Unique visitors', value: totals.visitors, delta: 'device-scoped, no cookies', deltaColor: '#7d7666' },
+        { label: 'Members', value: users.length, delta: satMembers + ' have sat', deltaColor: '#7fbf9a' },
+        { label: 'Week on week', value: (growth > 0 ? '+' : '') + growth + '%', delta: thisWeek + ' views this week', deltaColor: growth >= 0 ? '#7fbf9a' : '#e8a9a9' },
+        { label: 'Stillness logged', value: sitTotals, delta: 'minutes across all members', deltaColor: '#7d7666' },
+      ],
+      gridLines: [0.25, 0.5, 0.75, 1].map(f => ({ y: Math.round(200 * f) - 2 })),
+      viewsPath: p.views, visitorsPath: p.visitors, membersPath: p.members, areaPath: p.area,
+      dayTicks: daily.filter((d, i) => i % 3 === 0 || i === daily.length - 1)
+        .map(d => ({ label: d.day.slice(5).replace('-', '/') })),
+      noData: !totals.views,
+      pages: pages.map(x => ({ page: x.page, views: x.views, pct: Math.round((x.views / pageMax) * 100) })),
+      devices: devices.map(d => ({ device: d.device, pct: Math.round((d.views / devTotal) * 100) })),
+      hours: hours.map(h => ({
+        pct: Math.round((h.views / hourMax) * 100),
+        title: h.hour + ':00 — ' + h.views + ' views',
+        bg: h.views ? 'linear-gradient(180deg, #e6d3a8, #b89758)' : 'rgba(255,255,255,0.07)',
+      })),
+      peakHour: totals.views ? (peak.hour % 12 === 0 ? 12 : peak.hour % 12) + (peak.hour < 12 ? ' AM' : ' PM') : '—',
+      signals,
+
+      query: s.query,
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      members: list, memberCount: list.length + ' of ' + users.length + ' profiles', noMembers: !users.length,
+
+      cleanupItems, cleanClear: !cleanupItems.length,
+      wipeTelemetry: () => { if (T) T.clearAll(); this.flash('Telemetry erased.'); this.setState(x => ({ tick: x.tick + 1 })); },
+      note: s.note, hasNote: !!s.note,
+
+      roleRows: [
+        { role: 'Super admin', ...roleChip('super_admin'), can: 'Everything: telemetry, member removal, privacy controls, role grants.', who: (window.GAW_CONFIG && window.GAW_CONFIG.superAdminEmails.join(', ')) || 'none configured' },
+        { role: 'Admin', ...roleChip('admin'), can: 'Member list, profile cleanup and practice resets. No telemetry, no removals.', who: (window.GAW_CONFIG && window.GAW_CONFIG.adminEmails.length ? window.GAW_CONFIG.adminEmails.join(', ') : 'none configured') },
+        { role: 'Member', ...roleChip('member'), can: 'Their own dashboard, practice, journal and live sessions only.', who: 'everyone else who signs in' },
+      ].map(r => ({ role: r.role, bg: r.bg, color: r.color, can: r.can, who: r.who })),
+
+      consentState: consent ? (consent.analytics ? 'Analytics accepted' : 'Analytics declined') : 'Not asked yet',
+      consentBg: consent ? (consent.analytics ? 'rgba(127,191,154,0.18)' : 'rgba(224,132,132,0.16)') : 'rgba(255,255,255,0.08)',
+      consentColor: consent ? (consent.analytics ? '#a8d5a2' : '#e8a9a9') : '#b9b1a0',
+      consentWhen: consent ? new Date(consent.at).toLocaleString() : 'the banner appears on first visit',
+      revokeConsent: () => { if (T) T.setConsent(false); this.flash('Analytics revoked and erased.'); this.setState(x => ({ tick: x.tick + 1 })); },
+      retention: (window.GAW_CONFIG && window.GAW_CONFIG.telemetryRetentionDays) || 90,
+    };
+  }
+}
+</script>
+</body>
+</html>
