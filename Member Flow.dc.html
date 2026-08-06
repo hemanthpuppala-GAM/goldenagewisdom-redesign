@@ -39,6 +39,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="./gaw-config.js"></script>
+<script src="./gaw-backend.js"></script>
 <script src="./telemetry.js"></script>
 <script src="https://accounts.google.com/gsi/client" async></script>
 <style>
@@ -61,7 +62,7 @@
     .sess-layer { justify-content: flex-start !important; gap: 16px !important; }
     .sess-hint { display: none !important; }
     .sess-orb { width: min(210px, 46vh) !important; height: min(210px, 46vh) !important; }
-    .sess-chips { flex-wrap: nowrap !important; overflow-x: auto !important; justify-content: flex-start !important; padding-bottom: 2px; scrollbar-width: none; }
+    .sess-chips { flex-wrap: nowrap !important; overflow-x: auto !important; justify-content: flex-start !important; padding-bottom: 2px; scrollbar-width: none; mask-image: linear-gradient(to right, transparent 0, #000 18px, #000 calc(100% - 34px), transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0, #000 18px, #000 calc(100% - 34px), transparent 100%); }
     .sess-chips::-webkit-scrollbar { height: 0; }
   }
   @keyframes eqBar { 0%, 100% { transform: scaleY(0.32); } 50% { transform: scaleY(1); } }
@@ -90,6 +91,7 @@
     .r-sidebar .r-side-brand span { display: none !important; }
     .r-sidebar button { padding: 9px 12px !important; font-size: 13.5px !important; }
     .r-sidebar .r-side-collapse, .r-sidebar .r-side-note, .r-sidebar .r-side-spacer { display: none !important; }
+    .r-sidebar .r-side-mobile { display: flex !important; }
     .r-overview { height: auto !important; min-height: 0 !important; }
     .r-grid-2 { flex: none !important; }
     .r-main { padding: 24px 18px calc(96px + env(safe-area-inset-bottom)) !important; height: auto !important; overflow: visible !important; }
@@ -179,10 +181,15 @@
         <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
           <button onClick="{{ n.go }}" title="{{ n.label }}" style="display: flex; align-items: center; gap: 12px; padding: 11px 13px; border-radius: 12px; border: none; text-align: left; font-family: 'Outfit', sans-serif; font-size: 14.5px; cursor: pointer; white-space: nowrap; overflow: hidden; background: {{ n.bg }}; color: {{ n.color }}; font-weight: {{ n.weight }}"><span style="width: 18px; flex-shrink: 0; text-align: center">{{ n.icon }}</span>{{ n.label }}</button>
         </sc-for>
+        <div class="r-side-mobile" style="display: none; align-items: center; gap: 4px">
+          <button onClick="{{ openDonate }}" title="Support the mission" style="display: flex; align-items: center; gap: 8px; border-radius: 12px; border: none; background: rgba(213,183,124,0.14); text-align: left; font-family: 'Outfit', sans-serif; color: #e6d3a8; white-space: nowrap; cursor: pointer"><span style="width: 18px; flex-shrink: 0; text-align: center">♡</span>Support</button>
+          <button onClick="{{ becomeVolunteer }}" title="{{ volLabel }}" style="display: flex; align-items: center; gap: 8px; border-radius: 12px; border: none; background: none; text-align: left; font-family: 'Outfit', sans-serif; color: #b9b1a0; white-space: nowrap; cursor: pointer"><span style="width: 18px; flex-shrink: 0; text-align: center">✦</span>{{ volLabel }}</button>
+        </div>
         <div class="r-side-spacer" style="flex: 1"></div>
         <sc-if value="{{ sideOpen }}" hint-placeholder-val="{{ true }}">
         <div class="r-side-note" style="padding: 16px; border-radius: 16px; background: rgba(213,183,124,0.08); border: 1px solid rgba(213,183,124,0.26); font-size: 13px; font-weight: 300; color: #b9b1a0; line-height: 1.55; display: flex; flex-direction: column; gap: 8px">Our teachings stay free because of members like you. <button onClick="{{ openDonate }}" style="background: none; border: none; padding: 0; text-align: left; font-family: 'Outfit', sans-serif; font-size: 13px; color: #d5b77c; cursor: pointer" style-hover="color: #e6d3a8">Support the mission ♡</button><button onClick="{{ becomeVolunteer }}" style="background: none; border: none; padding: 0; text-align: left; font-family: 'Outfit', sans-serif; font-size: 13px; color: #d5b77c; cursor: pointer" style-hover="color: #e6d3a8">{{ volLabel }}</button></div>
         </sc-if>
+        <button onClick="{{ syncNow }}" title="Practice history sync — tap to retry" style="display: flex; align-items: center; gap: 12px; padding: 6px 13px; border: none; background: none; text-align: left; font-family: 'Outfit', sans-serif; font-size: 12px; color: {{ syncColor }}; white-space: nowrap; overflow: hidden; cursor: pointer">{{ syncLabel }}</button>
         <a href="Privacy.dc.html" title="Privacy notice" style="display: flex; align-items: center; gap: 12px; padding: 6px 13px 10px; font-size: 12px; color: #7d7666; white-space: nowrap; overflow: hidden"><span style="width: 18px; flex-shrink: 0; text-align: center">❋</span>{{ privacyLabel }}</a>
         <button onClick="{{ signOut }}" style="display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px; border: none; background: none; text-align: left; font-family: 'Outfit', sans-serif; font-size: 13.5px; color: #7d7666; cursor: pointer" style-hover="color: #d8d2c4"><span style="width: 18px; flex-shrink: 0; text-align: center">↩</span>{{ signOutLabel }}</button>
       </aside>
@@ -195,7 +202,7 @@
             <sc-if value="{{ demoBanner }}" hint-placeholder-val="{{ false }}">
               <div style="display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-radius: 16px; border: 1px solid rgba(213,183,124,0.4); background: rgba(213,183,124,0.09)">
                 <span style="font-size: 14px; color: #d5b77c">✦</span>
-                <span style="flex: 1; font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #c9b98a">You're in a demo session — real OAuth activates once the provider app is registered (see HANDOFF.md).</span>
+                <span style="flex: 1; font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #c9b98a">You're in a demo session — real account sign-in isn't switched on yet, so this practice is saved on this device only.</span>
                 <button onClick="{{ dismissDemoBanner }}" style="background: none; border: none; color: #9a927f; font-size: 16px; cursor: pointer; padding: 0 4px" style-hover="color: #e6d3a8">×</button>
               </div>
             </sc-if>
@@ -215,8 +222,8 @@
             <div class="r-grid-3" style="flex-shrink: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px">
               <div style="padding: 16px 20px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.26)">
                 <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758">Current streak</div>
-                <div style="font-family: 'Marcellus', serif; font-size: 30px; color: #e6d3a8; margin: 5px 0 1px">{{ statStreak }} <span style="font-size: 14px; color: #b9b1a0">days</span></div>
-                <div style="font-size: 12px; font-weight: 300; color: #9a927f">Best: {{ statBest }} days</div>
+                <div style="font-family: 'Marcellus', serif; font-size: 30px; color: #e6d3a8; margin: 5px 0 1px">{{ statStreak }} <span style="font-size: 14px; color: #b9b1a0">{{ streakUnit }}</span></div>
+                <div style="font-size: 12px; font-weight: 300; color: #9a927f">{{ streakSub }}</div>
               </div>
               <div style="padding: 16px 20px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
                 <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758">Total stillness</div>
@@ -224,9 +231,10 @@
                 <div style="font-size: 12px; font-weight: 300; color: #9a927f">Across {{ statSessions }} sessions</div>
               </div>
               <div style="padding: 16px 20px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
-                <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758">Journey stage</div>
-                <div style="font-family: 'Marcellus', serif; font-size: 19px; color: #f2e9d8; margin: 8px 0 7px">{{ stageName }}</div>
+                <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758; white-space: nowrap">Journey stage</div>
+                <div style="font-family: 'Marcellus', serif; font-size: 19px; color: #f2e9d8; margin: 8px 0 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ stageName }}</div>
                 <div style="height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08)"><div style="width: {{ stagePct }}%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #d5b77c, #b89758)"></div></div>
+                <div style="font-size: 12px; font-weight: 300; color: #9a927f; margin-top: 6px">Day {{ journeyDay }} of 41</div>
               </div>
             </div>
             <div style="flex-shrink: 0; padding: 14px 20px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1)">
@@ -241,6 +249,17 @@
                     <span style="font-size: 11px; color: #7d7666">{{ d.label }}</span>
                   </div>
                 </sc-for>
+              </div>
+              <div style="margin-top: 13px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 8px">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+                  <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758">41-day challenge</span>
+                  <span style="font-size: 12px; font-weight: 300; color: #9a927f">{{ challengeLine }}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(41, 1fr); gap: 3px">
+                  <sc-for list="{{ challengeDots }}" as="c" hint-placeholder-count="41">
+                    <span title="Day {{ c.n }}" style="height: 10px; border-radius: 2px; background: {{ c.bg }}; border: 1px solid {{ c.border }}"></span>
+                  </sc-for>
+                </div>
               </div>
             </div>
             <div class="r-grid-2" style="flex: 1; min-height: 0; display: grid; grid-template-columns: 1.15fr 1fr; gap: 13px">
@@ -282,6 +301,9 @@
               <div style="min-height: 0; padding: 16px 20px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 10px">
                 <h2 style="flex-shrink: 0; font-family: 'Marcellus', serif; font-size: 17px; margin: 0; color: #f2e9d8">Your gatherings</h2>
                 <div class="r-scroll-list" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column">
+                <sc-if value="{{ noUpcoming }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin: 0 0 10px; font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #9a927f">Nothing on the calendar yet — the live sessions run every day, Monday to Saturday. New retreats are announced here.</p>
+                </sc-if>
                 <sc-for list="{{ events }}" as="e" hint-placeholder-count="2">
                   <div style="display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1)">
                     <div style="flex-shrink: 0; width: 52px; text-align: center; padding: 7px 0; border-radius: 12px; background: {{ e.dateBg }}; border: 1px solid {{ e.dateBorder }}">
@@ -369,7 +391,7 @@
             </div>
             <div style="padding: 24px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 14px">
               <textarea value="{{ journalDraft }}" onChange="{{ onJournalInput }}" placeholder="What arose in today's sitting?" rows="4" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.6; resize: vertical; outline: none"></textarea>
-              <div style="display: flex; justify-content: flex-end"><button onClick="{{ saveJournal }}" style="padding: 11px 26px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer">Save entry</button></div>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px"><span style="font-size: 12px; font-weight: 300; color: #7d7666">{{ journalHint }}</span><button onClick="{{ saveJournal }}" disabled="{{ journalEmpty }}" style="padding: 11px 26px; border-radius: 999px; border: none; background: {{ journalBtnBg }}; color: {{ journalBtnColor }}; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: {{ journalBtnCursor }}; flex-shrink: 0">Save entry</button></div>
             </div>
             <sc-for list="{{ journalEntries }}" as="j" hint-placeholder-count="2">
               <div style="padding: 22px 26px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1)">
@@ -638,12 +660,19 @@
       <div style="position: relative; text-align: center; display: flex; flex-direction: column; gap: 9px; align-items: center">
         <div style="font-family: 'Marcellus', serif; font-size: 27px; letter-spacing: 0.04em; color: #f2e9d8">{{ breathLabel }}</div>
         <div style="min-height: 20px; font-size: 13.5px; font-weight: 300; font-style: italic; color: #9a927f; animation: fadeSlow 1.4s ease both">{{ guidance }}</div>
-        <div style="display: flex; align-items: center; gap: 14px; margin-top: 6px; padding: 7px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); font-size: 12.5px; color: #b9b1a0">
+        <div style="display: flex; align-items: center; gap: 14px; margin-top: 6px; padding: 7px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); font-size: 12.5px; color: #b9b1a0; white-space: nowrap">
           <span style="font-family: 'Marcellus', serif; font-size: 14px; color: #e6d3a8">{{ sessionClock }}</span>
           <span style="width: 1px; height: 12px; background: rgba(255,255,255,0.15)"></span>
-          <span>goal 30:00</span>
+          <span>goal {{ goalClock }}</span>
           <span style="width: 1px; height: 12px; background: rgba(255,255,255,0.15)"></span>
           <span>Day {{ journeyDay }} of 41</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 7px; flex-wrap: wrap; justify-content: center">
+          <span style="font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #7d7666">Sit for</span>
+          <sc-for list="{{ goalChips }}" as="g" hint-placeholder-count="5">
+            <button onClick="{{ g.pick }}" title="Sit for {{ g.label }} minutes" style="min-width: 42px; padding: 5px 11px; border-radius: 999px; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 12px; border: 1px solid {{ g.border }}; background: {{ g.bg }}; color: {{ g.color }}; font-weight: {{ g.weight }}">{{ g.label }}</button>
+          </sc-for>
+          <span style="font-size: 11.5px; font-weight: 300; color: #7d7666">min</span>
         </div>
       </div>
       <div class="sess-sound" style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 11px; width: min(560px, 100%); flex-shrink: 0">
@@ -677,7 +706,8 @@
         </div>
         <div class="sess-hint" style="font-size: 11.5px; font-weight: 300; font-style: italic; color: #7d7666">Tap a sound to listen in · or stay in pure silence</div>
       </div>
-      <div style="position: relative; display: flex; align-items: center; gap: 12px">
+      <div style="position: relative; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center">
+        <button onClick="{{ togglePause }}" style="padding: 11px 26px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.55); background: rgba(213,183,124,0.12); color: #e6d3a8; font-family: 'Outfit', sans-serif; font-size: 14px; cursor: pointer" style-hover="border-color: rgba(230,211,168,0.9); color: #f7f1e3">{{ pauseLabel }}</button>
         <button onClick="{{ endSession }}" style="padding: 11px 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: none; color: #d8d2c4; font-family: 'Outfit', sans-serif; font-size: 14px; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5); color: #e6d3a8">End session</button>
       </div>
     </div>
@@ -704,7 +734,7 @@ class Component extends DCLogic {
   state = {
     screen: 'login', tab: 'overview', sessionOpen: false, breathIn: true, sessionSecs: 0,
     chatOpen: false, chatInput: '', nudged: false,
-    sndKey: 'off', sndVol: 0.55, sndPlaying: false,
+    sndKey: 'off', sndVol: 0.55, sndPlaying: false, sndLoading: false, sessPaused: false, syncState: 'idle', syncNote: '',
     videoFilter: 'all', videoOpen: null, videoTitle: '',
     joinOpen: false, copyNote: '', testimonialDraft: '', cardBig: false,
     sideOpen: true, landingOpen: false, landingRemember: true, consentSeen: false,
@@ -714,7 +744,10 @@ class Component extends DCLogic {
     chatMessages: [{ from: 'bot', text: 'Namaste 🙏 I\u2019m your Wisdom Guide. I know your streak, your gatherings and your practice — ask me anything, or tap a suggestion below.' }],
     journalDraft: '',
     journalEntries: [],
-    registered: {},
+    // read straight from storage so the RSVP button never paints "I'll be there"
+    // for a moment before flipping to "Going" on every refresh
+    registered: (() => { try { return (this.loadData() || {}).events || {}; } catch (e) { return {}; } })(),
+    sessGoal: (() => { try { return Math.max(5, Math.min(120, parseInt(localStorage.getItem('gaw_goal'), 10) || 30)); } catch (e) { return 30; } })(),
   };
   // --- lightweight self-NLP: tokenize, stem, score intents, track context ---
   // YouTube's live_stream embed renders its own grey "This video is unavailable"
@@ -838,7 +871,7 @@ class Component extends DCLogic {
   }
   logSit(mins) {
     const p = n => String(n).padStart(2, '0'), now = new Date(), d = this.loadData();
-    d.sits.push({ date: now.getFullYear() + '-' + p(now.getMonth() + 1) + '-' + p(now.getDate()), mins, via: 'live' });
+    d.sits.push({ date: now.getFullYear() + '-' + p(now.getMonth() + 1) + '-' + p(now.getDate()), mins, via: 'live', ts: now.toISOString() });
     this.saveData(d);
   }
   markLiveStart(label, how) {
@@ -970,139 +1003,142 @@ class Component extends DCLogic {
     if (c && c.state !== 'running' && c.resume) c.resume();
     return c;
   }
-  noiseBuffer(ctx) {
-    if (this._nb) return this._nb;
-    const len = Math.floor(ctx.sampleRate * 4), b = ctx.createBuffer(1, len, ctx.sampleRate), d = b.getChannelData(0);
-    let a = 0, bb = 0, c = 0;
-    for (let i = 0; i < len; i++) {
-      const w = Math.random() * 2 - 1;
-      a = 0.99 * a + w * 0.05; bb = 0.96 * bb + w * 0.09; c = 0.78 * c + w * 0.22;
-      d[i] = Math.max(-1, Math.min(1, (a + bb + c) * 0.72));
-    }
-    this._nb = b; return b;
+  /* Ambience you cannot hear is a bug. The three synthesised sounds are now
+     rendered offline into a seamless WAV loop and played through an <audio>
+     element — iOS silences bare WebAudio output but never a media element.
+     Volume rides a GainNode when WebAudio is awake, because iOS ignores
+     HTMLMediaElement.volume outright. */
+  wavBlob(buf) {
+    const d = buf.getChannelData(0), n = d.length;
+    const ab = new ArrayBuffer(44 + n * 2), v = new DataView(ab);
+    const str = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+    str(0, 'RIFF'); v.setUint32(4, 36 + n * 2, true); str(8, 'WAVEfmt ');
+    v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, buf.sampleRate, true); v.setUint32(28, buf.sampleRate * 2, true);
+    v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+    str(36, 'data'); v.setUint32(40, n * 2, true);
+    for (let i = 0; i < n; i++) { const s = Math.max(-1, Math.min(1, d[i])); v.setInt16(44 + i * 2, s * 32767, true); }
+    return new Blob([ab], { type: 'audio/wav' });
   }
-  stopSound() {
-    if (this._chirpT) { clearTimeout(this._chirpT); this._chirpT = null; }
-    if (this._bellT) { clearTimeout(this._bellT); this._bellT = null; }
-    if (this._el) { try { this._el.pause(); } catch (e) {} this._el = null; }
-    if (this._nodes) {
-      const ctx = window.__gawCtx, g = this._gain;
-      if (ctx && g) { try { g.gain.cancelScheduledValues(ctx.currentTime); g.gain.setTargetAtTime(0, ctx.currentTime, 0.25); } catch (e) {} }
-      const nodes = this._nodes;
-      setTimeout(() => nodes.forEach(n => { try { n.stop ? n.stop() : n.disconnect(); } catch (e) {} }), 900);
-      this._nodes = null; this._gain = null;
-    }
+  async synthUrl(kind) {
+    this._urls = this._urls || {};
+    if (this._urls[kind]) return this._urls[kind];
+    const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    if (!OAC) return null;
+    const sr = 44100, dur = kind === 'birds' ? 18 : kind === 'bells' ? 28 : 24;
+    const ctx = new OAC(1, Math.floor(sr * dur), sr);
+    const out = ctx.createGain(); out.gain.value = 0.9; out.connect(ctx.destination);
+    if (kind === 'bowl') this.renderBowl(ctx, out, dur);
+    else if (kind === 'bells') this.renderBells(ctx, out, dur);
+    else this.renderBirds(ctx, out, dur);
+    const buf = await ctx.startRendering();
+    const url = URL.createObjectURL(this.wavBlob(buf));
+    this._urls[kind] = url;
+    return url;
   }
-  pickSound(key) {
-    this.stopSound();
-    if (key === 'off') { this.setState({ sndKey: 'off', sndPlaying: false }); return; }
-    const o = this.soundList().find(x => x.key === key);
-    if (!o) return;
-    this.setState({ sndKey: key, sndPlaying: true });
-    if (o.src) {
-      const el = new Audio(o.src);
-      el.loop = true; el.volume = this.state.sndVol;
-      el.play().catch(() => this.setState({ sndPlaying: false }));
-      this._el = el; return;
-    }
-    const ctx = this.audioCtx();
-    if (!ctx) { this.setState({ sndPlaying: false }); return; }
-    const now = ctx.currentTime, out = ctx.createGain(), nodes = [];
-    out.gain.setValueAtTime(0, now);
-    out.gain.linearRampToValueAtTime(this.state.sndVol, now + 1.4);
-    out.connect(ctx.destination);
-    this._gain = out; this._nodes = nodes;
-    const lfo = (rate, depth, target) => {
-      const o1 = ctx.createOscillator(), g = ctx.createGain();
-      o1.frequency.value = rate; g.gain.value = depth;
-      o1.connect(g); g.connect(target); o1.start(); nodes.push(o1); return o1;
-    };
-    if (o.synth === 'birds') {
-      // soft breeze bed under the chirps
-      const src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), body = ctx.createGain();
-      src.buffer = this.noiseBuffer(ctx); src.loop = true;
-      f.type = 'bandpass'; f.frequency.value = 520; f.Q.value = 0.4;
-      body.gain.value = 0.09;
-      src.connect(f); f.connect(body); body.connect(out); src.start();
-      nodes.push(src);
-      lfo(0.08, 120, f.frequency);
-      lfo(0.05, 0.025, body.gain);
-      this.scheduleBirds(ctx, out, nodes);
-    } else if (o.synth === 'bells') {
-      this.scheduleBells(ctx, out, nodes);
-    } else {
-      const shaper = ctx.createBiquadFilter();
-      shaper.type = 'lowpass'; shaper.frequency.value = 1400; shaper.connect(out);
-      [[196, 0.15], [294.4, 0.075], [392.6, 0.035], [588, 0.018]].forEach(([hz, amp], i) => {
-        const osc = ctx.createOscillator(), g = ctx.createGain();
-        osc.type = 'sine'; osc.frequency.value = hz + (i % 2 ? 0.6 : -0.4);
-        g.gain.value = amp; osc.connect(g); g.connect(shaper); osc.start(); nodes.push(osc);
-        lfo(0.11 + i * 0.03, amp * 0.55, g.gain);
-      });
+  strikeAt(ctx, out, t, root, parts, dec) {
+    parts.forEach(([mul, amp, d]) => {
+      const osc = ctx.createOscillator(), g = ctx.createGain();
+      osc.type = 'sine'; osc.frequency.value = root * mul;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(amp, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + d * dec);
+      osc.connect(g); g.connect(out); osc.start(t); osc.stop(t + d * dec + 0.05);
+    });
+  }
+  // Singing bowl: struck every 8s over a faint sustaining hum, so something is
+  // always sounding instead of a lone strike lost in silence.
+  renderBowl(ctx, out, dur) {
+    const hum = ctx.createGain(); hum.gain.value = 0.06; hum.connect(out);
+    [211, 211.7, 316.5].forEach((hz, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = hz; g.gain.value = i === 2 ? 0.34 : 1;
+      o.connect(g); g.connect(hum); o.start(0); o.stop(dur);
+    });
+    for (let t = 0; t < dur - 2; t += 8) {
+      this.strikeAt(ctx, out, t, 211, [[1, 0.34, 1], [2.01, 0.15, 0.7], [2.71, 0.09, 0.5], [4.06, 0.05, 0.34], [5.42, 0.028, 0.24]], 8.5);
+      this.strikeAt(ctx, out, t + 0.004, 212.6, [[1, 0.16, 1]], 8.5); // detuned twin — the bowl's beating shimmer
     }
   }
-  // Dawn birdsong: short glissando chirps in small motifs, spaced by natural pauses.
-  scheduleBirds(ctx, out, nodes) {
-    const air = ctx.createDelay(0.4), airG = ctx.createGain(), soft = ctx.createBiquadFilter();
-    air.delayTime.value = 0.14; airG.gain.value = 0.14;
-    soft.type = 'lowpass'; soft.frequency.value = 6200;
-    soft.connect(out); soft.connect(air); air.connect(airG); airG.connect(soft);
-    const rnd = (a, b) => a + Math.random() * (b - a);
-    const chirp = (t, f0, f1, dur, amp) => {
+  renderBells(ctx, out, dur) {
+    const roots = [329.6, 392, 440, 493.9];
+    for (let i = 0, t = 0; t < dur - 2; i++, t += 7) {
+      this.strikeAt(ctx, out, t, roots[i % 4], [[1, 0.4, 1], [2.76, 0.16, 0.62], [5.4, 0.06, 0.36], [8.9, 0.03, 0.2]], 6.5);
+    }
+  }
+  renderBirds(ctx, out, dur) {
+    const len = Math.floor(ctx.sampleRate * 4), nb = ctx.createBuffer(1, len, ctx.sampleRate), nd = nb.getChannelData(0);
+    let a = 0, b = 0, c = 0;
+    for (let i = 0; i < len; i++) { const w = Math.random() * 2 - 1; a = 0.99 * a + w * 0.05; b = 0.96 * b + w * 0.09; c = 0.78 * c + w * 0.22; nd[i] = Math.max(-1, Math.min(1, (a + b + c) * 0.72)); }
+    const src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), body = ctx.createGain();
+    src.buffer = nb; src.loop = true;
+    f.type = 'bandpass'; f.frequency.value = 520; f.Q.value = 0.4; body.gain.value = 0.12;
+    src.connect(f); f.connect(body); body.connect(out); src.start(0); src.stop(dur);
+    const soft = ctx.createBiquadFilter(); soft.type = 'lowpass'; soft.frequency.value = 6200; soft.connect(out);
+    const rnd = (x, y) => x + Math.random() * (y - x);
+    const chirp = (t, f0, f1, l, amp) => {
+      if (t + l > dur - 0.2) return;
       const osc = ctx.createOscillator(), g = ctx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(f0, t);
-      osc.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      osc.frequency.exponentialRampToValueAtTime(f1, t + l);
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(amp, t + dur * 0.22);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      osc.connect(g); g.connect(soft);
-      osc.start(t); osc.stop(t + dur + 0.05);
-      nodes.push(osc);
+      g.gain.exponentialRampToValueAtTime(amp, t + l * 0.22);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + l);
+      osc.connect(g); g.connect(soft); osc.start(t); osc.stop(t + l + 0.05);
     };
-    const motif = () => {
-      if (!this._nodes || this._nodes !== nodes) return;
-      const t0 = ctx.currentTime + 0.06, n = Math.round(rnd(2, 5)), up = Math.random() > 0.45;
-      const base = rnd(2100, 3900), amp = rnd(0.022, 0.055);
-      let t = t0;
+    let t = 0.4;
+    while (t < dur - 1.5) {
+      const n = Math.round(rnd(2, 5)), up = Math.random() > 0.45, base = rnd(2100, 3900), amp = rnd(0.1, 0.2);
       for (let i = 0; i < n; i++) {
-        const d = rnd(0.07, 0.16), f0 = base * rnd(0.94, 1.08);
-        chirp(t, up ? f0 : f0 * 1.5, up ? f0 * rnd(1.3, 1.9) : f0 * rnd(0.6, 0.82), d, amp);
-        t += d + rnd(0.05, 0.14);
+        const l = rnd(0.07, 0.16), f0 = base * rnd(0.94, 1.08);
+        chirp(t, up ? f0 : f0 * 1.5, up ? f0 * rnd(1.3, 1.9) : f0 * rnd(0.6, 0.82), l, amp);
+        t += l + rnd(0.05, 0.14);
       }
-      // occasional distant answer
-      if (Math.random() > 0.6) {
-        const fb = rnd(1500, 2400);
-        chirp(t + rnd(0.4, 1.1), fb, fb * rnd(1.2, 1.6), rnd(0.1, 0.2), amp * 0.4);
-      }
-      this._chirpT = setTimeout(motif, rnd(2200, 5600));
-    };
-    motif();
+      if (Math.random() > 0.6) { const fb = rnd(1500, 2400); chirp(t + rnd(0.3, 0.8), fb, fb * rnd(1.2, 1.6), rnd(0.1, 0.2), amp * 0.45); }
+      t += rnd(1.4, 3.2);
+    }
   }
-  // Temple bells: a single soft strike every 9-22s, left to ring out into silence.
-  scheduleBells(ctx, out, nodes) {
-    const rnd = (a, b) => a + Math.random() * (b - a);
-    const strike = () => {
-      if (!this._nodes || this._nodes !== nodes) return;
-      const t = ctx.currentTime + 0.05, root = [329.6, 392, 440, 493.9][Math.floor(Math.random() * 4)];
-      [[1, 0.09, 7.5], [2.76, 0.03, 4.2], [5.4, 0.012, 2.6], [8.9, 0.006, 1.6]].forEach(([mul, amp, dec]) => {
-        const osc = ctx.createOscillator(), g = ctx.createGain();
-        osc.type = 'sine'; osc.frequency.value = root * mul * rnd(0.998, 1.002);
-        g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(amp, t + 0.012);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + dec);
-        osc.connect(g); g.connect(out);
-        osc.start(t); osc.stop(t + dec + 0.1);
-        nodes.push(osc);
-      });
-      this._bellT = setTimeout(strike, rnd(9000, 22000));
-    };
-    strike();
+  stopSound() {
+    this._sndTok = (this._sndTok || 0) + 1;
+    if (this._el) { try { this._el.pause(); this._el.removeAttribute('src'); this._el.load(); } catch (e) {} this._el = null; }
+    if (this._gain) { try { this._gain.disconnect(); } catch (e) {} this._gain = null; }
+  }
+  async pickSound(key) {
+    this.stopSound();
+    if (key === 'off') { this.setState({ sndKey: 'off', sndPlaying: false, sndLoading: false }); return; }
+    const o = this.soundList().find(x => x.key === key);
+    if (!o) return;
+    const token = this._sndTok;
+    this.setState({ sndKey: key, sndPlaying: true, sndLoading: !o.src });
+    let src = o.src;
+    if (!src) {
+      try { src = await this.synthUrl(o.synth); } catch (e) { src = null; }
+      if (token !== this._sndTok) return;
+      if (!src) { this.setState({ sndPlaying: false, sndLoading: false }); return; }
+    }
+    const el = new Audio(src);
+    el.loop = true; el.preload = 'auto';
+    try { el.volume = this.state.sndVol; } catch (e) {}
+    this._el = el;
+    const ctx = this.audioCtx();
+    if (ctx && ctx.state === 'running') {
+      try {
+        const ms = ctx.createMediaElementSource(el), g = ctx.createGain();
+        g.gain.value = this.state.sndVol;
+        ms.connect(g); g.connect(ctx.destination);
+        this._gain = g;
+      } catch (e) { this._gain = null; }
+    }
+    el.play().then(() => { if (token === this._sndTok) this.setState({ sndLoading: false }); })
+      .catch(() => { if (token === this._sndTok) this.setState({ sndPlaying: false, sndLoading: false }); });
   }
   setVolume(v) {
     this.setState({ sndVol: v });
-    if (this._el) this._el.volume = v;
-    if (this._gain && window.__gawCtx) { try { this._gain.gain.setTargetAtTime(v, window.__gawCtx.currentTime, 0.08); } catch (e) {} }
+    try { localStorage.setItem('gaw_vol', String(v)); } catch (e) {}
+    const ctx = window.__gawCtx;
+    if (this._gain && ctx) { try { this._gain.gain.cancelScheduledValues(ctx.currentTime); this._gain.gain.setTargetAtTime(v, ctx.currentTime, 0.06); } catch (e) {} }
+    if (this._el) { try { this._el.volume = v; } catch (e) {} }
   }
   knowledgeBase() {
     return [
@@ -1113,7 +1149,7 @@ class Component extends DCLogic {
       'Kundalini is the dormant life-energy at the base of the spine. As breath refines, prana is received through the sahasrara and the energy rises chakra by chakra.',
       'Common experiences as prana refines: tingling at the crown, inner light, deep stillness. Welcome them, do not chase them.',
       'The journal is private to the member and stored only for them. Writing right after a sit captures what the mind forgets.',
-      'Wellness teachings include sun gazing, earth gazing (barefoot walking), alkaline water and a 41-day detox diet repeated every 6 months.',
+      'Wellness teachings include sun gazing, earthing (barefoot walking), alkaline water and a 41-day detox diet repeated every 6 months.',
       'Members sign in with Google, Microsoft, Facebook or Apple. Golden Age Wisdom never sees, stores or handles passwords.',
       'Donations are optional, processed by Stripe, and keep the teachings free. Members can also volunteer (seva).',
       'How to meditate, the whole method: sit comfortably with the hands joined in the lap (fingers gently interlaced), eyes closed, watch the breath without controlling it, let thoughts flow, surrender and observe. Nothing to buy or master.',
@@ -1161,7 +1197,20 @@ class Component extends DCLogic {
       const score = it.kw.reduce((n, k) => n + (toks.some(t => t.startsWith(stem(k))) ? 1 : 0), 0);
       if (score > bestScore) { best = it.id; bestScore = score; }
     }
-    return { intent: bestScore > 0 ? best : (this.chatCtx ? this.chatCtx + '_follow' : null), toks };
+    if (bestScore > 0) return { intent: best, toks };
+    // No keyword hit. Only carry the previous topic forward when the message really
+    // reads as a follow-up ("why?", "tell me more") — otherwise every unmatched
+    // question echoed the first topic instead of switching.
+    const FOLLOW = ['why', 'more', 'explain', 'elaborate', 'detail', 'so', 'then', 'and', 'ok', 'okay', 'yes', 'sure', 'go', 'continue', 'that', 'it', 'this', 'again', 'what'];
+    const isFollow = !!this.chatCtx && toks.length <= 4 && toks.some(t => FOLLOW.includes(t));
+    return { intent: isFollow ? this.chatCtx + '_follow' : null, toks };
+  }
+  // Anything with no real word in it — punctuation, emoji, keysmash.
+  isGibberish(q) {
+    const letters = (q.match(/[a-z]/gi) || []).length;
+    if (letters < 2) return true;
+    const words = q.toLowerCase().match(/[a-z]{2,}/g) || [];
+    return words.length === 0;
   }
   botReply(q) {
     const { intent } = this.nlp(q);
@@ -1192,7 +1241,17 @@ class Component extends DCLogic {
       volunteer: `Wonderful, ${name} — meditators who complete the 41 days often feel called to give back. As a volunteer you can host group sits, welcome new members, and help at retreats. You can also support the mission with a donation or join our live events — everything stays free for all.`,
       gratitude: `Namaste, ${name} 🙏 The light in me honors the light in you. Is there anything on your practice I can help with?`,
     };
-    const fallback = `Tell me more — do you want help with your practice, your streak, an event, or how you\u2019re feeling today? I learn from what you ask.`;
+    if (this.isGibberish(q)) {
+      this.chatCtx = null;
+      return `I couldn\u2019t read that one, ${name} — it came through as symbols. Try it in words, e.g. "how do I meditate?", "how is my streak?" or "when is the next live session?"`;
+    }
+    const fallbacks = [
+      `I don\u2019t have that one yet, ${name}. Ask me about your streak, your minutes, the live sessions, the 41-day challenge, the journal, or how you\u2019re feeling today.`,
+      `That\u2019s outside what I know, ${name} — but I can help with your practice, your progress, the live sessions or the journal. For anything else, info@goldenagewisdom.org reaches a person.`,
+      `Still learning that one. Try asking about meditation itself, kundalini, the 41 days, your streak, or tonight\u2019s session.`,
+    ];
+    this._fbN = (this._fbN || 0);
+    const fallback = fallbacks[this._fbN++ % fallbacks.length];
     if (intent && intent.endsWith('_follow')) {
       const base = intent.replace('_follow', '');
       this.chatCtx = base;
@@ -1204,22 +1263,22 @@ class Component extends DCLogic {
   async submitSignup() {
     const { suName, suEmail, suHoney, suBusy } = this.state;
     if (suBusy) return;
+    if (suHoney) { this.setState({ suOk: true, suStatus: 'Welcome!' }); return; } // honeypot
     if (!suName.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(suEmail.trim())) {
       this.setState({ suStatus: 'Please enter your name and a valid email.', suOk: false });
       return;
     }
     this.setState({ suBusy: true, suStatus: '' });
-    try {
-      const body = new URLSearchParams({ name: suName.trim(), email: suEmail.trim(), website: suHoney, lang: 'EN', role: this.state.suRole });
-      const r = await fetch('signup.php', { method: 'POST', body });
-      const j = await r.json();
-      if (j.ok) {
-        this.setState({ suBusy: false, suOk: true, suStatus: j.message || 'Welcome to the community! Check your inbox.', suName: '', suEmail: '' });
-        this.setSession({ name: suName.trim(), email: suEmail.trim(), role: this.state.suRole, memberId: j.member_id });
-      }
-      else this.setState({ suBusy: false, suOk: false, suStatus: j.error || 'Something went wrong — please try again.' });
-    } catch (e) {
-      // preview fallback: no PHP server here — create the account locally and sign in
+    let res = null;
+    try { res = window.GAW_BACKEND && await window.GAW_BACKEND.signup(suName.trim(), suEmail.trim()); } catch (e) {}
+    if (res && res.ok && res.memberId) {
+      this.setState({ suBusy: false, suOk: true, suStatus: (res.returning ? 'Welcome back! ' : 'Welcome to the community! ') + 'Your member ID is ' + res.memberId + '.', suName: '', suEmail: '' });
+      this.setSession({ name: suName.trim(), email: suEmail.trim(), role: this.state.suRole, memberId: res.memberId });
+    } else if (res && !res.ok && res.error === 'invalid email') {
+      this.setState({ suBusy: false, suOk: false, suStatus: 'Please enter a valid email address.' });
+    } else {
+      // offline / backend unreachable: sign in with a provisional number; the
+      // silent sync corrects it against the shared registry on the next visit.
       this.setState({ suBusy: false, suOk: true, suStatus: 'Welcome to the community!' });
       this.setSession({ name: suName.trim(), email: suEmail.trim(), role: this.state.suRole });
     }
@@ -1253,10 +1312,16 @@ class Component extends DCLogic {
   sendChat(text) {
     const q = (text != null ? text : this.state.chatInput).trim();
     if (!q || q.length > 400) return;
-    this.setState(s => ({ chatMessages: [...s.chatMessages, { from: 'user', text: q }, { from: 'bot', text: '·  ·  ·' }], chatInput: '' }));
+    // Tag this exchange's placeholder so a slow reply lands on ITS OWN bubble.
+    // Overwriting the last message meant a second question mid-flight received
+    // the first question's answer, and the first kept its typing dots forever.
+    const pid = 'p' + Date.now() + Math.random().toString(36).slice(2, 6);
+    this.setState(s => ({ chatMessages: [...s.chatMessages, { from: 'user', text: q }, { from: 'bot', text: '·  ·  ·', pid }], chatInput: '' }));
     const land = (reply) => this.setState(s => {
+      const i = s.chatMessages.findIndex(m => m.pid === pid);
+      if (i < 0) return null;
       const m = s.chatMessages.slice();
-      m[m.length - 1] = { from: 'bot', text: reply };
+      m[i] = { from: 'bot', text: reply };
       return { chatMessages: m };
     });
     const local = this.botReply(q);
@@ -1321,7 +1386,7 @@ class Component extends DCLogic {
     }, 1800);
   }
   signInGoogle() {
-    const cid = this.props.googleClientId ?? '';
+    const cid = this.props.googleClientId ?? (window.GAW_CONFIG && window.GAW_CONFIG.googleClientId) ?? '';
     if (cid && window.google && google.accounts && google.accounts.oauth2) {
       try {
         const tc = google.accounts.oauth2.initTokenClient({
@@ -1414,16 +1479,45 @@ class Component extends DCLogic {
     const u = this.state.sessionUser || this.session();
     return window.GAW_ROLE ? window.GAW_ROLE(u && u.email) : 'member';
   }
+  /* Silent number correction: the shared registry is the source of truth.
+     Whatever number this browser handed out locally, the backend's answer
+     replaces it in place — no re-signup, no visible interruption. */
+  async syncBackendNumber(user) {
+    if (!window.GAW_BACKEND || !user || !user.email) return;
+    const email = String(user.email).trim().toLowerCase();
+    if (email.endsWith('@preview.goldenagewisdom.org')) return; // demo identities stay local
+    const res = await window.GAW_BACKEND.signup(user.name, user.email);
+    if (!res || !res.ok || !res.memberId || res.memberId === user.memberId) return;
+    const old = user.memberId;
+    try {
+      const s = this.session();
+      if (s && String(s.email || '').trim().toLowerCase() === email) {
+        s.memberId = res.memberId;
+        localStorage.setItem('gaw_session', JSON.stringify(s));
+        localStorage.setItem('gaw_last_user', JSON.stringify(s));
+      }
+      // carry the member's local progress over to the corrected number
+      const d = localStorage.getItem('gaw_data_' + old);
+      if (d && !localStorage.getItem('gaw_data_' + res.memberId)) localStorage.setItem('gaw_data_' + res.memberId, d);
+    } catch (e) {}
+    this.registerUser(Object.assign({}, user, { memberId: res.memberId }));
+    const cur = this.state.sessionUser;
+    if (cur && String(cur.email || '').trim().toLowerCase() === email) {
+      this.setState({ sessionUser: Object.assign({}, cur, { memberId: res.memberId }) });
+    }
+  }
   setSession(user) {
     const rostered = window.GAW_ROSTER_ID && window.GAW_ROSTER_ID(user.email);
     if (rostered) user.memberId = rostered;              // roster always wins
-    else user.memberId = this.assignMemberId(user);      // seal, then existing, then counter
+    else if (!user.memberId) user.memberId = this.assignMemberId(user); // no server number: provisional local
     this.registerUser(user);
+    this.syncBackendNumber(user);
     try { localStorage.setItem('gaw_session', JSON.stringify(user)); localStorage.setItem('gaw_last_user', JSON.stringify(user)); } catch (e) {}
     let landing = null;
     try { landing = localStorage.getItem('gaw_landing'); } catch (e) {}
     if (landing) { setTimeout(() => this.openLanding(landing), 60); } else { setTimeout(() => this.setState({ landingOpen: true }), 350); }
     this.setState({ screen: 'dash', sessionUser: user, journalEntries: this.loadData().journal || [], registered: this.loadData().events || {} });
+    this.cloudPull(user);
   }
   openLanding(where) {
     this.setState({ landingOpen: false });
@@ -1447,9 +1541,107 @@ class Component extends DCLogic {
     const s = this.state.sessionUser, l = this.lastUser();
     return (s && s.name) || (l && l.name) || this.props.memberName || 'Seeker';
   }
-  userKey() { const u = this.session(); return 'gaw_data_' + ((u && u.memberId) || 'guest'); }
-  loadData() { const empty = { sits: [], journal: [] }; try { const d = JSON.parse(localStorage.getItem(this.userKey()) || 'null'); return (d && d.sits) ? d : empty; } catch (e) { return empty; } }
-  saveData(d) { try { localStorage.setItem(this.userKey(), JSON.stringify(d)); } catch (e) {} }
+  /* Keyed by email, never by member number: the number starts out provisional
+     and is corrected by the registry, which used to orphan a member's history. */
+  userKey() { const e = this.cloudEmail(); if (e) return 'gaw_data_' + e; const u = this.session(); return 'gaw_data_' + ((u && u.memberId) || 'guest'); }
+  loadData() {
+    const empty = { sits: [], journal: [], events: {} };
+    let d = empty;
+    try { const raw = JSON.parse(localStorage.getItem(this.userKey()) || 'null'); if (raw && raw.sits) d = raw; } catch (e) {}
+    /* One-time rescue of history stranded under an older member-number key.
+       A device may be shared, so a bucket is only claimed when it can be
+       attributed to this email — never swept up on proximity alone. */
+    if (!this._migrated && this.cloudEmail()) {
+      this._migrated = true;
+      const mine = this.userKey(), email = this.cloudEmail();
+      const u = this.session() || {};
+      const reg = this.registry() || [];
+      const ids = new Set();
+      if (u.memberId) ids.add(String(u.memberId));
+      reg.forEach(r => { if (String(r.email || '').trim().toLowerCase() === email && r.memberId) ids.add(String(r.memberId)); });
+      // Only when this browser has ever known exactly one member is an
+      // unattributable leftover bucket safe to claim.
+      const soleMember = reg.filter(r => r.email).length <= 1;
+      let found = false;
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (!k || k === mine || k.indexOf('gaw_data_') !== 0) continue;
+          if (k.indexOf('@') > -1) continue;                       // another email's bucket
+          const id = k.slice(9);
+          const claimed = ids.has(id) || (soleMember && (id === 'guest' || /^GAW-/.test(id)));
+          if (!claimed) continue;
+          let old = null; try { old = JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) {}
+          if (old && old.sits && (old.sits.length || (old.journal || []).length)) { d = this.mergeData(d, old); found = true; }
+        }
+      } catch (e) {}
+      if (found) { try { localStorage.setItem(mine, JSON.stringify(d)); } catch (e) {} }
+    }
+    return d;
+  }
+  saveData(d) { try { localStorage.setItem(this.userKey(), JSON.stringify(d)); } catch (e) {} this.queueCloudPush(); }
+  /* Practice history lives against the member's email in the registry, so a
+     phone, an iPad and a laptop all show the same streak and journal. */
+  cloudEmail() { const u = this.session() || this.lastUser(); return (u && u.email) ? String(u.email).trim().toLowerCase() : ''; }
+  /* Merging two devices must never cost a member a sit. Legacy records carry no
+     timestamp, so two honest 2-minute sits on the same day look identical — a
+     plain de-dupe would silently delete one. Instead each side is counted
+     separately and the larger count of each identical record is kept: a record
+     the two devices share collapses, a record one device genuinely holds twice
+     survives twice. */
+  mergeData(a, b) {
+    const kS = s => (s.ts || '') + '|' + (s.date || '') + '|' + (s.mins || 0) + '|' + (s.via || '');
+    const kJ = j => (j.date || '') + '|' + (j.text || '');
+    const union = (la, lb, k) => {
+      la = la || []; lb = lb || [];
+      const tally = list => { const m = new Map(); list.forEach(x => { const key = k(x); const e = m.get(key); if (e) e.push(x); else m.set(key, [x]); }); return m; };
+      const ma = tally(la), mb = tally(lb), out = [];
+      const emit = key => {
+        const ga = ma.get(key) || [], gb = mb.get(key) || [];
+        const keep = ga.length >= gb.length ? ga : gb;
+        keep.forEach(x => out.push(x));
+      };
+      const done = new Set();
+      la.forEach(x => { const key = k(x); if (!done.has(key)) { done.add(key); emit(key); } });
+      lb.forEach(x => { const key = k(x); if (!done.has(key)) { done.add(key); emit(key); } });
+      return out;
+    };
+    return {
+      sits: union(a.sits, b.sits, kS),
+      journal: union(a.journal, b.journal, kJ),
+      events: Object.assign({}, a.events || {}, b.events || {}),
+    };
+  }
+  async cloudPull(u) {
+    const email = (u && u.email) ? String(u.email).trim().toLowerCase() : this.cloudEmail();
+    if (!email) { this.setState({ syncState: 'nouser', syncNote: 'No email on this sign-in' }); return; }
+    if (!window.GAW_BACKEND || !window.GAW_BACKEND.practiceGet) { this.setState({ syncState: 'old', syncNote: 'Old cached code — hard-refresh' }); return; }
+    this.setState({ syncState: 'busy', syncNote: 'Syncing…' });
+    let remote = null;
+    try { remote = await window.GAW_BACKEND.practiceGet(email); } catch (e) { remote = null; }
+    if (!remote || typeof remote !== 'object' || Array.isArray(remote)) {
+      this.setState({ syncState: 'down', syncNote: 'Registry unreachable' });
+      return;
+    }
+    this._pulled = true;
+    const merged = this.mergeData(this.loadData(), remote);
+    this.saveData(merged);
+    this.setState({ journalEntries: merged.journal || [], registered: merged.events || {} });
+  }
+  queueCloudPush() {
+    clearTimeout(this._pushT);
+    this._pushT = setTimeout(() => {
+      const email = this.cloudEmail();
+      if (!email) { this.setState({ syncState: 'nouser', syncNote: 'No email on this sign-in' }); return; }
+      if (!window.GAW_BACKEND || !window.GAW_BACKEND.practicePut) { this.setState({ syncState: 'old', syncNote: 'Old cached code — hard-refresh' }); return; }
+      const local = this.loadData(), n = (local.sits || []).length;
+      if (!n && !(local.journal || []).length && !this._pulled) { this.setState({ syncState: 'busy', syncNote: 'Waiting for history…' }); return; }
+      window.GAW_BACKEND.practicePut(email, this.loadData()).then(ok => {
+        this.setState(ok ? { syncState: 'ok', syncNote: n + (n === 1 ? ' sit synced' : ' sits synced') }
+                         : { syncState: 'down', syncNote: 'Registry refused the write' });
+      }).catch(() => this.setState({ syncState: 'down', syncNote: 'Registry unreachable' }));
+    }, 1500);
+  }
   registeredEvents() {
     const d = this.loadData();
     return (d && d.events) || {};
@@ -1478,7 +1670,9 @@ class Component extends DCLogic {
     let best = 0, run = 0, prev = null;
     for (const x of days) { const tm = new Date(x + 'T00:00:00').getTime(); run = prev !== null && tm - prev === one ? run + 1 : 1; if (run > best) best = run; prev = tm; }
     const totalMins = d.sits.reduce((n, s) => n + (s.mins || 0), 0);
-    return { streak, best, sessions: d.sits.length, totalMins, journeyDay: Math.max(1, Math.min(41, streak || 1)) };
+    const last = days[days.length - 1];
+    const lastSat = last ? new Date(last + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) : '';
+    return { streak, best, sessions: d.sits.length, totalMins, lastSat, daysSat: days.length, journeyDay: Math.max(1, Math.min(41, streak || 1)) };
   }
   componentDidMount() {
     this.applyNumberingEpoch();
@@ -1490,12 +1684,25 @@ class Component extends DCLogic {
       else if (this.state.joinOpen) this.setState({ joinOpen: false, copyNote: '' });
     };
     window.addEventListener('keydown', this.onEsc);
-    this.onVis = () => { if (!document.hidden) this.checkLiveReturn(); };
+    this.onVis = () => {
+      if (document.hidden) return;
+      this.checkLiveReturn();
+      // the browser drops the wake lock whenever the tab is hidden — take it back
+      if (this.state.sessionOpen && !this._wake) this.keepAwake();
+    };
     document.addEventListener('visibilitychange', this.onVis);
     window.addEventListener('focus', this.onVis);
     setTimeout(() => this.checkLiveReturn(), 400);
     const u = this.session();
     if (u) this.setState({ screen: 'dash', sessionUser: u, journalEntries: this.loadData().journal || [], registered: this.loadData().events || {} });
+    if (u) this.syncBackendNumber(u); // silent correction against the shared registry
+    if (u) this.cloudPull(u);
+    try { const sv = parseFloat(localStorage.getItem('gaw_vol')); if (sv >= 0 && sv <= 1) this.setState({ sndVol: sv }); } catch (e) {}
+    // A returning member on a new device has never been asked where to begin.
+    if (u) {
+      let lg = null; try { lg = localStorage.getItem('gaw_landing'); } catch (e) {}
+      if (!lg) setTimeout(() => { const st = this.state; if (!st.sessionOpen && !st.doneOpen && !st.joinOpen) this.setState({ landingOpen: true }); }, 500);
+    }
     // app-shortcut deep links: /join?go=solo | /join?go=live
     try {
       const go = new URLSearchParams(location.search).get('go');
@@ -1506,7 +1713,7 @@ class Component extends DCLogic {
       }, 300);
     } catch (e) {}
     // breath rhythm: 4s in, 6s out (natural exhale is longer)
-    this.clockTimer = setInterval(() => { if (this.state.sessionOpen) this.setState(s => ({ sessionSecs: s.sessionSecs + 1 })); }, 1000);
+    this.clockTimer = setInterval(() => { if (this.state.sessionOpen && !this.state.sessPaused) this.setState(s => ({ sessionSecs: s.sessionSecs + 1 })); }, 1000);
   }
   maybeNudge() {
     if (this.state.nudged || this.state.chatOpen) return;
@@ -1525,28 +1732,46 @@ class Component extends DCLogic {
     }));
     try { localStorage.setItem('gaw_guide_nudge', today); } catch (e) {}
   }
-  componentWillUnmount() { clearTimeout(this.nudgeT); clearTimeout(this.breathT); clearInterval(this.clockTimer); this.stopSound(); window.removeEventListener('keydown', this.onEsc); document.removeEventListener('visibilitychange', this.onVis); window.removeEventListener('focus', this.onVis); }
+  componentWillUnmount() { this.releaseAwake(); clearTimeout(this.nudgeT); clearTimeout(this.breathT); clearInterval(this.clockTimer); this.stopSound(); window.removeEventListener('keydown', this.onEsc); document.removeEventListener('visibilitychange', this.onVis); window.removeEventListener('focus', this.onVis); }
   breathe() {
     if (!this.state.sessionOpen) return;
     const goingIn = this.state.breathPhase !== 'in';
     this.setState({ breathPhase: goingIn ? 'in' : 'out' });
     this.breathT = setTimeout(() => this.breathe(), goingIn ? 4000 : 6000);
   }
+  setGoal(mins) {
+    this.setState({ sessGoal: mins });
+    try { localStorage.setItem('gaw_goal', String(mins)); } catch (e) {}
+  }
+  // Keep the screen lit while sitting — a member watching the orb never touches
+  // the screen, and a lock screen mid-sit breaks the practice and the timer.
+  async keepAwake() {
+    if (!('wakeLock' in navigator)) return;
+    try {
+      this._wake = await navigator.wakeLock.request('screen');
+      this._wake.addEventListener('release', () => { this._wake = null; });
+    } catch (e) { this._wake = null; }
+  }
+  releaseAwake() {
+    if (this._wake) { try { this._wake.release(); } catch (e) {} this._wake = null; }
+  }
   startSit() {
     clearTimeout(this.breathT);
-    this.setState({ sessionOpen: true, sessionSecs: 0, breathPhase: 'out' }, () => this.breathe());
+    this.keepAwake();
+    this.setState({ sessionOpen: true, sessionSecs: 0, sessPaused: false, breathPhase: 'out' }, () => this.breathe());
   }
   endSit() {
     clearTimeout(this.breathT);
+    this.releaseAwake();
     const secs = this.state.sessionSecs;
     const mins = Math.max(1, Math.round(secs / 60));
     if (secs >= 60) {
       const p = n => String(n).padStart(2, '0'), now = new Date();
       const d = this.loadData();
-      d.sits.push({ date: now.getFullYear() + '-' + p(now.getMonth() + 1) + '-' + p(now.getDate()), mins });
+      d.sits.push({ date: now.getFullYear() + '-' + p(now.getMonth() + 1) + '-' + p(now.getDate()), mins, ts: now.toISOString() });
       this.saveData(d);
-      this.setState({ sessionOpen: false, doneOpen: true, doneMins: mins + (mins === 1 ? ' minute' : ' minutes'), journalDraft: '' });
-    } else this.setState({ sessionOpen: false });
+      this.setState({ sessionOpen: false, sessPaused: false, doneOpen: true, doneMins: mins + (mins === 1 ? ' minute' : ' minutes'), journalDraft: '' });
+    } else this.setState({ sessionOpen: false, sessPaused: false });
   }
   renderVals() {
     const s = this.state;
@@ -1563,7 +1788,6 @@ class Component extends DCLogic {
     const secs = String(s.sessionSecs % 60).padStart(2, '0');
     const eventDefs = [
       { day: '26', month: 'JUL', title: 'Awakening Hyderabad', meta: '11 AM–6 PM · 9 Convention, Sanath Nagar', ends: '2026-07-26T18:00:00+05:30' },
-      { day: '15', month: 'AUG', title: '7-Day Silent Retreat', meta: 'All day · Rishikesh', ends: '2026-08-21T23:59:00+05:30' },
     ];
     const screen = this.props.startOnDashboard && s.screen === 'login' ? 'dash' : s.screen;
     return {
@@ -1582,9 +1806,18 @@ class Component extends DCLogic {
         const si = st2.streak >= 30 ? 3 : st2.streak >= 14 ? 2 : st2.streak >= 5 ? 1 : 0;
         return {
           statStreak: st2.streak, statBest: st2.best, statSessions: st2.sessions,
+          challengeLine: Math.min(41, st2.daysSat) + ' of 41 days' + (st2.daysSat >= 41 ? ' · complete 🙏' : ''),
+          challengeDots: Array.from({ length: 41 }, (_, i) => {
+            const done = i < Math.min(41, st2.daysSat);
+            return { n: i + 1, bg: done ? '#d5b77c' : 'rgba(255,255,255,0.07)', border: done ? 'rgba(213,183,124,0.6)' : 'rgba(255,255,255,0.1)' };
+          }),
+          streakUnit: st2.streak === 1 ? 'day' : 'days',
+          streakSub: st2.streak === 0
+            ? (st2.lastSat ? 'Last sat ' + st2.lastSat + ' · sit today to begin again' : 'Your first sit starts the count')
+            : 'Best: ' + st2.best + (st2.best === 1 ? ' day' : ' days'),
           statH: Math.floor(st2.totalMins / 60), statM: st2.totalMins % 60,
           journeyDay: st2.journeyDay,
-          journeyLine: st2.sessions === 0 ? 'Your journey begins today · Take your first sit.' : 'Day ' + st2.journeyDay + ' of your journey · The breath is becoming quiet.',
+          journeyLine: st2.sessions === 0 ? 'Your journey begins today · Take your first sit.' : 'Day ' + st2.journeyDay + ' of your journey · ' + st2.sessions + (st2.sessions === 1 ? ' sit' : ' sits') + ' so far.',
           stageName: stages[si], stagePct: Math.max(2, Math.round(Math.min(41, st2.streak) / 41 * 100)),
         };
       })(),
@@ -1777,6 +2010,7 @@ class Component extends DCLogic {
         { title: 'Breath of Stillness', description: 'Gentle breath awareness', duration: '12 min' },
         { title: 'Silence Immersion', description: 'Unguided with soft bells', duration: '30 min' },
       ],
+      noUpcoming: !eventDefs.some(e => new Date(e.ends).getTime() >= Date.now()),
       events: eventDefs
         .map((e) => ({ ...e, past: new Date(e.ends).getTime() < Date.now() }))
         .sort((a, b) => (a.past === b.past ? new Date(a.ends) - new Date(b.ends) : a.past ? 1 : -1))
@@ -1802,6 +2036,11 @@ class Component extends DCLogic {
         };
       }),
       journalDraft: s.journalDraft,
+      journalEmpty: !s.journalDraft.trim(),
+      journalHint: s.journalDraft.trim() ? '' : 'Write a line or two, then save.',
+      journalBtnBg: s.journalDraft.trim() ? 'linear-gradient(135deg, #d5b77c, #b89758)' : 'rgba(255,255,255,0.07)',
+      journalBtnColor: s.journalDraft.trim() ? '#241b06' : '#7d7666',
+      journalBtnCursor: s.journalDraft.trim() ? 'pointer' : 'not-allowed',
       onJournalInput: (e) => this.setState({ journalDraft: e.target.value }),
       saveJournal: () => { const text = s.journalDraft.trim(); if (text) this.addJournalEntry(text); },
       saveDoneJournal: () => {
@@ -1821,6 +2060,9 @@ class Component extends DCLogic {
       roleVolBg: s.suRole === 'volunteer' ? 'rgba(213,183,124,0.18)' : 'rgba(255,255,255,0.05)',
       roleVolBorder: s.suRole === 'volunteer' ? 'rgba(213,183,124,0.6)' : 'rgba(255,255,255,0.15)',
       roleVolColor: s.suRole === 'volunteer' ? '#e6d3a8' : '#b9b1a0',
+      syncLabel: (s.syncState === 'ok' ? '⟳ ' : s.syncState === 'busy' ? '◌ ' : '⚠ ') + (s.syncNote || 'Sync history'),
+      syncColor: s.syncState === 'ok' ? '#9a927f' : s.syncState === 'busy' ? '#a89f8c' : '#d5b77c',
+      syncNow: () => this.cloudPull(this.session()),
       donateOpen: s.donateOpen,
       openDonate: () => this.setState({ donateOpen: true, donStatus: '' }),
       closeDonate: () => this.setState({ donateOpen: false }),
@@ -1867,10 +2109,17 @@ class Component extends DCLogic {
       startSession: () => this.startSit(),
       openLiveSheet: () => this.setState({ joinOpen: true }),
       endSession: () => { this.pickSound('off'); this.endSit(); },
+      sessPaused: !!s.sessPaused,
+      pauseLabel: s.sessPaused ? '▶  Resume' : '❙❙  Pause',
+      togglePause: () => this.setState(st => ({ sessPaused: !st.sessPaused }), () => {
+        const p = this.state.sessPaused;
+        if (this._el) { try { p ? this._el.pause() : this._el.play(); } catch (e) {} }
+        if (p) clearTimeout(this.breathT); else this.breathe();
+      }),
       sessionOpen: s.sessionOpen,
       breathScale: s.breathPhase === 'in' ? 1.16 : 0.8,
       breathSecs: s.breathPhase === 'in' ? 4 : 6,
-      breathLabel: s.breathPhase === 'in' ? 'Breathe in…' : 'Let go…',
+      breathLabel: s.sessPaused ? 'Held' : (s.breathPhase === 'in' ? 'Breathe in…' : 'Let go…'),
       guidance: [
         'Settle into your seat — let the body be still.',
         'Rest your attention where the breath touches the nostrils.',
@@ -1878,12 +2127,20 @@ class Component extends DCLogic {
         'There is nothing to achieve. Only this breath.',
         'If the mind wanders, gently return — that is the practice.',
         'Sink beneath the breath, into the silence that holds it.',
-      ][Math.floor(s.sessionSecs / 45) % 6],
-      progOffset: Math.round(955 * (1 - Math.min(s.sessionSecs / 1800, 1))),
+      ].map((g, i) => (s.sessPaused && i === 5) ? 'Your timer is held. Step away — the minutes are safe.' : g)[s.sessPaused ? 5 : Math.floor(s.sessionSecs / 45) % 6],
+      progOffset: Math.round(955 * (1 - Math.min(s.sessionSecs / (s.sessGoal * 60), 1))),
+      goalClock: String(s.sessGoal).padStart(2, '0') + ':00',
+      goalChips: [10, 15, 20, 30, 45, 60].map(m => ({
+        label: String(m), pick: () => this.setGoal(m),
+        border: m === s.sessGoal ? 'rgba(213,183,124,0.7)' : 'rgba(255,255,255,0.14)',
+        bg: m === s.sessGoal ? 'rgba(213,183,124,0.18)' : 'rgba(255,255,255,0.04)',
+        color: m === s.sessGoal ? '#f2e9d8' : '#9a927f',
+        weight: m === s.sessGoal ? 600 : 400,
+      })),
       sndPlaying: !!s.sndPlaying,
       sndIdle: !s.sndPlaying,
       sndName: (this.soundList().find(x => x.key === s.sndKey) || { label: 'Pure silence' }).label,
-      sndStatus: s.sndPlaying ? 'Now sounding' : 'Sound · tap to listen',
+      sndStatus: s.sndLoading ? 'Preparing…' : (s.sndPlaying ? 'Now sounding' : 'Sound · tap to listen'),
       sndTitle: s.sndPlaying ? 'Pause the sound' : 'Play the sound',
       sndBorder: s.sndPlaying ? 'rgba(213,183,124,0.7)' : 'rgba(255,255,255,0.16)',
       sndBg: s.sndPlaying ? 'rgba(213,183,124,0.13)' : 'rgba(255,255,255,0.04)',

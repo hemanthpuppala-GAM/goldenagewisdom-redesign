@@ -1,0 +1,46 @@
+GOLDEN AGE WISDOM — upload set (4 Aug 2026)
+=================================================
+
+Upload all four files into:  public_html/goldenagewisdom.org/
+Overwrite the existing copies. Keep the same file names exactly
+(including the space in "Member Flow.dc.html").
+
+  index.html            homepage
+  Member Flow.dc.html   member area
+  chat.php              Wisdom Guide backend
+  intro-film.jsx        intro film
+
+AFTER UPLOADING
+---------------
+Load the site TWICE on one device. The first load installs the
+update; the second one runs it. (The site caches itself for
+offline use, so one load is not enough.)
+
+WHAT CHANGED
+------------
+Homepage
+  - hero portrait no longer overlaps the headline on laptops;
+    framing now adapts to the screen shape
+  - mandala nudged so the ring starts below the face
+  - fixed sideways scrolling on phones (Wellness page)
+  - "Earth gazing" renamed "Earthing"
+  - 7-Day Silent Retreat removed; a short note shows when no
+    gathering is scheduled
+
+Member area
+  - 41-day challenge tracker added under "This week"
+  - sit length is now chooseable: 10 / 15 / 20 / 30 / 45 / 60 min
+    (remembered for next time)
+  - the screen no longer sleeps during a sit
+  - streak card reads correctly when a streak has lapsed
+  - "Save entry" is disabled until something is written
+  - RSVP button no longer flashes the wrong state on load
+  - 7-Day Silent Retreat removed
+
+Wisdom Guide
+  - fixed: it stayed stuck on the first topic. Two causes — an
+    unmatched question repeated the previous answer, and a second
+    question asked before the first replied received the first
+    question's answer.
+  - symbols-only or nonsense prompts now get a clear message with
+    examples instead of the same generic line
