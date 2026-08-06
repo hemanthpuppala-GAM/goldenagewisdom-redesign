@@ -20,6 +20,9 @@ window.GAW_CONFIG = {
 
   privacyEmail: 'info@goldenagewisdom.org',
 
+  // Real Google OAuth for 'Continue with Google' (Google Cloud Console client ID).
+  googleClientId: '927688395054-3b3praeptn0muruff5v90hr5t6n121lk.apps.googleusercontent.com',
+
   /* ── MEMBER NUMBERING ─────────────────────────────────────────
      The roster is authoritative. Any email listed here gets exactly that
      number on every device, overriding whatever their browser handed out

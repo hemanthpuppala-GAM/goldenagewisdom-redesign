@@ -60,7 +60,7 @@ $facts = [
     'Kundalini is the dormant life-energy at the base of the spine. As breath refines, prana is received through the sahasrara and the energy rises chakra by chakra.',
     'Common experiences as prana refines: tingling at the crown, inner light, deep stillness. Welcome them, do not chase them.',
     'The member journal is private to that member. Writing right after a sit captures what the mind forgets.',
-    'Wellness teachings include sun gazing, earth gazing (barefoot walking), alkaline water and a 41-day detox diet repeated every 6 months.',
+    'Wellness teachings include sun gazing, earthing (barefoot walking), alkaline water and a 41-day detox diet repeated every 6 months.',
     'Members sign in with Google, Microsoft, Facebook or Apple. Golden Age Wisdom never sees, stores or handles passwords.',
     'Donations are optional, processed by Stripe, and keep the teachings free. Members can also volunteer (seva).',
     'Guided sounds available during a sit: Aum drone, Aum chant, temple flute, singing bowl, monsoon rain, ocean breath, or pure silence.',

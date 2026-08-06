@@ -1,7 +1,7 @@
 /* Golden Age Wisdom — offline shell.
    Cache-first for assets, network-first for pages, so content stays fresh
    but the app still opens on a bad connection. */
-const V = 'gaw-v36';
+const V = 'gaw-v44';
 const SHELL = [
   '/', '/index.html', '/manifest.webmanifest',
   '/assets/logo-128.webp', '/assets/meditator-clear.webp',
@@ -28,8 +28,9 @@ self.addEventListener('fetch', (e) => {
   if (url.origin !== location.origin) return;              // never touch YouTube, Zoom, fonts
   if (url.pathname.endsWith('.php')) return;               // never cache the server helpers
 
-  // Config carries the launch moment — always fresh, fall back to cache offline.
-  if (url.pathname.endsWith('gaw-config.js')) {
+  // Config carries the launch moment and gaw-backend.js talks to the registry:
+  // both must never be frozen in cache. Always fresh, fall back offline.
+  if (url.pathname.endsWith('gaw-config.js') || url.pathname.endsWith('gaw-backend.js')) {
     e.respondWith(fetch(req)
       .then(r => { const copy = r.clone(); caches.open(V).then(c => c.put(req, copy)); return r; })
       .catch(() => caches.match(req)));

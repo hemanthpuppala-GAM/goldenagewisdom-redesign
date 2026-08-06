@@ -1,8 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free daily live meditation &amp; Upanishadic wisdom · Golden Age Wisdom</title>
+<meta name="description" content="Free live meditation twice daily, guided by Dr Hari Krishna, MD — 25 years of practice. Ancient wisdom explained with scientific clarity. Join free.">
+<link rel="canonical" href="https://goldenagewisdom.org/">
+<meta name="theme-color" content="#0d0a1c">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Golden Age Wisdom">
+<meta property="og:title" content="Free daily live meditation &amp; Upanishadic wisdom">
+<meta property="og:description" content="Free live meditation twice daily, guided by Dr Hari Krishna, MD — 25 years of practice. Ancient wisdom explained with scientific clarity. Join free.">
+<meta property="og:image" content="https://goldenagewisdom.org/assets/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://goldenagewisdom.org/">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free daily live meditation &amp; Upanishadic wisdom">
+<meta name="twitter:description" content="Free live meditation twice daily, guided by Dr Hari Krishna, MD — 25 years of practice. Ancient wisdom explained with scientific clarity. Join free.">
+<meta name="twitter:image" content="https://goldenagewisdom.org/assets/og-default.jpg">
+<link rel="icon" href="assets/logo-128.webp" type="image/webp">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Golden Age">
+<meta name="mobile-web-app-capable" content="yes">
+<script defer src="pwa.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"NGO","@id":"https://goldenagewisdom.org/#org","name":"Golden Age Wisdom","alternateName":"Golden Age Spiritual Movement","url":"https://goldenagewisdom.org/","logo":"https://goldenagewisdom.org/assets/logo-128.webp","email":"info@goldenagewisdom.org","founder":{"@id":"https://goldenagewisdom.org/#founder"},"sameAs":["https://www.youtube.com/@GoldenAgeGurus","https://www.instagram.com/golden.age.spiritual.movement","https://facebook.com/share/1JSPUE4kMV"]},
+{"@type":"Person","@id":"https://goldenagewisdom.org/#founder","name":"Dr Hari Krishna","honorificPrefix":"Dr","jobTitle":"Founder and meditation teacher","hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"degree","name":"MD in Anaesthesiology, postgraduate"},"knowsAbout":["Meditation","Anaesthesiology","Upanishadic philosophy"]},
+{"@type":"WebSite","@id":"https://goldenagewisdom.org/#site","url":"https://goldenagewisdom.org/","name":"Golden Age Wisdom","publisher":{"@id":"https://goldenagewisdom.org/#org"}},
+{"@type":"Event","name":"Daily group meditation","startDate":"2026-07-27T20:00:00+05:30","endDate":"2026-07-27T21:00:00+05:30","eventSchedule":{"@type":"Schedule","repeatFrequency":"P1D","byDay":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"startTime":"20:00:00","endTime":"21:00:00","scheduleTimezone":"Asia/Kolkata"},"eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","location":{"@type":"VirtualLocation","url":"https://www.youtube.com/@GoldenAgeGurus/streams"},"organizer":{"@id":"https://goldenagewisdom.org/#org"},"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"INR","availability":"https://schema.org/InStock","url":"https://goldenagewisdom.org/"}}
+]}
+</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -11,14 +45,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="./image-slot.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;500&family=Noto+Sans+Telugu:wght@300;500&family=Noto+Sans+Kannada:wght@300;500&family=Noto+Sans+Tamil:wght@300;500&display=swap" rel="stylesheet">
+<script src="./gaw-i18n.js"></script>
+<script src="./gaw-phrases.js"></script>
+<script src="./gaw-config.js"></script>
+<script src="./telemetry.js"></script>
 <style>
   html, body { margin: 0; padding: 0; background: #0d0a1c; height: 100%; }
-  body { font-family: 'Outfit', sans-serif; color: #efe9dc; }
+  :root {
+    --font-display: 'Marcellus', 'Noto Serif Devanagari', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Tamil', Georgia, serif;
+    --font-body: 'Outfit', 'Noto Sans Devanagari', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Tamil', system-ui, -apple-system, sans-serif;
+  }
+  /* Marcellus is a Latin display serif — for Indic scripts swap the face wholesale. */
+  html[lang="hi"] { --font-display: 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif; --font-body: 'Noto Sans Devanagari', system-ui, sans-serif; }
+  html[lang="te"] { --font-display: 'Noto Sans Telugu', serif; --font-body: 'Noto Sans Telugu', system-ui, sans-serif; }
+  html[lang="kn"] { --font-display: 'Noto Sans Kannada', serif; --font-body: 'Noto Sans Kannada', system-ui, sans-serif; }
+  html[lang="ta"] { --font-display: 'Noto Sans Tamil', serif; --font-body: 'Noto Sans Tamil', system-ui, sans-serif; }
+
+  body { font-family: var(--font-body); color: #efe9dc; }
   a { color: #d5b77c; text-decoration: none; }
   a:hover { color: #e6d3a8; }
+  button, input, textarea, select, optgroup { font-family: inherit; }
+  .m-view > * { flex-shrink: 0; }
+  .t-rail { position: relative; flex: 0 0 auto; min-height: 112px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+  .t-track { display: flex; gap: 10px; width: max-content; animation: tDrift 64s linear infinite; }
+  .t-rail:hover .t-track, .t-rail:focus-within .t-track { animation-play-state: paused; }
+  @keyframes tDrift { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 5px)); } }
+  @media (prefers-reduced-motion: reduce) { .t-track { animation: none; } .t-rail { overflow-x: auto; } }
+
   * { box-sizing: border-box; }
+  :focus-visible { outline: 2px solid #e6d3a8; outline-offset: 3px; border-radius: 6px; }
+  .skip-link { position: absolute; left: -9999px; top: 8px; z-index: 200; padding: 10px 18px; border-radius: 999px; background: #d5b77c; color: #241b06; font-weight: 600; font-size: 14px; }
+  .skip-link:focus { left: 12px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  }
   @keyframes breathe { 0%,100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.07); opacity: 1; } }
+  @keyframes sndRing { 0%, 100% { box-shadow: 0 0 0 0 rgba(224,132,132,0.45); } 50% { box-shadow: 0 0 0 7px rgba(224,132,132,0); } }
   @keyframes ringPulse { 0%,100% { transform: scale(1); opacity: 0.35; } 50% { transform: scale(1.04); opacity: 0.6; } }
   @keyframes nodeFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
   @keyframes viewIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
@@ -32,10 +95,69 @@
   @keyframes vtOut { to { opacity: 0; } }
   @keyframes vtIn { from { opacity: 0; } }
   ::selection { background: rgba(213,183,124,0.3); }
-  .m-view { scrollbar-width: thin; scrollbar-color: rgba(213,183,124,0.3) transparent; }
+  .m-node-ring { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease; }
+  .m-node-aura { opacity: 0; transition: opacity 0.45s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1); transform: scale(0.7); }
+  .m-node-label { transition: color 0.35s ease, text-shadow 0.35s ease; }
+  .m-node button:hover .m-node-ring, .m-node button:focus-visible .m-node-ring { transform: scale(1.16); box-shadow: 0 10px 44px rgba(0,0,0,0.45), 0 0 54px rgba(230,211,168,0.5); border-color: rgba(246,232,196,0.85) !important; }
+  .m-node button:hover .m-node-aura, .m-node button:focus-visible .m-node-aura { opacity: 1; transform: scale(1); }
+  .m-node button:hover .m-node-label, .m-node button:focus-visible .m-node-label { color: #f7f1e3; text-shadow: 0 0 18px rgba(230,211,168,0.6); }
+  .m-view { scrollbar-width: thin; scrollbar-color: rgba(213,183,124,0.3) transparent;
+    width: min(1120px, 100%) !important; margin: 0 auto !important; gap: 18px !important;
+    justify-content: center !important; justify-content: safe center !important;
+    overflow-y: auto !important; overscroll-behavior: contain; }
+  .m-view-film { width: min(980px, 100%) !important; }
   .m-view::-webkit-scrollbar { width: 6px; }
   .m-view::-webkit-scrollbar-thumb { background: rgba(213,183,124,0.3); border-radius: 3px; }
   .m-view::-webkit-scrollbar-track { background: transparent; }
+  /* flex items default to min-width:auto, so a wide child forced the view past the
+     viewport and the whole page scrolled sideways on phones. */
+  .m-view, .m-view > *, .m-grid-2 > *, .m-answers > * { min-width: 0 !important; }
+  .m-view { max-width: 100% !important; overflow-wrap: anywhere; }
+  /* Hero framing: the bottom-anchored upscale lifts the subject as the viewport
+     gets taller, so ease the scale and push him down on narrower aspects. */
+  @media (max-aspect-ratio: 16/10) { .m-bg { transform: scale(1.16) translateY(4%) !important; } }
+  @media (max-aspect-ratio: 4/3)   { .m-bg { transform: scale(0.98) translateY(-3%) !important; }
+    .m-hub { margin-left: 38px !important; margin-top: 68px !important; } }
+  @media (max-aspect-ratio: 1/1)   { .m-bg { transform: scale(0.94) translateY(-6%) !important; } }
+  /* On narrow aspects the figure sits behind the mandala — veil it so the ring stays the focus. */
+  @media (max-aspect-ratio: 4/3) {
+    .m-scrim { background:
+      radial-gradient(ellipse 52% 60% at 50% 62%, rgba(13,10,28,0.62) 0%, rgba(13,10,28,0.34) 55%, rgba(13,10,28,0) 78%),
+      radial-gradient(ellipse 46% 82% at 50% 42%, rgba(38,34,96,0.55) 0%, rgba(14,12,42,0.72) 55%, rgba(10,8,30,0.9) 80%, rgba(8,6,24,0.98) 100%),
+      linear-gradient(180deg, rgba(11,8,24,0.88) 0%, rgba(11,8,24,0.66) 17%, rgba(11,8,24,0.38) 32%, rgba(13,10,28,0.14) 43%, rgba(13,10,28,0) 52%) !important; }
+  }
+  @media (max-aspect-ratio: 1/1) {
+    .m-scrim { background:
+      radial-gradient(ellipse 58% 64% at 50% 64%, rgba(13,10,28,0.76) 0%, rgba(13,10,28,0.46) 55%, rgba(13,10,28,0) 80%),
+      radial-gradient(ellipse 46% 82% at 50% 42%, rgba(38,34,96,0.55) 0%, rgba(14,12,42,0.72) 55%, rgba(10,8,30,0.9) 80%, rgba(8,6,24,0.98) 100%),
+      linear-gradient(180deg, rgba(11,8,24,0.88) 0%, rgba(11,8,24,0.66) 17%, rgba(11,8,24,0.38) 32%, rgba(13,10,28,0.14) 43%, rgba(13,10,28,0) 52%) !important; }
+  }
+  @media (max-width: 640px) { .m-answers { grid-template-columns: 1fr !important; } }
+  @media (max-width: 820px) { .m-posture { display: none !important; } }
+  @media (max-width: 1180px) {
+    .m-tag-text { font-size: 12px !important; letter-spacing: 0.26em !important; }
+    .m-tag-line { width: 26px !important; }
+  }
+  @media (max-width: 900px) {
+    .m-nav { flex-wrap: wrap !important; row-gap: 10px !important; border-radius: 24px !important; }
+    .m-tagline { order: 3 !important; width: 100% !important; justify-content: center !important; }
+    .m-tag-line { flex: 1 1 auto !important; width: auto !important; max-width: 120px !important; }
+  }
+  @media (max-height: 700px) {
+    .m-vp-sub { display: none !important; }
+    .m-vp-cred { display: block !important; }
+    .m-hub { --orbit-r: clamp(96px, min(calc(38dvh - 62px), calc(50vw - 62px)), 118px) !important; }
+    .m-node-ring { width: 44px !important; height: 44px !important; }
+    .m-node-label { font-size: 11.5px !important; }
+    .m-orb { width: 62px !important; height: 62px !important; gap: 0 !important; overflow: visible !important; }
+    .m-orb-cap { position: absolute !important; top: calc(100% + 7px) !important; left: 50% !important; transform: translateX(-50%) !important; font-size: 10.5px !important; letter-spacing: 0.16em !important; text-shadow: 0 2px 12px rgba(8,6,20,0.95) !important; }
+  }
+  @media (max-width: 560px) {
+    .m-vp-sub { display: none !important; }
+    .m-vp-cred { display: block !important; }
+    .m-hub { --orbit-r: clamp(96px, calc(50vw - 58px), 150px) !important; }
+  }
+  @media (max-width: 900px) { .m-lang-name { display: none !important; } }
   @media (max-width: 760px) {
     .m-grid-2 { grid-template-columns: 1fr !important; }
   }
@@ -45,8 +167,7 @@
   }
   @media (max-width: 860px) {
     .m-tag-text { font-size: 10.5px !important; letter-spacing: 0.22em !important; text-shadow: 0 0 12px rgba(213,183,124,0.5); }
-    .m-tag-line { width: 14px !important; }
-    .m-tagline { gap: 8px !important; }
+    .m-tagline { gap: 10px !important; }
   }
   .film-fs { position: fixed !important; inset: 0 !important; width: auto !important; z-index: 2147483000 !important; border-radius: 0 !important; margin: 0 !important; background: #0d0a1c !important; }
   body.film-fs-on .m-orb, body.film-fs-on .m-qr { visibility: hidden !important; }
@@ -61,36 +182,66 @@
     .m-caption { display: none !important; }
   }
 </style>
-<script>window.OM_SCENES = '[{"name":"Opening","dur":6.4},{"name":"Silence","dur":6},{"name":"Breath","dur":5.5},{"name":"Kundalini","dur":5.1},{"name":"Oneness","dur":5.2},{"name":"FortyDays","dur":5.3},{"name":"Within","dur":3.3},{"name":"SatyaYugam","dur":4.6},{"name":"Invitation","dur":8.6}]';</script>
-<script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
-<script>window.TWEAK_DEFAULTS = {"captions":true,"music":true,"omChant":false,"impacts":false,"narration":false,"motionEditor":false};</script>
+<script>window.addEventListener('pointerdown', function () { try { if (!window.__gawCtx) window.__gawCtx = new (window.AudioContext || window.webkitAudioContext)(); if (window.__gawCtx.state !== 'running') window.__gawCtx.resume(); } catch (e) {} }, true);</script>
 </helmet>
 <div style="height: 100dvh; background: #0d0a1c; overflow: hidden; display: flex; flex-direction: column; position: relative">
-  <img src="assets/meditator-cosmic-crop.png" alt="" data-bg="1" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; opacity: 0.6; view-transition-name: mbg">
-  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 50% 90% at 50% 42%, rgba(74,65,131,0.2) 0%, rgba(13,10,28,0.45) 60%, rgba(13,10,28,0.75) 85%, rgba(13,10,28,0.95) 100%), linear-gradient(180deg, rgba(13,10,28,0.7) 0%, rgba(13,10,28,0) 14%); view-transition-name: mbg2"></div>
+  <img src="assets/meditator-clear.webp" alt="" data-bg="1" class="m-bg" width="2560" height="1525" fetchPriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; transform: scale(1.22); transform-origin: 50% 100%; opacity: {{ bgOpacity }}; transition: opacity 0.6s ease; view-transition-name: mbg">
+  <div class="m-scrim" style="position: absolute; inset: 0; background: radial-gradient(ellipse 46% 82% at 50% 42%, rgba(38,34,96,0.55) 0%, rgba(14,12,42,0.72) 55%, rgba(10,8,30,0.9) 80%, rgba(8,6,24,0.98) 100%), linear-gradient(180deg, rgba(11,8,24,0.88) 0%, rgba(11,8,24,0.66) 17%, rgba(11,8,24,0.38) 32%, rgba(13,10,28,0.14) 43%, rgba(13,10,28,0) 52%); view-transition-name: mbg2"></div>
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 60% at 50% 40%, rgba(52,46,110,0.5) 0%, rgba(24,20,58,0.3) 55%, transparent 80%); opacity: {{ subGlowOpacity }}; transition: opacity 0.6s ease"></div>
+  <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 170px; pointer-events: none; z-index: 1; background: linear-gradient(to top, rgba(9,7,24,0.96) 0%, rgba(9,7,24,0.7) 45%, rgba(9,7,24,0) 100%)"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <h1 class="m-sr" style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0">Golden Age Wisdom — free daily live meditation and Upanishadic wisdom, taught by Dr Hari Krishna, MD</h1>
   <!-- TOP BAR -->
-  <nav style="position: relative; z-index: 50; margin: 16px auto 0; width: min(1180px, calc(100% - 32px)); display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 20px; border-radius: 999px; background: rgba(20,15,40,0.55); backdrop-filter: blur(18px); border: 1px solid rgba(213,183,124,0.18); flex-shrink: 0">
+  <nav class="m-nav" style="position: relative; z-index: 50; margin: 16px auto 0; width: min(1180px, calc(100% - 32px)); display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 20px; border-radius: 999px; background: rgba(20,15,40,0.55); backdrop-filter: blur(18px); border: 1px solid rgba(213,183,124,0.18); flex-shrink: 0">
     <button onClick="{{ goHub }}" style="flex: 1; display: flex; align-items: center; justify-content: flex-start; gap: 10px; background: none; border: none; cursor: pointer; padding: 0">
-      <img src="assets/logo.jpeg" alt="Golden Age Wisdom" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.6); box-shadow: 0 0 18px rgba(213,183,124,0.3)">
-      <span class="m-brand-t" style="font-family: 'Marcellus', serif; font-size: 18px; line-height: 1; letter-spacing: 0.06em; color: #ecdcb4; white-space: nowrap">GOLDEN AGE WISDOM</span>
+      <img src="assets/logo-128.webp" alt="Golden Age Wisdom" width="44" height="44" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.6); box-shadow: 0 0 18px rgba(213,183,124,0.3)">
+      <span class="m-brand-t" style="font-family: var(--font-display); font-size: 18px; line-height: 1; letter-spacing: 0.06em; color: #ecdcb4; white-space: nowrap">GOLDEN AGE WISDOM</span>
     </button>
     <div class="m-tagline" style="flex-shrink: 0; display: flex; align-items: center; gap: 14px; min-width: 0">
       <span class="m-tag-line" style="width: clamp(18px, 4vw, 54px); height: 1px; background: linear-gradient(90deg, transparent, rgba(213,183,124,0.55))"></span>
-      <span class="m-tag-text" style="font-size: 13px; letter-spacing: 0.34em; text-transform: uppercase; color: #b89758; white-space: nowrap; text-indent: 0.34em">A Spiritual Movement</span>
+      <span class="m-tag-text" style="font-size: 13px; letter-spacing: 0.34em; text-transform: uppercase; color: #b89758; white-space: nowrap; text-indent: 0.34em">{{ tMovement }}</span>
       <span class="m-tag-line" style="width: clamp(18px, 4vw, 54px); height: 1px; background: linear-gradient(90deg, rgba(213,183,124,0.55), transparent)"></span>
     </div>
-    <div style="flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 12px">
-      <a href="Member Flow.dc.html" style="display: inline-block; padding: 9px 22px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 14px" style-hover="color: #241b06">Sign in</a>
+    <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: nowrap">
+      <div class="m-langs" style="position: relative; flex-shrink: 0">
+        <button onClick="{{ toggleLangs }}" aria-label="Choose language" aria-haspopup="listbox" title="Language" style="display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: #d8d2c4; cursor: pointer; font-family: var(--font-body); font-size: 13px; white-space: nowrap" style-hover="border-color: rgba(213,183,124,0.6); color: #f2e9d8">
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; flex-shrink: 0"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18" fill="none" stroke="currentColor" stroke-width="1.2"></path></svg>
+          <span class="m-lang-name">{{ langCurrent }}</span>
+          <span style="font-size: 9px; opacity: 0.7">▾</span>
+        </button>
+        <sc-if value="{{ langsOpen }}" hint-placeholder-val="{{ false }}">
+          <div role="listbox" style="position: absolute; top: calc(100% + 8px); right: 0; z-index: 80; min-width: 158px; padding: 6px; border-radius: 16px; background: rgba(23,17,48,0.97); backdrop-filter: blur(14px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 18px 46px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 2px">
+            <sc-for list="{{ langs }}" as="l" hint-placeholder-count="5">
+              <button onClick="{{ l.pick }}" role="option" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 12px; border-radius: 12px; border: none; cursor: pointer; text-align: left; font-family: var(--font-body); font-size: 13.5px; white-space: nowrap; background: {{ l.bg }}; color: {{ l.color }}">{{ l.name }}<span style="font-size: 11px; opacity: 0.75">{{ l.tick }}</span></button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <sc-if value="{{ signedOut }}" hint-placeholder-val="{{ true }}">
+        <a href="Member Flow.dc.html" style="display: inline-block; padding: 9px 22px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 14px" style-hover="color: #241b06">{{ tJoinFree }}</a>
+      </sc-if>
+      <sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
+        <a href="Member Flow.dc.html" title="Open your dashboard" style="display: inline-flex; align-items: center; gap: 9px; padding: 6px 16px 6px 7px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.4); background: rgba(20,15,40,0.55); color: #e6d3a8; font-weight: 500; font-size: 13.5px; white-space: nowrap" style-hover="border-color: rgba(230,211,168,0.85); color: #f7f1e3"><span style="width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 12.5px">{{ memberInitial }}</span>{{ memberFirstName }}</a>
+      </sc-if>
     </div>
   </nav>
 
-  <main style="position: relative; z-index: 10; flex: 1; min-height: 0; display: flex; align-items: stretch; justify-content: center; padding: {{ mainPadTop }}px clamp(12px, 3vw, 24px) 12px">
+  <main id="main" style="position: relative; z-index: 10; flex: 1; min-height: 0; display: flex; align-items: stretch; justify-content: center; padding: {{ mainPadTop }}px clamp(12px, 3vw, 24px) 12px">
 
     <!-- MANDALA HUB -->
     <sc-if value="{{ viewHub }}" hint-placeholder-val="{{ true }}">
-      <div data-screen-label="Mandala hub" class="m-hub" style="--orbit-r: clamp(110px, min(calc(50dvh - 150px), calc(50vw - 70px)), 185px); position: relative; width: 100%; display: flex; align-items: center; justify-content: center; transform: translate({{ hubTx }}px, {{ hubTy }}px); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)">
+      <div data-screen-label="Mandala hub" class="m-hub-wrap" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: clamp(8px, 2vh, 20px); min-height: 0">
+        <div class="m-vp" style="display: flex; position: relative; z-index: 8; width: min(760px, 100%); margin: 0 auto; flex-direction: column; align-items: center; gap: 9px; text-align: center; pointer-events: none">
+          <div class="m-vp-line" style="font-family: var(--font-display); font-size: clamp(19px, 2.5vw, 30px); line-height: 1.25; color: #f7f1e3; text-shadow: 0 2px 22px rgba(8,6,20,0.85)">{{ vpHead }}</div>
+          <div class="m-vp-sub" style="max-width: 520px; font-size: clamp(12.5px, 1.3vw, 14.5px); font-weight: 300; line-height: 1.55; color: #cfc8ba; text-shadow: 0 2px 16px rgba(8,6,20,0.9)">{{ vpSub }}</div>
+          <div class="m-vp-cred" style="display: none; max-width: 420px; font-size: 12px; font-weight: 300; line-height: 1.45; color: #cfc8ba; text-shadow: 0 2px 16px rgba(8,6,20,0.9)">{{ vpCred }}</div>
+          <div style="display: flex; align-items: center; gap: 9px; flex-wrap: wrap; justify-content: center; pointer-events: auto; margin-top: 2px">
+            <a href="{{ liveHref }}" target="{{ liveTarget }}" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 999px; border: 1px solid {{ liveBorder }}; background: {{ liveBg }}; color: #f2e9d8; font-size: 13px; white-space: nowrap; backdrop-filter: blur(8px)" style-hover="border-color: rgba(230,211,168,0.9)"><span style="width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: {{ liveDot }}; animation: {{ liveAnim }}"></span>{{ liveLine }}</a>
+          </div>
+        </div>
+      <div class="m-hub" style="--orbit-r: clamp(88px, min(calc(46dvh - 130px), calc(50vw - 70px)), 185px); position: relative; width: 100%; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; transform: translate({{ hubTx }}px, {{ hubTy }}px); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)">
         <div class="m-ring2" style="position: absolute; width: calc(var(--orbit-r) * 2.24); height: calc(var(--orbit-r) * 2.24); border-radius: 50%; border: 1px solid rgba(213,183,124,0.14); animation: ringPulse 9s ease-in-out infinite"></div>
-        <div class="m-ring1" style="position: absolute; width: calc(var(--orbit-r) * 1.52); height: calc(var(--orbit-r) * 1.52); border-radius: 50%; border: 1px dashed rgba(213,183,124,0.22); animation: ringPulse 7s ease-in-out infinite reverse"></div>
+        <div class="m-ring1" style="position: absolute; width: calc(var(--orbit-r) * 1.52); height: calc(var(--orbit-r) * 1.52); border-radius: 50%; border: 1px dashed rgba(213,183,124,0.26); animation: ringPulse 7s ease-in-out infinite reverse"></div>
         <div style="position: absolute; width: calc(var(--orbit-r) * 0.72); height: calc(var(--orbit-r) * 0.72); border-radius: 50%; border: 1.5px solid rgba(230,211,168,0.55); box-shadow: 0 0 30px rgba(213,183,124,0.25), inset 0 0 24px rgba(213,183,124,0.18); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) infinite; pointer-events: none"></div>
         <div style="position: absolute; width: calc(var(--orbit-r) * 0.72); height: calc(var(--orbit-r) * 0.72); border-radius: 50%; border: 1px solid rgba(230,211,168,0.4); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) 2s infinite; pointer-events: none"></div>
         <div style="position: absolute; width: calc(var(--orbit-r) * 0.72); height: calc(var(--orbit-r) * 0.72); border-radius: 50%; border: 1px solid rgba(230,211,168,0.3); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) 4s infinite; pointer-events: none"></div>
@@ -99,60 +250,164 @@
             <polygon points="50,8 86,71 14,71" fill="none" stroke="#f7f1e3" stroke-width="3" stroke-linejoin="round"></polygon>
             <polygon points="50,92 14,29 86,29" fill="none" stroke="#f7f1e3" stroke-width="3" stroke-linejoin="round"></polygon>
           </svg>
-          <span style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #e6d3a8">Begin here</span>
+          <span class="m-orb-cap" style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #efdcae; white-space: nowrap; text-shadow: 0 1px 4px rgba(13,10,28,0.9)">{{ tBeginHere }}</span>
         </button>
         <sc-for list="{{ hubNodes }}" as="n" hint-placeholder-count="5">
           <div class="m-node" style="position: absolute; z-index: 6; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate({{ n.angle }}deg) translateY(calc(-1 * var(--orbit-r) * {{ n.rf }})) rotate({{ n.unangle }}deg)">
             <button onClick="{{ n.go }}" style="display: flex; flex-direction: column; align-items: center; gap: 7px; background: none; border: none; cursor: pointer; animation: nodeFloat {{ n.dur }}s ease-in-out infinite">
-              <span style="position: relative; width: clamp(64px, calc(var(--orbit-r) * 0.55), 92px); height: clamp(64px, calc(var(--orbit-r) * 0.55), 92px); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.06); backdrop-filter: blur(14px); border: 1px solid {{ n.color }}59; box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 26px {{ n.color }}30; transition: box-shadow 0.3s, border-color 0.3s" style-hover="border-color: {{ n.color }}cc; box-shadow: 0 0 50px {{ n.color }}59">
-                <span style="position: absolute; inset: 5px; border-radius: 50%; background: repeating-conic-gradient({{ n.color }}59 0deg {{ n.segA }}deg, transparent {{ n.segA }}deg {{ n.segB }}deg); -webkit-mask: radial-gradient(circle, transparent 60%, black 62%); mask: radial-gradient(circle, transparent 60%, black 62%)"></span>
-                <span style="font-family: 'Marcellus', serif; font-size: clamp(19px, calc(var(--orbit-r) * 0.15), 27px); color: {{ n.color }}; text-shadow: 0 0 16px {{ n.color }}66">{{ n.glyph }}</span>
+              <span class="m-node-ring" style="position: relative; width: clamp(64px, calc(var(--orbit-r) * 0.55), 92px); height: clamp(64px, calc(var(--orbit-r) * 0.55), 92px); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 38% 32%, rgba(38,32,72,0.55), rgba(20,16,44,0.5) 62%, rgba(14,11,34,0.45)); backdrop-filter: blur(14px); border: 1.5px solid {{ n.color }}a6; box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 34px {{ n.color }}4d, inset 0 0 22px rgba(255,255,255,0.04); transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease" style-hover="border-color: {{ n.color }}cc; box-shadow: 0 10px 44px rgba(0,0,0,0.45), 0 0 40px {{ n.color }}59, 0 0 54px rgba(230,211,168,0.5)">
+                <span class="m-node-aura" aria-hidden="true" style="position: absolute; inset: -42%; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, rgba(255,246,220,0.2), rgba(230,211,168,0.1) 46%, transparent 100%); filter: blur(12px)"></span>
+                <span style="font-family: var(--font-display); font-size: clamp(19px, calc(var(--orbit-r) * 0.15), 27px); color: {{ n.color }}; text-shadow: 0 0 20px {{ n.color }}b3, 0 0 40px {{ n.color }}4d">{{ n.glyph }}</span>
               </span>
-              <span style="font-family: 'Outfit', sans-serif; font-size: clamp(11.5px, calc(var(--orbit-r) * 0.075), 13.5px); font-weight: 500; letter-spacing: 0.04em; color: #d8d2c4; text-shadow: 0 2px 12px rgba(13,10,28,0.9); text-align: center; max-width: 120px">{{ n.label }}</span>
+              <span class="m-node-label" style="font-family: var(--font-body); font-size: clamp(14px, calc(var(--orbit-r) * 0.085), 15.5px); font-weight: 500; letter-spacing: 0.04em; color: #f2ecdd; text-shadow: 0 1px 4px rgba(13,10,28,0.9), 0 2px 16px rgba(13,10,28,0.9); text-align: center; max-width: 140px">{{ n.label }}</span>
             </button>
           </div>
         </sc-for>
 
       </div>
+      </div>
     </sc-if>
 
     <!-- MEDITATION -->
     <sc-if value="{{ viewPractice }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="Meditation" class="m-view" style="width: min(1120px, 100%); display: flex; flex-direction: column; justify-content: flex-start; gap: 28px; animation: viewIn 0.45s ease; overflow-y: auto">
+      <div data-screen-label="Meditation" class="m-view" style="width: min(1120px, 100%); display: flex; flex-direction: column; justify-content: flex-start; gap: 16px; animation: viewIn 0.45s ease; overflow-y: auto">
         <div style="text-align: center">
-          <div style="font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; margin-bottom: 12px">The Path</div>
-          <h2 style="font-family: 'Marcellus', serif; font-size: clamp(28px, 3.4vw, 40px); margin: 0; color: #f2e9d8">What meditation awakens in you</h2>
+          <div style="font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #b89758">{{ tMedEyebrow }}</div>
+          <h2 style="font-family: var(--font-display); font-size: clamp(26px, 3.2vw, 38px); margin: 8px 0 0; color: #f2e9d8">{{ tMedTitle }}</h2>
+          <p style="max-width: 540px; margin: 8px auto 0; font-size: 14px; font-weight: 300; line-height: 1.6; color: #9a927f">{{ tMedSub }}</p>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px">
-          <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
-            <div style="padding: 26px 22px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 12px" style-hover="border-color: rgba(213,183,124,0.45)">
-              <div style="width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.35), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.35); font-family: 'Marcellus', serif; font-size: 18px; color: #e6d3a8">{{ b.num }}</div>
-              <h3 style="font-family: 'Marcellus', serif; font-size: 19px; margin: 0; color: #f2e9d8">{{ b.title }}</h3>
-              <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.6; color: #b9b1a0">{{ b.body }}</p>
+        <!-- MEDITATION 101 -->
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div class="m-grid-2" style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 16px; align-items: start">
+            <div style="display: flex; flex-direction: column; gap: 14px; min-width: 0">
+            <div style="padding: 18px 20px; border-radius: 24px; background: rgba(255,255,255,0.05); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 2px">
+              <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758; margin-bottom: 8px">How to meditate</div>
+              <sc-for list="{{ howSteps }}" as="h" hint-placeholder-count="5">
+                <div style="display: flex; gap: 15px; align-items: flex-start">
+                  <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0; align-self: stretch">
+                    <span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 36% 34%, rgba(230,211,168,0.4), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.45); font-family: var(--font-display); font-size: 13px; color: #f2e3bb">{{ h.n }}</span>
+                    <span style="flex: 1; width: 1px; min-height: 14px; background: linear-gradient(180deg, rgba(213,183,124,0.5), rgba(213,183,124,0.05))"></span>
+                  </div>
+                  <div style="padding-bottom: 9px">
+                    <div style="font-family: var(--font-display); font-size: 16px; color: #f2e9d8">{{ h.title }}</div>
+                    <div style="font-size: 13px; font-weight: 300; line-height: 1.55; color: #b9b1a0; margin-top: 2px">{{ h.body }}</div>
+                  </div>
+                </div>
+              </sc-for>
+              <div style="margin-top: 2px; font-size: 12.5px; font-weight: 300; font-style: italic; color: #9a927f">That's the whole method. Nothing to buy, nothing to master.</div>
             </div>
-          </sc-for>
-        </div>
-        <div class="m-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
-          <sc-for list="{{ practiceTestimonials }}" as="t" hint-placeholder-count="2">
-            <div style="padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.25); display: flex; flex-direction: column; gap: 5px">
-              <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; font-style: italic; color: #d8d2c4">{{ t.text }}</p>
-              <div style="font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</div>
+
+              <figure class="m-posture" style="margin: 0; position: relative; align-self: center; height: min(38vh, 330px); aspect-ratio: 3 / 4; max-width: 100%; border-radius: 24px; overflow: hidden; border: 1px solid rgba(213,183,124,0.4); box-shadow: 0 0 0 1px rgba(230,211,168,0.12), 0 0 34px rgba(213,183,124,0.22), 0 0 78px rgba(184,151,88,0.16), inset 0 0 60px rgba(230,211,168,0.07)">
+                <img src="assets/hari-posture.webp" alt="Dr. Hari Krishna seated cross-legged in meditation, eyes closed, palms resting open on his knees" width="640" height="853" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover">
+                <span aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 26%, rgba(255,244,214,0.20), rgba(230,211,168,0.07) 42%, transparent 66%); mix-blend-mode: screen; animation: breathe 9s ease-in-out infinite"></span>
+                <figcaption style="position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 16px 12px; background: linear-gradient(180deg, rgba(11,10,26,0), rgba(11,10,26,0.82)); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #cbbfa6">The posture &mdash; nothing more than this</figcaption>
+              </figure>
             </div>
-          </sc-for>
+
+            <div style="display: flex; flex-direction: column; gap: 14px">
+              <div class="m-answers" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px">
+                <sc-for list="{{ quickAnswers }}" as="q" hint-placeholder-count="3">
+                  <div style="padding: 13px 16px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 5px">
+                    <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758">{{ q.label }}</div>
+                    <div style="font-family: var(--font-display); font-size: 17px; line-height: 1.3; color: #f2e9d8">{{ q.answer }}</div>
+                    <div style="font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #9a927f">{{ q.detail }}</div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="position: relative; overflow: hidden; padding: 17px 20px; border-radius: 24px; background: linear-gradient(135deg, rgba(213,183,124,0.12), rgba(255,255,255,0.03)); border: 1px solid rgba(213,183,124,0.26); display: flex; gap: 20px; align-items: center; flex-wrap: wrap">
+                <div aria-hidden="true" style="position: relative; width: 92px; flex-shrink: 0; display: flex; align-items: center; justify-content: center">
+                  <svg viewBox="0 0 100 126" style="width: 100%; height: auto; display: block; overflow: visible; animation: breathe 9s ease-in-out infinite">
+                    <path d="M50 12 C 36 30, 36 96, 50 114" fill="none" stroke="rgba(230,211,168,0.50)" stroke-width="1.1"></path>
+                    <path d="M50 12 C 64 30, 64 96, 50 114" fill="none" stroke="rgba(230,211,168,0.50)" stroke-width="1.1"></path>
+                    <path d="M50 12 C 26 30, 26 96, 50 114" fill="none" stroke="rgba(230,211,168,0.44)" stroke-width="1.1"></path>
+                    <path d="M50 12 C 74 30, 74 96, 50 114" fill="none" stroke="rgba(230,211,168,0.44)" stroke-width="1.1"></path>
+                    <path d="M50 12 C 16 30, 16 96, 50 114" fill="none" stroke="rgba(230,211,168,0.38)" stroke-width="1.1"></path>
+                    <path d="M50 12 C 84 30, 84 96, 50 114" fill="none" stroke="rgba(230,211,168,0.38)" stroke-width="1.1"></path>
+                    <path d="M50 12 C 6 30, 6 96, 50 114" fill="none" stroke="rgba(230,211,168,0.32)" stroke-width="1.1"></path>
+                    <path d="M50 12 C 94 30, 94 96, 50 114" fill="none" stroke="rgba(230,211,168,0.32)" stroke-width="1.1"></path>
+                    <path d="M50 12 C -2 30, -2 96, 50 114" fill="none" stroke="rgba(230,211,168,0.26)" stroke-width="1.1"></path>
+                    <path d="M50 12 C 102 30, 102 96, 50 114" fill="none" stroke="rgba(230,211,168,0.26)" stroke-width="1.1"></path>
+                    <line x1="50" y1="16" x2="50" y2="110" stroke="rgba(213,183,124,0.5)" stroke-width="1.2"></line>
+                    <circle cx="50" cy="63" r="5.4" fill="rgba(255,246,220,0.9)"></circle>
+                    <circle cx="50" cy="63" r="11" fill="none" stroke="rgba(230,211,168,0.35)" stroke-width="1"></circle>
+                    <circle cx="50" cy="12" r="2.6" fill="#f7f1e3"></circle>
+                    <circle cx="50" cy="114" r="2.6" fill="#f7f1e3"></circle>
+                  </svg>
+                </div>
+                <div style="flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 7px">
+                  <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">The science, simply</div>
+                  <div style="font-family: var(--font-display); font-size: 19px; color: #f7f1e3">The field closes into a torus around you</div>
+                  <div style="font-size: 13.5px; font-weight: 300; line-height: 1.6; color: #cfc8ba">Sit still with the legs crossed — palms open on the knees, or the hands joined together in the lap — and the body's field closes on itself: lines of energy leave the crown, arc wide around you, and return through the base of the spine — the same shape a magnet draws in iron filings. Inside that loop the work is not yours to do. Healing settles, energy rises, the chakras open in their own order. You only have to stop interfering.</div>
+                </div>
+              </div>
+
+              <div style="padding: 15px 18px; border-radius: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 9px">
+                <div style="padding: 14px 16px; border-radius: 16px; background: linear-gradient(135deg, rgba(213,183,124,0.16), rgba(213,183,124,0.05)); border: 1px solid rgba(213,183,124,0.45); display: flex; gap: 13px; align-items: flex-start">
+                  <span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 36% 34%, rgba(230,211,168,0.5), rgba(184,151,88,0.15)); border: 1px solid rgba(213,183,124,0.55); font-size: 12px; color: #f7f1e3">✦</span>
+                  <div style="display: flex; flex-direction: column; gap: 4px">
+                    <div style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #b89758">Dr. Hari Krishna recommends</div>
+                    <div style="font-family: var(--font-display); font-size: 17px; line-height: 1.3; color: #f7f1e3">Simply sit and watch the breath</div>
+                    <div style="font-size: 13px; font-weight: 300; line-height: 1.6; color: #d8d2c4">No technique to learn, no counting, no force — and by far the most efficient way. Surrender, and let whichever breath wants to happen, happen by itself.</div>
+                  </div>
+                </div>
+                <div style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #7d7666; margin-top: 2px">Other techniques people use</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 7px">
+                  <sc-for list="{{ techniques }}" as="t" hint-placeholder-count="5">
+                    <span style="padding: 5px 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); font-size: 12px; color: #9a927f; white-space: nowrap">{{ t.name }}</span>
+                  </sc-for>
+                </div>
+                <div style="font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #7d7666">Some use these as a catalyst into a deeper state. They are optional — the sitting is not.</div>
+                <div style="height: 1px; background: rgba(255,255,255,0.08)"></div>
+                <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+                  <div style="flex: 1; min-width: 200px; font-size: 13px; font-weight: 300; line-height: 1.6; color: #b9b1a0"><span style="color: #e6d3a8; margin-right: 0.28em">And the body?</span>Most disease sits at the mitochondrial level. Restored prana reaches the cell and heals upward — cellular, bodily, psychic, emotional.</div>
+                  <button onClick="{{ goDetox }}" style="flex-shrink: 0; padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); background: rgba(213,183,124,0.1); color: #e6d3a8; font-family: var(--font-body); font-size: 12.5px; cursor: pointer" style-hover="border-color: rgba(230,211,168,0.9)">Detox diet →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; padding-top: 2px">
+            <span style="font-size: 12px; font-weight: 300; color: #7d7666">Where are you on the path?</span>
+            <div style="display: flex; gap: 6px; padding: 4px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03)">
+              <button onClick="{{ setSimple }}" style="padding: 7px 16px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font-body); font-size: 12.5px; background: {{ simpleBg }}; color: {{ simpleColor }}">New to this</button>
+              <button onClick="{{ setDeep }}" style="padding: 7px 16px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font-body); font-size: 12.5px; background: {{ deepBg }}; color: {{ deepColor }}">Seasoned meditator</button>
+            </div>
+          </div>
+
+          <sc-if value="{{ depthSimple }}" hint-placeholder-val="{{ true }}">
+            <div style="padding: 14px 22px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px dashed rgba(213,183,124,0.26); text-align: center">
+              <div style="font-size: 13.5px; font-style: italic; color: #e6d3a8">As Dr. Hari says — <span style="font-family: var(--font-display); font-style: normal; margin: 0 0.28em">“Gammuga kurcho”</span>means simply sit, quietly.</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ depthDeep }}" hint-placeholder-val="{{ false }}">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px">
+              <sc-for list="{{ deepCards }}" as="d" hint-placeholder-count="4">
+                <div style="padding: 15px 18px; border-radius: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 6px">
+                  <div style="font-size: 15px; color: {{ d.glyphColor }}">{{ d.glyph }}</div>
+                  <div style="font-family: var(--font-display); font-size: 18px; color: #f2e9d8">{{ d.title }}</div>
+                  <div style="font-size: 13px; font-weight: 300; line-height: 1.6; color: #b9b1a0">{{ d.body }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="text-align: center; font-size: 13px; font-weight: 300; font-style: italic; color: #9a927f">Letters, shapes, numbers, colours behind the eyes? Enough reading, friend — time to meditate.</div>
+          </sc-if>
         </div>
-        <div style="text-align: center"><a href="Member Flow.dc.html" style="display: inline-flex; padding: 13px 28px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 15px" style-hover="color: #241b06">Take the 41-day challenge</a></div>
+
+        <div style="text-align: center"><a href="Member Flow.dc.html" style="display: inline-flex; padding: 13px 28px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 15px" style-hover="color: #241b06">{{ tChallenge }}</a></div>
       </div>
     </sc-if>
 
     <!-- FILM -->
     <sc-if value="{{ viewFilm }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="Intro Film" class="m-view" style="width: min(980px, 100%); display: flex; flex-direction: column; justify-content: flex-start; animation: featherIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) both">
-        <div id="film-embed" style="position: relative; width: min(100%, calc((100dvh - 330px) * 1.7778)); margin: 0 auto; border-radius: 18px; overflow: hidden; border: 1px solid rgba(213,183,124,0.3); box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 60px rgba(213,183,124,0.1); background: #332c63">
-          <div style="padding-top: calc(56.25% + 44px)"></div>
+      <div data-screen-label="Intro Film" class="m-view m-view-film" style="width: min(980px, 100%); display: flex; flex-direction: column; justify-content: flex-start; animation: featherIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) both">
+        <div id="film-embed" style="position: relative; width: min(100%, calc((100dvh - 330px) * 1.7778)); margin: 0 auto; border-radius: 16px; overflow: hidden; border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 60px rgba(213,183,124,0.1); background: #332c63">
+          <div style="padding-top: 56.25%"></div>
           <button onClick="{{ fsFilm }}" class="m-fs-toggle" title="Full screen" style="position: absolute; top: 14px; right: 14px; z-index: 50; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(213,183,124,0.45); background: rgba(13,10,28,0.55); backdrop-filter: blur(10px); color: #e6d3a8; font-size: 16px; cursor: pointer" style-hover="background: rgba(213,183,124,0.2); border-color: rgba(230,211,168,0.8)"><span class="fs-ic-open">⛶</span><span class="fs-ic-exit" style="display: none">✕</span></button>
           <x-import component-from-global-scope="IntroFilm" from="./tweaks-panel.jsx ./animations-v2.jsx ./intro-film.jsx" embed="true" style="position: absolute; inset: 0" hint-size="100%,100%"></x-import>
         </div>
-        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 18px"><button onClick="{{ goHub }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); background: rgba(20,15,40,0.4); color: #e6d3a8; font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 0.12em; cursor: pointer" style-hover="background: rgba(213,183,124,0.12)">✡ Center</button><button onClick="{{ pauseFilm }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); background: none; color: #e6d3a8; font-family: 'Outfit', sans-serif; font-size: 12.5px; letter-spacing: 0.12em; cursor: pointer" style-hover="background: rgba(213,183,124,0.12)">⏯ Play / Pause</button></div>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 18px"><button onClick="{{ goHub }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); background: rgba(20,15,40,0.4); color: #e6d3a8; font-family: var(--font-body); font-size: 12px; letter-spacing: 0.12em; cursor: pointer" style-hover="background: rgba(213,183,124,0.12)">✡ Go Back</button></div>
       </div>
     </sc-if>
 
@@ -161,25 +416,25 @@
       <div data-screen-label="Our Mission" class="m-view" style="width: min(1120px, 100%); display: flex; flex-direction: column; justify-content: flex-start; gap: 16px; animation: viewIn 0.45s ease; overflow-y: auto">
         <div style="text-align: center">
           <div style="font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; margin-bottom: 8px">Our Mission</div>
-          <h2 style="font-family: 'Marcellus', serif; font-size: clamp(24px, 2.8vw, 36px); margin: 0; color: #f2e9d8; line-height: 1.2">World peace through meditation —<br><span style="background: linear-gradient(120deg, #e6d3a8, #b89758); -webkit-background-clip: text; background-clip: text; color: transparent">scientifically.</span></h2>
+          <h2 style="font-family: var(--font-display); font-size: clamp(24px, 2.8vw, 36px); margin: 0; color: #f2e9d8; line-height: 1.2">World peace through meditation —<br><span style="background: linear-gradient(120deg, #e6d3a8, #b89758); -webkit-background-clip: text; background-clip: text; color: transparent">scientifically.</span></h2>
         </div>
         <div class="m-grid-2" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; align-items: stretch">
-          <div style="padding: 22px 26px; border-radius: 28px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.3); display: flex; flex-direction: column; gap: 14px">
-            <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.65; color: #b9b1a0">In the ancient yuga cycle, time turns through four great ages. We live at the far edge of Kali — the age of conflict and restlessness — and every tradition that tells this story agrees on what comes next: <span style="color: #e6d3a8">Satya Yugam, the age of truth.</span> A world where harmony is the norm, not the exception.</p>
+          <div style="padding: 22px 26px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 14px">
+            <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.65; color: #b9b1a0">In the ancient yuga cycle, time turns through four great ages. We live at the far edge of Kali — the age of conflict and restlessness — and every tradition that tells this story agrees on what comes next: <span style="color: #e6d3a8; margin-right: 0.28em; margin-right: 0.28em">Satya Yugam, the age of truth.</span>A world where harmony is the norm, not the exception.</p>
             <div style="display: flex; flex-direction: column; gap: 8px">
               <sc-for list="{{ yugas }}" as="y" hint-placeholder-count="4">
                 <div style="display: flex; align-items: center; gap: 12px">
                   <div style="width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; background: {{ y.dotBg }}; box-shadow: {{ y.dotGlow }}"></div>
-                  <div style="font-family: 'Marcellus', serif; font-size: 15px; color: {{ y.nameColor }}; min-width: 76px">{{ y.name }}</div>
+                  <div style="font-family: var(--font-display); font-size: 15px; color: {{ y.nameColor }}; min-width: 76px">{{ y.name }}</div>
                   <div style="font-size: 12.5px; font-weight: 300; color: #9a927f">{{ y.tag }}</div>
                 </div>
               </sc-for>
             </div>
             <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.65; color: #b9b1a0">Science gives us the mechanism: when enough minds settle into stillness, the collective field shifts — calm spreads the way fear does, person to person. The golden age is not waited for. <span style="color: #e6d3a8">It is meditated into being.</span></p>
           </div>
-          <div style="padding: 22px 26px; border-radius: 28px; background: linear-gradient(135deg, rgba(213,183,124,0.12), rgba(255,255,255,0.03)); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center">
-            <div style="font-family: 'Marcellus', serif; font-size: 44px; line-height: 1; color: #e6d3a8; text-shadow: 0 2px 30px rgba(213,183,124,0.4)">8<span style="font-size: 24px">%</span></div>
-            <div style="font-size: 13px; font-weight: 300; line-height: 1.55; color: #b9b1a0; max-width: 300px">Our end goal: a minimum of <span style="color: #e6d3a8">8% of humanity in meditative space</span> — the critical mass of consciousness that tips the world into Satya Yugam.</div>
+          <div style="padding: 22px 26px; border-radius: 24px; background: linear-gradient(135deg, rgba(213,183,124,0.12), rgba(255,255,255,0.03)); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center">
+            <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: #e6d3a8; text-shadow: 0 2px 30px rgba(213,183,124,0.4)">8<span style="font-size: 24px">%</span></div>
+            <div style="font-size: 13px; font-weight: 300; line-height: 1.55; color: #b9b1a0; max-width: 300px">Our end goal: a minimum of <span style="color: #e6d3a8; margin: 0 0.28em; margin-right: 0.28em">8% of humanity in meditative space</span>— the critical mass of consciousness that tips the world into Satya Yugam.</div>
             <div style="display: grid; grid-template-columns: repeat(20, 9px); gap: 5px">
               <sc-for list="{{ missionDots }}" as="d" hint-placeholder-count="100">
                 <div style="width: 9px; height: 9px; border-radius: 50%; background: {{ d.bg }}; box-shadow: {{ d.glow }}; animation: {{ d.anim }}"></div>
@@ -197,27 +452,93 @@
       <div data-screen-label="Wisdom" class="m-view" style="width: min(1120px, 100%); display: flex; flex-direction: column; justify-content: flex-start; gap: 18px; animation: viewIn 0.45s ease; overflow-y: auto">
         <div style="text-align: center">
           <div style="font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; margin-bottom: 8px">Wisdom</div>
-          <h2 style="font-family: 'Marcellus', serif; font-size: clamp(24px, 2.8vw, 34px); margin: 0; color: #f2e9d8">Ancient truths, scientific clarity</h2>
+          <h2 style="font-family: var(--font-display); font-size: clamp(24px, 2.8vw, 34px); margin: 0; color: #f2e9d8">Ancient truths, scientific clarity</h2>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px">
           <sc-for list="{{ wisdomCards }}" as="w" hint-placeholder-count="4">
-            <div style="padding: 20px 18px; border-radius: 22px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(213,183,124,0.45)">
-              <div style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.35), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.35); font-family: 'Marcellus', serif; font-size: 18px; color: #e6d3a8">{{ w.glyph }}</div>
-              <h3 style="font-family: 'Marcellus', serif; font-size: 17px; margin: 0; color: #f2e9d8">{{ w.title }}</h3>
+            <div style="padding: 20px 18px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(213,183,124,0.45)">
+              <div style="width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.35), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.26); font-family: var(--font-display); font-size: 18px; color: #e6d3a8">{{ w.glyph }}</div>
+              <h3 style="font-family: var(--font-display); font-size: 17px; margin: 0; color: #f2e9d8">{{ w.title }}</h3>
               <p style="margin: 0; font-size: 13px; font-weight: 300; line-height: 1.55; color: #b9b1a0">{{ w.body }}</p>
             </div>
           </sc-for>
         </div>
-        <div class="m-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
-          <sc-for list="{{ wisdomTestimonials }}" as="t" hint-placeholder-count="2">
-            <div style="padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.25); display: flex; flex-direction: column; gap: 5px">
+        <!-- ARCHITECTURE OF REALITY -->
+        <div style="border-radius: 24px; border: 1px solid rgba(120,168,255,0.24); background: linear-gradient(150deg, rgba(18,30,66,0.78), rgba(13,10,28,0.9)); backdrop-filter: blur(18px); padding: 26px clamp(16px, 3vw, 34px); display: flex; flex-direction: column; gap: 20px; overflow: hidden; position: relative">
+          <div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(110,160,255,0.15), transparent 70%)"></div>
+          <div style="text-align: center; position: relative">
+            <div style="font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: #8fb4ff">The Architecture of Reality</div>
+            <h3 style="font-family: var(--font-display); font-size: clamp(19px, 2.2vw, 25px); margin: 6px 0 0; color: #f2e9d8">You are an electromagnetic broadcast</h3>
+            <p style="margin: 6px auto 0; max-width: 620px; font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #b9b1a0">The heart generates a magnetic field ~100× stronger than the brain's — measurable up to 15 feet around the body. What you feel, you transmit.</p>
+          </div>
+          <div class="m-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative">
+            <div style="border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); padding: 16px 18px; display: flex; flex-direction: column; gap: 8px">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+                <span style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #e08a8a">Static noise · stress</span>
+                <span style="font-size: 10px; color: #8d8676">cortisol · adrenaline</span>
+              </div>
+              <svg viewBox="0 0 260 44" style="width: 100%; height: 44px" aria-hidden="true"><polyline points="0,24 14,10 22,34 34,16 42,38 56,8 66,30 78,14 88,36 100,12 112,32 124,18 134,40 148,10 158,28 170,16 182,34 194,12 206,30 218,20 230,36 244,14 260,26" fill="none" stroke="rgba(224,138,138,0.8)" stroke-width="1.6"></polyline></svg>
+              <p style="margin: 0; font-size: 12px; font-weight: 300; line-height: 1.5; color: #b9b1a0">Fear and hurry make the heart rhythm jagged and the brain scattered — an incoherent signal that broadcasts, and attracts, more static.</p>
+            </div>
+            <div style="border-radius: 16px; border: 1px solid rgba(120,168,255,0.4); background: rgba(120,168,255,0.07); padding: 16px 18px; display: flex; flex-direction: column; gap: 8px">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+                <span style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8c4ff">Coherence · meditation</span>
+                <span style="font-size: 10px; color: #8d8676">oxytocin · DHEA</span>
+              </div>
+              <svg viewBox="0 0 260 44" style="width: 100%; height: 44px" aria-hidden="true"><path d="M0,22 C13,4 26,4 39,22 C52,40 65,40 78,22 C91,4 104,4 117,22 C130,40 143,40 156,22 C169,4 182,4 195,22 C208,40 221,40 234,22 C247,4 254,8 260,16" fill="none" stroke="rgba(150,190,255,0.9)" stroke-width="1.6"></path></svg>
+              <p style="margin: 0; font-size: 12px; font-weight: 300; line-height: 1.5; color: #b9b1a0">A quiet heart broadcasts a smooth, organised wave. Like a tuning fork, a coherent field sets the space around it humming in sympathy.</p>
+            </div>
+          </div>
+          <div class="m-grid-2" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; position: relative">
+            <div style="display: flex; flex-direction: column; gap: 5px; padding: 4px 6px">
+              <span style="font-family: var(--font-display); font-size: 15px; color: #e6d3a8">◉ The observer</span>
+              <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #a49c8b">Attention collapses possibility into experience — what you steadily watch, you make real.</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px; padding: 4px 6px">
+              <span style="font-family: var(--font-display); font-size: 15px; color: #e6d3a8">∞ Entanglement</span>
+              <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #a49c8b">Your field is never isolated — influence travels between hearts without physical contact.</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px; padding: 4px 6px">
+              <span style="font-family: var(--font-display); font-size: 15px; color: #e6d3a8">♒ Resonance</span>
+              <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #a49c8b">A coherent field attracts matching people, opportunities and events — like answers like.</p>
+            </div>
+          </div>
+          <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; position: relative; display: flex; flex-direction: column; gap: 10px">
+            <div style="font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #b89758; text-align: center">The Coherence Protocol · daily</div>
+            <div class="m-grid-2" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px">
+              <div style="border-radius: 16px; background: rgba(213,183,124,0.06); border: 1px solid rgba(213,183,124,0.26); padding: 13px 15px; display: flex; flex-direction: column; gap: 5px">
+                <span style="font-size: 11px; color: #d5b77c">01 · Morning coherence</span>
+                <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #b9b1a0">Before opening your eyes: 10 minutes of slow 5-second rhythmic breathing — set the day's frequency first.</p>
+              </div>
+              <div style="border-radius: 16px; background: rgba(213,183,124,0.06); border: 1px solid rgba(213,183,124,0.26); padding: 13px 15px; display: flex; flex-direction: column; gap: 5px">
+                <span style="font-size: 11px; color: #d5b77c">02 · Scan & interrupt</span>
+                <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #b9b1a0">Catch static in real time. On tension, breathe 5-5-7 — the longer exhale calms the nervous system out of survival mode.</p>
+              </div>
+              <div style="border-radius: 16px; background: rgba(213,183,124,0.06); border: 1px solid rgba(213,183,124,0.26); padding: 13px 15px; display: flex; flex-direction: column; gap: 5px">
+                <span style="font-size: 11px; color: #d5b77c">03 · Feel it done</span>
+                <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #b9b1a0">The field responds to feeling, not thought — gratitude in advance broadcasts the signal of a life already fulfilled.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="t-rail">
+          <div class="t-track">
+            <sc-for list="{{ floatVoices }}" as="t" hint-placeholder-count="4">
+            <div style="flex: 0 0 clamp(230px, 24vw, 310px); padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 5px">
               <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; font-style: italic; color: #d8d2c4">{{ t.text }}</p>
               <div style="font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</div>
             </div>
           </sc-for>
+            <sc-for list="{{ floatVoices }}" as="t" hint-placeholder-count="4">
+            <div style="flex: 0 0 clamp(230px, 24vw, 310px); padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 5px">
+              <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; font-style: italic; color: #d8d2c4">{{ t.text }}</p>
+              <div style="font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</div>
+            </div>
+          </sc-for>
+          </div>
         </div>
         <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap">
-          <button onClick="{{ goFilm }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 14px; font-family: 'Outfit', sans-serif; cursor: pointer"><span style="font-size: 11px">▶</span> Watch the intro film</button>
+          <button onClick="{{ goFilm }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 14px; font-family: var(--font-body); cursor: pointer"><span style="font-size: 11px; margin-right: 0.28em">▶</span>Watch the intro film</button>
           <a href="Member Flow.dc.html" style="display: inline-flex; align-items: center; padding: 12px 26px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); color: #e6d3a8; font-weight: 500; font-size: 14px" style-hover="background: rgba(213,183,124,0.12)">Join the live sessions — free</a>
         </div>
       </div>
@@ -228,19 +549,19 @@
       <div data-screen-label="Wellness" class="m-view" style="width: min(1120px, 100%); display: flex; flex-direction: column; justify-content: flex-start; gap: 14px; animation: viewIn 0.45s ease; overflow-y: auto">
         <div style="text-align: center">
           <div style="font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; margin-bottom: 8px">Wellness</div>
-          <h2 style="font-family: 'Marcellus', serif; font-size: clamp(24px, 2.8vw, 34px); margin: 0; color: #f2e9d8">The Golden Age Detox Diet</h2>
+          <h2 style="font-family: var(--font-display); font-size: clamp(24px, 2.8vw, 34px); margin: 0; color: #f2e9d8">The Golden Age Detox Diet</h2>
           <div style="margin-top: 8px; display: inline-flex; padding: 6px 16px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.4); font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #d5b77c">A 41-day program · repeat every 6 months</div>
         </div>
         <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap">
           <sc-for list="{{ detoxTabs }}" as="dt" hint-placeholder-count="6">
-            <button onClick="{{ dt.pick }}" style="padding: 8px 16px; border-radius: 999px; border: 1px solid {{ dt.border }}; background: {{ dt.bg }}; color: {{ dt.color }}; font-family: 'Outfit', sans-serif; font-size: 13px; cursor: pointer">{{ dt.label }}</button>
+            <button onClick="{{ dt.pick }}" style="padding: 8px 16px; border-radius: 999px; border: 1px solid {{ dt.border }}; background: {{ dt.bg }}; color: {{ dt.color }}; font-family: var(--font-body); font-size: 13px; cursor: pointer">{{ dt.label }}</button>
           </sc-for>
         </div>
-        <div style="position: relative; max-width: 760px; margin: 0 auto; width: 100%; padding: 26px 30px; border-radius: 28px; transform: perspective(1200px) rotateX(1.5deg); box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 60px rgba(213,183,124,0.12), inset 0 1px 0 rgba(230,211,168,0.2); border: 1px solid rgba(213,183,124,0.35); background: linear-gradient(135deg, rgba(213,183,124,0.1), rgba(255,255,255,0.03)); backdrop-filter: blur(16px); display: flex; flex-direction: column; gap: 12px; animation: viewIn 0.35s ease">
+        <div style="position: relative; max-width: 760px; margin: 0 auto; width: 100%; padding: 26px 30px; border-radius: 24px; transform: perspective(1200px) rotateX(1.5deg); box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 60px rgba(213,183,124,0.12), inset 0 1px 0 rgba(230,211,168,0.2); border: 1px solid rgba(213,183,124,0.26); background: linear-gradient(135deg, rgba(213,183,124,0.1), rgba(255,255,255,0.03)); backdrop-filter: blur(16px); display: flex; flex-direction: column; gap: 12px; animation: viewIn 0.35s ease">
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
             <div style="display: flex; align-items: center; gap: 14px">
-              <div style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(230,211,168,0.4), rgba(184,151,88,0.15)); border: 1px solid rgba(213,183,124,0.5); font-family: 'Marcellus', serif; font-size: 20px; color: #f2e3bb">{{ dtGlyph }}</div>
-              <h3 style="font-family: 'Marcellus', serif; font-size: clamp(19px, 2.2vw, 25px); margin: 0; color: #f2e9d8">{{ dtTitle }}</h3>
+              <div style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(230,211,168,0.4), rgba(184,151,88,0.15)); border: 1px solid rgba(213,183,124,0.5); font-family: var(--font-display); font-size: 20px; color: #f2e3bb">{{ dtGlyph }}</div>
+              <h3 style="font-family: var(--font-display); font-size: clamp(19px, 2.2vw, 25px); margin: 0; color: #f2e9d8">{{ dtTitle }}</h3>
             </div>
             <div style="font-size: 11.5px; letter-spacing: 0.18em; color: #b89758; white-space: nowrap">{{ dtStep }}</div>
           </div>
@@ -253,7 +574,7 @@
         </div>
         <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap">
           <a href="assets/detox-diet.pdf" download="GoldenAge Detox Diet.pdf" style="display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 13.5px" style-hover="color: #241b06">↓ Full program (PDF)</a>
-          <button onClick="{{ goHealth }}" style="display: inline-flex; align-items: center; padding: 11px 24px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); background: none; color: #e6d3a8; font-weight: 500; font-size: 13.5px; font-family: 'Outfit', sans-serif; cursor: pointer" style-hover="background: rgba(213,183,124,0.12)">← Back to Wellness</button>
+          <button onClick="{{ goHealth }}" style="display: inline-flex; align-items: center; padding: 11px 24px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); background: none; color: #e6d3a8; font-weight: 500; font-size: 13.5px; font-family: var(--font-body); cursor: pointer" style-hover="background: rgba(213,183,124,0.12)">← Back to Wellness</button>
         </div>
       </div>
     </sc-if>
@@ -263,40 +584,49 @@
       <div data-screen-label="Health" class="m-view" style="width: min(1120px, 100%); display: flex; flex-direction: column; justify-content: flex-start; gap: 16px; animation: viewIn 0.45s ease; overflow-y: auto">
         <div style="text-align: center">
           <div style="font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; margin-bottom: 8px">Wellness</div>
-          <h2 style="font-family: 'Marcellus', serif; font-size: clamp(24px, 2.8vw, 34px); margin: 0; color: #f2e9d8">How stillness heals the body</h2>
+          <h2 style="font-family: var(--font-display); font-size: clamp(24px, 2.8vw, 34px); margin: 0; color: #f2e9d8">How stillness heals the body</h2>
         </div>
         <div class="m-grid-2" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 16px; align-items: stretch">
         <div style="display: flex; flex-direction: column; gap: 12px">
           <sc-for list="{{ healthBenefits }}" as="h" hint-placeholder-count="4">
-            <div style="padding: 14px 18px; border-radius: 18px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 14px; flex: 1" style-hover="border-color: rgba(213,183,124,0.45)">
-              <div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.35), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.35); font-family: 'Marcellus', serif; font-size: 17px; color: #e6d3a8">{{ h.glyph }}</div>
+            <div style="padding: 14px 18px; border-radius: 16px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 14px; flex: 1" style-hover="border-color: rgba(213,183,124,0.45)">
+              <div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.35), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.26); font-family: var(--font-display); font-size: 17px; color: #e6d3a8">{{ h.glyph }}</div>
               <div>
-                <h3 style="font-family: 'Marcellus', serif; font-size: 16.5px; margin: 0 0 2px; color: #f2e9d8">{{ h.title }}</h3>
+                <h3 style="font-family: var(--font-display); font-size: 16.5px; margin: 0 0 2px; color: #f2e9d8">{{ h.title }}</h3>
                 <p style="margin: 0; font-size: 13px; font-weight: 300; line-height: 1.5; color: #b9b1a0">{{ h.body }}</p>
               </div>
             </div>
           </sc-for>
           <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 2px">
-            <button onClick="{{ goDetox }}" style="display: inline-flex; padding: 11px 22px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 13.5px; font-family: 'Outfit', sans-serif; cursor: pointer">✦ Explore the Detox Diet program</button>
+            <button onClick="{{ goDetox }}" style="display: inline-flex; padding: 11px 22px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 13.5px; font-family: var(--font-body); cursor: pointer">✦ Explore the Detox Diet program</button>
             <a href="Member Flow.dc.html" style="display: inline-flex; padding: 11px 22px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); color: #e6d3a8; font-weight: 500; font-size: 13.5px" style-hover="background: rgba(213,183,124,0.12)">Take the 41-day challenge</a>
           </div>
-          <sc-for list="{{ healthTestimonials }}" as="t" hint-placeholder-count="2">
-            <div style="padding: 10px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.25); display: flex; flex-direction: column; gap: 4px">
-              <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.45; font-style: italic; color: #d8d2c4">{{ t.text }} <span style="font-style: normal; font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</span></p>
+          <div class="t-rail">
+            <div class="t-track">
+              <sc-for list="{{ floatVoices }}" as="t" hint-placeholder-count="4">
+                <div style="flex: 0 0 clamp(230px, 24vw, 310px); padding: 10px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.26)">
+                  <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.45; font-style: italic; color: #d8d2c4">{{ t.text }} <span style="font-style: normal; font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</span></p>
+                </div>
+              </sc-for>
+              <sc-for list="{{ floatVoices }}" as="t" hint-placeholder-count="4">
+                <div style="flex: 0 0 clamp(230px, 24vw, 310px); padding: 10px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.26)">
+                  <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.45; font-style: italic; color: #d8d2c4">{{ t.text }} <span style="font-style: normal; font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</span></p>
+                </div>
+              </sc-for>
             </div>
-          </sc-for>
+          </div>
         </div>
-        <div style="width: 100%; padding: 20px 24px; border-radius: 28px; background: linear-gradient(135deg, rgba(213,183,124,0.12), rgba(255,255,255,0.03)); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.35); display: flex; flex-direction: column; gap: 16px">
+        <div style="width: 100%; padding: 20px 24px; border-radius: 24px; background: linear-gradient(135deg, rgba(213,183,124,0.12), rgba(255,255,255,0.03)); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 16px">
           <div style="text-align: center">
-            <h3 style="font-family: 'Marcellus', serif; font-size: clamp(19px, 2vw, 24px); margin: 0; color: #e6d3a8"><span style="font-size: 1.3em">5</span> Golden Rules to a Healthy and Happy Life</h3>
+            <h3 style="font-family: var(--font-display); font-size: clamp(19px, 2vw, 24px); margin: 0; color: #e6d3a8"><span style="font-size: 1.3em; margin-right: 0.28em">5</span>Golden Rules to a Healthy and Happy Life</h3>
             <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; margin-top: 4px">Golden Age Spiritual Movement</div>
           </div>
           <div style="display: flex; flex-direction: column; gap: 9px">
             <sc-for list="{{ goldenRules }}" as="r" hint-placeholder-count="5">
               <div style="display: flex; align-items: center; gap: 13px">
-                <div style="width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(230,211,168,0.4), rgba(184,151,88,0.15)); border: 1px solid rgba(213,183,124,0.5); font-family: 'Marcellus', serif; font-size: 16px; color: #f2e3bb">{{ r.glyph }}</div>
+                <div style="width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(230,211,168,0.4), rgba(184,151,88,0.15)); border: 1px solid rgba(213,183,124,0.5); font-family: var(--font-display); font-size: 16px; color: #f2e3bb">{{ r.glyph }}</div>
                 <div>
-                  <div style="font-family: 'Marcellus', serif; font-size: 15.5px; color: #f2e9d8"><span style="color: #b89758">{{ r.n }}.</span> {{ r.title }}</div>
+                  <div style="font-family: var(--font-display); font-size: 15.5px; color: #f2e9d8"><span style="color: #b89758">{{ r.n }}.</span> {{ r.title }}</div>
                   <div style="font-size: 12.5px; font-weight: 300; color: #b9b1a0">{{ r.body }}</div>
                 </div>
               </div>
@@ -312,39 +642,53 @@
     <sc-if value="{{ viewGuru }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="Our Guide" class="m-view" style="width: min(1120px, 100%); display: flex; flex-direction: column; justify-content: flex-start; gap: 16px; animation: viewIn 0.45s ease; overflow-y: auto">
         <div class="m-grid-2" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 16px; align-items: stretch">
-          <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px 22px; border-radius: 28px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.3)">
+          <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px 22px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.26)">
             <div style="display: flex; align-items: center; gap: 16px">
-              <image-slot id="hari-portrait" shape="circle" placeholder="Dr. Hari Krishna's photo" style="width: 92px; height: 92px; flex-shrink: 0; border-radius: 50%; border: 1px solid rgba(213,183,124,0.45); box-shadow: 0 0 30px rgba(213,183,124,0.2)"></image-slot>
+              <img src="assets/hari-avatar.webp" alt="Dr. Hari Krishna" width="400" height="400" loading="lazy" style="width: clamp(74px, 8vw, 96px); height: clamp(74px, 8vw, 96px); flex-shrink: 0; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.55); box-shadow: 0 0 26px rgba(213,183,124,0.22)">
               <div>
                 <div style="font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; margin-bottom: 5px">About Me</div>
-                <h2 style="font-family: 'Marcellus', serif; font-size: clamp(20px, 2.2vw, 26px); margin: 0; color: #f2e9d8; line-height: 1.2">Dr. Hari Krishna — where science meets spirit</h2>
+                <h2 style="font-family: var(--font-display); font-size: clamp(20px, 2.2vw, 26px); margin: 0; color: #f2e9d8; line-height: 1.2">Dr. Hari Krishna — where science meets spirit</h2>
               </div>
             </div>
             <p style="margin: 0; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: #b9b1a0">A medical professional and spiritual teacher, Dr. Hari Krishna founded the Golden Age Spiritual Movement to make meditation logical, practical and free for all — guiding a global community of seekers toward conscious living and the coming golden age.</p>
-            <div style="flex: 1; min-height: 90px; display: flex; flex-direction: column; gap: 7px">
-              <img src="assets/hari-graduation.jpg" alt="Dr. Hari Krishna receiving his doctorate" style="width: 100%; flex: 1; min-height: 80px; object-fit: cover; object-position: 50% 30%; border-radius: 14px; border: 1px solid rgba(213,183,124,0.35)">
-              <div style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #b89758; text-align: center">MD — Doctor of Medicine · Doctorate conferment</div>
+            <div style="flex: 1; min-height: 90px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
+              <div style="display: flex; flex-direction: column; gap: 7px; min-height: 0">
+                <img src="assets/hari-graduation.jpg" alt="Dr. Hari Krishna receiving his doctorate" style="width: 100%; flex: 1; min-height: 80px; object-fit: cover; object-position: 50% 30%; border-radius: 12px; border: 1px solid rgba(213,183,124,0.26)">
+                <div style="font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #b89758; text-align: center">MD, Anaesthesiology</div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 7px; min-height: 0">
+                <img src="assets/hari-reflect.webp" alt="Dr. Hari Krishna in reflection" width="560" height="700" loading="lazy" style="width: 100%; flex: 1; min-height: 80px; object-fit: cover; object-position: 42% 22%; border-radius: 12px; border: 1px solid rgba(213,183,124,0.26)">
+                <div style="font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #b89758; text-align: center">In reflection</div>
+              </div>
             </div>
           </div>
           <div style="display: flex; flex-direction: column; gap: 12px">
             <sc-for list="{{ guruStrengths }}" as="g" hint-placeholder-count="3">
-              <div style="padding: 13px 18px; border-radius: 18px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 14px; flex: 1" style-hover="border-color: rgba(213,183,124,0.45)">
-                <div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.35), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.35); font-family: 'Marcellus', serif; font-size: 17px; color: #e6d3a8">{{ g.glyph }}</div>
+              <div style="padding: 13px 18px; border-radius: 16px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 14px; flex: 1" style-hover="border-color: rgba(213,183,124,0.45)">
+                <div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.35), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.26); font-family: var(--font-display); font-size: 17px; color: #e6d3a8">{{ g.glyph }}</div>
                 <div>
-                  <h3 style="font-family: 'Marcellus', serif; font-size: 16px; margin: 0 0 2px; color: #f2e9d8">{{ g.title }}</h3>
+                  <h3 style="font-family: var(--font-display); font-size: 16px; margin: 0 0 2px; color: #f2e9d8">{{ g.title }}</h3>
                   <p style="margin: 0; font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #b9b1a0">{{ g.body }}</p>
                 </div>
               </div>
             </sc-for>
           </div>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px" class="m-grid-2">
-          <sc-for list="{{ guruTestimonials }}" as="t" hint-placeholder-count="4">
-            <div style="padding: 12px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.25); display: flex; flex-direction: column; gap: 6px; justify-content: space-between">
+        <div class="t-rail">
+          <div class="t-track">
+            <sc-for list="{{ floatVoices }}" as="t" hint-placeholder-count="4">
+            <div style="flex: 0 0 clamp(230px, 24vw, 310px); padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 5px">
               <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; font-style: italic; color: #d8d2c4">{{ t.text }}</p>
-              <div style="font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via <a href="https://neosouth.in/science-meets-spirit-dr-hari-krishnas-path/" target="_blank" style="font-size: 10.5px">NeoSouth</a></div>
+              <div style="font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</div>
             </div>
           </sc-for>
+            <sc-for list="{{ floatVoices }}" as="t" hint-placeholder-count="4">
+            <div style="flex: 0 0 clamp(230px, 24vw, 310px); padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 5px">
+              <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; font-style: italic; color: #d8d2c4">{{ t.text }}</p>
+              <div style="font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</div>
+            </div>
+          </sc-for>
+          </div>
         </div>
       </div>
     </sc-if>
@@ -352,10 +696,11 @@
     <!-- EVENTS -->
     <sc-if value="{{ viewEvents }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="Events" class="m-view" style="width: min(1120px, 100%); margin: 0 auto; display: flex; flex-direction: column; gap: 16px; animation: viewIn 0.45s ease; overflow-y: auto; max-height: 100%">
-        <!-- FEATURED: Awakening Hyderabad -->
-        <a href="assets/awakening-hyderabad-invite.jpg" target="_blank" style="flex-shrink: 0; position: relative; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; padding: 20px 26px; border-radius: 28px; background: linear-gradient(120deg, rgba(213,183,124,0.18), rgba(74,65,131,0.25)); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.5); box-shadow: 0 14px 50px rgba(0,0,0,0.4), 0 0 50px rgba(213,183,124,0.12)" style-hover="border-color: rgba(230,211,168,0.85); box-shadow: 0 14px 60px rgba(0,0,0,0.45), 0 0 70px rgba(213,183,124,0.25)">
-          <div style="flex-shrink: 0; text-align: center; padding: 10px 16px; border-radius: 18px; background: rgba(13,10,28,0.45); border: 1px solid rgba(213,183,124,0.5)">
-            <div style="font-family: 'Marcellus', serif; font-size: 34px; line-height: 1; color: #f2e3bb">26</div>
+        <!-- FEATURED: Awakening Hyderabad — only while it is still ahead -->
+        <sc-if value="{{ hydUpcoming }}" hint-placeholder-val="{{ false }}">
+        <a href="assets/awakening-hyderabad-invite.jpg" target="_blank" style="flex-shrink: 0; position: relative; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; padding: 20px 26px; border-radius: 24px; background: linear-gradient(120deg, rgba(213,183,124,0.18), rgba(74,65,131,0.25)); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.5); box-shadow: 0 14px 50px rgba(0,0,0,0.4), 0 0 50px rgba(213,183,124,0.12)" style-hover="border-color: rgba(230,211,168,0.85); box-shadow: 0 14px 60px rgba(0,0,0,0.45), 0 0 70px rgba(213,183,124,0.25)">
+          <div style="flex-shrink: 0; text-align: center; padding: 10px 16px; border-radius: 16px; background: rgba(13,10,28,0.45); border: 1px solid rgba(213,183,124,0.5)">
+            <div style="font-family: var(--font-display); font-size: 34px; line-height: 1; color: #f2e3bb">26</div>
             <div style="font-size: 11px; letter-spacing: 0.2em; color: #d5b77c; margin-top: 3px">JUL · SUN</div>
           </div>
           <div style="flex: 1; min-width: 260px">
@@ -363,25 +708,26 @@
               <span style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #241b06; background: linear-gradient(135deg, #e6d3a8, #b89758); padding: 4px 12px; border-radius: 999px; font-weight: 600">Featured gathering</span>
               <span style="font-size: 11.5px; letter-spacing: 0.12em; color: #e6d3a8; animation: glowPulse 2.5s ease-in-out infinite">✦ {{ hydCountdown }}</span>
             </div>
-            <div style="font-family: 'Marcellus', serif; font-size: clamp(20px, 2.4vw, 27px); color: #f7f1e3; margin-top: 7px">Awakening Hyderabad</div>
+            <div style="font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 27px); color: #f7f1e3; margin-top: 7px">Awakening Hyderabad</div>
             <div style="font-size: 13px; font-weight: 300; color: #cfc8ba; margin-top: 3px">Awaken the inner wisdom · live with purpose & peace — a full day with <span style="color: #e6d3a8">Dr. Harikrishna Garu</span>, founder of the movement</div>
             <div style="font-size: 12px; font-weight: 300; color: #9a927f; margin-top: 5px">11 AM–6 PM · 9 Convention, Sanath Nagar, Hyderabad · parking limited — carpool 🙏</div>
           </div>
           <div style="flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; align-items: stretch">
             <span style="display: inline-flex; justify-content: center; padding: 10px 20px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 13px">View invitation ↗</span>
-            <span style="text-align: center; font-size: 11px; color: #9a927f">K.V. Raman Kumar · 98663 21729</span>
+            <span style="text-align: center; font-size: 11px; color: #9a927f">Questions? info@goldenagewisdom.org</span>
           </div>
         </a>
+        </sc-if>
         <div class="m-grid-2" style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; align-items: stretch">
-        <div style="padding: 30px 28px; border-radius: 28px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
+        <div style="padding: 30px 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
           <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap">
-            <h2 style="font-family: 'Marcellus', serif; font-size: 25px; margin: 0; color: #f2e9d8">Daily live sessions</h2>
+            <h2 style="font-family: var(--font-display); font-size: 25px; margin: 0; color: #f2e9d8">Daily live sessions</h2>
             <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758; white-space: nowrap">Mon–Sat · Sunday rest</span>
           </div>
           <sc-for list="{{ sessions }}" as="s" hint-placeholder-count="3">
-            <div style="display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07)" style-hover="border-color: rgba(213,183,124,0.4)">
-              <div style="flex-shrink: 0; width: 92px; text-align: center; padding: 8px 4px; border-radius: 14px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.3)">
-                <div style="font-family: 'Marcellus', serif; font-size: 13.5px; color: #e6d3a8; line-height: 1.25">{{ s.time }}</div>
+            <div style="display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1)" style-hover="border-color: rgba(213,183,124,0.4)">
+              <div style="flex-shrink: 0; width: 92px; text-align: center; padding: 8px 4px; border-radius: 12px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.26)">
+                <div style="font-family: var(--font-display); font-size: 13.5px; color: #e6d3a8; line-height: 1.25">{{ s.time }}</div>
                 <div style="font-size: 9.5px; letter-spacing: 0.16em; color: #b89758; margin-top: 2px">IST</div>
               </div>
               <div style="flex: 1">
@@ -391,8 +737,8 @@
               </div>
             </div>
           </sc-for>
-          <a href="https://youtube.com/@goldenagegurus?si=xTzK1H3NEm1kbfSX" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 20px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 14px" style-hover="color: #241b06"><span style="font-size: 11px">▶</span> Watch live on YouTube — free, worldwide</a>
-          <div style="display: flex; align-items: center; gap: 13px; padding: 13px 16px; border-radius: 18px; border: 1px dashed rgba(213,183,124,0.4); background: rgba(213,183,124,0.05)">
+          <a href="https://youtube.com/@goldenagegurus?si=xTzK1H3NEm1kbfSX" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 20px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 14px" style-hover="color: #241b06"><span style="font-size: 11px; margin-right: 0.28em">▶</span>Watch live on YouTube — free, worldwide</a>
+          <div style="display: flex; align-items: center; gap: 13px; padding: 13px 16px; border-radius: 16px; border: 1px dashed rgba(213,183,124,0.4); background: rgba(213,183,124,0.05)">
             <div style="width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(213,183,124,0.12); border: 1px solid rgba(213,183,124,0.4)">
               <svg viewBox="0 0 24 24" style="width: 15px; height: 15px; display: block"><rect x="5" y="11" width="14" height="9" rx="2.5" fill="none" stroke="#e6d3a8" stroke-width="1.6"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="#e6d3a8" stroke-width="1.6"></path></svg>
             </div>
@@ -403,12 +749,16 @@
             <a href="Member Flow.dc.html" style="flex-shrink: 0; font-size: 12.5px; white-space: nowrap">Sign in →</a>
           </div>
         </div>
-        <div style="padding: 30px 28px; border-radius: 28px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
-          <h2 style="font-family: 'Marcellus', serif; font-size: 25px; margin: 0; color: #f2e9d8">Upcoming gatherings</h2>
-          <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
-            <div style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07)">
-              <div style="flex-shrink: 0; width: 56px; text-align: center; padding: 7px 0; border-radius: 14px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.3)">
-                <div style="font-family: 'Marcellus', serif; font-size: 20px; color: #e6d3a8; line-height: 1.1">{{ e.day }}</div>
+        <div style="padding: 30px 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
+          <h2 style="font-family: var(--font-display); font-size: 25px; margin: 0; color: #f2e9d8">Upcoming gatherings</h2>
+          <sc-if value="{{ noUpcoming }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.6; color: #9a927f">No gatherings on the calendar right now — the free live sessions run every day, Monday to Saturday. New retreats and satsangs are announced here first.</p>
+          </sc-if>
+          <sc-if value="{{ hasUpcoming }}" hint-placeholder-val="{{ true }}">
+          <sc-for list="{{ upcomingEvents }}" as="e" hint-placeholder-count="2">
+            <div style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1)">
+              <div style="flex-shrink: 0; width: 56px; text-align: center; padding: 7px 0; border-radius: 12px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.26)">
+                <div style="font-family: var(--font-display); font-size: 20px; color: #e6d3a8; line-height: 1.1">{{ e.day }}</div>
                 <div style="font-size: 11px; letter-spacing: 0.1em; color: #b89758">{{ e.month }}</div>
               </div>
               <div>
@@ -417,16 +767,43 @@
               </div>
             </div>
           </sc-for>
+          </sc-if>
+          <sc-if value="{{ hasPast }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px">
+            <div style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #7d7666">Past gatherings</div>
+            <sc-for list="{{ pastEvents }}" as="p" hint-placeholder-count="1">
+              <div style="display: flex; gap: 14px; align-items: center; opacity: 0.62">
+                <div style="flex-shrink: 0; width: 48px; text-align: center; padding: 5px 0; border-radius: 12px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1)">
+                  <div style="font-family: var(--font-display); font-size: 16px; color: #b6afa0; line-height: 1.1">{{ p.day }}</div>
+                  <div style="font-size: 9.5px; letter-spacing: 0.1em; color: #837c6d">{{ p.month }}</div>
+                </div>
+                <div style="flex: 1; min-width: 0">
+                  <div style="font-weight: 500; font-size: 13.5px; color: #b6afa0">{{ p.title }}</div>
+                  <div style="font-size: 11.5px; font-weight: 300; color: #7d7666">{{ p.meta }}</div>
+                </div>
+                <span style="flex-shrink: 0; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #7d7666; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 3px 10px">Complete</span>
+              </div>
+            </sc-for>
+          </div>
+          </sc-if>
           <a href="Member Flow.dc.html" style="font-size: 13.5px">Register as a member →</a>
         </div>
         </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px" class="m-grid-2">
-          <sc-for list="{{ eventTestimonials }}" as="t" hint-placeholder-count="2">
-            <div style="padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.25); display: flex; flex-direction: column; gap: 5px">
+        <div class="t-rail">
+          <div class="t-track">
+            <sc-for list="{{ floatVoices }}" as="t" hint-placeholder-count="4">
+            <div style="flex: 0 0 clamp(230px, 24vw, 310px); padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 5px">
               <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; font-style: italic; color: #d8d2c4">{{ t.text }}</p>
               <div style="font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</div>
             </div>
           </sc-for>
+            <sc-for list="{{ floatVoices }}" as="t" hint-placeholder-count="4">
+            <div style="flex: 0 0 clamp(230px, 24vw, 310px); padding: 11px 14px; border-radius: 16px; background: rgba(213,183,124,0.07); border: 1px solid rgba(213,183,124,0.26); display: flex; flex-direction: column; gap: 5px">
+              <p style="margin: 0; font-size: 11.5px; font-weight: 300; line-height: 1.5; font-style: italic; color: #d8d2c4">{{ t.text }}</p>
+              <div style="font-size: 10.5px; letter-spacing: 0.06em; color: #b89758">— {{ t.name }}, via NeoSouth</div>
+            </div>
+          </sc-for>
+          </div>
         </div>
       </div>
     </sc-if>
@@ -435,52 +812,63 @@
     <!-- HOME/WELCOME SECTION -->
     <sc-if value="{{ viewHome }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="Welcome" class="m-view" style="width: min(880px, 100%); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; gap: 22px; animation: viewIn 0.45s ease">
-        <div style="display: inline-flex; padding: 7px 18px; border-radius: 999px; background: rgba(255,255,255,0.07); backdrop-filter: blur(12px); border: 1px solid rgba(213,183,124,0.25); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #d5b77c">A non-profit for inner awakening</div>
-        <h1 style="font-family: 'Marcellus', serif; font-size: clamp(36px, 5vw, 64px); line-height: 1.1; margin: 0; color: #f7f1e3">Quiet the mind.<br><span style="background: linear-gradient(120deg, #e6d3a8, #b89758); -webkit-background-clip: text; background-clip: text; color: transparent">Return to stillness.</span></h1>
+        <div style="display: inline-flex; padding: 7px 18px; border-radius: 999px; background: rgba(255,255,255,0.07); backdrop-filter: blur(12px); border: 1px solid rgba(213,183,124,0.26); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #d5b77c">A non-profit for inner awakening</div>
+        <h1 style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); line-height: 1.1; margin: 0; color: #f7f1e3">Quiet the mind.<br><span style="background: linear-gradient(120deg, #e6d3a8, #b89758); -webkit-background-clip: text; background-clip: text; color: transparent">Return to stillness.</span></h1>
         <p style="max-width: 560px; font-size: 16.5px; font-weight: 300; line-height: 1.6; color: #cfc8ba; margin: 0">Guided kundalini meditation, ancient wisdom and a global community — free, for every age and every seeker.</p>
         <a href="Member Flow.dc.html" style="display: inline-flex; padding: 14px 30px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 16px" style-hover="color: #241b06">Begin your journey — free</a>
       </div>
     </sc-if>
   </main>
 
+  <!-- SIGNUP QR — hub only -->
+  <sc-if value="{{ showJoinQR }}" hint-placeholder-val="{{ true }}">
+    <a href="Member Flow.dc.html" class="m-qr" title="Join Golden Age Wisdom" style="position: absolute; z-index: 60; right: clamp(12px, 2vw, 24px); bottom: 58px; display: flex; align-items: center; gap: 12px; padding: 8px 16px 8px 8px; border-radius: 24px; background: rgba(20,15,40,0.55); backdrop-filter: blur(14px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 8px 26px rgba(0,0,0,0.45); transition: border-color 0.3s, box-shadow 0.3s" style-hover="border-color: rgba(230,211,168,0.85); box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 30px rgba(213,183,124,0.3)">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=241b06&bgcolor=f2e3bb&data=https%3A%2F%2Fgoldenagewisdom.org%2Fjoin" alt="Scan to join" style="width: 62px; height: 62px; border-radius: 12px; display: block; border: 1px solid rgba(213,183,124,0.5)">
+      <span style="display: flex; flex-direction: column; gap: 3px">
+        <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #e6d3a8">{{ tScanJoin }}</span>
+        <span style="font-size: 10.5px; font-weight: 300; color: #9a927f">{{ tFreeMember }}</span>
+      </span>
+    </a>
+  </sc-if>
+
+  <sc-if value="{{ consentOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 120; padding: 14px; display: flex; justify-content: center; pointer-events: none">
+      <div style="pointer-events: auto; width: min(760px, 100%); padding: 16px 20px; border-radius: 24px; background: rgba(23,17,48,0.96); backdrop-filter: blur(14px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 20px 60px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+        <span style="flex: 1 1 300px; font-size: 13px; font-weight: 300; line-height: 1.6; color: #cfc8ba">We set no advertising cookies. May we count anonymous visits to see which teachings people reach for? <a href="Privacy.dc.html">Read the privacy notice →</a></span>
+        <span style="display: flex; gap: 9px; flex-wrap: wrap">
+          <button onClick="{{ acceptCookies }}" style="padding: 10px 20px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: var(--font-body); font-weight: 600; font-size: 13px; cursor: pointer">Allow</button>
+          <button onClick="{{ declineCookies }}" style="padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); background: none; color: #d8d2c4; font-family: var(--font-body); font-size: 13px; cursor: pointer">No thanks</button>
+        </span>
+      </div>
+    </div>
+  </sc-if>
+  <footer style="position: relative; z-index: 10; flex-shrink: 0; min-height: 54px; padding: 8px 24px 12px; display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 12px; font-weight: 300; color: #b8b0a0; text-shadow: 0 1px 10px rgba(11,9,26,0.9)">
   <!-- RETURN TO CENTER — floating orb -->
   <sc-if value="{{ inSection }}" hint-placeholder-val="{{ false }}">
-    <button onClick="{{ goHub }}" title="Return to the mandala · Esc" class="m-orb" style="position: absolute; z-index: 60; left: clamp(12px, 2vw, 24px); bottom: 58px; display: flex; align-items: center; gap: 9px; background: rgba(20,15,40,0.55); border: 1px solid rgba(213,183,124,0.4); border-radius: 999px; cursor: pointer; padding: 6px 16px 6px 7px; font-family: 'Outfit', sans-serif; box-shadow: 0 8px 26px rgba(0,0,0,0.45); transition: border-color 0.3s, box-shadow 0.3s" style-hover="border-color: rgba(230,211,168,0.85); box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 30px rgba(213,183,124,0.3)">
-      <span style="width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.5); background: radial-gradient(circle at 38% 34%, rgba(230,211,168,0.35), rgba(184,151,88,0.1)); animation: breathe 6s ease-in-out infinite">
+    <button onClick="{{ goHub }}" title="Return to Home · Esc" class="m-orb" style="position: absolute; z-index: 60; left: clamp(12px, 2vw, 24px); bottom: 8px; display: flex; align-items: center; gap: 9px; background: rgba(13,10,28,0.92); backdrop-filter: blur(10px); border: 1px solid rgba(213,183,124,0.4); border-radius: 999px; cursor: pointer; padding: 4px 15px 4px 5px; font-family: var(--font-body); box-shadow: 0 8px 26px rgba(0,0,0,0.45); transition: border-color 0.3s, box-shadow 0.3s" style-hover="border-color: rgba(230,211,168,0.85); box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 30px rgba(213,183,124,0.3)">
+      <span style="width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.5); background: radial-gradient(circle at 38% 34%, rgba(230,211,168,0.35), rgba(184,151,88,0.1)); animation: breathe 6s ease-in-out infinite">
         <svg viewBox="0 0 100 100" style="width: 13px; height: 13px; display: block">
           <polygon points="50,8 86,71 14,71" fill="none" stroke="#f7f1e3" stroke-width="6" stroke-linejoin="round"></polygon>
           <polygon points="50,92 14,29 86,29" fill="none" stroke="#f7f1e3" stroke-width="6" stroke-linejoin="round"></polygon>
         </svg>
       </span>
-      <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #e6d3a8; white-space: nowrap">Center</span>
+      <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #e6d3a8; white-space: nowrap">{{ tGoBack }}</span>
     </button>
   </sc-if>
-
-  <!-- SIGNUP QR — hub only -->
-  <sc-if value="{{ viewHub }}" hint-placeholder-val="{{ true }}">
-    <a href="Member Flow.dc.html" class="m-qr" title="Join Golden Age Wisdom" style="position: absolute; z-index: 60; right: clamp(12px, 2vw, 24px); bottom: 58px; display: flex; align-items: center; gap: 12px; padding: 8px 16px 8px 8px; border-radius: 20px; background: rgba(20,15,40,0.55); backdrop-filter: blur(14px); border: 1px solid rgba(213,183,124,0.35); box-shadow: 0 8px 26px rgba(0,0,0,0.45); transition: border-color 0.3s, box-shadow 0.3s" style-hover="border-color: rgba(230,211,168,0.85); box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 30px rgba(213,183,124,0.3)">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=241b06&bgcolor=f2e3bb&data=https%3A%2F%2Fgoldenagewisdom.org%2Fjoin" alt="Scan to join" style="width: 62px; height: 62px; border-radius: 12px; display: block; border: 1px solid rgba(213,183,124,0.5)">
-      <span style="display: flex; flex-direction: column; gap: 3px">
-        <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #e6d3a8">Scan to join</span>
-        <span style="font-size: 10.5px; font-weight: 300; color: #9a927f">Free membership · /join</span>
-      </span>
-    </a>
-  </sc-if>
-
-  <footer style="position: relative; z-index: 10; flex-shrink: 0; padding: 8px 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 12px; font-weight: 300; color: #7d7666">
-    <sc-if value="{{ viewHub }}" hint-placeholder-val="{{ true }}"><div class="m-caption" style="font-size: 12.5px; letter-spacing: 0.1em; color: #7d7666">Choose a path · the center breathes with you</div></sc-if>
+    <sc-if value="{{ viewHub }}" hint-placeholder-val="{{ true }}"><div class="m-caption" style="font-size: 12.5px; letter-spacing: 0.1em; color: #7d7666">{{ tCaption }}</div></sc-if>
     <div style="display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap">
-    <span style="font-family: 'Marcellus', serif; letter-spacing: 0.08em; color: #d5b77c">GOLDEN AGE WISDOM</span>
-    <span>A registered non-profit · © 2026</span>
+    <span style="font-family: var(--font-display); letter-spacing: 0.08em; color: #d5b77c">GOLDEN AGE WISDOM</span>
+    <span>{{ tNonProfit }}</span>
     <a href="mailto:info@goldenagewisdom.org">info@goldenagewisdom.org</a>
+    <a href="Privacy.dc.html">{{ tPrivacy }}</a>
     </div>
   </footer>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { view: 'hub', detoxTab: 0, hubTx: 0, hubTy: 60, secPad: 104 };
-  // anchor the wheel to the figure: chin sits at y=480 (of 1248) and midline at x=1319 (of 2686)
+  state = { view: 'hub', lang: (window.GAW_LANG || 'en'), langsOpen: false, detoxTab: 0, hubTx: 0, hubTy: 60, secPad: 104, member: null, consentSeen: false, depth: 'simple' };
+  // anchor the wheel to the figure: chin sits at y=778 (of 1525) and midline at x=1280 (of 2560)
   // in the background image; replicate the CSS cover-crop math to find them on screen.
   computeLayout() {
     const vw = window.innerWidth, vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
@@ -491,19 +879,20 @@ class Component extends DCLogic {
     if (mb.height < 40) return;
     const r = Math.max(110, Math.min(vh / 2 - 150, vw / 2 - 70, 185));
     const node = Math.max(64, Math.min(r * 0.55, 92));
-    const scale = Math.max(vw / 2686, vh / 1248);
-    const cropTop = Math.max(0, (1248 * scale - vh) * 0.42); // matches object-position 50% 42%
-    const cropLeft = Math.max(0, (2686 * scale - vw) * 0.5);
-    const chinY = 480 * scale - cropTop;
-    const midX = 1319 * scale - cropLeft;
+    const scale = Math.max(vw / 2560, vh / 1525);
+    const cropTop = Math.max(0, (1525 * scale - vh) * 0.42); // matches object-position 50% 42%
+    const cropLeft = Math.max(0, (2560 * scale - vw) * 0.5);
+    const zoom = 1.22; // img transform: scale(1.22) anchored bottom-center
+    const chinY = vh - (vh - (778 * scale - cropTop)) * zoom;
+    const midX = vw / 2 + ((1280 * scale - cropLeft) - vw / 2) * zoom;
     const topExtent = 0.78 * r + node / 2 + 14;
     const bottomExtent = 0.78 * r + node / 2 + 38; // node + label below
     const footerTop = footer ? footer.getBoundingClientRect().top : vh - 52;
     const minCenter = mb.top + topExtent + 4;
     const maxCenter = Math.min(footerTop - 6, vh - 8) - bottomExtent;
-    const cy = Math.max(Math.min(chinY + 16 + topExtent - 48, maxCenter), Math.min(minCenter, maxCenter));
+    const cy = Math.max(Math.min(chinY - 64 + topExtent, maxCenter), Math.min(minCenter, maxCenter));
     const halfW = 0.78 * r + node / 2 + 12;
-    const cx = Math.min(Math.max(midX + 8, halfW + 8), vw - halfW - 8);
+    const cx = Math.min(Math.max(midX - 16, halfW + 8), vw - halfW - 8);
     const hubTy = Math.round(cy - (mb.top + mb.height / 2));
     const hubTx = Math.round(cx - vw / 2);
     const secPad = Math.round(Math.max(24, Math.min(cy - topExtent - mb.top, vh * 0.34)));
@@ -523,10 +912,51 @@ class Component extends DCLogic {
     { label: 'Daily Routine', glyph: '☉', title: 'One golden day', desc: 'The whole program in a single daily rhythm — repeat for 41 days, once every 6 months.',
       items: ['Morning — plain water, light walk (fasting)', '12 PM — break the fast with one detox smoothie', '5–7 PM — one satvik salad bowl', '8 PM — the fast begins again · water only'] },
   ];
+  lang() { return this.state.lang || window.GAW_LANG || 'en'; }
+  // Sessions are Monday-Saturday IST: 4:10 AM, 8 PM and 9 PM.
+  nextSession() {
+    const ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
+    const mins = ist.getHours() * 60 + ist.getMinutes(), sunday = ist.getDay() === 0;
+    const list = [{ from: 250, to: 310 }, { from: 1200, to: 1260 }, { from: 1260, to: 1320 }];
+    const fmtLocal = (fromIST) => {
+      const ms = Date.UTC(ist.getFullYear(), ist.getMonth(), ist.getDate()) - 330 * 60000 + fromIST * 60000;
+      try { return new Date(ms).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; }
+    };
+    if (sunday) return { line: this.t('liveRest'), dot: 'rgba(255,255,255,0.28)', border: 'rgba(255,255,255,0.16)', bg: 'rgba(20,15,40,0.5)', live: false };
+    const live = list.find(s => mins >= s.from && mins < s.to);
+    if (live) return { line: this.t('liveNow'), dot: '#e08484', border: 'rgba(224,132,132,0.7)', bg: 'rgba(224,132,132,0.14)', live: true };
+    const next = list.find(s => mins < s.from) || list[0];
+    const away = next.from > mins ? next.from - mins : (1440 - mins) + next.from;
+    const hh = Math.floor(away / 60), mm = away % 60;
+    const inTxt = (hh ? hh + 'h ' : '') + mm + 'm';
+    return { line: this.t('liveIn') + ' ' + inTxt + ' · ' + fmtLocal(next.from), dot: '#d5b77c', border: 'rgba(213,183,124,0.45)', bg: 'rgba(20,15,40,0.5)', live: false };
+  }
+  t(key) { return window.GAW_T ? window.GAW_T(key, this.lang()) : key; }
+  SECTIONS = ['hub', 'home', 'practice', 'film', 'events', 'health', 'wellness', 'guru', 'wisdom', 'mission'];
+  sectionFromUrl() {
+    try {
+      const p = new URLSearchParams(location.search).get('section');
+      if (p && this.SECTIONS.indexOf(p) >= 0) return p;
+      const hash = (location.hash || '').replace('#', '');
+      if (hash && this.SECTIONS.indexOf(hash) >= 0) return hash;
+    } catch (e) {}
+    return null;
+  }
   componentDidMount() {
-    this.onKey = (e) => { if (e.key === 'Escape' && this.state.view !== 'hub') this.go('hub'); };
+    try { const u = JSON.parse(localStorage.getItem('gaw_session') || 'null'); if (u && u.name) this.setState({ member: u }); } catch (e) {}
+    const fromUrl = this.sectionFromUrl();
+    if (fromUrl && fromUrl !== 'hub') this.setState({ view: fromUrl });
+    this.onPop = () => { const v = this.sectionFromUrl() || 'hub'; this.setState({ view: v }, () => this.computeLayout()); };
+    window.addEventListener('popstate', this.onPop);
+    this.onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      if (this.state.langsOpen) { this.setState({ langsOpen: false }); return; }
+      if (this.state.view !== 'hub') this.go('hub');
+    };
+    this.onDocClick = (e) => { if (this.state.langsOpen && !e.target.closest('.m-langs')) this.setState({ langsOpen: false }); };
+    document.addEventListener('click', this.onDocClick);
     window.addEventListener('keydown', this.onKey);
-    this.tick = setInterval(() => this.forceUpdate(), 60000);
+    this.tick = setInterval(() => this.forceUpdate(), 30000);
     this.onResize = () => this.computeLayout();
     window.addEventListener('resize', this.onResize);
     window.addEventListener('orientationchange', this.onResize);
@@ -538,9 +968,17 @@ class Component extends DCLogic {
     if (bg && !bg.complete) bg.addEventListener('load', this.onResize, { once: true });
     this.layoutTimers = [0, 150, 500, 1200].map(t => setTimeout(this.onResize, t));
     requestAnimationFrame(() => this.computeLayout());
+    this.applyPhrases();
+  }
+  componentDidUpdate() { this.applyPhrases(); }
+  applyPhrases() {
+    if (!window.GAW_TRANSLATE_TREE) return;
+    requestAnimationFrame(() => window.GAW_TRANSLATE_TREE(document.body, this.lang()));
   }
   componentWillUnmount() {
+    window.removeEventListener('popstate', this.onPop);
     window.removeEventListener('keydown', this.onKey);
+    document.removeEventListener('click', this.onDocClick);
     window.removeEventListener('resize', this.onResize);
     window.removeEventListener('orientationchange', this.onResize);
     if (window.visualViewport) window.visualViewport.removeEventListener('resize', this.onResize);
@@ -566,6 +1004,19 @@ class Component extends DCLogic {
       { time: '9:00 – 10:00 PM', title: 'Wisdom session · Dr. Hari', desc: 'Knowledge, living Upanishads and open Q&A', s: [21, 0], e: [22, 0] },
     ].map(x => ({ ...x, showLocal, local: showLocal ? this.istLocal(x.s[0], x.s[1]) + ' – ' + this.istLocal(x.e[0], x.e[1]) + ' your time' : '' }));
   }
+  GATHERINGS = [
+    { day: '26', month: 'JUL', year: 2026, title: 'Awakening Hyderabad', meta: '11 AM–6 PM · 9 Convention, Sanath Nagar, Hyderabad', ends: '2026-07-26T18:00:00+05:30', featured: true },
+  ];
+  splitGatherings() {
+    const now = Date.now();
+    const up = [], past = [];
+    for (const g of this.GATHERINGS) {
+      (new Date(g.ends).getTime() < now ? past : up).push(g);
+    }
+    past.sort((a, b) => new Date(b.ends) - new Date(a.ends));
+    up.sort((a, b) => new Date(a.ends) - new Date(b.ends));
+    return { up, past };
+  }
   hydCountdown() {
     const start = new Date('2026-07-26T11:00:00+05:30'), end = new Date('2026-07-26T18:00:00+05:30');
     const now = Date.now();
@@ -580,22 +1031,105 @@ class Component extends DCLogic {
       document.startViewTransition(() => new Promise(res => this.setState({ view }, res)));
     } else this.setState({ view });
     if (view === 'hub') requestAnimationFrame(() => this.computeLayout());
+    this.pushUrl(view);
+  }
+  // the address bar follows the journey, so any section can be shared
+  pushUrl(view) {
+    try {
+      const url = view === 'hub' ? location.pathname : location.pathname + '?section=' + view;
+      if (location.pathname + location.search !== url) history.pushState({ view }, '', url);
+      const t = {
+        hub: 'Free daily live meditation & Upanishadic wisdom',
+        practice: 'The path — what meditation awakens in you',
+        wisdom: 'Living Upanishads — ancient truths, scientific clarity',
+        wellness: '5 Golden Rules — detox, sun gazing, earthing, alkaline water',
+        health: '5 Golden Rules — detox, sun gazing, earthing, alkaline water',
+        events: 'Live sessions & gatherings — free, daily, worldwide',
+        guru: 'Dr Hari Krishna — where science meets spirit',
+        mission: 'World peace through meditation — the 8% goal',
+        film: 'Watch the intro film',
+        home: 'Free daily live meditation & Upanishadic wisdom',
+      }[view];
+      if (t) document.title = t + ' · Golden Age Wisdom';
+    } catch (e) {}
   }
   renderVals() {
     const v = this.state.view;
     const nodes = [
       // rotate(a) translateY(-R): a=0 is TOP, clockwise. Welcome at top, rest evenly.
       // seven chakras, seven mandalas — crown at the top, root at the base, heart at the center
-      { key: 'guru', label: 'About Me', glyph: '✦', angle: 0, color: '#c9a6f0', petals: 48 },
-      { key: 'wisdom', label: 'Wisdom', glyph: '◎', angle: 60, color: '#9d8fe0', petals: 2 },
-      { key: 'health', label: 'Wellness', glyph: '❋', angle: 120, color: '#eda06a', petals: 6 },
-      { key: 'practice', label: 'Meditation', glyph: '▽', angle: 180, color: '#e08a8a', petals: 4 },
-      { key: 'events', label: 'Events', glyph: '☾', angle: 240, color: '#7fb0e0', petals: 16 },
-      { key: 'mission', label: 'Our Mission', glyph: '△', angle: 300, color: '#e6c96a', petals: 10 },
+      { key: 'guru', label: this.t('nAbout'), glyph: '✦', angle: 0, color: '#c9a6f0', petals: 48 },
+      { key: 'wisdom', label: this.t('nWisdom'), glyph: '◎', angle: 60, color: '#9d8fe0', petals: 2 },
+      { key: 'health', label: this.t('nWellness'), glyph: '❋', angle: 120, color: '#eda06a', petals: 6 },
+      { key: 'practice', label: this.t('nMeditate'), glyph: '▽', angle: 180, color: '#e08a8a', petals: 4 },
+      { key: 'events', label: this.t('nEvents'), glyph: '☾', angle: 240, color: '#7fb0e0', petals: 16 },
+      { key: 'mission', label: this.t('nMission'), glyph: '△', angle: 300, color: '#e6c96a', petals: 10 },
     ];
+    const mb = this.state.member;
     return {
+      signedIn: !!mb, signedOut: !mb,
+      memberFirstName: (((mb && mb.name) || '').trim().split(/\s+/)[0]) || 'Member',
+      memberInitial: ((((mb && mb.name) || 'M').trim()[0]) || 'M').toUpperCase(),
+      consentOpen: !this.state.consentSeen && !(window.GAWTelemetry && window.GAWTelemetry.consentRecord()),
+      acceptCookies: () => { if (window.GAWTelemetry) { window.GAWTelemetry.setConsent(true); window.GAWTelemetry.track('Home'); } this.setState({ consentSeen: true }); },
+      declineCookies: () => { if (window.GAWTelemetry) window.GAWTelemetry.setConsent(false); this.setState({ consentSeen: true }); },
+      depthSimple: this.state.depth !== 'deep',
+      depthDeep: this.state.depth === 'deep',
+      setSimple: () => this.setState({ depth: 'simple' }),
+      setDeep: () => this.setState({ depth: 'deep' }),
+      simpleBg: this.state.depth !== 'deep' ? 'linear-gradient(135deg, #d5b77c, #b89758)' : 'transparent',
+      simpleColor: this.state.depth !== 'deep' ? '#241b06' : '#b9b1a0',
+      deepBg: this.state.depth === 'deep' ? 'linear-gradient(135deg, #d5b77c, #b89758)' : 'transparent',
+      deepColor: this.state.depth === 'deep' ? '#241b06' : '#b9b1a0',
+      howSteps: [
+        { n: 'I', title: 'Sit cross-legged, hands joined or at rest', body: 'Any comfortable seat will do — floor or chair. Cross the legs and rest the palms open on the knees, or join the hands together in the lap; either closes the circuit. Keep the spine easy and upright.' },
+        { n: 'II', title: 'Close the eyes', body: 'Nothing to look at. The world can wait an hour.' },
+        { n: 'III', title: 'Watch the breath', body: 'Don\u2019t control it. Just notice it arriving and leaving.' },
+        { n: 'IV', title: 'Let the thoughts flow', body: 'They are traffic, not enemies. Watching them is the practice.' },
+        { n: 'V', title: 'Surrender and observe', body: 'Surrender means: I am nothing. Let the universe — nature, God, whichever word is yours — deal with it. Stop trying to meditate and allow it to happen to you.' },
+      ],
+      quickAnswers: [
+        { label: 'Best time', answer: 'Sunrise', detail: 'Brahmamuhurtham is finest — but no hour is forbidden. The one you keep is the right one.' },
+        { label: 'How long', answer: 'It happens, you don\u2019t do it', detail: 'Beginners: start with 30 minutes, or an hour if it comes easily. Some sit 1–2 hours; some drop deep in minutes. Comparison is a thief of joy.' },
+        { label: 'The goal', answer: 'There isn\u2019t one', detail: 'Keep sitting. Life reorders itself — physically, emotionally, spiritually. Try it and watch.' },
+      ],
+      techniques: [{ name: 'Soham' }, { name: 'Kundalini breathing' }, { name: 'Anapanasati' }, { name: 'Kumbhaka' }, { name: 'Bhramari' }],
+      deepCards: [
+        { glyph: '༄', glyphColor: '#c9a6f0', title: 'What kundalini is', body: 'An infinite energy that rises and aligns every chakra, moving like a serpent — cleansing the nadis, healing at each level. Scientifically: cosmic energy raising your frequency once you are connected. Emotionally: fear, shame and guilt giving way to bliss.' },
+        { glyph: '✦', glyphColor: '#e6d3a8', title: 'Karmas, visions, openings', body: 'Third-eye visions, past-life glimpses, awakenings — all part of the terrain. They come and they go. The real beauty is transformation: wisdom that stays after the vision fades.' },
+        { glyph: '◎', glyphColor: '#8fb8f0', title: 'Where the energy comes from', body: 'Some use a pyramid as a conductor. Some sit in groups, where consciousness pools higher. Some connect straight to the universe and give energy away like transformers. Guided meditation is another door.' },
+        { glyph: '☀', glyphColor: '#f0c98f', title: 'The ultimate truth', body: 'It depends on what you seek — joy for one, wisdom for another, self-discovery for the next. Come to know yourself through your own journey. See you on the other side, friend.' },
+      ],
+      langs: (window.GAW_LANGS || []).map(l => ({
+        label: l.label, name: l.name,
+        tick: this.lang() === l.code ? '✓' : '',
+        pick: () => { if (window.GAW_SET_LANG) window.GAW_SET_LANG(l.code); this.setState({ lang: l.code, langsOpen: false }); },
+        bg: this.lang() === l.code ? 'rgba(213,183,124,0.16)' : 'transparent',
+        color: this.lang() === l.code ? '#f7f1e3' : '#b9b1a0',
+      })),
+      langCurrent: ((window.GAW_LANGS || []).find(l => l.code === this.lang()) || { name: 'English' }).name,
+      langsOpen: !!this.state.langsOpen,
+      toggleLangs: () => this.setState({ langsOpen: !this.state.langsOpen }),
+      tMovement: this.t('movement'), tSignIn: this.t('signIn'), tBeginHere: this.t('beginHere'),
+      tGoBack: this.t('goBack'), tCaption: this.t('caption'), tScanJoin: this.t('scanJoin'),
+      tFreeMember: this.t('freeMember'), tNonProfit: this.t('nonProfit'), tPrivacy: this.t('privacy'),
+      tMedEyebrow: this.t('medEyebrow'), tMedTitle: this.t('medTitle'), tMedSub: this.t('medSub'),
+      tChallenge: this.t('challenge'), tJoinFree: this.t('joinFree'),
+      vpHead: this.t('vpHead'), vpSub: this.t('vpSub'), vpCred: this.t('vpCred'),
+      liveHref: this.state.sessionUser ? 'Member Flow.dc.html' : 'https://www.youtube.com/@GoldenAgeGurus/streams',
+      liveTarget: this.state.sessionUser ? '_self' : '_blank',
+      ...(() => {
+        const li = this.nextSession();
+        return {
+          liveLine: li.line, liveDot: li.dot, liveBorder: li.border, liveBg: li.bg,
+          liveAnim: li.live ? 'sndRing 2.4s ease-out infinite' : 'none',
+        };
+      })(),
+      bgOpacity: v === 'hub' ? 1 : 0,
+      subGlowOpacity: v === 'hub' ? 0 : 1,
+      showJoinQR: v === 'hub' && !mb,
       hubTx: this.state.hubTx, hubTy: this.state.hubTy,
-      mainPadTop: v === 'hub' ? 12 : this.state.secPad,
+      mainPadTop: 12,
       viewHub: v === 'hub', viewHome: v === 'home', viewPractice: v === 'practice',
       viewFilm: v === 'film', viewEvents: v === 'events',
       viewHealth: v === 'health',
@@ -636,36 +1170,27 @@ class Component extends DCLogic {
         { n: '5', glyph: '☵', title: 'Alkaline Water', body: 'Stay hydrated with alkaline water for better health and balance.' },
       ],
       guruStrengths: [
-        { glyph: '🎓', title: 'Education', body: 'A qualified medical doctor with a Master\u2019s degree in Medicine (MD) — bringing scientific clarity from biology, psychology and physiology to every teaching.' },
+        { glyph: '🎓', title: 'Education', body: 'A qualified medical doctor — MD in Anaesthesiology — bringing scientific clarity from biology, psychology and physiology to every teaching.' },
         { glyph: '☾', title: '25 years of meditation', body: 'Over 25 years of dedicated practice and deep study of consciousness — from Anapanasati breath awareness to the science of prana and the energy body.' },
         { glyph: '༄', title: 'Kundalini-awakened guru', body: 'A guide who has walked the path — demystifying kundalini and guiding real awakening journeys with patience, compassion and direct experience.' },
       ],
-      guruTestimonials: [
+      floatVoices: [
         { text: '“A doctor in a white coat heals the body; a spiritual teacher heals the soul.”', name: 'Manohar Gnani' },
-        { text: '“Spiritual knowledge + scientific knowledge + simplicity + compassion + thirst for human evolution = Dr. Hari Krishna sir”', name: 'Syamala Gowri' },
-        { text: '“He is a modern Guru for people who want to grow spiritually.”', name: 'Premalatha' },
-        { text: '“He is a torch bearer to many in spirituality.”', name: 'Kalyani' },
-      ],
-      wisdomTestimonials: [
         { text: '“He explains spiritual principles in a simple, logical and scientific way.”', name: 'Sreenivas Kumar G.' },
-        { text: '“Incredibly knowledgeable — a walking encyclopedia, with answers to even the most profound spiritual questions.”', name: 'Kavitha Reddy' },
-      ],
-      practiceTestimonials: [
-        { text: '“My thoughts really changed after listening to Hari sir — and I started doing meditation.”', name: 'Vamshi' },
         { text: '“Now I know what inner peace is, and how to attain it.”', name: 'Jyothi Gunda' },
-      ],
-      healthTestimonials: [
         { text: '“After knowing him I have not only improved my health but also my thinking towards my life.”', name: 'Sheela Shivraman' },
-        { text: '“His teachings have helped me navigate daily stress with a calm and grounded spirit.”', name: 'Hem' },
-      ],
-      eventTestimonials: [
+        { text: '“Incredibly knowledgeable — a walking encyclopedia, with answers to even the most profound spiritual questions.”', name: 'Kavitha Reddy' },
         { text: '“I have attended a few of his sessions — fantastic, and free of cost.”', name: 'Swathi G' },
+        { text: '“My thoughts really changed after listening to Hari sir — and I started doing meditation.”', name: 'Vamshi' },
+        { text: '“His teachings have helped me navigate daily stress with a calm and grounded spirit.”', name: 'Hem' },
+        { text: '“He is a torch bearer to many in spirituality.”', name: 'Kalyani' },
         { text: '“The Golden Age movement will definitely attract more youth towards meditation.”', name: 'Aruna Chatla' },
+        { text: '“Spiritual knowledge + scientific knowledge + simplicity + compassion + thirst for human evolution = Dr. Hari Krishna sir”', name: 'Syamala Gowri' },
       ],
       healthBenefits: [
         { glyph: '𑁍', title: 'Meditation', body: 'Calm the mind, connect with your soul — the foundation of all healing.' },
         { glyph: '☀', title: 'Sun gazing', body: 'Absorb natural sunlight — energize your body and mind.' },
-        { glyph: '𓂀', title: 'Earth gazing', body: 'Walk barefoot on the earth — stay grounded and recharge naturally.' },
+        { glyph: '𓂀', title: 'Earthing', body: 'Walk barefoot on the earth — stay grounded and recharge naturally.' },
         { glyph: '⚘', title: '41-day health diet program', body: 'A guided detox cycle, repeated every 6 months — download the full program below.' },
         { glyph: '☵', title: 'Alkaline water', body: 'Stay hydrated with alkaline water for better health and balance.' },
       ],
@@ -721,8 +1246,13 @@ class Component extends DCLogic {
       ],
       sessions: this.sessions(),
       hydCountdown: this.hydCountdown(),
+      hydUpcoming: Date.now() <= new Date('2026-07-26T18:00:00+05:30').getTime(),
+      upcomingEvents: this.splitGatherings().up,
+      pastEvents: this.splitGatherings().past,
+      hasUpcoming: this.splitGatherings().up.length > 0,
+      noUpcoming: this.splitGatherings().up.length === 0,
+      hasPast: this.splitGatherings().past.length > 0,
       events: [
-        { day: '15', month: 'AUG', title: '7-Day Silent Retreat', meta: 'All day · Rishikesh' },
       ],
     };
   }
