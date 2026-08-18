@@ -84,9 +84,9 @@ window.GAW_PHRASES = {
   /* Events */
   'Featured gathering': { hi: 'विशेष आयोजन', te: 'ప్రత్యేక సమావేశం', kn: 'ವಿಶೇಷ ಸಮಾವೇಶ', ta: 'சிறப்பு நிகழ்வு' },
   'View invitation ↗': { hi: 'निमंत्रण देखें ↗', te: 'ఆహ్వానం చూడండి ↗', kn: 'ಆಮಂತ್ರಣ ನೋಡಿ ↗', ta: 'அழைப்பிதழ் காண ↗' },
-  'Questions? info@goldenagewisdom.org': { hi: 'प्रश्न? info@goldenagewisdom.org', te: 'ప్రశ్నలా? info@goldenagewisdom.org', kn: 'ಪ್ರಶ್ನೆಗಳೇ? info@goldenagewisdom.org', ta: 'கேள்விகளா? info@goldenagewisdom.org' },
+  'Questions? goldenageguruteachings@gmail.com': { hi: 'प्रश्न? goldenageguruteachings@gmail.com', te: 'ప్రశ్నలా? goldenageguruteachings@gmail.com', kn: 'ಪ್ರಶ್ನೆಗಳೇ? goldenageguruteachings@gmail.com', ta: 'கேள்விகளா? goldenageguruteachings@gmail.com' },
   'Daily live sessions': { hi: 'प्रतिदिन सजीव सत्र', te: 'ప్రతిరోజూ ప్రత్యక్ష సెషన్లు', kn: 'ಪ್ರತಿದಿನ ನೇರ ಸೆಷನ್‌ಗಳು', ta: 'தினசரி நேரடி அமர்வுகள்' },
-  'Mon–Sat · Sunday rest': { hi: 'सोम–शनि · रविवार विश्राम', te: 'సోమ–శని · ఆదివారం విశ్రాంతి', kn: 'ಸೋಮ–ಶನಿ · ಭಾನುವಾರ ವಿಶ್ರಾಂತಿ', ta: 'திங்–சனி · ஞாயிறு ஓய்வு' },
+  'Every day · including Sunday': { hi: 'हर दिन · रविवार सहित', te: 'ప్రతిరోజూ · ఆదివారం సహా', kn: 'ಪ್ರತಿದಿನ · ಭಾನುವಾರ ಸೇರಿದಂತೆ', ta: 'தினமும் · ஞாயிறு உட்பட' },
   'Watch live on YouTube — free, worldwide': { hi: 'YouTube पर सजीव देखें — निःशुल्क, विश्वभर', te: 'YouTubeలో ప్రత్యక్షం చూడండి — ఉచితం, ప్రపంచవ్యాప్తం', kn: 'YouTubeನಲ್ಲಿ ನೇರ ನೋಡಿ — ಉಚಿತ, ವಿಶ್ವಾದ್ಯಂತ', ta: 'YouTube-ல் நேரடியாகப் பாருங்கள் — இலவசம், உலகெங்கும்' },
   'Zoom circle — members only': { hi: 'ज़ूम मंडल — केवल सदस्यों हेतु', te: 'జూమ్ వలయం — సభ్యులకు మాత్రమే', kn: 'ಝೂಮ್ ವಲಯ — ಸದಸ್ಯರಿಗೆ ಮಾತ್ರ', ta: 'சூம் வட்டம் — உறுப்பினர்களுக்கு மட்டும்' },
   'Join on Zoom and ask Dr. Hari your open spiritual questions — 1:1, live.': { hi: 'ज़ूम पर जुड़ें और डॉ. हरि से अपने आध्यात्मिक प्रश्न पूछें — आमने-सामने, सजीव।', te: 'జూమ్‌లో చేరి డా. హరిని మీ ఆధ్యాత్మిక ప్రశ్నలు అడగండి — నేరుగా, ప్రత్యక్షంగా.', kn: 'ಝೂಮ್‌ನಲ್ಲಿ ಸೇರಿ ಡಾ. ಹರಿಯವರಿಗೆ ನಿಮ್ಮ ಆಧ್ಯಾತ್ಮಿಕ ಪ್ರಶ್ನೆ ಕೇಳಿ — ನೇರವಾಗಿ, ಲೈವ್.', ta: 'சூமில் இணைந்து டாக்டர் ஹரியிடம் உங்கள் ஆன்மீகக் கேள்விகளைக் கேளுங்கள் — நேரடியாக.' },

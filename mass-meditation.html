@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #09071a; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; -webkit-font-smoothing: antialiased; }
+  a { color: #d5b77c; text-decoration: none; }
+  a:hover { color: #f0dcaf; }
+  * { box-sizing: border-box; }
+  ::selection { background: rgba(213,183,124,0.28); }
+  @keyframes emberDrift { 0%,100% { opacity: 0.45; } 50% { opacity: 1; } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes panelIn { from { opacity: 0; transform: translateY(16px) scale(0.99); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
+  @media (max-width: 760px) { .v-hide { display: none !important; } }
+  /* The page is deliberately non-scrolling, so on short viewports the content must
+     shrink to fit its box rather than overflow past the top edge into the nav. */
+  @media (max-height: 620px) { .v-short { display: none !important; } }
+  @media (max-height: 470px) { .v-shorter { display: none !important; } }
+  .v-scroll::-webkit-scrollbar { width: 6px; }
+  .v-scroll::-webkit-scrollbar-thumb { background: rgba(213,183,124,0.3); border-radius: 99px; }
+</style>
+</helmet>
+<div style="position: relative; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; background: #09071a">
+
+  <img src="assets/film-poster.png" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; opacity: 0.86">
+  <sc-if value="{{ filmAmbient }}" hint-placeholder-val="{{ false }}">
+    <video src="assets/peace-film.mp4" ref="{{ filmRef }}" playsinline preload="metadata" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.34) translateY(7%); background: #09071a; filter: brightness(0.86)"></video>
+  </sc-if>
+  <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,7,26,0.5) 0%, rgba(9,7,26,0.12) 32%, rgba(9,7,26,0.82) 78%, #09071a 100%)"></span>
+  <span aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(1000px 700px at 20% 62%, rgba(9,7,26,0.46), transparent 72%)"></span>
+
+  <nav style="position: relative; z-index: 20; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 4vw, 44px) 10px">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px">
+      <img src="assets/logo-128.webp" alt="Golden Age Wisdom" width="26" height="26" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; opacity: 0.92">
+      <span class="v-hide" style="font-family: 'Marcellus', serif; font-size: 11.5px; letter-spacing: 0.22em; color: rgba(236,220,180,0.75)">GOLDEN AGE WISDOM</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 14px">
+      <span style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.3); background: rgba(20,15,40,0.5); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: {{ statusColor }}">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: {{ statusDot }}; box-shadow: 0 0 9px {{ statusDot }}; animation: emberDrift 2.6s ease-in-out infinite"></span>{{ chipLabel }}
+      </span>
+      <a href="index.html" title="Return to Home" style="display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 8px 18px 8px 8px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.4); background: rgba(20,15,40,0.55); backdrop-filter: blur(10px); color: #e6d3a8; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; white-space: nowrap" style-hover="border-color: rgba(230,211,168,0.85); color: #f7ecd0"><span style="width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(213,183,124,0.5); background: radial-gradient(circle at 38% 34%, rgba(230,211,168,0.35), rgba(184,151,88,0.1))"><svg viewBox="0 0 100 100" style="width: 13px; height: 13px; display: block"><polygon points="50,8 86,71 14,71" fill="none" stroke="#f7f1e3" stroke-width="6" stroke-linejoin="round"></polygon><polygon points="50,92 14,29 86,29" fill="none" stroke="#f7f1e3" stroke-width="6" stroke-linejoin="round"></polygon></svg></span>Go back</a>
+    </div>
+  </nav>
+
+  <main data-screen-label="The sit" class="v-scroll" style="position: relative; z-index: 10; flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-end; width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px) clamp(18px, 3vh, 30px); animation: riseIn 0.7s ease both">
+    <div class="v-shorter" style="flex-shrink: 0; font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(238,211,150,0.98); margin-bottom: 12px; text-shadow: 0 2px 14px rgba(6,4,16,0.95)">Free · nothing to install · no technique to learn</div>
+    <h1 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(30px, 5.2vw, 64px); line-height: 1.05; margin: 0; max-width: 15em; color: #fbf6ea; text-wrap: balance; text-shadow: 0 3px 26px rgba(6,4,16,0.9), 0 1px 3px rgba(6,4,16,0.7)">Thousands of people close their eyes at the same moment.</h1>
+    <p class="v-hide v-short" style="flex-shrink: 0; max-width: 34em; margin: 16px 0 0; font-size: clamp(14px, 1.5vw, 17px); font-weight: 200; line-height: 1.6; color: rgba(238,232,219,0.97); text-wrap: pretty; text-shadow: 0 2px 18px rgba(6,4,16,0.92)">Thirty minutes of silence, every day of the week — Sundays included. It is evening in India when it begins — so on your clock it may be morning or midday. The hour differs. The moment does not.</p>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: clamp(12px, 2vw, 22px); margin-top: clamp(18px, 3vh, 32px)">
+      <div style="padding: 15px 22px; border-radius: 20px; border: 1px solid rgba(213,183,124,0.38); background: rgba(20,15,42,0.72); backdrop-filter: blur(10px)">
+        <div style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(184,151,88,0.95)">{{ nextLabel }}</div>
+        <div style="font-family: 'Marcellus', serif; font-size: clamp(22px, 3vw, 33px); line-height: 1.15; margin: 5px 0 3px; color: #f7ecd0">{{ yourWhen }}</div>
+        <div style="font-size: 12.5px; font-weight: 300; color: rgba(190,182,168,0.95)">{{ yourWhere }}</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px">
+        <a href="{{ primaryHref }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; padding: 14px 30px; border-radius: 999px; background: linear-gradient(135deg, #e6d3a8, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-size: 14.5px; font-weight: 500" style-hover="filter: brightness(1.07)">{{ primaryLabel }}</a>
+        <a href="{{ ytHref }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: baseline; gap: 8px; padding: 9px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.04); color: rgba(226,219,204,0.95); font-size: 12.5px; font-weight: 300" style-hover="border-color: rgba(213,183,124,0.7); color: #f7ecd0">If Zoom is full, join us on the YouTube live stream</a>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
+          <button onClick="{{ downloadIcs }}" style="padding: 0; border: none; background: none; color: rgba(207,200,186,0.9); font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 300; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(207,200,186,0.32); cursor: pointer" style-hover="color: #e6d3a8">Add to my calendar</button>
+          <button onClick="{{ openFootage }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.55); background: rgba(213,183,124,0.12); color: #f0dcaf; font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 400; cursor: pointer; backdrop-filter: blur(8px)" style-hover="border-color: rgba(230,211,168,0.95); background: rgba(213,183,124,0.22); color: #fbf1d9"><span style="font-size: 9px">▶</span>Watch the film · 1 min 37</button>
+        </div>
+        <!-- The sit is the doorway; the Circle is the practice it opens onto. Named here,
+             where someone has just decided to sit, rather than as a pill on the home page. -->
+        <!-- The ongoing practice this sit opens onto: pick a daily hour and keep it lit.
+             Named simply — "hold your hour" says the whole deal in three words. -->
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; max-width: 44em; margin: 10px 0 0; padding: 14px 18px; border-radius: 18px; border: 1px solid rgba(213,183,124,0.3); background: rgba(213,183,124,0.07)">
+          <div style="flex: 1 1 260px; min-width: 0">
+            <div style="font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(184,151,88,0.95)">The Unbroken Circle</div>
+            <p style="margin: 5px 0 0; font-size: 12.5px; font-weight: 300; line-height: 1.55; color: rgba(206,198,184,0.95); text-wrap: pretty">We are filling all 24 hours of the day with meditation, so someone, somewhere, is always sitting. Pick the hour that suits you and keep it lit.</p>
+          </div>
+          <a href="/circle" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.6); background: rgba(213,183,124,0.14); color: #f0dcaf; font-size: 13px; font-weight: 400; white-space: nowrap" style-hover="border-color: rgba(230,211,168,0.95); background: rgba(213,183,124,0.24); color: #fbf1d9"><span style="width: 7px; height: 7px; border-radius: 50%; background: #7ecb8f; box-shadow: 0 0 9px #7ecb8f"></span>Hold your hour</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 9px; margin-top: clamp(16px, 3vh, 28px); padding-top: clamp(14px, 2.4vh, 22px); border-top: 1px solid rgba(255,255,255,0.09)">
+      <sc-for list="{{ panels }}" as="p" hint-placeholder-count="4">
+        <button onClick="{{ p.open }}" style="padding: 8px 17px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: rgba(207,200,186,0.9); font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 400; cursor: pointer; white-space: nowrap" style-hover="border-color: rgba(213,183,124,0.7); color: #f7ecd0">{{ p.label }}</button>
+      </sc-for>
+    </div>
+  </main>
+
+  <!-- WHAT HAPPENS -->
+  <sc-if value="{{ panelRitual }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closePanelBackdrop }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(8,6,20,0.9); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; padding: clamp(14px, 4vw, 40px)">
+      <div class="v-scroll" style="width: min(960px, 100%); max-height: 86vh; overflow-y: auto; padding: clamp(22px, 3vw, 34px); border-radius: 26px; border: 1px solid rgba(255,255,255,0.1); background: rgba(18,13,38,0.96); animation: panelIn 0.4s ease both">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 22px">
+          <div>
+            <div style="font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(184,151,88,0.9)">Your first sit</div>
+            <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 8px 0 0; color: #f2e9d8">Three things happen. That is all.</h2>
+          </div>
+          <button onClick="{{ closePanel }}" aria-label="Close" style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background: none; color: rgba(207,200,186,0.9); font-size: 15px; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6); color: #f7ecd0">×</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
+          <sc-for list="{{ ritual }}" as="r" hint-placeholder-count="3">
+            <div style="display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.035)">
+              <span style="font-family: 'Marcellus', serif; font-size: 14px; color: rgba(213,183,124,0.85)">{{ r.num }}</span>
+              <span style="font-family: 'Marcellus', serif; font-size: 18px; line-height: 1.25; color: #f2e9d8">{{ r.title }}</span>
+              <span style="font-size: 13px; font-weight: 200; line-height: 1.6; color: rgba(206,198,184,0.9); text-wrap: pretty">{{ r.body }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- WHY -->
+  <sc-if value="{{ panelWhy }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closePanelBackdrop }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(8,6,20,0.9); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; padding: clamp(14px, 4vw, 40px)">
+      <div class="v-scroll" style="width: min(1000px, 100%); max-height: 86vh; overflow-y: auto; padding: clamp(22px, 3vw, 34px); border-radius: 26px; border: 1px solid rgba(255,255,255,0.1); background: rgba(18,13,38,0.96); animation: panelIn 0.4s ease both">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 22px">
+          <div>
+            <div style="font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(184,151,88,0.9)">Why a mass meditation</div>
+            <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 8px 0 0; color: #f2e9d8">The claim is old, and it has been measured.</h2>
+          </div>
+          <button onClick="{{ closePanel }}" aria-label="Close" style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background: none; color: rgba(207,200,186,0.9); font-size: 15px; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6); color: #f7ecd0">×</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px">
+          <sc-for list="{{ why }}" as="w" hint-placeholder-count="5">
+            <div style="display: flex; flex-direction: column; gap: 7px; padding: 18px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03)">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px">
+                <span style="font-family: 'Marcellus', serif; font-size: 13.5px; color: rgba(213,183,124,0.8)">{{ w.num }}</span>
+                <span style="font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(160,152,138,0.9)">{{ w.year }}</span>
+              </div>
+              <span style="font-family: 'Marcellus', serif; font-size: 16.5px; line-height: 1.28; color: #f2e9d8">{{ w.title }}</span>
+              <span style="font-size: 12.5px; font-weight: 200; line-height: 1.6; color: rgba(200,192,178,0.9); text-wrap: pretty">{{ w.body }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- COUNT ME IN -->
+  <sc-if value="{{ panelPledge }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closePanelBackdrop }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(8,6,20,0.9); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; padding: clamp(14px, 4vw, 40px)">
+      <div style="width: min(620px, 100%); max-height: 86vh; overflow-y: auto; padding: clamp(26px, 3.4vw, 40px); border-radius: 26px; border: 1px solid rgba(255,255,255,0.1); background: rgba(18,13,38,0.96); text-align: center; animation: panelIn 0.4s ease both">
+        <sc-if value="{{ notPledged }}" hint-placeholder-val="{{ true }}">
+          <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 0 0 10px; color: #f2e9d8">Count me in tonight.</h2>
+          <p style="margin: 0 0 22px; font-size: 14px; font-weight: 200; line-height: 1.6; color: rgba(206,198,184,0.9)">Say so and we will keep a seat in mind for you. No account, no email — your name stays on this device.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center">
+            <input value="{{ nameVal }}" onChange="{{ onName }}" onKeyDown="{{ onKey }}" placeholder="Your name" style="flex: 1 1 190px; min-width: 0; padding: 13px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); color: #f2e9d8; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; outline: none" style-focus="border-color: rgba(213,183,124,0.7)">
+            <input value="{{ countryVal }}" onChange="{{ onCountry }}" onKeyDown="{{ onKey }}" placeholder="Country (optional)" style="flex: 1 1 160px; min-width: 0; padding: 13px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); color: #f2e9d8; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; outline: none" style-focus="border-color: rgba(213,183,124,0.7)">
+            <button onClick="{{ submitPledge }}" style="padding: 13px 28px; border-radius: 999px; border: none; background: linear-gradient(135deg, #e6d3a8, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer" style-hover="filter: brightness(1.07)">I will sit</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ pledged }}" hint-placeholder-val="{{ false }}">
+          <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 0 0 10px; color: #f2e9d8">You are counted, {{ pledgeName }}.</h2>
+          <p style="margin: 0 0 20px; font-size: 14px; font-weight: 200; line-height: 1.6; color: rgba(206,198,184,0.9)">{{ yourWhen }} — {{ yourWhere }}.</p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center">
+            <button onClick="{{ downloadIcs }}" style="padding: 12px 24px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); background: none; color: rgba(232,225,210,0.95); font-family: 'Outfit', sans-serif; font-size: 13.5px; font-weight: 300; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6)">Add to my calendar</button>
+            <a href="{{ whatsappShare }}" target="_blank" rel="noopener" style="padding: 12px 24px; border-radius: 999px; border: 1px solid rgba(126,203,143,0.35); color: #a7dcb4; font-size: 13.5px; font-weight: 300" style-hover="border-color: rgba(126,203,143,0.8)">Bring someone with you</a>
+          </div>
+        </sc-if>
+        <button onClick="{{ closePanel }}" style="margin-top: 22px; padding: 0; border: none; background: none; color: rgba(160,152,138,0.9); font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 300; text-decoration: underline; text-underline-offset: 3px; cursor: pointer" style-hover="color: #e6d3a8">Close</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- CIRCLES NEAR YOU -->
+  <sc-if value="{{ panelGroups }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closePanelBackdrop }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(8,6,20,0.9); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; padding: clamp(14px, 4vw, 40px)">
+      <div class="v-scroll" style="width: min(960px, 100%); max-height: 86vh; overflow-y: auto; padding: clamp(22px, 3vw, 34px); border-radius: 26px; border: 1px solid rgba(255,255,255,0.1); background: rgba(18,13,38,0.96); animation: panelIn 0.4s ease both">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px">
+          <div>
+            <div style="font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(184,151,88,0.9)">Circles near you</div>
+            <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 8px 0 0; color: #f2e9d8">A circle in your city already keeps this evening open.</h2>
+          </div>
+          <button onClick="{{ closePanel }}" aria-label="Close" style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background: none; color: rgba(207,200,186,0.9); font-size: 15px; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6); color: #f7ecd0">×</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px">
+          <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+            <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.032); transition: border-color 0.3s" style-hover="border-color: rgba(213,183,124,0.45)">
+              <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 36% 32%, rgba(230,211,168,0.38), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.42); font-family: 'Marcellus', serif; font-size: 13.5px; color: #f7ecd0">{{ g.initial }}</span>
+              <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px">
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px">
+                  <span style="min-width: 0"><span style="font-family: 'Marcellus', serif; font-size: 16px; color: #f2e9d8">{{ g.city }}</span> <span style="font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(184,151,88,0.95)">{{ g.meets }}</span></span>
+                  <a href="{{ g.link }}" target="_blank" rel="noopener" style="flex-shrink: 0; padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(126,203,143,0.4); color: #a7dcb4; font-size: 11px; white-space: nowrap" style-hover="border-color: rgba(126,203,143,0.85); color: #c2ebcc">Join the group →</a>
+                </div>
+                <p style="margin: 0; font-size: 12px; font-weight: 200; line-height: 1.55; color: rgba(206,198,184,0.9); text-wrap: pretty">{{ g.says }}</p>
+                <div style="display: flex; gap: 5px; flex-wrap: wrap">
+                  <sc-for list="{{ g.helps }}" as="h" hint-placeholder-count="2">
+                    <span style="padding: 2px 8px; border-radius: 999px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.25); font-size: 9.5px; font-weight: 300; color: rgba(226,211,178,0.95); white-space: nowrap">{{ h }}</span>
+                  </sc-for>
+                  <span style="padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); font-size: 9.5px; font-weight: 300; color: rgba(160,152,138,0.95); white-space: nowrap">{{ g.sinceShort }}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ footageOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeFootage }}" style="position: fixed; inset: 0; z-index: 120; background: rgba(8,6,20,0.94); backdrop-filter: blur(14px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: clamp(16px, 4vw, 40px)">
+      <video src="assets/peace-film.mp4" poster="assets/film-poster.png" ref="{{ overlayRef }}" playsinline style="width: min(1040px, 100%); max-height: 72vh; border-radius: 20px; border: 1px solid rgba(213,183,124,0.28); background: #0d0a1c; box-shadow: 0 30px 90px rgba(0,0,0,0.6)"></video>
+      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center">
+        <span style="font-size: 12px; font-weight: 200; color: rgba(160,152,138,0.9)">Peace begins wherever you already are.</span>
+        <button onClick="{{ closeFilm }}" style="padding: 9px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: none; color: rgba(216,210,196,0.95); font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 300; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6); color: #f7ecd0">Close</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;footageSrc&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/peace-film.mp4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Film&quot;}}">
+class Component extends DCLogic {
+  wave = {
+    region: 'India & South Asia', offsetMin: 330, at: [20, 30], mins: 30, days: [0,1,2,3,4,5,6],
+    youtube: 'https://www.youtube.com/@GoldenAgeGurus/streams',
+    zoom: 'https://us05web.zoom.us/j/81783627692?pwd=gassAOQsZh3OCvmNRhPwKHyaFBV83H.1'
+  };
+
+  state = { now: Date.now(), panel: null, name: '', country: '', pledged: false, pledgeName: '', footageOpen: false, filmAmbient: false };
+
+  componentDidMount() {
+    // A 17-hour wait needs no per-second repaint; the copy is minute-grained.
+    this.timer = setInterval(() => this.setState({ now: Date.now() }), 20000);
+    try {
+      const p = JSON.parse(localStorage.getItem('gaw_peace_pledge') || 'null');
+      if (p && p.name) this.setState({ pledged: true, pledgeName: p.name });
+    } catch (e) {}
+    try {
+      const wide = window.matchMedia('(min-width: 900px)').matches;
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const saving = !!(navigator.connection && navigator.connection.saveData);
+      if (wide && !still && !saving) this.setState({ filmAmbient: true });
+    } catch (e) {}
+    this.onKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+      if (this.state.footageOpen) this.setState({ footageOpen: false });
+      else if (this.state.panel) this.setState({ panel: null });
+    };
+    window.addEventListener('keydown', this.onKeyDown);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    window.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  nextWindow(w, now) {
+    const shift = w.offsetMin * 60000;
+    const wall = new Date(now + shift);
+    const days = w.days || [0,1,2,3,4,5,6];
+    for (let d = 0; d < 9; d++) {
+      const base = Date.UTC(wall.getUTCFullYear(), wall.getUTCMonth(), wall.getUTCDate() + d);
+      if (!days.includes(new Date(base).getUTCDay())) continue;
+      const start = base + (w.at[0] * 60 + w.at[1]) * 60000 - shift;
+      const end = start + (w.mins || 30) * 60000;
+      if (now < end) return { start, end };
+    }
+    return null;
+  }
+
+  /* Plain language beats a ticking clock: "17 50 31" reads like a raffle. */
+  countdownText(ms) {
+    const total = Math.max(0, Math.floor(ms / 60000));
+    if (total < 1) return 'starting now';
+    if (total < 60) return 'in ' + total + (total === 1 ? ' minute' : ' minutes');
+    const h = Math.floor(total / 60), m = total % 60;
+    if (h < 12) return 'in ' + h + 'h ' + String(m).padStart(2, '0') + 'm';
+    return 'in about ' + h + ' hours';
+  }
+
+  at(ms, tz) {
+    try { return new Date(ms).toLocaleTimeString([], { timeZone: tz, hour: 'numeric', minute: '2-digit' }); }
+    catch (e) { return ''; }
+  }
+  dayAt(ms, tz) {
+    try { return new Date(ms).toLocaleDateString([], { timeZone: tz, weekday: 'long' }); }
+    catch (e) { return ''; }
+  }
+
+  renderVals() {
+    const now = this.state.now, w = this.wave, pane = this.state.panel;
+    const win = this.nextWindow(w, now);
+    const live = now >= win.start && now < win.end;
+    const localTz = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { return ''; } })();
+    const minsLeft = Math.max(1, Math.round((win.end - now) / 60000));
+
+    const yourStart = this.at(win.start, localTz), yourEnd = this.at(win.end, localTz);
+    const yourDay = this.dayAt(win.start, localTz);
+    const istStart = this.at(win.start, 'Asia/Kolkata');
+
+    const stamp = (t) => new Date(t).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    const footage = (this.props.footageSrc ?? 'assets/peace-film.mp4').trim();
+
+    const panelDefs = [
+      { key: 'ritual', label: 'What happens' },
+      { key: 'why', label: 'Why world peace' },
+      { key: 'pledge', label: 'Count me in' },
+      { key: 'member', label: 'Join as a member', href: '/join' },
+    ];
+
+    return {
+      statusDot: live ? '#7ecb8f' : '#d5b77c',
+      statusColor: live ? '#a9dfb8' : 'rgba(213,183,124,0.95)',
+      chipLabel: live ? 'Sitting now' : this.countdownText(win.start - now),
+
+      nextLabel: live ? 'In session now' : 'Your next sit',
+      yourWhen: live ? minsLeft + ' minutes of silence left' : yourDay + ', ' + yourStart + ' – ' + yourEnd,
+      yourWhere: live ? 'Join at any point — nobody will notice you arrive' : istStart + ' in Hyderabad · ' + this.countdownText(win.start - now),
+      // Zoom is the room; YouTube is the overflow when the room fills.
+      primaryLabel: live ? 'Enter the silence on Zoom' : 'Sit with us on Zoom',
+      primaryHref: w.zoom,
+      ytHref: w.youtube,
+
+
+      panels: panelDefs.map(p => ({
+        label: p.label,
+        // A pill either opens a panel or goes somewhere — the member pill is the only one
+        // that leaves the page.
+        open: p.href ? () => { window.location.href = p.href; } : () => this.setState({ panel: p.key }),
+      })),
+      panelRitual: pane === 'ritual', panelWhy: pane === 'why',
+      panelPledge: pane === 'pledge', panelGroups: pane === 'groups',
+      closePanel: () => this.setState({ panel: null }),
+      closePanelBackdrop: (e) => { if (!e || e.target === e.currentTarget) this.setState({ panel: null }); },
+
+      ritual: [
+        { num: 'I', title: 'Arrive a minute early', body: 'Open the stream just before the hour. The room is already quiet — no greeting, no introduction, nothing to say.' },
+        { num: 'II', title: 'Close your eyes and watch the breath', body: 'That is the whole practice. No mantra, no posture to master. Sit comfortably and let the breath be watched for thirty minutes.' },
+        { num: 'III', title: 'Rest, then come back tomorrow', body: 'When the bell sounds, keep your eyes closed a moment longer. The same room opens tomorrow, and the one after.' }
+      ],
+
+      why: [
+        { num: 'I', year: '1960', title: 'A testable claim', body: 'Maharishi predicted that if one percent of a population meditated, the whole population would feel it.' },
+        { num: 'II', year: '1976', title: 'One percent, and the crime rate bent', body: 'Cities past that line showed crime around 16% lower. The pattern was named the Maharishi Effect.' },
+        { num: 'III', year: '1993', title: 'Four thousand people, eight weeks', body: '4,000 meditators in Washington DC; protocol pre-approved by 27 independent scientists and police. Homicide, rape and assault fell 23.3%.' },
+        { num: 'IV', year: 'Open', title: 'The hum underneath', body: 'Earth resonates near 7.8 Hz — the band the brain enters in deep meditation. Whether a mass sit moves it is unproven.' },
+        { num: 'V', year: 'Goal', title: 'Not one percent. Eight.', body: 'Eight percent of humanity in daily silence — where a golden age becomes ordinary weather.' }
+      ],
+
+      pledged: this.state.pledged, notPledged: !this.state.pledged,
+      pledgeName: this.state.pledgeName,
+      nameVal: this.state.name, countryVal: this.state.country,
+      onName: (e) => this.setState({ name: e.target.value }),
+      onCountry: (e) => this.setState({ country: e.target.value }),
+      onKey: (e) => { if (e.key === 'Enter') this.pledge(); },
+      submitPledge: () => this.pledge(),
+
+      whatsappShare: 'https://wa.me/?text=' + encodeURIComponent('Thirty minutes of silence for world peace — free, and it lands on your own clock. https://goldenagewisdom.org/peace'),
+      downloadIcs: () => {
+        const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Golden Age Wisdom//Peace//EN','BEGIN:VEVENT',
+          'SUMMARY:Mass Meditation for Global Peace',
+          'DESCRIPTION:Thirty minutes of silence for world peace. Watch: ' + w.youtube + ' — or join on Zoom: ' + w.zoom,
+          'DTSTART:' + stamp(win.start), 'DTEND:' + stamp(win.end),
+          'RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR,SA','END:VEVENT','END:VCALENDAR'].join('\r\n');
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+        a.download = 'global-peace-sit.ics';
+        a.click();
+      },
+
+      /* Regions, not people — no volunteer name or number on a public page. */
+      groups: [
+        { city: 'Hyderabad', initial: 'H', meets: 'Daily · 8:15 PM', sinceShort: 'Since 2019',
+          says: 'A volunteer meets first-timers at the gate — you will not walk in alone.',
+          helps: ['First-timers', 'Telugu · English'], link: 'https://chat.whatsapp.com/gaw-hyd' },
+        { city: 'Bengaluru', initial: 'B', meets: 'Daily · 8:15 PM', sinceShort: 'Since 2021',
+          says: 'Mats and shawls are kept at the back. Come straight from work.',
+          helps: ['First-timers', 'Kannada · English'], link: 'https://chat.whatsapp.com/gaw-blr' },
+        { city: 'Pune', initial: 'P', meets: 'Tue, Thu, Sat', sinceShort: 'Since 2022',
+          says: 'A living-room circle of about eleven, with tea afterwards.',
+          helps: ['Small group', 'Hindi · Marathi'], link: 'https://chat.whatsapp.com/gaw-pune' },
+        { city: 'Chennai', initial: 'C', meets: 'Daily · 8:20 PM', sinceShort: 'Since 2020',
+          says: 'Never meditated? Say so in the group and someone will sit beside you.',
+          helps: ['First-timers', 'Tamil · English'], link: 'https://chat.whatsapp.com/gaw-chn' }
+      ],
+
+      // This runtime drops boolean media attributes, so every playback flag is a property.
+      filmAmbient: !!this.state.filmAmbient && !!footage,
+      filmRef: (el) => {
+        if (!el || el._gawFilm) return;
+        el._gawFilm = true;
+        el.muted = true; el.defaultMuted = true; el.loop = true; el.volume = 0;
+        const go = () => el.play().catch(() => {});
+        if (el.readyState >= 2) go(); else el.addEventListener('loadeddata', go, { once: true });
+      },
+      overlayRef: (el) => {
+        if (!el) return;
+        el.controls = true;
+        el.muted = false;
+        if (footage && !el.src.endsWith(footage)) { el.src = footage; el.load(); }
+        el.play().catch(() => {});
+      },
+      footageOpen: !!this.state.footageOpen,
+      openFootage: () => this.setState({ footageOpen: true }),
+      // The video is a descendant of the closing backdrop, so guard on the target.
+      closeFootage: (e) => { if (!e || e.target === e.currentTarget) this.setState({ footageOpen: false }); },
+      closeFilm: () => this.setState({ footageOpen: false }),
+    };
+  }
+
+  pledge() {
+    const nm = this.state.name.trim();
+    if (!nm) return;
+    try { localStorage.setItem('gaw_peace_pledge', JSON.stringify({ name: nm, country: this.state.country.trim() })); } catch (e) {}
+    this.setState({ pledged: true, pledgeName: nm });
+  }
+}
+</script>
+</body>
+</html>

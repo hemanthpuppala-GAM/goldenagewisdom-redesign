@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #09071a; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; -webkit-font-smoothing: antialiased; }
+  a { color: #d5b77c; text-decoration: none; }
+  a:hover { color: #e6d3a8; }
+  * { box-sizing: border-box; }
+  ::selection { background: rgba(213,183,124,0.28); }
+  @keyframes breathe { 0% { transform: scale(0.9); opacity: 0.32; } 40% { transform: scale(1.1); opacity: 0.6; } 100% { transform: scale(0.9); opacity: 0.32; } }
+  @keyframes emberDrift { 0%,100% { opacity: 0.4; } 50% { opacity: 0.95; } }
+  @keyframes viewIn { from { opacity: 0; transform: translateY(10px) scale(0.985); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
+  .p-panel::-webkit-scrollbar { width: 6px; }
+  .p-panel::-webkit-scrollbar-thumb { background: rgba(213,183,124,0.3); border-radius: 99px; }
+  @media (max-width: 760px) {
+    .p-row { flex-direction: column !important; align-items: flex-start !important; gap: 5px !important; }
+    .p-hide { display: none !important; }
+    .p-legend { font-size: 11px !important; }
+  }
+  /* Comfortable touch targets on phones */
+  @media (max-width: 768px) {
+    nav a, nav button, footer a, footer button { display: inline-flex; align-items: center; min-height: 40px; }
+  }
+</style>
+</helmet>
+<div style="position: relative; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; background: #09071a">
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(700px 580px at 50% 42%, rgba(96,84,166,0.34), transparent 68%), radial-gradient(1000px 600px at 50% 112%, rgba(213,183,124,0.10), transparent 72%)"></div>
+
+  <!-- NAV -->
+  <nav style="position: relative; z-index: 20; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 4vw, 40px) 10px">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px">
+      <img src="assets/logo-128.webp" alt="Golden Age Wisdom" width="28" height="28" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover; opacity: 0.92">
+      <span class="p-hide" style="font-family: 'Marcellus', serif; font-size: 12px; letter-spacing: 0.22em; color: rgba(242,227,187,0.75)">GOLDEN AGE WISDOM</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <span style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.3); background: rgba(20,16,41,0.5); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: {{ statusColor }}">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: {{ statusDot }}; box-shadow: 0 0 9px {{ statusDot }}; animation: emberDrift 2.6s ease-in-out infinite"></span>{{ chipLabel }}
+      </span>
+      <a href="index.html" style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(207,200,186,0.6)" style-hover="color: #e6d3a8">Home</a>
+    </div>
+  </nav>
+
+  <!-- STAGE -->
+  <main style="position: relative; z-index: 10; flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 clamp(16px, 4vw, 40px)">
+
+    <!-- THE SIT -->
+    <sc-if value="{{ viewSit }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="The sit" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(8px, 1.6vh, 18px); animation: viewIn 0.45s ease">
+        <h1 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(23px, 3.4vw, 40px); line-height: 1.1; margin: 0; color: #f7f1e3; text-align: center; text-wrap: balance">Sit for the peace of the whole world.</h1>
+        <p class="p-hide" style="max-width: 430px; margin: 0; font-size: clamp(13px, 1.4vw, 15px); font-weight: 200; line-height: 1.6; color: rgba(216,210,196,0.85); text-align: center; text-wrap: pretty">Thirty minutes of silence, every evening. Thousands of us close our eyes at the same moment. Nothing to install, no technique to learn.</p>
+
+        <div style="flex: 1 1 auto; min-height: 160px; width: 100%; container-type: size; display: flex; align-items: center; justify-content: center">
+          <div style="position: relative; font-size: min(100cqmin, 400px); width: 1em; height: 1em; flex-shrink: 0">
+            <sc-if value="{{ showBreath }}" hint-placeholder-val="{{ true }}">
+              <span style="position: absolute; inset: 6%; border-radius: 50%; border: 1px solid rgba(213,183,124,0.22); animation: breathe 10s ease-in-out infinite"></span>
+              <span style="position: absolute; inset: 20%; border-radius: 50%; border: 1px solid rgba(157,143,224,0.20); animation: breathe 10s ease-in-out infinite; animation-delay: -2.4s"></span>
+              <span style="position: absolute; inset: 34%; border-radius: 50%; background: radial-gradient(circle, rgba(213,183,124,0.14), transparent 72%); animation: breathe 10s ease-in-out infinite; animation-delay: -3.4s"></span>
+            </sc-if>
+
+            <!-- the hours. Fixed frame: shared with the sit marker and the now-hand. -->
+            <div style="position: absolute; inset: 0">
+              <sc-for list="{{ petals }}" as="p" hint-placeholder-count="24">
+                <span style="position: absolute; left: 50%; top: 0; width: 2px; height: 50%; margin-left: -1px; transform-origin: 50% 100%; transform: rotate({{ p.deg }}deg)">
+                  <span style="position: absolute; top: 0; left: 50%; width: {{ p.w }}; height: {{ p.h }}; margin-left: {{ p.off }}; border-radius: 99px; background: {{ p.bg }}"></span>
+                </span>
+              </sc-for>
+            </div>
+
+            <sc-for list="{{ ghosts }}" as="g" hint-placeholder-count="2">
+              <span style="position: absolute; left: 50%; top: 0; width: 2px; height: 50%; margin-left: -1px; transform-origin: 50% 100%; transform: rotate({{ g.deg }}deg)">
+                <span style="position: absolute; top: 4%; left: 50%; width: 0.017em; height: 0.017em; margin-left: -0.0085em; border-radius: 50%; background: rgba(185,177,160,0.62)"></span>
+              </span>
+            </sc-for>
+
+            <span style="position: absolute; left: 50%; top: 0; width: 2px; height: 50%; margin-left: -1px; transform-origin: 50% 100%; transform: rotate({{ sitDeg }}deg)">
+              <span style="position: absolute; top: 1%; left: 50%; width: 0.024em; height: 20%; margin-left: -0.012em; border-radius: 99px; background: linear-gradient(180deg, #f7ecd0, #b89758); box-shadow: 0 0 0.07em rgba(213,183,124,0.95)"></span>
+            </span>
+
+            <span style="position: absolute; left: 50%; top: 0; width: 1px; height: 50%; margin-left: -0.5px; transform-origin: 50% 100%; transform: rotate({{ nowDeg }}deg); background: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.04))">
+              <span style="position: absolute; top: -0.008em; left: -0.0075em; width: 0.017em; height: 0.017em; border-radius: 50%; background: #fff; box-shadow: 0 0 0.035em rgba(255,255,255,0.9)"></span>
+            </span>
+
+            <sc-for list="{{ cardinals }}" as="c" hint-placeholder-count="4">
+              <span style="position: absolute; left: {{ c.left }}; top: {{ c.top }}; transform: translate(-50%,-50%); font-size: max(11px, 0.026em); letter-spacing: 0.18em; color: rgba(185,177,160,0.85)">{{ c.label }}</span>
+            </sc-for>
+
+            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; pointer-events: none">
+              <sc-if value="{{ isCountdown }}" hint-placeholder-val="{{ true }}">
+                <div style="font-size: max(11px, 0.028em); letter-spacing: 0.26em; text-transform: uppercase; color: rgba(184,151,88,0.9)">Begins in</div>
+                <div style="display: flex; align-items: flex-start; gap: 0.022em">
+                  <sc-for list="{{ clock }}" as="u" hint-placeholder-count="3">
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.012em">
+                      <span style="font-family: 'Marcellus', serif; font-size: max(32px, 0.13em); line-height: 0.94; color: #f7f1e3; font-variant-numeric: tabular-nums; text-shadow: 0 0 0.1em rgba(213,183,124,0.45)">{{ u.val }}</span>
+                      <span style="font-size: max(11px, 0.032em); font-weight: 300; letter-spacing: 0.08em; color: rgba(184,151,88,0.95)">{{ u.label }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="font-size: max(12px, 0.034em); font-weight: 300; color: rgba(185,177,160,0.9); margin-top: 0.012em">{{ localWhen }}</div>
+              </sc-if>
+              <sc-if value="{{ isLive }}" hint-placeholder-val="{{ false }}">
+                <div style="font-family: 'Marcellus', serif; font-size: max(22px, 0.09em); line-height: 1.15; color: #a9dfb8; text-align: center; text-shadow: 0 0 0.1em rgba(126,203,143,0.4)">The silence<br>has begun</div>
+                <div style="font-size: max(12px, 0.032em); font-weight: 300; color: rgba(216,210,196,0.8); margin-top: 0.02em">{{ endsIn }} remaining</div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-legend" style="font-size: 11.5px; font-weight: 200; letter-spacing: 0.03em; color: rgba(154,146,127,0.9); text-align: center; text-wrap: pretty">{{ tzNote }} · gold is tonight's sit on a dial of one full day</div>
+
+        <sc-if value="{{ hasFootage }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ openFootage }}" style="margin-top: -2px; padding: 0; border: none; background: none; color: rgba(154,146,127,0.9); font-family: 'Outfit', sans-serif; font-size: 11.5px; font-weight: 200; letter-spacing: 0.03em; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(154,146,127,0.35); cursor: pointer" style-hover="color: rgba(230,211,168,0.95); text-decoration-color: rgba(213,183,124,0.6)">{{ footageLabel }}</button>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- WHY -->
+    <sc-if value="{{ viewWhy }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Why world peace" class="p-panel" style="width: min(880px, 100%); max-height: 100%; overflow-y: auto; padding: clamp(14px, 2vw, 20px) clamp(14px, 2.4vw, 24px); border-radius: 26px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); animation: viewIn 0.45s ease">
+        <div style="text-align: center; margin-bottom: 12px">
+          <div style="font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(184,151,88,0.9); margin-bottom: 5px">Why a mass meditation</div>
+          <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(20px, 2.5vw, 27px); line-height: 1.18; margin: 0 0 5px; color: #f2e9d8">Peace is not negotiated. It is generated.</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px">
+          <sc-for list="{{ why }}" as="w" hint-placeholder-count="5">
+            <div style="display: flex; flex-direction: column; gap: 4px; padding: 11px 14px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09)">
+              <div style="display: flex; align-items: baseline; gap: 8px">
+                <span style="font-family: 'Marcellus', serif; font-size: 12px; letter-spacing: 0.1em; color: rgba(213,183,124,0.85)">{{ w.num }}</span>
+                <span style="font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(154,146,127,0.95)">{{ w.year }}</span>
+              </div>
+              <h3 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: 15.5px; line-height: 1.22; margin: 0; color: #f2e9d8">{{ w.title }}</h3>
+              <p style="margin: 0; font-size: 11.5px; font-weight: 200; line-height: 1.55; color: rgba(185,177,160,0.95); text-wrap: pretty">{{ w.body }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin: 10px 0 0; font-size: 10.5px; font-weight: 200; line-height: 1.5; color: rgba(154,146,127,0.95); text-align: center; text-wrap: pretty">These field-effect studies are debated — we cite them as why we sit, not as proof.</p>
+        <div aria-hidden="true" style="position: sticky; bottom: -1px; height: 20px; margin: 0 0 -1px; background: linear-gradient(rgba(9,7,26,0), rgba(9,7,26,0.92)); pointer-events: none"></div>
+      </div>
+    </sc-if>
+
+    <!-- FIRST SIT -->
+    <sc-if value="{{ viewFirst }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Your first sit" class="p-panel" style="width: min(820px, 100%); max-height: 100%; overflow-y: auto; padding: clamp(14px, 2vw, 20px) clamp(14px, 2.4vw, 24px); border-radius: 26px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); animation: viewIn 0.45s ease">
+        <div style="text-align: center; margin-bottom: 12px">
+          <div style="font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(184,151,88,0.9); margin-bottom: 5px">Your first sit</div>
+          <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(20px, 2.5vw, 27px); line-height: 1.18; margin: 0; color: #f2e9d8">There is nothing to prepare.</h2>
+        </div>
+        <sc-for list="{{ ritual }}" as="r" hint-placeholder-count="3">
+          <div style="display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 11px 0; border-top: 1px solid rgba(255,255,255,0.09); align-items: start">
+            <span style="font-family: 'Marcellus', serif; font-size: 13px; letter-spacing: 0.1em; color: rgba(213,183,124,0.85); padding-top: 2px">{{ r.num }}</span>
+            <div style="display: flex; flex-direction: column; gap: 3px">
+              <h3 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: 16.5px; line-height: 1.24; margin: 0; color: #f2e9d8">{{ r.title }}</h3>
+              <p style="margin: 0; font-size: 12.5px; font-weight: 200; line-height: 1.6; color: rgba(185,177,160,0.95); text-wrap: pretty">{{ r.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; padding-top: 13px; border-top: 1px solid rgba(255,255,255,0.09)">
+          <button onClick="{{ downloadIcs }}" style="padding: 11px 22px; border-radius: 999px; background: none; border: 1px solid rgba(255,255,255,0.18); color: rgba(242,233,216,0.95); font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 300; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6); color: #e6d3a8">Add to my calendar</button>
+          <a href="{{ whatsappShare }}" target="_blank" style="padding: 11px 22px; border-radius: 999px; border: 1px solid rgba(126,203,143,0.35); color: #a9dfb8; font-size: 13px; font-weight: 300" style-hover="border-color: rgba(126,203,143,0.75); color: #c2ebcc">Invite someone to sit</a>
+        </div>
+        <div aria-hidden="true" style="position: sticky; bottom: -1px; height: 20px; margin: 0 0 -1px; background: linear-gradient(rgba(9,7,26,0), rgba(9,7,26,0.92)); pointer-events: none"></div>
+      </div>
+    </sc-if>
+
+    <!-- COUNT ME IN -->
+    <sc-if value="{{ viewPledge }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Count me in" class="p-panel" style="width: min(560px, 100%); max-height: 100%; overflow-y: auto; padding: clamp(26px, 4vw, 40px) clamp(20px, 4vw, 36px); border-radius: 26px; background: linear-gradient(160deg, rgba(213,183,124,0.12), rgba(255,255,255,0.03)); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.3); text-align: center; animation: viewIn 0.45s ease">
+        <sc-if value="{{ notPledged }}" hint-placeholder-val="{{ true }}">
+          <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(22px, 3vw, 34px); line-height: 1.2; margin: 0 0 12px; color: #f2e9d8">Count me in tonight.</h2>
+          <p style="margin: 0 0 24px; font-size: 14px; font-weight: 200; line-height: 1.7; color: rgba(185,177,160,0.95)">{{ pledgeCount }} people have pledged to sit. Add your name — no account, no email needed.</p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px">
+            <input value="{{ nameVal }}" onChange="{{ onName }}" onKeyDown="{{ onKey }}" placeholder="First name" style="width: 170px; background: rgba(0,0,0,0.22); border: none; border-bottom: 1px solid rgba(255,255,255,0.22); padding: 11px 4px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 14.5px; font-weight: 300; outline: none; text-align: center">
+            <input value="{{ countryVal }}" onChange="{{ onCountry }}" onKeyDown="{{ onKey }}" placeholder="Country" style="width: 170px; background: rgba(0,0,0,0.22); border: none; border-bottom: 1px solid rgba(255,255,255,0.22); padding: 11px 4px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 14.5px; font-weight: 300; outline: none; text-align: center">
+          </div>
+          <button onClick="{{ submitPledge }}" style="padding: 13px 32px; border-radius: 999px; border: none; background: linear-gradient(135deg, #e6d3a8, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14.5px; cursor: pointer; box-shadow: 0 8px 30px rgba(213,183,124,0.28)" style-hover="box-shadow: 0 10px 42px rgba(213,183,124,0.55)">Count me in</button>
+        </sc-if>
+        <sc-if value="{{ pledged }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 14px">
+            <span style="width: 50px; height: 50px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(213,183,124,0.4), rgba(184,151,88,0.1)); border: 1px solid rgba(213,183,124,0.5); display: flex; align-items: center; justify-content: center; color: #e6d3a8; font-size: 18px">✓</span>
+            <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(21px, 2.8vw, 30px); margin: 0; color: #f2e9d8">You are counted, {{ pledgeName }}.</h2>
+            <p style="margin: 0; font-size: 14px; font-weight: 200; color: rgba(185,177,160,0.95)">{{ pledgeCount }} of us will be sitting with you. See you in the silence.</p>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- GROUPS -->
+    <sc-if value="{{ viewGroups }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Local groups" class="p-panel" style="width: min(920px, 100%); max-height: 100%; overflow-y: auto; padding: clamp(14px, 2vw, 20px) clamp(14px, 2.4vw, 24px); border-radius: 26px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); animation: viewIn 0.45s ease">
+        <div style="text-align: center; margin-bottom: 11px">
+          <div style="font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(184,151,88,0.9); margin-bottom: 5px">Circles near you</div>
+          <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(19px, 2.3vw, 24px); line-height: 1.2; margin: 0; color: #f2e9d8">A circle in your city already keeps this evening open.</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 9px">
+          <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+            <div style="display: flex; align-items: flex-start; gap: 10px; padding: 11px 13px; border-radius: 16px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.3s" style-hover="border-color: rgba(213,183,124,0.45)">
+              <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 36% 32%, rgba(230,211,168,0.4), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.45); font-family: 'Marcellus', serif; font-size: 14px; color: #f7ecd0">{{ g.initial }}</span>
+              <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+                  <span style="min-width: 0"><span style="font-family: 'Marcellus', serif; font-size: 15.5px; color: #f2e9d8">{{ g.city }}</span> <span style="font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(184,151,88,0.95)">{{ g.meets }}</span></span>
+                  <a href="{{ g.link }}" target="_blank" style="flex-shrink: 0; padding: 4px 11px; border-radius: 999px; border: 1px solid rgba(126,203,143,0.4); color: #a9dfb8; font-size: 11px; font-weight: 400; white-space: nowrap" style-hover="border-color: rgba(126,203,143,0.85); color: #c2ebcc">Join the group →</a>
+                </div>
+                <p style="margin: 0; font-size: 11.5px; font-weight: 200; line-height: 1.5; color: rgba(216,210,196,0.9); text-wrap: pretty">{{ g.says }}</p>
+                <div style="display: flex; gap: 5px; overflow: hidden">
+                  <sc-for list="{{ g.helps }}" as="h" hint-placeholder-count="2">
+                    <span style="padding: 2px 8px; border-radius: 999px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.25); font-size: 9.5px; font-weight: 300; color: rgba(230,211,168,0.95); white-space: nowrap">{{ h }}</span>
+                  </sc-for>
+                  <span style="padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); font-size: 9.5px; font-weight: 300; color: rgba(154,146,127,0.95); white-space: nowrap">{{ g.sinceShort }}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- Pinned: this is the whole point of the view, so it can never be the thing scrolled past. -->
+        <div style="position: sticky; bottom: 0; z-index: 2; margin-top: 10px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 11px 16px; border-radius: 16px; background: linear-gradient(120deg, rgba(58,53,71,0.96), rgba(30,25,48,0.96)); backdrop-filter: blur(12px); border: 1px dashed rgba(213,183,124,0.45)">
+          <div style="flex: 1; min-width: 210px; display: flex; flex-direction: column; gap: 2px">
+            <div style="font-family: 'Marcellus', serif; font-size: 16px; line-height: 1.2; color: #f2e9d8">Be the hands where you are.</div>
+            <p style="margin: 0; font-size: 11.5px; font-weight: 200; line-height: 1.5; color: rgba(185,177,160,0.95); text-wrap: pretty">A room, a mat, one evening a week. Every volunteer here is a meditator first — not staff, and never paid.</p>
+          </div>
+          <a href="mailto:goldenageguruteachings@gmail.com?subject=I%20would%20like%20to%20hold%20a%20room" style="flex-shrink: 0; padding: 8px 18px; border-radius: 999px; background: linear-gradient(135deg, #e6d3a8, #b89758); color: #241b06; font-size: 12px; font-weight: 600; white-space: nowrap" style-hover="color: #241b06; box-shadow: 0 6px 24px rgba(213,183,124,0.5)">Start a group in my city</a>
+        </div>
+        <div aria-hidden="true" style="position: sticky; bottom: -1px; height: 20px; margin: 0 0 -1px; background: linear-gradient(rgba(9,7,26,0), rgba(9,7,26,0.92)); pointer-events: none"></div>
+      </div>
+    </sc-if>
+  </main>
+
+  <!-- ACTION BAR — the one button never moves, on every view -->
+  <div style="position: relative; z-index: 20; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 10px clamp(16px, 4vw, 40px) clamp(12px, 2vh, 20px)">
+    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center">
+      <a href="{{ youtubeUrl }}" target="_blank" style="display: inline-flex; align-items: center; gap: 11px; padding: 14px 34px; border-radius: 999px; background: linear-gradient(135deg, #e6d3a8, #b89758); color: #241b06; font-weight: 600; font-size: 15.5px; box-shadow: 0 8px 34px rgba(213,183,124,0.32)" style-hover="color: #241b06; box-shadow: 0 10px 50px rgba(213,183,124,0.6)"><span style="font-size: 11px">▶</span> {{ primaryLabel }}</a>
+      <sc-if value="{{ zoomOpen }}" hint-placeholder-val="{{ true }}">
+        <a href="{{ zoomUrl }}" target="_blank" style="font-size: 12.5px; font-weight: 300; color: rgba(207,200,186,0.72); border-bottom: 1px solid rgba(213,183,124,0.28); padding-bottom: 2px" style-hover="color: #e6d3a8; border-color: rgba(213,183,124,0.8)">or Zoom — {{ seatsNote }}</a>
+      </sc-if>
+      <sc-if value="{{ zoomFull }}" hint-placeholder-val="{{ false }}">
+        <span style="font-size: 12px; font-weight: 300; color: rgba(224,163,163,0.95)">Zoom is full — the stream has no ceiling</span>
+      </sc-if>
+    </div>
+    <!-- VIEW SWITCHER -->
+    <div style="display: flex; align-items: center; gap: 7px; flex-wrap: wrap; justify-content: center; margin-top: 2px">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
+        <button onClick="{{ t.go }}" style="padding: 8px 17px; border-radius: 999px; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.color }}; font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 400; letter-spacing: 0.02em; cursor: pointer; white-space: nowrap" style-hover="border-color: rgba(213,183,124,0.7)">{{ t.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- FOOTAGE OVERLAY -->
+  <sc-if value="{{ footageOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeFootage }}" style="position: fixed; inset: 0; z-index: 120; background: rgba(8,6,20,0.94); backdrop-filter: blur(14px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: clamp(16px, 4vw, 40px)">
+      <video src="assets/peace-film.mp4" poster="assets/film-poster.png" ref="{{ overlayRef }}" playsinline style="width: min(1000px, 100%); max-height: 74vh; border-radius: 20px; border: 1px solid rgba(213,183,124,0.28); background: #0d0a1c; box-shadow: 0 30px 90px rgba(0,0,0,0.6)"></video>
+      <button onClick="{{ closeFilm }}" style="padding: 9px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: none; color: rgba(216,210,196,0.95); font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 300; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6); color: #f7ecd0">Close</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showBreathRings&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Atmosphere&quot;},&quot;showFutureWaves&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Atmosphere&quot;},&quot;zoomSeatsLeft&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:220,&quot;min&quot;:0,&quot;max&quot;:500,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Capacity&quot;},&quot;footageSrc&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/peace-film.mp4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Footage&quot;},&quot;footagePoster&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/film-poster.png&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Footage&quot;},&quot;footageLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Watch the film · 1 min 37&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Footage&quot;}}">
+class Component extends DCLogic {
+  wave = {
+    region: 'India & South Asia', offsetMin: 330, at: [20, 30], mins: 30, days: [1,2,3,4,5,6],
+    youtube: 'https://www.youtube.com/@GoldenAgeGurus/streams', zoom: 'https://zoom.us/j/gawpeace'
+  };
+  future = [
+    { region: 'Europe & Africa', offsetMin: 60, at: [20, 30] },
+    { region: 'Americas', offsetMin: -240, at: [20, 30] }
+  ];
+
+  state = { now: Date.now(), view: 'sit', pledgeCount: 1084, name: '', country: '', pledged: false, pledgeName: '', footageOpen: false };
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    try {
+      const p = JSON.parse(localStorage.getItem('gaw_peace_pledge') || 'null');
+      if (p && p.name) this.setState({ pledged: true, pledgeName: p.name });
+    } catch (e) {}
+    this.onKeyDown = (e) => { if (e.key === 'Escape') this.setState({ view: 'sit' }); };
+    window.addEventListener('keydown', this.onKeyDown);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    window.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  nextWindow(w, now) {
+    const shift = w.offsetMin * 60000;
+    const wall = new Date(now + shift);
+    const days = w.days || [0,1,2,3,4,5,6];
+    for (let d = 0; d < 9; d++) {
+      const base = Date.UTC(wall.getUTCFullYear(), wall.getUTCMonth(), wall.getUTCDate() + d);
+      if (!days.includes(new Date(base).getUTCDay())) continue;
+      const start = base + (w.at[0] * 60 + w.at[1]) * 60000 - shift;
+      const end = start + (w.mins || 30) * 60000;
+      if (now < end) return { start, end };
+    }
+    return null;
+  }
+
+  pad(n) { return String(n).padStart(2, '0'); }
+  split(ms) {
+    const s = Math.max(0, Math.floor(ms / 1000));
+    return { h: Math.floor(s / 3600), m: Math.floor((s % 3600) / 60), s: s % 60 };
+  }
+
+  renderVals() {
+    const now = this.state.now, w = this.wave, DAY = 86400000, v = this.state.view;
+    const win = this.nextWindow(w, now);
+    const live = now >= win.start && now < win.end;
+
+    const startDate = new Date(win.start);
+    const localTime = startDate.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const endLocal = new Date(win.end).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const localDay = startDate.toLocaleDateString([], { weekday: 'long' });
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    const cd = this.split(win.start - now), ed = this.split(win.end - now);
+
+    const bandStart = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()).getTime();
+    const deg = (t) => ((((t - bandStart) % DAY + DAY) % DAY) / DAY * 360).toFixed(2);
+
+    const petals = Array.from({ length: 24 }, (_, i) => {
+      const major = i % 6 === 0;
+      return {
+        deg: i * 15,
+        w: major ? '0.011em' : '0.007em',
+        h: major ? '12%' : '7%',
+        off: major ? '-0.0055em' : '-0.0035em',
+        bg: major ? 'rgba(213,183,124,0.72)' : 'rgba(213,183,124,0.38)'
+      };
+    });
+
+    const R = 35;
+    const cardinals = [0, 6, 12, 18].map(h => {
+      const a = (h / 24) * 2 * Math.PI;
+      return {
+        label: new Date(bandStart + h * 3600000).toLocaleTimeString([], { hour: 'numeric' }).replace(' ', ''),
+        left: (50 + R * Math.sin(a)).toFixed(1) + '%',
+        top: (50 - R * Math.cos(a)).toFixed(1) + '%'
+      };
+    });
+
+    const ghostList = (this.props.showFutureWaves ?? true) ? this.future : [];
+    const seatsLeft = this.props.zoomSeatsLeft ?? 220;
+    const zoomFull = seatsLeft <= 0;
+    const stamp = (t) => new Date(t).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+
+    const tabDefs = [
+      { key: 'sit', label: 'The sit' },
+      { key: 'why', label: 'Why world peace' },
+      { key: 'first', label: 'Your first sit' },
+      { key: 'pledge', label: 'Count me in' },
+      { key: 'groups', label: 'Local groups' }
+    ];
+
+    // The footage band stays hidden until a file is actually pointed at, so the
+    // page never shows a play button that opens nothing.
+    const footage = (this.props.footageSrc ?? 'assets/peace-film.mp4').trim();
+
+    return {
+      hasFootage: !!footage,
+      footageSrc: footage,
+      footagePoster: (this.props.footagePoster ?? 'assets/film-poster.png').trim(),
+      footageLabel: this.props.footageLabel || 'Watch the film · 1 min 37',
+      footageOpen: !!this.state.footageOpen && !!footage,
+      // Literal src in the template (a {{ hole }} there fetches at parse time);
+      // a swapped-in prop is applied to the element afterwards.
+      overlayRef: (el) => {
+        if (!el) return;
+        // This runtime drops boolean media attributes — controls, autoplay, muted,
+        // loop must all be set as DOM properties here rather than in markup.
+        el.controls = true;
+        el.muted = false;
+        if (footage && !el.src.endsWith(footage)) { el.src = footage; el.load(); }
+        const post = (this.props.footagePoster ?? '').trim();
+        if (post) el.poster = post;
+        el.play().catch(() => {});
+      },
+      openFootage: () => this.setState({ footageOpen: true }),
+      // The video is a descendant of the backdrop that closes the overlay, so a
+      // click on its native controls bubbles up. Close only on the backdrop itself.
+      closeFootage: (e) => { if (!e || e.target === e.currentTarget) this.setState({ footageOpen: false }); },
+      closeFilm: () => this.setState({ footageOpen: false }),
+      showBreath: this.props.showBreathRings ?? true,
+      viewSit: v === 'sit', viewWhy: v === 'why', viewFirst: v === 'first',
+      viewPledge: v === 'pledge', viewGroups: v === 'groups',
+      tabs: tabDefs.map(t => ({
+        label: t.label,
+        go: () => this.setState({ view: t.key }),
+        bg: v === t.key ? 'linear-gradient(135deg, rgba(230,211,168,0.22), rgba(184,151,88,0.12))' : 'rgba(255,255,255,0.04)',
+        border: v === t.key ? 'rgba(213,183,124,0.6)' : 'rgba(255,255,255,0.14)',
+        color: v === t.key ? '#f7ecd0' : 'rgba(207,200,186,0.85)'
+      })),
+
+      isLive: live, isCountdown: !live,
+      statusDot: live ? '#7ecb8f' : '#d5b77c',
+      statusColor: live ? '#a9dfb8' : 'rgba(213,183,124,0.95)',
+      chipLabel: live ? 'Sitting now' : `Begins in ${cd.h}h ${this.pad(cd.m)}m`,
+      endsIn: `${ed.m} min ${this.pad(ed.s)} sec`,
+      clock: [
+        { val: this.pad(cd.h), label: 'hrs' },
+        { val: this.pad(cd.m), label: 'min' },
+        { val: this.pad(cd.s), label: 'sec' }
+      ],
+      localWhen: live ? 'In session now' : `${localDay}, ${localTime} your time`,
+      tzNote: tz === 'Asia/Kolkata'
+        ? '8:30–9:00 PM IST · Monday to Saturday'
+        : `8:30–9:00 PM IST · ${localTime}–${endLocal} your time`,
+      primaryLabel: live ? 'Enter the silence' : 'Watch on YouTube',
+      youtubeUrl: w.youtube, zoomUrl: w.zoom,
+      zoomOpen: !zoomFull, zoomFull, seatsNote: `${seatsLeft} seats left`,
+
+      petals, cardinals,
+      sitDeg: deg(win.start),
+      nowDeg: deg(now),
+      ghosts: ghostList.map(f => ({ deg: deg(this.nextWindow({ ...f, mins: 30 }, now).start) })),
+
+      why: [
+        { num: 'I', year: '1960', title: 'A testable claim', body: 'Maharishi predicted that if one percent of a population meditated, the whole population would feel it.' },
+        { num: 'II', year: '1976', title: 'One percent, and the crime rate bent', body: 'Cities past that line showed crime around 16% lower. The pattern was named the Maharishi Effect.' },
+        { num: 'III', year: '1993', title: 'Four thousand people, eight weeks', body: '4,000 meditators in Washington DC; protocol pre-approved by 27 independent scientists and police. Homicide, rape and assault fell 23.3%.' },
+        { num: 'IV', year: 'Open', title: 'The hum underneath', body: 'Earth resonates near 7.8 Hz — the band the brain enters in deep meditation. Whether a mass sit moves it is unproven.' },
+        { num: 'V', year: 'Goal', title: 'Not one percent. Eight.', body: 'Eight percent of humanity in daily silence — where a golden age becomes ordinary weather.' }
+      ],
+
+      ritual: [
+        { num: 'I', title: 'Arrive a minute early', body: 'Open the stream just before the hour. The room is already quiet — no greeting, no introduction, nothing to say.' },
+        { num: 'II', title: 'Close your eyes and watch the breath', body: 'That is the whole practice. No mantra, no posture to master. Sit comfortably and let the breath be watched for thirty minutes.' },
+        { num: 'III', title: 'Rest, then come back tomorrow', body: 'When the bell sounds, keep your eyes closed a moment longer. The same room opens tomorrow evening, and the one after.' }
+      ],
+
+      pledged: this.state.pledged, notPledged: !this.state.pledged,
+      pledgeName: this.state.pledgeName,
+      pledgeCount: this.state.pledgeCount.toLocaleString(),
+      nameVal: this.state.name, countryVal: this.state.country,
+      onName: (e) => this.setState({ name: e.target.value }),
+      onCountry: (e) => this.setState({ country: e.target.value }),
+      onKey: (e) => { if (e.key === 'Enter') this.pledge(); },
+      submitPledge: () => this.pledge(),
+
+      whatsappShare: 'https://wa.me/?text=' + encodeURIComponent('Join a 30-minute meditation for world peace — free, live every evening. https://goldenagewisdom.org/peace'),
+      downloadIcs: () => {
+        const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Golden Age Wisdom//Peace//EN','BEGIN:VEVENT',
+          'SUMMARY:Mass Meditation for Global Peace',
+          'DESCRIPTION:Thirty minutes of silence for world peace. Watch: ' + w.youtube,
+          'DTSTART:' + stamp(win.start), 'DTEND:' + stamp(win.end),
+          'RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR,SA','END:VEVENT','END:VCALENDAR'].join('\r\n');
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+        a.download = 'global-peace-sit.ics';
+        a.click();
+      },
+
+      /* Regions, not people. Each entry is a city circle with its own WhatsApp
+         group — volunteers are never named here, so nobody's name and number
+         end up on a public page. The group itself answers. */
+      groups: [
+        { city: 'Hyderabad', initial: 'H', meets: 'Daily · 8:15 PM', sinceShort: 'Since 2019',
+          says: 'A volunteer meets first-timers at the gate — you will not walk in alone.',
+          helps: ['First-timers', 'Telugu · English'], link: 'https://chat.whatsapp.com/gaw-hyd' },
+        { city: 'Bengaluru', initial: 'B', meets: 'Daily · 8:15 PM', sinceShort: 'Since 2021',
+          says: 'Mats and shawls are kept at the back. Come straight from work.',
+          helps: ['First-timers', 'Kannada · English'], link: 'https://chat.whatsapp.com/gaw-blr' },
+        { city: 'Pune', initial: 'P', meets: 'Tue, Thu, Sat', sinceShort: 'Since 2022',
+          says: 'A living-room circle of about eleven, with tea afterwards.',
+          helps: ['Small group', 'Hindi · Marathi'], link: 'https://chat.whatsapp.com/gaw-pune' },
+        { city: 'Chennai', initial: 'C', meets: 'Daily · 8:20 PM', sinceShort: 'Since 2020',
+          says: 'Never meditated? Say so in the group and someone will sit beside you.',
+          helps: ['First-timers', 'Tamil · English'], link: 'https://chat.whatsapp.com/gaw-chn' }
+      ]
+    };
+  }
+
+  pledge() {
+    const nm = this.state.name.trim();
+    if (!nm) return;
+    try { localStorage.setItem('gaw_peace_pledge', JSON.stringify({ name: nm, country: this.state.country.trim() })); } catch (e) {}
+    this.setState(s => ({ pledged: true, pledgeName: nm, pledgeCount: s.pledgeCount + 1 }));
+  }
+}
+</script>
+</body>
+</html>

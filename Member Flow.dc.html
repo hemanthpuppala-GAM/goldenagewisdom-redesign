@@ -84,12 +84,12 @@
     .sched-label { flex: 1 1 100% !important; }
     .sched-times { margin-left: 20px !important; }
     .r-shell { flex-direction: column !important; }
-    .r-sidebar { width: 100% !important; height: auto !important; position: sticky !important; top: 0 !important; z-index: 60 !important; flex-direction: row !important; flex-wrap: nowrap !important; align-items: center !important; gap: 4px !important; padding: 8px 12px !important; overflow-x: auto !important; overflow-y: hidden !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; background: rgba(13,10,28,0.92) !important; backdrop-filter: blur(14px); border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; }
+    .r-sidebar { width: 100% !important; height: auto !important; position: sticky !important; top: 0 !important; z-index: 60 !important; flex-direction: row !important; flex-wrap: wrap !important; align-items: center !important; justify-content: center !important; gap: 4px !important; row-gap: 5px !important; padding: 8px 10px !important; overflow: visible !important; background: rgba(13,10,28,0.92) !important; backdrop-filter: blur(14px); border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; }
     .r-sidebar::-webkit-scrollbar { height: 0; }
     .r-sidebar > * { flex-shrink: 0 !important; }
     .r-sidebar .r-side-brand { padding: 0 6px 0 0 !important; }
     .r-sidebar .r-side-brand span { display: none !important; }
-    .r-sidebar button { padding: 9px 12px !important; font-size: 13.5px !important; }
+    .r-sidebar button { padding: 7px 10px !important; font-size: 12.5px !important; gap: 7px !important; border-radius: 999px !important; }
     .r-sidebar .r-side-collapse, .r-sidebar .r-side-note, .r-sidebar .r-side-spacer { display: none !important; }
     .r-sidebar .r-side-mobile { display: flex !important; }
     .r-overview { height: auto !important; min-height: 0 !important; }
@@ -110,6 +110,10 @@
   @media (max-width: 960px) {
     .r-login-visual { display: none !important; }
   }
+  /* Comfortable touch targets on phones */
+  @media (max-width: 768px) {
+    nav a, nav button, footer a, footer button { display: inline-flex; align-items: center; min-height: 40px; }
+  }
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #0d0a1c">
@@ -117,13 +121,13 @@
   <sc-if value="{{ showLogin }}" hint-placeholder-val="{{ true }}">
     <div data-screen-label="Sign in" style="position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; gap: 60px; padding: 40px 24px; overflow: hidden; background: #0d0a1c; flex-wrap: wrap">
       <img src="assets/meditator-clear.webp" alt="" width="2560" height="1525" fetchPriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; transform: scale(1.22); transform-origin: 50% 100%; opacity: 0.5">
-      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 46% 82% at 50% 42%, rgba(38,34,96,0.55) 0%, rgba(14,12,42,0.72) 55%, rgba(10,8,30,0.9) 80%, rgba(8,6,24,0.98) 100%), linear-gradient(180deg, rgba(13,10,28,0.7) 0%, rgba(13,10,28,0) 14%)"></div>
-      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 170px; pointer-events: none; background: linear-gradient(to top, rgba(9,7,24,0.96) 0%, rgba(9,7,24,0.7) 45%, rgba(9,7,24,0) 100%)"></div>
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 46% 82% at 50% 42%, rgba(58,53,71,0.55) 0%, rgba(20,16,41,0.72) 55%, rgba(13,10,28,0.9) 80%, rgba(9,7,26,0.98) 100%), linear-gradient(180deg, rgba(13,10,28,0.7) 0%, rgba(13,10,28,0) 14%)"></div>
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 170px; pointer-events: none; background: linear-gradient(to top, rgba(9,7,26,0.96) 0%, rgba(9,7,26,0.7) 45%, rgba(9,7,26,0) 100%)"></div>
       <sc-for list="{{ loginStars }}" as="st" hint-placeholder-count="10">
-        <div style="position: absolute; left: {{ st.x }}%; top: {{ st.y }}%; width: {{ st.s }}px; height: {{ st.s }}px; border-radius: 50%; background: #f5ecd6; opacity: {{ st.o }}"></div>
+        <div style="position: absolute; left: {{ st.x }}%; top: {{ st.y }}%; width: {{ st.s }}px; height: {{ st.s }}px; border-radius: 50%; background: #f2e9d8; opacity: {{ st.o }}"></div>
       </sc-for>
       <div class="r-login-visual" style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 26px; padding: 20px">
-        <div style="position: absolute; inset: -40px; border-radius: 50%; background: radial-gradient(circle, rgba(245,223,164,0.14), rgba(245,223,164,0) 70%)"></div>
+        <div style="position: absolute; inset: -40px; border-radius: 50%; background: radial-gradient(circle, rgba(230,211,168,0.14), rgba(230,211,168,0) 70%)"></div>
         <div style="display: flex; align-items: baseline; gap: 12px">
           <span style="font-family: 'Marcellus', serif; font-size: 96px; line-height: 1; color: #d5b77c; text-shadow: 0 2px 40px rgba(213,183,124,0.4)">41</span>
           <span style="font-family: 'Marcellus', serif; font-size: 30px; color: #cfc8ba">days</span>
@@ -133,12 +137,12 @@
             <div style="width: 16px; height: 16px; border-radius: 50%; background: {{ d.bg }}; border: 1px solid rgba(213,183,124,0.4); box-shadow: {{ d.glow }}"></div>
           </sc-for>
         </div>
-        <div style="max-width: 380px; text-align: center; padding: 14px 24px; border-radius: 16px; background: rgba(20,15,40,0.65); backdrop-filter: blur(10px); border: 1px solid rgba(213,183,124,0.26)">
-          <div style="font-family: 'Marcellus', serif; font-size: 19px; color: #fdf8ec">Give us 41 days — a 30-minute sit in silence.</div>
-          <div style="font-size: 12.5px; font-weight: 300; color: #c4bcab; margin-top: 5px; line-height: 1.5">No kriyas, no breath techniques. Close your eyes and watch the breath — that's all.</div>
+        <div style="max-width: 380px; text-align: center; padding: 14px 24px; border-radius: 16px; background: rgba(20,16,41,0.65); backdrop-filter: blur(10px); border: 1px solid rgba(213,183,124,0.26)">
+          <div style="font-family: 'Marcellus', serif; font-size: 19px; color: #f7f1e3">Give us 41 days — a 30-minute sit in silence.</div>
+          <div style="font-size: 12.5px; font-weight: 300; color: #cfc8ba; margin-top: 5px; line-height: 1.5">No kriyas, no breath techniques. Close your eyes and watch the breath — that's all.</div>
         </div>
       </div>
-      <div style="position: relative; width: min(420px, 100%); padding: 44px 38px; border-radius: 24px; background: rgba(20,15,40,0.62); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 80px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center">
+      <div style="position: relative; width: min(420px, 100%); padding: 44px 38px; border-radius: 24px; background: rgba(20,16,41,0.62); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 80px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center">
         <img src="assets/logo-128.webp" alt="Golden Age Wisdom" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
         <div>
           <h1 style="font-family: 'Marcellus', serif; font-size: 28px; margin: 0 0 8px; color: #f7f1e3">Welcome back, {{ loginName }}</h1>
@@ -153,15 +157,17 @@
         <div style="width: 100%; display: flex; flex-direction: column; gap: 12px">
           <button onClick="{{ signInGoogle }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.95); color: #1f1f1f; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer"><span style="font-weight: 700; font-size: 16px; background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853); -webkit-background-clip: text; background-clip: text; color: transparent">G</span> Continue with Google</button>
           <sc-if value="{{ hasOauthNote }}" hint-placeholder-val="{{ false }}">
-            <div style="font-size: 12px; font-weight: 300; line-height: 1.5; color: #c9b98a; padding: 0 6px">{{ oauthNote }}</div>
+            <div style="font-size: 12px; font-weight: 300; line-height: 1.5; color: #d5b77c; padding: 0 6px">{{ oauthNote }}</div>
           </sc-if>
           <button onClick="{{ signInMicrosoft }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5)"><svg viewBox="0 0 21 21" style="width: 15px; height: 15px"><rect x="0" y="0" width="10" height="10" fill="#f25022"></rect><rect x="11" y="0" width="10" height="10" fill="#7fba00"></rect><rect x="0" y="11" width="10" height="10" fill="#00a4ef"></rect><rect x="11" y="11" width="10" height="10" fill="#ffb900"></rect></svg> Continue with Microsoft</button>
           <button onClick="{{ signInFacebook }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5)"><span style="color: #8ab4f8; font-weight: 700">f</span> Continue with Facebook</button>
           <button onClick="{{ signInApple }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5)"> Continue with Apple</button>
+          <div style="display: flex; align-items: center; gap: 10px; color: #7d7666; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 2px"><span style="flex: 1; height: 1px; background: rgba(255,255,255,0.12)"></span>just looking<span style="flex: 1; height: 1px; background: rgba(255,255,255,0.12)"></span></div>
+          <button onClick="{{ signInDemo }}" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 11px 16px; border-radius: 999px; border: 1px dashed rgba(213,183,124,0.5); background: rgba(213,183,124,0.05); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 14.5px; font-weight: 500; cursor: pointer; text-align: left" style-hover="border-color: rgba(230,211,168,0.9); background: rgba(213,183,124,0.12)"><span style="width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.5); color: #d5b77c; font-weight: 600; font-size: 14px">A</span><span style="display: flex; flex-direction: column; gap: 1px"><span>Look around a demo account</span><span style="font-size: 11.5px; font-weight: 300; color: #b9b1a0">demo@goldenagewisdom.org · nothing is saved</span></span></button>
         </div>
         <div style="width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-radius: 16px; border: 1px solid rgba(213,183,124,0.26); background: rgba(213,183,124,0.06); text-align: left">
           <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; flex-shrink: 0"><path d="M12 2l8 3.5v5c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11v-5L12 2z" fill="none" stroke="#d5b77c" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8.5 12l2.5 2.5 4.5-4.7" fill="none" stroke="#d5b77c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          <span style="font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #b9b1a0">We never see, store or handle passwords. Sign-in happens entirely with Google, Microsoft, Facebook or Apple — we only receive your name and email. <a href="mailto:info@goldenagewisdom.org?subject=Privacy%20policy" style="font-size: 12.5px">Privacy policy</a></span>
+          <span style="font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #b9b1a0">We never see, store or handle passwords. Sign-in happens entirely with Google, Microsoft, Facebook or Apple — we only receive your name and email. <a href="mailto:goldenageguruteachings@gmail.com?subject=Privacy%20policy" style="font-size: 12.5px">Privacy policy</a></span>
         </div>
         <a href="./" style="font-size: 13px; color: #9a927f">← Back to goldenagewisdom.org</a>
       </div>
@@ -176,7 +182,7 @@
         <button onClick="{{ toggleSide }}" title="{{ sideTitle }}" class="r-side-collapse" style="align-self: flex-end; width: 30px; height: 30px; flex-shrink: 0; margin-bottom: 4px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: #b9b1a0; font-size: 13px; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6); color: #e6d3a8">{{ sideIcon }}</button>
         <a href="./" class="r-side-brand" title="Golden Age Wisdom" style="display: flex; align-items: center; gap: 10px; padding: 0 8px 22px">
           <img src="assets/logo-128.webp" alt="" style="width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
-          <sc-if value="{{ sideOpen }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.04em; color: #ecdcb4; white-space: nowrap">GOLDEN AGE</span></sc-if>
+          <sc-if value="{{ sideOpen }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'Marcellus', serif; font-size: 19px; letter-spacing: 0.05em; background: linear-gradient(115deg, #f6e7c1 10%, #d5b77c 48%, #b89758 90%); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; filter: drop-shadow(0 0 12px rgba(213,183,124,0.35))">GOLDEN AGE</span></sc-if>
         </a>
         <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
           <button onClick="{{ n.go }}" title="{{ n.label }}" style="display: flex; align-items: center; gap: 12px; padding: 11px 13px; border-radius: 12px; border: none; text-align: left; font-family: 'Outfit', sans-serif; font-size: 14.5px; cursor: pointer; white-space: nowrap; overflow: hidden; background: {{ n.bg }}; color: {{ n.color }}; font-weight: {{ n.weight }}"><span style="width: 18px; flex-shrink: 0; text-align: center">{{ n.icon }}</span>{{ n.label }}</button>
@@ -202,14 +208,14 @@
             <sc-if value="{{ demoBanner }}" hint-placeholder-val="{{ false }}">
               <div style="display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-radius: 16px; border: 1px solid rgba(213,183,124,0.4); background: rgba(213,183,124,0.09)">
                 <span style="font-size: 14px; color: #d5b77c">✦</span>
-                <span style="flex: 1; font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #c9b98a">You're in a demo session — real account sign-in isn't switched on yet, so this practice is saved on this device only.</span>
+                <span style="flex: 1; font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #d5b77c">You're in a demo session — real account sign-in isn't switched on yet, so this practice is saved on this device only.</span>
                 <button onClick="{{ dismissDemoBanner }}" style="background: none; border: none; color: #9a927f; font-size: 16px; cursor: pointer; padding: 0 4px" style-hover="color: #e6d3a8">×</button>
               </div>
             </sc-if>
             <div class="r-dash-head" style="flex-shrink: 0; position: sticky; top: 0; z-index: 20; margin: 0 -34px; padding: 16px 34px 12px; background: linear-gradient(180deg, rgba(13,10,28,0.96) 60%, rgba(13,10,28,0)); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; gap: 16px">
               <div style="flex: 1 1 300px; min-width: 240px">
                 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
-                  <h1 style="font-family: 'Marcellus', serif; font-size: 24px; margin: 0; color: #f7f1e3">Namaste, {{ memberName }} 🙏</h1>
+                  <h1 style="font-family: 'Marcellus', serif; font-size: 18px; margin: 0; color: #f7f1e3">Namaste, {{ memberName }} 🙏</h1>
                   <sc-if value="{{ hasMemberId }}" hint-placeholder-val="{{ true }}"><span style="padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.4); background: rgba(213,183,124,0.08); font-size: 11.5px; letter-spacing: 0.12em; color: #d5b77c; white-space: nowrap">{{ memberId }}</span></sc-if>
                 </div>
                 <p style="margin: 4px 0 0; font-size: 13px; font-weight: 300; color: #9a927f">{{ journeyLine }}</p>
@@ -264,57 +270,14 @@
             </div>
             <div class="r-grid-2" style="flex: 1; min-height: 0; display: grid; grid-template-columns: 1.15fr 1fr; gap: 13px">
               <div style="min-height: 0; padding: 16px 18px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 11px">
-                <div style="flex-shrink: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
-                  <h2 style="font-family: 'Marcellus', serif; font-size: 17px; margin: 0; color: #f2e9d8">Teachings to sit with</h2>
-                  <a href="https://www.youtube.com/@GoldenAgeGurus/videos" target="_blank" rel="noopener" style="font-size: 12px">All discourses →</a>
-                </div>
-                <button onClick="{{ openFeatured }}" style="flex-shrink: 0; padding: 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; display: flex; flex-direction: column; font-family: 'Outfit', sans-serif; transition: border-color 0.3s, transform 0.3s" style-hover="border-color: rgba(213,183,124,0.6); transform: translateY(-2px)">
-                  <span style="position: relative; display: block; height: clamp(112px, 19vh, 208px); background: #0d0a1c">
-                    <img src="{{ featuredThumb }}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.9">
-                    <span style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,6,20,0) 42%, rgba(8,6,20,0.88) 100%)"></span>
-                    <span style="position: absolute; left: 16px; bottom: 14px; right: 16px; display: flex; align-items: center; gap: 12px">
-                      <span style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; background: rgba(213,183,124,0.94); display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 22px rgba(0,0,0,0.5)">
-                        <svg viewBox="0 0 24 24" style="width: 15px; height: 15px; margin-left: 2px"><path d="M8 5.5v13l11-6.5z" fill="#241b06"></path></svg>
-                      </span>
-                      <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
-                        <span style="font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #d5b77c">{{ featuredCat }}</span>
-                        <span style="font-family: 'Marcellus', serif; font-size: 17px; line-height: 1.25; color: #f7f1e3">{{ featuredTitle }}</span>
-                      </span>
-                    </span>
+                <h2 style="font-family: 'Marcellus', serif; font-size: 17px; margin: 0; color: #f2e9d8">Wisdom of Dr. Hari</h2>
+                <p style="margin: 0; font-size: 13px; font-weight: 300; line-height: 1.55; color: #9a927f">His teachings cover meditation, kundalini, wellness practices and much more — all discourses live on our YouTube channel.</p>
+                <a href="https://www.youtube.com/@GoldenAgeGurus" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 16px; border: 1px solid rgba(213,183,124,0.35); background: rgba(213,183,124,0.08); color: #e6d3a8; font-size: 13.5px; font-weight: 500; align-self: flex-start" style-hover="border-color: rgba(230,211,168,0.7); color: #f7f1e3">
+                  <span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: rgba(213,183,124,0.94); display: flex; align-items: center; justify-content: center">
+                    <svg viewBox="0 0 24 24" style="width: 12px; height: 12px; margin-left: 2px"><path d="M8 5.5v13l11-6.5z" fill="#241b06"></path></svg>
                   </span>
-                </button>
-                <div class="r-scroll-list" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; scrollbar-width: thin">
-                <sc-for list="{{ videoRest }}" as="v" hint-placeholder-count="4">
-                  <button onClick="{{ v.open }}" style="display: flex; align-items: center; gap: 13px; padding: 9px 12px 9px 9px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.035); cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; transition: border-color 0.3s" style-hover="border-color: rgba(213,183,124,0.45)">
-                    <span style="position: relative; width: 68px; flex-shrink: 0; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; background: #0d0a1c">
-                      <img src="{{ v.thumb }}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85">
-                      <span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #f7f1e3; font-size: 11px; text-shadow: 0 1px 6px rgba(0,0,0,0.7)">▶</span>
-                    </span>
-                    <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1">
-                      <span style="font-size: 14px; font-weight: 500; color: #ece5d5; line-height: 1.35">{{ v.title }}</span>
-                      <span style="font-size: 11.5px; font-weight: 300; color: #9a927f">{{ v.cat }}</span>
-                    </span>
-                  </button>
-                </sc-for>
-                </div>
-              </div>
-              <div style="min-height: 0; padding: 16px 20px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 10px">
-                <h2 style="flex-shrink: 0; font-family: 'Marcellus', serif; font-size: 17px; margin: 0; color: #f2e9d8">Your gatherings</h2>
-                <div class="r-scroll-list" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column">
-                <sc-if value="{{ noUpcoming }}" hint-placeholder-val="{{ false }}">
-                  <p style="margin: 0 0 10px; font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #9a927f">Nothing on the calendar yet — the live sessions run every day, Monday to Saturday. New retreats are announced here.</p>
-                </sc-if>
-                <sc-for list="{{ events }}" as="e" hint-placeholder-count="2">
-                  <div style="display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1)">
-                    <div style="flex-shrink: 0; width: 52px; text-align: center; padding: 7px 0; border-radius: 12px; background: {{ e.dateBg }}; border: 1px solid {{ e.dateBorder }}">
-                      <div style="font-family: 'Marcellus', serif; font-size: 18px; color: {{ e.dateColor }}; line-height: 1.1">{{ e.day }}</div>
-                      <div style="font-size: 10.5px; letter-spacing: 0.1em; color: {{ e.monthColor }}">{{ e.month }}</div>
-                    </div>
-                    <div style="flex: 1"><div style="font-weight: 500; font-size: 14.5px; color: {{ e.titleColor }}">{{ e.title }}</div><div style="font-size: 12.5px; font-weight: 300; color: {{ e.metaColor }}">{{ e.meta }}</div></div>
-                    <button onClick="{{ e.toggle }}" disabled="{{ e.past }}" style="flex-shrink: 0; padding: 7px 14px; border-radius: 999px; font-family: 'Outfit', sans-serif; font-size: 12px; white-space: nowrap; cursor: {{ e.btnCursor }}; border: 1px solid {{ e.btnBorder }}; background: {{ e.btnBg }}; color: {{ e.btnColor }}; font-weight: 500">{{ e.btnLabel }}</button>
-                  </div>
-                </sc-for>
-                </div>
+                  Watch on YouTube — @GoldenAgeGurus
+                </a>
               </div>
             </div>
           </div>
@@ -341,7 +304,7 @@
               <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">Your words</div>
               <textarea value="{{ testimonialDraft }}" onChange="{{ onTestimonial }}" placeholder="What changed for you in the silence?" rows="3" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.6; resize: vertical; outline: none"></textarea>
               <div class="r-share-row" style="display: grid; grid-template-columns: minmax(280px, 360px) 1fr; gap: 20px; align-items: center">
-                <div onClick="{{ openCard }}" title="Tap to enlarge" style="position: relative; aspect-ratio: 1/1; container-type: inline-size; border-radius: 24px; overflow: hidden; cursor: zoom-in; background: radial-gradient(ellipse 70% 60% at 50% 42%, #241a4d 0%, #141029 55%, #080614 100%); border: 1px solid rgba(213,183,124,0.26)">
+                <div onClick="{{ openCard }}" title="Tap to enlarge" style="position: relative; aspect-ratio: 1/1; container-type: inline-size; border-radius: 24px; overflow: hidden; cursor: zoom-in; background: radial-gradient(ellipse 70% 60% at 50% 42%, #141029 0%, #141029 55%, #080614 100%); border: 1px solid rgba(213,183,124,0.26)">
                   <div style="position: absolute; inset: 0; padding: 8.5cqi; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4cqi; text-align: center">
                     <div style="font-size: 2.6cqi; letter-spacing: 0.34em; text-transform: uppercase; color: #d5b77c">Golden Age Wisdom</div>
                     <div style="font-family: 'Marcellus', serif; font-size: {{ cardFontSize }}; line-height: 1.42; color: #f7f1e3; text-wrap: pretty">“{{ testimonialPreview }}”</div>
@@ -359,7 +322,7 @@
                       <a href="{{ t.url }}" target="_blank" rel="noopener" style="padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); color: #9a927f; font-size: 12px; white-space: nowrap" style-hover="border-color: rgba(213,183,124,0.6); color: #f2e9d8">{{ t.label }}</a>
                     </sc-for>
                   </div>
-                  <sc-if value="{{ hasCopyNote }}" hint-placeholder-val="{{ false }}"><span style="font-size: 11.5px; color: #a8d5a2">{{ copyNote }}</span></sc-if>
+                  <sc-if value="{{ hasCopyNote }}" hint-placeholder-val="{{ false }}"><span style="font-size: 11.5px; color: #a9dfb8">{{ copyNote }}</span></sc-if>
                 </div>
               </div>
             </div>
@@ -378,6 +341,85 @@
                   </div>
                 </sc-for>
               </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Circles & help tab -->
+        <sc-if value="{{ tabHelp }}" hint-placeholder-val="{{ false }}">
+          <div style="padding-top: 34px; display: flex; flex-direction: column; gap: 30px; max-width: 940px">
+            <div>
+              <h1 style="font-family: 'Marcellus', serif; font-size: 30px; margin: 0; color: #f7f1e3">Circles &amp; help</h1>
+              <p style="margin: 6px 0 0; font-size: 14.5px; font-weight: 300; color: #9a927f">Sit with people near you — and ask a real person when something comes up.</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">Circles near you</div>
+              <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: 22px; line-height: 1.25; margin: 0; color: #f2e9d8">A circle in your city already keeps this evening open.</h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px">
+                <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+                  <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.032); transition: border-color 0.3s" style-hover="border-color: rgba(213,183,124,0.45)">
+                    <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 36% 32%, rgba(230,211,168,0.38), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.42); font-family: 'Marcellus', serif; font-size: 13.5px; color: #f7ecd0">{{ g.initial }}</span>
+                    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px">
+                      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px">
+                        <span style="min-width: 0"><span style="font-family: 'Marcellus', serif; font-size: 16px; color: #f2e9d8">{{ g.city }}</span> <span style="font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(184,151,88,0.95)">{{ g.meets }}</span></span>
+                        <a href="{{ g.link }}" target="_blank" rel="noopener" style="flex-shrink: 0; padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(126,203,143,0.4); color: #a9dfb8; font-size: 11px; white-space: nowrap" style-hover="border-color: rgba(126,203,143,0.85); color: #c2ebcc">Join the group →</a>
+                      </div>
+                      <p style="margin: 0; font-size: 12px; font-weight: 200; line-height: 1.55; color: rgba(207,200,186,0.9); text-wrap: pretty">{{ g.says }}</p>
+                      <div style="display: flex; gap: 5px; flex-wrap: wrap">
+                        <sc-for list="{{ g.helps }}" as="h" hint-placeholder-count="2">
+                          <span style="padding: 2px 8px; border-radius: 999px; background: rgba(213,183,124,0.1); border: 1px solid rgba(213,183,124,0.25); font-size: 9.5px; font-weight: 300; color: rgba(230,211,168,0.95); white-space: nowrap">{{ h }}</span>
+                        </sc-for>
+                        <span style="padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); font-size: 9.5px; font-weight: 300; color: rgba(154,146,127,0.95); white-space: nowrap">{{ g.sinceShort }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">Ask a volunteer</div>
+              <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: 22px; line-height: 1.25; margin: 0; color: #f2e9d8">Something came up? Ask a person, not a page.</h2>
+              <p style="margin: 0; max-width: 620px; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: #9a927f">Health and diet, an experience in meditation you don't understand, trouble sitting at all, or anything else in the way. Write it below with your phone number and press send — WhatsApp opens with your question already typed. A volunteer who has been through it writes back, usually within a day.</p>
+
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px">
+                <sc-for list="{{ askTopics }}" as="t" hint-placeholder-count="5">
+                  <button onClick="{{ t.pick }}" style="padding: 9px 16px; border-radius: 999px; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.color }}; font-family: 'Outfit', sans-serif; font-size: 13px; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6)">{{ t.label }}</button>
+                </sc-for>
+              </div>
+
+              <textarea value="{{ askText }}" onChange="{{ onAskText }}" placeholder="{{ askPlaceholder }}" rows="4" style="width: 100%; max-width: 720px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.6; resize: vertical; outline: none"></textarea>
+
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+                <button onClick="{{ sendAskWhatsapp }}" style="display: inline-flex; align-items: center; gap: 9px; padding: 13px 26px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer">Send my question</button>
+                <button onClick="{{ sendAskEmail }}" style="padding: 0; border: none; background: none; color: #9a927f; font-family: 'Outfit', sans-serif; font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer" style-hover="color: #e6d3a8">or send it by email</button>
+                <sc-if value="{{ askSent }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12.5px; color: #a9dfb8">{{ askNote }}</span></sc-if>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 6px">
+                <sc-for list="{{ volunteers }}" as="v" hint-placeholder-count="4">
+                  <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.032)">
+                    <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 36% 32%, rgba(230,211,168,0.38), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.42); font-family: 'Marcellus', serif; font-size: 13.5px; color: #f7ecd0">{{ v.initial }}</span>
+                    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px">
+                      <span style="font-family: 'Marcellus', serif; font-size: 16px; color: #f2e9d8">{{ v.name }}</span>
+                      <span style="font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(184,151,88,0.95)">{{ v.area }}</span>
+                      <p style="margin: 0; font-size: 12px; font-weight: 200; line-height: 1.55; color: rgba(207,200,186,0.9); text-wrap: pretty">{{ v.says }}</p>
+                      <span style="font-size: 11px; font-weight: 300; color: rgba(154,146,127,0.95)">{{ v.reach }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <p style="margin: 4px 0 0; max-width: 620px; font-size: 12px; font-weight: 300; line-height: 1.6; color: #7d7666">Volunteers are seekers, not doctors. Nothing here replaces medical care — if something is urgent, call your local emergency number first.</p>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 22px; border-radius: 22px; border: 1px solid rgba(213,183,124,0.28); background: rgba(213,183,124,0.06)">
+              <div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 4px">
+                <span style="font-family: 'Marcellus', serif; font-size: 18px; color: #f7f1e3">Serve, once you have walked it</span>
+                <span style="font-size: 13px; font-weight: 300; line-height: 1.55; color: #9a927f">Seven teams — the helpline, events on the ground, answering experiences, social media, tech and more. Choose what suits you.</span>
+              </div>
+              <button onClick="{{ volunteerSignup }}" style="flex-shrink: 0; padding: 12px 24px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.6); background: none; color: #e6d3a8; font-family: 'Outfit', sans-serif; font-size: 13.5px; cursor: pointer" style-hover="background: rgba(213,183,124,0.16)">{{ volunteerLabel }}</button>
             </div>
           </div>
         </sc-if>
@@ -402,63 +444,56 @@
           </div>
         </sc-if>
 
+        <!-- Wisdom Guide tab -->
+        <sc-if value="{{ tabGuide }}" hint-placeholder-val="{{ false }}">
+          <div style="padding-top: 34px; display: flex; flex-direction: column; gap: 20px; max-width: 720px">
+            <div style="display: flex; align-items: center; gap: 14px">
+              <div style="width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; background: radial-gradient(circle at 35% 35%, #e6d3a8, #b89758); display: flex; align-items: center; justify-content: center">
+                <svg viewBox="0 0 64 64" style="width: 26px; height: 26px; display: block">
+                  <circle cx="32" cy="14" r="6.5" fill="#241b06"></circle>
+                  <path d="M32 24c-6.5 0-10.5 4-12.5 10l-2 6h29l-2-6c-2-6-6-10-12.5-10z" fill="#241b06"></path>
+                  <path d="M12 46c2-4.5 9-7 20-7s18 2.5 20 7c0.8 1.8-0.5 3.5-2.5 3.5h-35c-2 0-3.3-1.7-2.5-3.5z" fill="#241b06"></path>
+                </svg>
+              </div>
+              <div>
+                <h1 style="font-family: 'Marcellus', serif; font-size: 30px; margin: 0; color: #f7f1e3">Wisdom Guide</h1>
+                <p style="margin: 4px 0 0; font-size: 14.5px; font-weight: 300; color: #9a927f">Knows your journey · asks back</p>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(213,183,124,0.26); min-height: 420px; max-height: calc(100dvh - 300px)">
+              <div style="flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+                <sc-for list="{{ chatMessages }}" as="msg" hint-placeholder-count="1">
+                  <div style="max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 13.5px; font-weight: 300; line-height: 1.5; align-self: {{ msg.align }}; background: {{ msg.bg }}; color: {{ msg.color }}">{{ msg.text }}</div>
+                </sc-for>
+                <a href="mailto:goldenageguruteachings@gmail.com?subject=A%20question%20from%20a%20member" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(213,183,124,0.26); background: rgba(213,183,124,0.07); color: #e6d3a8; font-size: 12.5px; max-width: 340px">
+                  <span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.4); font-size: 12px">✉</span>
+                  <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+                    <span style="color: #f2e9d8">Ask the seva team</span>
+                    <span style="font-weight: 300; color: #9a927f; overflow: hidden; text-overflow: ellipsis">goldenageguruteachings@gmail.com</span>
+                  </span>
+                </a>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                  <sc-for list="{{ chatChips }}" as="c" hint-placeholder-count="2">
+                    <button onClick="{{ c.pick }}" style="padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.26); background: rgba(213,183,124,0.08); color: #d5b77c; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">{{ c.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="padding: 12px; display: flex; gap: 8px; border-top: 1px solid rgba(255,255,255,0.1)">
+                <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Ask anything…" style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 10px 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 13.5px; outline: none">
+                <button onClick="{{ sendChat }}" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-size: 15px; cursor: pointer">↑</button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
       </main>
     </div>
-  </sc-if>
-
-  <!-- WISDOM GUIDE BOT -->
-  <sc-if value="{{ showDash }}" hint-placeholder-val="{{ false }}">
-    <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
-      <div style="position: fixed; bottom: 96px; right: 24px; z-index: 90; width: 350px; max-height: min(480px, calc(100vh - 120px)); display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: rgba(22,17,44,0.88); backdrop-filter: blur(24px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 20px 60px rgba(0,0,0,0.5)">
-        <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 10px">
-          <div style="width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #e6d3a8, #b89758); display: flex; align-items: center; justify-content: center">
-            <svg viewBox="0 0 64 64" style="width: 21px; height: 21px; display: block">
-              <circle cx="32" cy="14" r="6.5" fill="#241b06"></circle>
-              <path d="M32 24c-6.5 0-10.5 4-12.5 10l-2 6h29l-2-6c-2-6-6-10-12.5-10z" fill="#241b06"></path>
-              <path d="M12 46c2-4.5 9-7 20-7s18 2.5 20 7c0.8 1.8-0.5 3.5-2.5 3.5h-35c-2 0-3.3-1.7-2.5-3.5z" fill="#241b06"></path>
-            </svg>
-          </div>
-          <div><div style="font-weight: 600; font-size: 14.5px; color: #f2e9d8">Wisdom Guide</div><div style="font-size: 12px; color: #9a927f">Knows your journey · asks back</div></div>
-        </div>
-        <div style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px">
-          <sc-for list="{{ chatMessages }}" as="msg" hint-placeholder-count="1">
-            <div style="max-width: 86%; padding: 10px 14px; border-radius: 16px; font-size: 13.5px; font-weight: 300; line-height: 1.5; align-self: {{ msg.align }}; background: {{ msg.bg }}; color: {{ msg.color }}">{{ msg.text }}</div>
-          </sc-for>
-          <a href="mailto:info@goldenagewisdom.org?subject=A%20question%20from%20a%20member" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(213,183,124,0.26); background: rgba(213,183,124,0.07); color: #e6d3a8; font-size: 12.5px">
-            <span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.4); font-size: 12px">✉</span>
-            <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
-              <span style="color: #f2e9d8">Ask the seva team</span>
-              <span style="font-weight: 300; color: #9a927f; overflow: hidden; text-overflow: ellipsis">info@goldenagewisdom.org</span>
-            </span>
-          </a>
-          <div style="display: flex; flex-wrap: wrap; gap: 6px">
-            <sc-for list="{{ chatChips }}" as="c" hint-placeholder-count="2">
-              <button onClick="{{ c.pick }}" style="padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.26); background: rgba(213,183,124,0.08); color: #d5b77c; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">{{ c.label }}</button>
-            </sc-for>
-          </div>
-        </div>
-        <div style="padding: 12px; display: flex; gap: 8px; border-top: 1px solid rgba(255,255,255,0.1)">
-          <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Ask anything…" style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 10px 16px; color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 13.5px; outline: none">
-          <button onClick="{{ sendChat }}" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-size: 15px; cursor: pointer">↑</button>
-        </div>
-      </div>
-    </sc-if>
-    <button onClick="{{ toggleChat }}" class="r-fab" title="Wisdom Guide" style="position: fixed; bottom: 24px; right: 24px; z-index: 90; width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(213,183,124,0.5); background: radial-gradient(circle at 35% 35%, #e6d3a8, #b89758); color: #241b06; font-size: 24px; cursor: pointer; box-shadow: 0 8px 30px rgba(213,183,124,0.45); font-family: 'Marcellus', serif; display: flex; align-items: center; justify-content: center">
-      <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}"><span style="font-size: 26px; line-height: 1">×</span></sc-if>
-      <sc-if value="{{ chatClosed }}" hint-placeholder-val="{{ true }}">
-        <svg viewBox="0 0 64 64" style="width: 32px; height: 32px; display: block">
-          <circle cx="32" cy="14" r="6.5" fill="#241b06"></circle>
-          <path d="M32 24c-6.5 0-10.5 4-12.5 10l-2 6h29l-2-6c-2-6-6-10-12.5-10z" fill="#241b06"></path>
-          <path d="M12 46c2-4.5 9-7 20-7s18 2.5 20 7c0.8 1.8-0.5 3.5-2.5 3.5h-35c-2 0-3.3-1.7-2.5-3.5z" fill="#241b06"></path>
-        </svg>
-      </sc-if>
-    </button>
   </sc-if>
 
   <!-- SESSION OVERLAY -->
   <sc-if value="{{ donateOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; inset: 0; z-index: 110; background: rgba(13,10,28,0.85); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; padding: 24px">
-      <div style="width: min(440px, 100%); padding: 36px 34px; border-radius: 24px; background: rgba(42,36,82,0.75); backdrop-filter: blur(28px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 80px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 18px; text-align: center">
+      <div style="width: min(440px, 100%); padding: 36px 34px; border-radius: 24px; background: rgba(58,53,71,0.75); backdrop-filter: blur(28px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 80px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 18px; text-align: center">
         <div style="font-family: 'Marcellus', serif; font-size: 24px; color: #f7f1e3">Support the mission ♡</div>
         <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.6; color: #b9b1a0">Every teaching stays free because of you. Donations are processed securely by Stripe — we use your member info ({{ memberName }}), nothing to re-enter.</p>
         <div style="display: flex; gap: 10px; justify-content: center">
@@ -477,7 +512,7 @@
   </sc-if>
   <sc-if value="{{ cardBigOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeCard }}" style="position: fixed; inset: 0; z-index: 118; background: rgba(8,6,20,0.93); backdrop-filter: blur(12px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 24px; cursor: zoom-out">
-      <div style="position: relative; width: min(560px, 86vw, 74vh); aspect-ratio: 1/1; container-type: inline-size; border-radius: 24px; overflow: hidden; background: radial-gradient(ellipse 70% 60% at 50% 42%, #241a4d 0%, #141029 55%, #080614 100%); border: 1px solid rgba(213,183,124,0.4); box-shadow: 0 30px 90px rgba(0,0,0,0.6)">
+      <div style="position: relative; width: min(560px, 86vw, 74vh); aspect-ratio: 1/1; container-type: inline-size; border-radius: 24px; overflow: hidden; background: radial-gradient(ellipse 70% 60% at 50% 42%, #141029 0%, #141029 55%, #080614 100%); border: 1px solid rgba(213,183,124,0.4); box-shadow: 0 30px 90px rgba(0,0,0,0.6)">
         <div style="position: absolute; inset: 0; padding: 8.5cqi; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4cqi; text-align: center">
           <div style="font-size: 2.6cqi; letter-spacing: 0.34em; text-transform: uppercase; color: #d5b77c">Golden Age Wisdom</div>
           <div style="font-family: 'Marcellus', serif; font-size: {{ cardFontSize }}; line-height: 1.42; color: #f7f1e3; text-wrap: pretty">“{{ testimonialPreview }}”</div>
@@ -492,7 +527,7 @@
   </sc-if>
   <sc-if value="{{ landingOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; inset: 0; z-index: 114; background: rgba(8,6,20,0.92); backdrop-filter: blur(12px); display: flex; align-items: flex-start; justify-content: center; padding: 20px; overflow-y: auto">
-      <div style="width: min(680px, 100%); margin: auto; padding: 32px 30px; border-radius: 24px; background: rgba(23,17,48,0.94); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 90px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 20px">
+      <div style="width: min(680px, 100%); margin: auto; padding: 32px 30px; border-radius: 24px; background: rgba(20,16,41,0.94); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 90px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 20px">
         <div style="text-align: center; display: flex; flex-direction: column; gap: 7px">
           <span style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">Welcome, {{ memberName }}</span>
           <span style="font-family: 'Marcellus', serif; font-size: 26px; color: #f7f1e3">Where would you like to begin?</span>
@@ -517,7 +552,7 @@
 
   <sc-if value="{{ consentOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 120; padding: 14px; display: flex; justify-content: center; pointer-events: none">
-      <div style="pointer-events: auto; width: min(760px, 100%); padding: 16px 20px; border-radius: 24px; background: rgba(23,17,48,0.96); backdrop-filter: blur(14px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 20px 60px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+      <div style="pointer-events: auto; width: min(760px, 100%); padding: 16px 20px; border-radius: 24px; background: rgba(20,16,41,0.96); backdrop-filter: blur(14px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 20px 60px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
         <span style="flex: 1 1 300px; font-size: 13px; font-weight: 300; line-height: 1.6; color: #cfc8ba">We set no advertising cookies. May we count anonymous visits to see which teachings people reach for? <a href="Privacy.dc.html">Read the privacy notice →</a></span>
         <span style="display: flex; gap: 9px; flex-wrap: wrap">
           <button onClick="{{ acceptCookies }}" style="padding: 10px 20px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 13px; cursor: pointer">Allow</button>
@@ -528,7 +563,7 @@
   </sc-if>
   <sc-if value="{{ liveBackOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; inset: 0; z-index: 112; background: rgba(8,6,20,0.9); backdrop-filter: blur(12px); display: flex; align-items: flex-start; justify-content: center; padding: 20px; overflow-y: auto">
-      <div style="width: min(460px, 100%); margin: auto; padding: 30px 28px; border-radius: 24px; background: rgba(23,17,48,0.94); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 90px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 16px; text-align: center">
+      <div style="width: min(460px, 100%); margin: auto; padding: 30px 28px; border-radius: 24px; background: rgba(20,16,41,0.94); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 90px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 16px; text-align: center">
         <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">Welcome back</div>
         <div style="font-family: 'Marcellus', serif; font-size: 24px; color: #f7f1e3">{{ liveBackMins }} minutes with {{ liveBackLabel }}</div>
         <p style="margin: 0; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: #b9b1a0">You were away on {{ liveBackHow }} for {{ liveBackMins }} minutes. Shall I add that to your practice? Only you know how much of it was true stillness.</p>
@@ -542,7 +577,7 @@
   </sc-if>
   <sc-if value="{{ joinOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ backdropJoin }}" style="position: fixed; inset: 0; z-index: 108; background: rgba(8,6,20,0.9); backdrop-filter: blur(12px); display: flex; align-items: flex-start; justify-content: center; padding: 20px; overflow-y: auto; -webkit-overflow-scrolling: touch">
-      <div data-sheet="join" style="width: min(680px, 100%); margin: auto; padding: 30px 28px; border-radius: 24px; background: rgba(23,17,48,0.92); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 90px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 20px">
+      <div data-sheet="join" style="width: min(680px, 100%); margin: auto; padding: 30px 28px; border-radius: 24px; background: rgba(20,16,41,0.92); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 90px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 20px">
         <div style="display: flex; align-items: flex-start; gap: 14px">
           <div style="flex: 1; display: flex; flex-direction: column; gap: 8px">
             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
@@ -556,13 +591,13 @@
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
-          <a href="{{ zoomUrl }}" onClick="{{ openZoom }}" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 24px; border: 1px solid rgba(213,183,124,0.55); background: rgba(213,183,124,0.12); color: #f7f1e3" style-hover="border-color: rgba(230,211,168,0.9); background: rgba(213,183,124,0.18); color: #fdf8ec">
+          <a href="{{ zoomUrl }}" onClick="{{ openZoom }}" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 24px; border: 1px solid rgba(213,183,124,0.55); background: rgba(213,183,124,0.12); color: #f7f1e3" style-hover="border-color: rgba(230,211,168,0.9); background: rgba(213,183,124,0.18); color: #f7f1e3">
             <span style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">Members only</span>
             <span style="font-family: 'Marcellus', serif; font-size: 18px">Join live on Zoom</span>
-            <span style="font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #b9b1a0">Sit with Guruji and ask your questions 1:1.</span>
             <span style="font-size: 11.5px; color: #b89758">{{ zoomStartLine }}</span>
+            <span style="font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #7d7666">The same room every session · ID {{ zoomId }}</span>
           </a>
-          <div style="position: relative; display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: #efe9dc" style-hover="border-color: rgba(213,183,124,0.6); color: #fdf8ec">
+          <div style="position: relative; display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: #efe9dc" style-hover="border-color: rgba(213,183,124,0.6); color: #f7f1e3">
             <button onClick="{{ watchLive }}" aria-label="Watch the live session on this page" style="position: absolute; inset: 0; z-index: 0; width: 100%; border: none; border-radius: 24px; background: transparent; cursor: pointer"></button>
             <span style="position: relative; z-index: 1; pointer-events: none; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #9a927f">Watch only · here</span>
             <span style="position: relative; z-index: 1; pointer-events: none; font-family: 'Marcellus', serif; font-size: 18px">YouTube live</span>
@@ -573,7 +608,7 @@
           <button onClick="{{ sitNow }}" style="display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: #efe9dc; text-align: left; font-family: 'Outfit', sans-serif; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6)">
             <span style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #9a927f">{{ soloEyebrow }}</span>
             <span style="font-family: 'Marcellus', serif; font-size: 18px">Sit &amp; Scribe</span>
-            <span style="font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #b9b1a0">Can't make the group session? Sit in silence at any hour — then write what arose, while it is still warm.</span>
+            <span style="font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #b9b1a0">Sit in silence at any hour — then write what arose, while it is still warm.</span>
           </button>
         </div>
 
@@ -593,12 +628,12 @@
               </span>
             </div>
           </sc-for>
-          <div style="font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #7d7666">Sunday is rest — no group session. Group meditation is a silent hour together; the wisdom hour that follows is Dr. Hari answering open questions.</div>
+          <div style="font-size: 11.5px; font-weight: 300; line-height: 1.5; color: #7d7666">The same three sessions run Monday to Saturday — Sunday is the rest day. Group meditation is a silent hour together; the wisdom hour that follows is Dr. Hari answering open questions.</div>
         </div>
         <div style="padding: 18px 20px; border-radius: 24px; border: 1px solid rgba(213,183,124,0.26); background: rgba(213,183,124,0.06); display: flex; flex-direction: column; gap: 12px">
           <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
             <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #b89758">Your Zoom details</span>
-            <sc-if value="{{ hasCopyNote }}" hint-placeholder-val="{{ false }}"><span style="font-size: 11.5px; color: #a8d5a2">{{ copyNote }}</span></sc-if>
+            <sc-if value="{{ hasCopyNote }}" hint-placeholder-val="{{ false }}"><span style="font-size: 11.5px; color: #a9dfb8">{{ copyNote }}</span></sc-if>
           </div>
           <div style="display: flex; flex-wrap: wrap; gap: 10px">
             <button onClick="{{ copyZoomId }}" title="Copy meeting ID" style="display: flex; flex-direction: column; gap: 2px; padding: 9px 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: #f2e9d8; font-family: 'Outfit', sans-serif; text-align: left; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.6)"><span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #9a927f">Meeting ID</span><span style="font-size: 14.5px">{{ zoomId }}</span></button>
@@ -623,7 +658,7 @@
       <a href="{{ videoWatchUrl }}" target="_blank" rel="noopener" style="font-size: 12.5px; font-weight: 300; color: #9a927f">Player not loading? Watch on YouTube →</a>
       </sc-if>
       <sc-if value="{{ videoNotLive }}" hint-placeholder-val="{{ false }}">
-      <div style="width: min(680px, 100%); padding: 40px 32px; border-radius: 24px; border: 1px solid rgba(213,183,124,0.26); background: rgba(23,17,48,0.7); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
+      <div style="width: min(680px, 100%); padding: 40px 32px; border-radius: 24px; border: 1px solid rgba(213,183,124,0.26); background: rgba(20,16,41,0.7); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
         <div style="width: 62px; height: 62px; border-radius: 50%; border: 1px solid rgba(213,183,124,0.45); background: radial-gradient(circle at 38% 34%, rgba(230,211,168,0.28), rgba(184,151,88,0.08)); display: flex; align-items: center; justify-content: center; font-size: 24px; color: #e6d3a8">☾</div>
         <div style="font-family: 'Marcellus', serif; font-size: 22px; color: #f7f1e3">No stream is live right now</div>
         <div style="font-size: 13.5px; font-weight: 300; line-height: 1.6; color: #b9b1a0; max-width: 420px">{{ liveNextNote }}</div>
@@ -636,16 +671,16 @@
     </div>
   </sc-if>
   <sc-if value="{{ sessionOpen }}" hint-placeholder-val="{{ false }}">
-    <div class="sess-layer" style="position: fixed; inset: 0; z-index: 100; background: radial-gradient(ellipse 70% 60% at 50% 44%, #171130 0%, #0d0a1c 60%, #080614 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 24px 16px; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch">
+    <div class="sess-layer" style="position: fixed; inset: 0; z-index: 100; background: radial-gradient(ellipse 70% 60% at 50% 44%, #141029 0%, #0d0a1c 60%, #080614 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 24px 16px; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch">
       <sc-for list="{{ loginStars }}" as="st" hint-placeholder-count="10">
-        <div style="position: absolute; left: {{ st.x }}%; top: {{ st.y }}%; width: {{ st.s }}px; height: {{ st.s }}px; border-radius: 50%; background: #f5ecd6; opacity: {{ st.o }}"></div>
+        <div style="position: absolute; left: {{ st.x }}%; top: {{ st.y }}%; width: {{ st.s }}px; height: {{ st.s }}px; border-radius: 50%; background: #f2e9d8; opacity: {{ st.o }}"></div>
       </sc-for>
       <div style="position: absolute; width: min(620px, 130vw); height: min(620px, 130vw); border-radius: 50%; border: 1px dashed rgba(213,183,124,0.1); animation: sessSpin 120s linear infinite"></div>
       <div style="position: absolute; width: min(460px, 105vw); height: min(460px, 105vw); border-radius: 50%; border: 1px solid rgba(213,183,124,0.07); animation: sessSpin 80s linear infinite reverse"></div>
       <div class="sess-orb" style="position: relative; width: min(320px, 80vw); height: min(320px, 80vw); flex-shrink: 0; display: flex; align-items: center; justify-content: center">
         <svg viewBox="0 0 320 320" style="position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg)">
           <circle cx="160" cy="160" r="152" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"></circle>
-          <circle cx="160" cy="160" r="152" fill="none" stroke="rgba(213,183,124,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="955" stroke-dashoffset="{{ progOffset }}" style="transition: stroke-dashoffset 1s linear"></circle>
+          <circle cx="160" cy="160" r="152" fill="none" stroke="{{ ringColor }}" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="955" stroke-dashoffset="{{ progOffset }}" style="transition: stroke-dashoffset 1s linear, stroke 1.2s ease"></circle>
         </svg>
         <div style="position: absolute; width: 66%; height: 66%; border-radius: 50%; border: 1px solid rgba(230,211,168,0.4); animation: rippleOut 10s cubic-bezier(0.2, 0.6, 0.4, 1) infinite; pointer-events: none"></div>
         <div style="position: absolute; width: 66%; height: 66%; border-radius: 50%; border: 1px solid rgba(230,211,168,0.28); animation: rippleOut 10s cubic-bezier(0.2, 0.6, 0.4, 1) 5s infinite; pointer-events: none"></div>
@@ -658,12 +693,17 @@
         </div>
       </div>
       <div style="position: relative; text-align: center; display: flex; flex-direction: column; gap: 9px; align-items: center">
+        <sc-if value="{{ goalHit }}" hint-placeholder-val="{{ false }}">
+          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px; border: 1px solid rgba(126,203,143,0.5); background: rgba(126,203,143,0.14); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #a9dfb8; animation: fadeSlow 1.4s ease both">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #7ecb8f; box-shadow: 0 0 9px #7ecb8f"></span>{{ goalDoneChip }}
+          </div>
+        </sc-if>
         <div style="font-family: 'Marcellus', serif; font-size: 27px; letter-spacing: 0.04em; color: #f2e9d8">{{ breathLabel }}</div>
         <div style="min-height: 20px; font-size: 13.5px; font-weight: 300; font-style: italic; color: #9a927f; animation: fadeSlow 1.4s ease both">{{ guidance }}</div>
         <div style="display: flex; align-items: center; gap: 14px; margin-top: 6px; padding: 7px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); font-size: 12.5px; color: #b9b1a0; white-space: nowrap">
           <span style="font-family: 'Marcellus', serif; font-size: 14px; color: #e6d3a8">{{ sessionClock }}</span>
           <span style="width: 1px; height: 12px; background: rgba(255,255,255,0.15)"></span>
-          <span>goal {{ goalClock }}</span>
+          <span style="color: {{ goalColor }}">{{ goalText }}</span>
           <span style="width: 1px; height: 12px; background: rgba(255,255,255,0.15)"></span>
           <span>Day {{ journeyDay }} of 41</span>
         </div>
@@ -713,7 +753,7 @@
     </div>
   </sc-if>
   <sc-if value="{{ doneOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position: fixed; inset: 0; z-index: 100; background: radial-gradient(ellipse 70% 60% at 50% 44%, #171130 0%, #0d0a1c 60%, #080614 100%); display: flex; align-items: center; justify-content: center; padding: 24px">
+    <div style="position: fixed; inset: 0; z-index: 100; background: radial-gradient(ellipse 70% 60% at 50% 44%, #141029 0%, #0d0a1c 60%, #080614 100%); display: flex; align-items: center; justify-content: center; padding: 24px">
       <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; animation: fadeSlow 1s ease both">
         <div style="width: 74px; height: 74px; border-radius: 50%; background: radial-gradient(circle at 38% 34%, rgba(230,211,168,0.45), rgba(184,151,88,0.12)); border: 1px solid rgba(213,183,124,0.5); box-shadow: 0 0 60px rgba(213,183,124,0.3); display: flex; align-items: center; justify-content: center">
           <svg viewBox="0 0 64 64" style="width: 30px; height: 30px"><circle cx="32" cy="14" r="6.5" fill="#f2e3bb"></circle><path d="M32 24c-6.5 0-10.5 4-12.5 10l-2 6h29l-2-6c-2-6-6-10-12.5-10z" fill="#f2e3bb"></path><path d="M12 46c2-4.5 9-7 20-7s18 2.5 20 7c0.8 1.8-0.5 3.5-2.5 3.5h-35c-2 0-3.3-1.7-2.5-3.5z" fill="#f2e3bb"></path></svg>
@@ -764,7 +804,7 @@ class Component extends DCLogic {
     return 'https://www.youtube.com/embed/' + path + p;
   }
   channelId() { return 'UCb_5Mpr91TDNqc6zHbq9erQ'; }
-  // Live sessions run Monday to Saturday, IST. No sessions on Sunday.
+  // Live sessions run Monday–Saturday IST — Sunday is the rest day.
   sessionSchedule() {
     // IST minutes-from-midnight. `youtube` marks the windows that are actually
     // broadcast on the channel — the Zoom circle opens at 8:00 PM IST
@@ -776,17 +816,41 @@ class Component extends DCLogic {
       { key: 'wisdom', label: 'Wisdom sharing with Dr. Hari', from: 1270, to: 1320, zoom: true, youtube: true },
     ];
   }
+  /* Next (or current) occurrence of a window, as ABSOLUTE instants so the
+     member's own clock and calendar day are the source of truth. Sunday (IST)
+     is the rest day — live/next windows skip it. */
+  nextOccurrence(list) {
+    const day = 86400000, ist = this.istNow();
+    const dow = ist.getDay();
+    const mins = ist.getHours() * 60 + ist.getMinutes();
+    const live = dow !== 0 && list.find(s => mins >= s.from && mins < s.to);
+    if (live) return { status: 'live', session: live, rest: false, startMs: this.sessionInstant(live.from), endMs: this.sessionInstant(live.to) };
+    const later = dow !== 0 && list.find(s => mins < s.from);
+    if (later) return { status: 'soon', session: later, rest: false, startMs: this.sessionInstant(later.from), endMs: this.sessionInstant(later.to) };
+    // Roll to the next session day: +1 day normally, +2 from Saturday night,
+    // +1 from Sunday itself (whole Sunday counts down to Monday).
+    const first = list[0];
+    const skip = dow === 6 ? 2 : 1;
+    return {
+      status: 'soon', session: first, rest: dow === 0,
+      startMs: this.sessionInstant(first.from) + skip * day,
+      endMs: this.sessionInstant(first.to) + skip * day,
+    };
+  }
+  awayMins(startMs) { return Math.max(0, Math.round((startMs - Date.now()) / 60000)); }
+  awayText(startMs) {
+    const t = this.awayMins(startMs), hh = Math.floor(t / 60), mm = t % 60;
+    if (t < 1) return 'any moment now';
+    if (hh >= 24) { const d = Math.floor(hh / 24); return 'in ' + d + (d === 1 ? ' day ' : ' days ') + (hh % 24) + 'h'; }
+    return 'in ' + (hh ? hh + 'h ' : '') + mm + 'm';
+  }
   // The next (or current) window that is streamed on YouTube.
   youtubeWindow() {
-    const ist = this.istNow();
-    const mins = ist.getHours() * 60 + ist.getMinutes(), sunday = ist.getDay() === 0;
-    const list = this.sessionSchedule().filter(s => s.youtube);
-    if (sunday) return { status: 'rest', session: list[0] };
-    const live = list.find(s => mins >= s.from && mins < s.to);
-    if (live) return { status: 'live', session: live };
-    const next = list.find(s => mins < s.from) || list[0];
-    const away = next.from > mins ? next.from - mins : (1440 - mins) + next.from;
-    return { status: 'soon', session: next, away };
+    const o = this.nextOccurrence(this.sessionSchedule().filter(s => s.youtube));
+    return {
+      status: o.status, session: o.session,
+      startMs: o.startMs, endMs: o.endMs, away: this.awayMins(o.startMs),
+    };
   }
   istNow() { return new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000); }
   localZone() {
@@ -814,13 +878,12 @@ class Component extends DCLogic {
   scheduleRows() {
     const ist = this.istNow(), mins = ist.getHours() * 60 + ist.getMinutes(), day = 86400000;
     return this.sessionSchedule().map(s => {
-      const live = mins >= s.from && mins < s.to && ist.getDay() !== 0;
-      // roll past sessions (and all of Sunday) forward to their next occurrence
+      const live = mins >= s.from && mins < s.to;
+      // roll past sessions forward to their next occurrence
       let roll = 0;
       if (!live && mins >= s.to) roll = 1;
       let a = this.sessionInstant(s.from) + roll * day, b = this.sessionInstant(s.to) + roll * day;
       let nextIstDay = (ist.getDay() + roll) % 7;
-      if (nextIstDay === 0) { a += day; b += day; roll += 1; nextIstDay = 1; }  // skip Sunday
       // state reads from the member's OWN calendar day, the same source as the local time shown
       let state;
       if (live) state = 'Live now';
@@ -839,22 +902,20 @@ class Component extends DCLogic {
         dotAnim: live ? 'sndRing 2.4s ease-out infinite' : 'none',
         rowBg: live ? 'rgba(224,132,132,0.09)' : 'transparent',
         labelColor: live || roll === 0 ? '#f2e9d8' : '#b9b1a0',
-        stateColor: live ? '#e8a9a9' : '#7d7666',
+        stateColor: live ? '#e0a3a3' : '#7d7666',
       };
     });
   }
   liveInfo() {
-    const ist = this.istNow();
-    const mins = ist.getHours() * 60 + ist.getMinutes(), sunday = ist.getDay() === 0;
-    const list = this.sessionSchedule();
-    if (sunday) return { status: 'rest', label: 'No sessions on Sunday', note: 'Guruji rests today — sit on your own whenever you wish.' };
-    const live = list.find(s => mins >= s.from && mins < s.to);
-    const fmt = s => this.fmtLocal(this.sessionInstant(s.from)) + ' your time · ' + this.fmtIST(s.from) + ' IST';
-    if (live) return { status: 'live', label: live.label, note: fmt(live) + ' · in progress' };
-    const next = list.find(s => mins < s.from) || list[0];
-    const away = next.from > mins ? next.from - mins : (1440 - mins) + next.from;
-    const hh = Math.floor(away / 60), mm = away % 60;
-    return { status: 'soon', label: next.label, note: fmt(next) + ' · starts in ' + (hh ? hh + 'h ' : '') + mm + 'm' };
+    const o = this.nextOccurrence(this.sessionSchedule());
+    const when = this.localDayHint(o.startMs) + this.fmtLocal(o.startMs) + ' your time · ' + this.fmtIST(o.session.from) + ' IST';
+    if (o.status === 'live') {
+      const left = Math.max(1, Math.round((o.endMs - Date.now()) / 60000));
+      return { status: 'live', label: o.session.label, startMs: o.startMs, endMs: o.endMs,
+               note: when + ' · in progress, about ' + left + ' min left' };
+    }
+    return { status: 'soon', label: o.session.label, startMs: o.startMs, endMs: o.endMs,
+             note: when + ' · starts ' + this.awayText(o.startMs) };
   }
   zoomDetails() {
     return {
@@ -937,7 +998,7 @@ class Component extends DCLogic {
     x.lineTo(0, R); x.quadraticCurveTo(0, 0, R, 0); x.closePath();
     x.save(); x.clip();
     const g = x.createRadialGradient(W * 0.5, W * 0.42, 40, W * 0.5, W * 0.42, W * 0.78);
-    g.addColorStop(0, '#241a4d'); g.addColorStop(0.55, '#141029'); g.addColorStop(1, '#080614');
+    g.addColorStop(0, '#141029'); g.addColorStop(0.55, '#141029'); g.addColorStop(1, '#080614');
     x.fillStyle = g; x.fillRect(0, 0, W, W);
     try { await document.fonts.ready; } catch (e) {}
     x.textAlign = 'center';
@@ -1142,7 +1203,7 @@ class Component extends DCLogic {
   }
   knowledgeBase() {
     return [
-      'Golden Age Wisdom is a registered non-profit spiritual movement. Everything it teaches is free. Contact: info@goldenagewisdom.org.',
+      'Golden Age Wisdom is a registered non-profit spiritual movement. Everything it teaches is free. Contact: goldenageguruteachings@gmail.com.',
       'Founder: Dr. Hari Krishna, a medical professional and spiritual teacher who founded the Golden Age Spiritual Movement.',
       'The core practice: sit comfortably, close the eyes and watch the breath. No kriyas, no breath-control techniques, no mantras required.',
       'The 41-day invitation: one 30-minute sit in silence every day for 41 days, then observe how mind and body heal and how you act.',
@@ -1166,7 +1227,7 @@ class Component extends DCLogic {
       'Karmas, past-life glimpses, third-eye visions and openings are all part of the terrain of meditation experiences; they come and go. The real beauty is transformation, wisdom and knowing the ultimate truth.',
       'The ultimate truth depends on what the seeker wants: joy for one, wisdom for another, self-discovery for the next. Come to know yourself through your own journey.',
       'If a member is new and asks about kundalini, visions or karmas, gently suggest they simply sit first — as Dr. Hari says, \'Gammuga kurchavo\', simply sit quietly.',
-      'Live sessions run Monday to Saturday on Zoom, with no sessions on Sunday. 4:10-5:10 AM IST Brahmamuhurtham sit, 8:00-9:00 PM IST group meditation, 9:00-10:00 PM IST wisdom sharing with Dr. Hari.',
+      'Live sessions run Monday to Saturday on Zoom — Sunday is the rest day. 4:10-5:10 AM IST Brahmamuhurtham sit, 8:00-9:00 PM IST group meditation, 9:00-10:00 PM IST wisdom sharing with Dr. Hari.',
       'The group meditation hour is silent sitting together. The wisdom hour that follows is Dr. Hari answering members\' open spiritual questions, 1:1.',
       'Members join live from the Join live panel in their dashboard: Zoom (members only, full meeting details shown there), or YouTube live to watch only. Members who cannot attend can Sit & Scribe on their own at any hour.',
       'Recorded discourses of Dr. Hari are in the Discourses tab of the member area and on youtube.com/@GoldenAgeGurus.',
@@ -1231,14 +1292,14 @@ class Component extends DCLogic {
       event: (() => {
         const li = this.liveInfo();
         const rows = this.scheduleRows().map(r => r.label + ' — ' + r.local + ' (' + r.ist + ')').join('\n');
-        return 'Live sessions run Monday to Saturday:\n' + rows + '\n\n' + (li.status === 'live' ? li.label + ' is live right now — open Join live in your sidebar for the Zoom details.' : (li.status === 'rest' ? 'Sunday is rest — no group session today.' : 'Next: ' + li.label + ', ' + li.note + '.')) + ' For retreats and satsang dates, write to info@goldenagewisdom.org.';
+        return 'Live sessions run Monday to Saturday (Sunday is the rest day):\n' + rows + '\n\n' + (li.status === 'live' ? li.label + ' is live right now — open Join live in your sidebar for the Zoom details.' : (li.status === 'rest' ? 'Sunday is rest — no group session today.' : 'Next: ' + li.label + ', ' + li.note + '.')) + ' For retreats and satsang dates, write to goldenageguruteachings@gmail.com.';
       })(),
       journal: 'Your journal is private and encrypted — only you can read it. Writing right after a sit captures what the mind forgets in minutes. Open the Journal tab and note even one line about today\u2019s sitting.',
       stress: `I hear you, ${name}. Stress softens fastest in silence: sit now for just 5 minutes, eyes closed, watching the breath — nothing else. Your streak shows the healing is already working. Shall I open a session?`,
       forty: 'The 41-day invitation: one 30-minute sit in silence daily. No kriyas, no breath practices — close your eyes and watch the breath, that\u2019s it. After 41 days, see how well you act and how deeply mind and body heal. You\u2019re on day ' + st.streak + ' of it.',
       donate: 'Every teaching here is free — we are a non-profit. If our work moves you, the "Support the mission ♡" link in your sidebar keeps it free for all. Never an obligation.',
       experience: 'Sensations of light, tingling at the crown, or deep stillness are common as prana refines — welcome them without chasing them. Masters explain these experiences here: youtube.com/watch?v=_7xG_Y0RBUo. Note what you felt in your Journal while it\u2019s fresh.',
-      volunteer: `Wonderful, ${name} — meditators who complete the 41 days often feel called to give back. As a volunteer you can host group sits, welcome new members, and help at retreats. You can also support the mission with a donation or join our live events — everything stays free for all.`,
+      volunteer: `Wonderful, ${name} — meditators who complete the 41 days often feel called to give back. There are seven teams — events on the ground, the helpline, local events, answering experiences, donors, social media and tech. Open goldenagewisdom.org/volunteer and choose the ones that suit you. You can also support the mission with a donation or join our live events — everything stays free for all.`,
       gratitude: `Namaste, ${name} 🙏 The light in me honors the light in you. Is there anything on your practice I can help with?`,
     };
     if (this.isGibberish(q)) {
@@ -1247,7 +1308,7 @@ class Component extends DCLogic {
     }
     const fallbacks = [
       `I don\u2019t have that one yet, ${name}. Ask me about your streak, your minutes, the live sessions, the 41-day challenge, the journal, or how you\u2019re feeling today.`,
-      `That\u2019s outside what I know, ${name} — but I can help with your practice, your progress, the live sessions or the journal. For anything else, info@goldenagewisdom.org reaches a person.`,
+      `That\u2019s outside what I know, ${name} — but I can help with your practice, your progress, the live sessions or the journal. For anything else, goldenageguruteachings@gmail.com reaches a person.`,
       `Still learning that one. Try asking about meditation itself, kundalini, the 41 days, your streak, or tonight\u2019s session.`,
     ];
     this._fbN = (this._fbN || 0);
@@ -1342,7 +1403,7 @@ class Component extends DCLogic {
   async askGuide(q, local) {
     const facts = this.knowledgeBase().join('\n- ');
     const rules = 'You are the Wisdom Guide of Golden Age Wisdom, a warm meditation companion. Answer ONLY from the FACTS and MEMBER DATA below. '
-      + 'If the answer is not contained there, say plainly that you do not know and invite the member to write to info@goldenagewisdom.org. '
+      + 'If the answer is not contained there, say plainly that you do not know and invite the member to write to goldenageguruteachings@gmail.com. '
       + 'Never invent teachings, events, dates, numbers, names or scripture. Never give medical, psychiatric, legal or financial advice — refer to a qualified professional. '
       + 'Two to four sentences, calm and plain, no emoji except an occasional 🙏. If the member is distressed, be gentle and suggest a short sit.'
       + '\n\nFACTS:\n- ' + facts + '\n\nMEMBER DATA:\n' + this.memberContext();
@@ -1387,6 +1448,15 @@ class Component extends DCLogic {
   }
   signInGoogle() {
     const cid = this.props.googleClientId ?? (window.GAW_CONFIG && window.GAW_CONFIG.googleClientId) ?? '';
+    // Google refuses to render inside an embedded frame (ERR_BLOCKED_BY_RESPONSE), so in a
+    // preview there is nothing to attempt — say so plainly and point at the demo account
+    // rather than opening a popup that can only fail.
+    let framed = false;
+    try { framed = window.top !== window.self; } catch (e) { framed = true; }
+    if (framed) {
+      this.setState({ oauthNote: 'Google will not open inside a preview window. It works on the live site — or use the demo account below to look around.' });
+      return;
+    }
     if (cid && window.google && google.accounts && google.accounts.oauth2) {
       try {
         const tc = google.accounts.oauth2.initTokenClient({
@@ -1513,9 +1583,7 @@ class Component extends DCLogic {
     this.registerUser(user);
     this.syncBackendNumber(user);
     try { localStorage.setItem('gaw_session', JSON.stringify(user)); localStorage.setItem('gaw_last_user', JSON.stringify(user)); } catch (e) {}
-    let landing = null;
-    try { landing = localStorage.getItem('gaw_landing'); } catch (e) {}
-    if (landing) { setTimeout(() => this.openLanding(landing), 60); } else { setTimeout(() => this.setState({ landingOpen: true }), 350); }
+    // Landing chooser removed — members land on the dashboard overview.
     this.setState({ screen: 'dash', sessionUser: user, journalEntries: this.loadData().journal || [], registered: this.loadData().events || {} });
     this.cloudPull(user);
   }
@@ -1700,8 +1768,7 @@ class Component extends DCLogic {
     try { const sv = parseFloat(localStorage.getItem('gaw_vol')); if (sv >= 0 && sv <= 1) this.setState({ sndVol: sv }); } catch (e) {}
     // A returning member on a new device has never been asked where to begin.
     if (u) {
-      let lg = null; try { lg = localStorage.getItem('gaw_landing'); } catch (e) {}
-      if (!lg) setTimeout(() => { const st = this.state; if (!st.sessionOpen && !st.doneOpen && !st.joinOpen) this.setState({ landingOpen: true }); }, 500);
+      // Landing chooser removed — no first-visit prompt.
     }
     // app-shortcut deep links: /join?go=solo | /join?go=live
     try {
@@ -1713,7 +1780,17 @@ class Component extends DCLogic {
       }, 300);
     } catch (e) {}
     // breath rhythm: 4s in, 6s out (natural exhale is longer)
-    this.clockTimer = setInterval(() => { if (this.state.sessionOpen && !this.state.sessPaused) this.setState(s => ({ sessionSecs: s.sessionSecs + 1 })); }, 1000);
+    this.clockTimer = setInterval(() => {
+      if (!this.state.sessionOpen || this.state.sessPaused) return;
+      this.setState(s => {
+        const n = s.sessionSecs + 1;
+        if (!s.goalHit && n >= s.sessGoal * 60) { this.chime(); return { sessionSecs: n, goalHit: true }; }
+        return { sessionSecs: n };
+      });
+    }, 1000);
+    // Schedule copy is derived, not stored: re-render each minute so a countdown
+    // never sits stale and "Live now" appears the minute the window opens.
+    this.scheduleTimer = setInterval(() => { if (!this.state.sessionOpen) this.forceUpdate(); }, 30000);
   }
   maybeNudge() {
     if (this.state.nudged || this.state.chatOpen) return;
@@ -1732,15 +1809,37 @@ class Component extends DCLogic {
     }));
     try { localStorage.setItem('gaw_guide_nudge', today); } catch (e) {}
   }
-  componentWillUnmount() { this.releaseAwake(); clearTimeout(this.nudgeT); clearTimeout(this.breathT); clearInterval(this.clockTimer); this.stopSound(); window.removeEventListener('keydown', this.onEsc); document.removeEventListener('visibilitychange', this.onVis); window.removeEventListener('focus', this.onVis); }
+  componentWillUnmount() { this.releaseAwake(); clearTimeout(this.nudgeT); clearTimeout(this.breathT); clearInterval(this.clockTimer); clearInterval(this.scheduleTimer); this.stopSound(); window.removeEventListener('keydown', this.onEsc); document.removeEventListener('visibilitychange', this.onVis); window.removeEventListener('focus', this.onVis); }
   breathe() {
     if (!this.state.sessionOpen) return;
     const goingIn = this.state.breathPhase !== 'in';
     this.setState({ breathPhase: goingIn ? 'in' : 'out' });
     this.breathT = setTimeout(() => this.breathe(), goingIn ? 4000 : 6000);
   }
+  chime() {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!this._bellCtx) this._bellCtx = new AC();
+      const ctx = this._bellCtx;
+      if (ctx.state === 'suspended') ctx.resume();
+      [0, 3.1].forEach(delay => {
+        const t = ctx.currentTime + delay;
+        [[1, 0.42, 7], [2.76, 0.15, 4.5], [5.4, 0.06, 2.6]].forEach(([mult, amp, dec]) => {
+          const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = 196 * mult;
+          const g = ctx.createGain();
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.linearRampToValueAtTime(amp, t + 0.03);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + dec);
+          o.connect(g); g.connect(ctx.destination);
+          o.start(t); o.stop(t + dec + 0.2);
+        });
+      });
+    } catch (e) {}
+    if (navigator.vibrate) { try { navigator.vibrate([90, 120, 90]); } catch (e) {} }
+  }
   setGoal(mins) {
-    this.setState({ sessGoal: mins });
+    this.setState(st => ({ sessGoal: mins, goalHit: st.sessionSecs >= mins * 60 }));
     try { localStorage.setItem('gaw_goal', String(mins)); } catch (e) {}
   }
   // Keep the screen lit while sitting — a member watching the orb never touches
@@ -1758,7 +1857,7 @@ class Component extends DCLogic {
   startSit() {
     clearTimeout(this.breathT);
     this.keepAwake();
-    this.setState({ sessionOpen: true, sessionSecs: 0, sessPaused: false, breathPhase: 'out' }, () => this.breathe());
+    this.setState({ sessionOpen: true, sessionSecs: 0, sessPaused: false, goalHit: false, breathPhase: 'out' }, () => this.breathe());
   }
   endSit() {
     clearTimeout(this.breathT);
@@ -1773,22 +1872,44 @@ class Component extends DCLogic {
       this.setState({ sessionOpen: false, sessPaused: false, doneOpen: true, doneMins: mins + (mins === 1 ? ' minute' : ' minutes'), journalDraft: '' });
     } else this.setState({ sessionOpen: false, sessPaused: false });
   }
+  askBody(s, topics) {
+    const q = (s.askText || '').trim();
+    if (!q) return '';
+    const topic = (topics.find(t => t.key === (s.askTopic || 'health')) || topics[0]).label;
+    const who = this.memberNameNow ? this.memberNameNow() : '';
+    const head = [
+      'Golden Age Wisdom — question for a volunteer',
+      'Topic: ' + topic,
+      who ? 'From: ' + who : ''
+    ].filter(Boolean).join('\n');
+    return head + '\n\n' + q;
+  }
+
   renderVals() {
     const s = this.state;
     const tab = s.tab;
+    const SEVA_WHATSAPP = '917337505390';
+    const SEVA_EMAIL = 'goldenageguruteachings@gmail.com';
+    const ASK_TOPICS = [
+      { key: 'health', label: 'Health & diet', hint: 'Tell them what is going on — food, sleep, energy, medicines.' },
+      { key: 'kundalini', label: 'Kundalini experiences', hint: 'Describe what you felt, and when it happens.' },
+      { key: 'practice', label: 'Trouble sitting', hint: 'What happens when you try to sit? Be plain about it.' },
+      { key: 'life', label: 'Money & daily life', hint: 'Money trouble, work, family, manifestation — say what is weighing on you.' },
+      { key: 'other', label: 'Something else', hint: 'Ask anything. A person reads this, not a machine.' }
+    ].map(t => ({ ...t, hint: t.hint + ' Please include your phone number so a volunteer can call you back.' }));
     const navDefs = [
       { key: 'overview', icon: '☀', label: 'Overview' },
       { key: 'solo', icon: '▶', label: 'Sit & Scribe' },
       { key: 'live', icon: '◉', label: 'Join live', badge: true },
       { key: 'journal', icon: '✎', label: 'Journal' },
+      { key: 'guide', icon: '✧', label: 'Wisdom Guide' },
       { key: 'share', icon: '♡', label: 'Share the light' },
+      { key: 'help', icon: '✆', label: 'Circles & help' },
       ...(this.myRole() !== 'member' ? [{ key: 'admin', icon: '✦', label: 'Admin panel' }] : []),
     ];
     const mins = String(Math.floor(s.sessionSecs / 60)).padStart(2, '0');
     const secs = String(s.sessionSecs % 60).padStart(2, '0');
-    const eventDefs = [
-      { day: '26', month: 'JUL', title: 'Awakening Hyderabad', meta: '11 AM–6 PM · 9 Convention, Sanath Nagar', ends: '2026-07-26T18:00:00+05:30' },
-    ];
+    const eventDefs = [];
     const screen = this.props.startOnDashboard && s.screen === 'login' ? 'dash' : s.screen;
     return {
       memberName: this.memberNameNow(),
@@ -1854,11 +1975,13 @@ class Component extends DCLogic {
       signInMicrosoft: () => this.demoProvider('Microsoft'),
       signInFacebook: () => this.demoProvider('Facebook'),
       signInApple: () => this.demoProvider('Apple'),
+      signInDemo: () => this.setSession({ name: 'Ananya Rao', email: 'demo@goldenagewisdom.org', role: 'member', provider: 'demo' }),
       oauthNote: s.oauthNote || '',
       hasOauthNote: !!s.oauthNote,
       signOut: () => this.clearSession(),
       tabOverview: tab === 'overview' || tab === 'events',
       tabJournal: tab === 'journal',
+      tabGuide: tab === 'guide',
       videoFilters: [['all', 'All'], ['discourse', 'Discourses'], ['meditation', 'Meditation'], ['practice', 'Practices']].map(([k, label]) => {
         const on = (s.videoFilter || 'all') === k;
         return { label, pick: () => this.setState({ videoFilter: k }),
@@ -1879,19 +2002,24 @@ class Component extends DCLogic {
         return {
           liveLabel: li.label,
           liveNote: li.note,
-          liveBadge: li.status === 'live' ? 'Live now' : (li.status === 'rest' ? 'Sunday' : 'Up next'),
+          liveBadge: li.status === 'live' ? 'Live now' : 'Up next',
           scheduleRows: this.scheduleRows(),
-          liveCtaLabel: li.status === 'live' ? 'Group session live now'
-            : li.status === 'rest' ? 'No group session today'
-            : 'Group session in ' + (li.note.split(' · starts in ')[1] || 'a while'),
+          // Name the session the schedule actually points at — the card below does, and a
+          // hardcoded "Group session" contradicted it two windows out of three. Short forms
+          // because the pill is a single nowrap line.
+          liveCtaLabel: (() => {
+            const short = { 'Brahmamuhurtham sit': 'Dawn sit', 'Group meditation': 'Group sit', 'Wisdom sharing with Dr. Hari': 'Wisdom hour' }[li.label] || li.label;
+            if (li.status === 'live') return short + ' live now';
+            return short + ' in ' + (li.note.split(' · starts in ')[1] || 'a while');
+          })(),
           liveCtaBorder: li.status === 'live' ? 'rgba(224,132,132,0.75)' : 'rgba(213,183,124,0.45)',
           liveCtaBg: li.status === 'live' ? 'rgba(224,132,132,0.12)' : 'rgba(255,255,255,0.03)',
-          liveCtaDot: li.status === 'live' ? '#e08484' : (li.status === 'rest' ? 'rgba(255,255,255,0.25)' : '#d5b77c'),
+          liveCtaDot: li.status === 'live' ? '#e08484' : '#d5b77c',
           liveCtaAnim: li.status === 'live' ? 'sndRing 2.4s ease-out infinite' : 'none',
           localZone: this.localZone(),
-          soloEyebrow: li.status === 'live' ? "Can't join the group session?" : 'Any hour, on your own',
-          liveBadgeBg: li.status === 'live' ? 'rgba(184,88,88,0.9)' : 'rgba(213,183,124,0.16)',
-          liveBadgeColor: li.status === 'live' ? '#fff4f0' : '#e6d3a8',
+          soloEyebrow: li.status === 'live' ? "Can't join the live session?" : 'Any hour, on your own',
+          liveBadgeBg: li.status === 'live' ? 'rgba(196,64,64,0.9)' : 'rgba(213,183,124,0.16)',
+          liveBadgeColor: li.status === 'live' ? '#f7f1e3' : '#e6d3a8',
           zoomUrl: z.url, zoomId: z.id, zoomPass: z.pass,
           copyZoomId: () => this.copyText(z.id, 'Meeting ID'),
           copyZoomPass: () => this.copyText(z.pass, 'Passcode'),
@@ -1953,25 +2081,22 @@ class Component extends DCLogic {
       // instead of handing the member YouTube's grey error card.
       zoomStartLine: (() => {
         const li = this.liveInfo();
-        if (li.status === 'rest') return 'Returns Monday';
-        if (li.status === 'live') return 'Open now · ' + li.label;
-        const g = this.sessionSchedule().find(x => x.key === 'group');
-        return 'Opens ' + this.fmtLocal(this.sessionInstant(g.from)) + ' your time · ' + this.fmtIST(g.from) + ' IST';
+        if (li.status === 'live') return 'Open now · in progress';
+        const at = this.localDayHint(li.startMs) + this.fmtLocal(li.startMs) + ' your time';
+        return 'Opens ' + at + ' · ' + this.awayText(li.startMs);
       })(),
       ytStartLine: (() => {
-        const w = this.youtubeWindow(), s2 = w.session;
+        const w = this.youtubeWindow();
         if (w.status === 'live') return 'Streaming now';
-        if (w.status === 'rest') return 'Returns Monday';
-        return 'Streams ' + this.fmtLocal(this.sessionInstant(s2.from)) + ' your time · ' + this.fmtIST(s2.from) + ' IST';
+        const at = this.localDayHint(w.startMs) + this.fmtLocal(w.startMs) + ' your time';
+        return 'Streams ' + at + ' · ' + this.awayText(w.startMs);
       })(),
       videoIsPlayable: !!s.videoOpen && (s.videoOpen !== 'LIVE' || this.youtubeWindow().status === 'live'),
       videoNotLive: s.videoOpen === 'LIVE' && this.youtubeWindow().status !== 'live',
       liveNextNote: (() => {
         const w = this.youtubeWindow(), s2 = w.session;
-        const at = this.fmtLocal(this.sessionInstant(s2.from)) + ' your time · ' + this.fmtIST(s2.from) + ' IST';
-        if (w.status === 'rest') return 'Sunday is rest — nothing is broadcast today. The stream returns tomorrow for ' + s2.label + ', ' + at + '.';
-        const hh = Math.floor(w.away / 60), mm = w.away % 60;
-        return 'The channel streams ' + s2.label + ' — ' + at + ', starting in ' + (hh ? hh + 'h ' : '') + mm + 'm. The group meditation hour before it runs on Zoom only.';
+        const at = this.localDayHint(w.startMs) + this.fmtLocal(w.startMs) + ' your time · ' + this.fmtIST(s2.from) + ' IST';
+        return 'The channel streams ' + s2.label + ' — ' + at + ', starting ' + this.awayText(w.startMs) + '. The group meditation hour before it runs on Zoom only.';
       })(),
       sitFromVideo: () => { this.setState({ videoOpen: null }); setTimeout(() => this.startSit(), 120); },
       watchLive: () => { const w = this.youtubeWindow(); const li = w.status === 'live' ? { status: 'live', label: w.session.label } : this.liveInfo(); if (w.status === 'live') this.markLiveStart(w.session.label, 'YouTube live'); this.setState({ joinOpen: false, videoOpen: 'LIVE', videoTitle: li.status === 'live' ? li.label + ' · live on YouTube' : 'Live on YouTube' }); },
@@ -1979,6 +2104,58 @@ class Component extends DCLogic {
       videoTitle: s.videoTitle || '',
       closeVideo: () => { this.setState({ videoOpen: null }); setTimeout(() => this.checkLiveReturn(), 200); },
       tabShare: tab === 'share',
+      tabHelp: tab === 'help',
+      groups: [
+        { city: 'Hyderabad', initial: 'H', meets: 'Daily · 8:15 PM', sinceShort: 'Since 2019',
+          says: 'A volunteer meets first-timers at the gate — you will not walk in alone.',
+          helps: ['First-timers', 'Telugu · English'], link: 'https://chat.whatsapp.com/gaw-hyd' },
+        { city: 'Bengaluru', initial: 'B', meets: 'Daily · 8:15 PM', sinceShort: 'Since 2021',
+          says: 'Mats and shawls are kept at the back. Come straight from work.',
+          helps: ['First-timers', 'Kannada · English'], link: 'https://chat.whatsapp.com/gaw-blr' },
+        { city: 'Pune', initial: 'P', meets: 'Tue, Thu, Sat', sinceShort: 'Since 2022',
+          says: 'A living-room circle of about eleven, with tea afterwards.',
+          helps: ['Small group', 'Hindi · Marathi'], link: 'https://chat.whatsapp.com/gaw-pune' },
+        { city: 'Chennai', initial: 'C', meets: 'Daily · 8:20 PM', sinceShort: 'Since 2020',
+          says: 'Never meditated? Say so in the group and someone will sit beside you.',
+          helps: ['First-timers', 'Tamil · English'], link: 'https://chat.whatsapp.com/gaw-chn' }
+      ],
+      askTopics: ASK_TOPICS.map(t => ({
+        label: t.label,
+        border: (s.askTopic || 'health') === t.key ? 'rgba(213,183,124,0.7)' : 'rgba(255,255,255,0.12)',
+        bg: (s.askTopic || 'health') === t.key ? 'rgba(213,183,124,0.14)' : 'rgba(255,255,255,0.03)',
+        color: (s.askTopic || 'health') === t.key ? '#e6d3a8' : '#b9b1a0',
+        pick: () => this.setState({ askTopic: t.key, askSent: false })
+      })),
+      askPlaceholder: (ASK_TOPICS.find(t => t.key === (s.askTopic || 'health')) || ASK_TOPICS[0]).hint,
+      askText: s.askText || '',
+      onAskText: e => this.setState({ askText: e.target.value, askSent: false }),
+      askSent: !!s.askSent,
+      askNote: s.askNote || '',
+      sendAskWhatsapp: () => {
+        const body = this.askBody(s, ASK_TOPICS);
+        if (!body) { this.setState({ askSent: true, askNote: 'Write your question first.' }); return; }
+        window.open('https://wa.me/' + SEVA_WHATSAPP + '?text=' + encodeURIComponent(body), '_blank', 'noopener');
+        this.setState({ askSent: true, askNote: 'WhatsApp is opening with your question — just press send.' });
+      },
+      sendAskEmail: () => {
+        const body = this.askBody(s, ASK_TOPICS);
+        if (!body) { this.setState({ askSent: true, askNote: 'Write your question first.' }); return; }
+        const topic = (ASK_TOPICS.find(t => t.key === (s.askTopic || 'health')) || ASK_TOPICS[0]).label;
+        window.location.href = 'mailto:' + SEVA_EMAIL + '?subject=' + encodeURIComponent('Question · ' + topic) + '&body=' + encodeURIComponent(body);
+        this.setState({ askSent: true, askNote: 'Opening your mail app — press send there.' });
+      },
+      volunteers: [
+        { name: 'Health & diet seva', initial: '✚', area: 'Food, fasting, sleep, medicines', reach: 'Telugu, English · replies by evening',
+          says: 'Long-time practitioners of the detox diet. They will ask what you eat before they answer.' },
+        { name: 'Kundalini seva', initial: 'ॐ', area: 'Experiences in meditation', reach: 'Hindi, English · replies by morning',
+          says: 'Heat, shaking, light, fear — what is ordinary, and what means slow down.' },
+        { name: 'Practice seva', initial: '◯', area: 'Trouble sitting at all', reach: 'Tamil, English · replies same day',
+          says: 'For restless minds, painful knees, and the weeks when nothing happens.' },
+        { name: 'Householder seva', initial: '⌂', area: 'Money, work & everyday life', reach: 'Kannada, English · replies at weekends',
+          says: 'Debt, job worries, manifestation, and a house that leaves no room for practice.' }
+      ],
+      volunteerLabel: 'Choose a team →',
+      volunteerSignup: () => { window.location.href = '/volunteer'; },
       navItems: navDefs.map(n => ({
         icon: n.icon, label: s.sideOpen ? n.label : '',
         go: () => {
@@ -2022,7 +2199,7 @@ class Component extends DCLogic {
             toggle: () => {}, btnLabel: 'Complete',
             btnBg: 'transparent', btnBorder: 'rgba(255,255,255,0.12)', btnColor: '#7d7666',
             dateBg: 'rgba(255,255,255,0.035)', dateBorder: 'rgba(255,255,255,0.09)',
-            dateColor: '#b6afa0', monthColor: '#837c6d', titleColor: '#b6afa0', metaColor: '#7d7666', btnCursor: 'default',
+            dateColor: '#b9b1a0', monthColor: '#7d7666', titleColor: '#b9b1a0', metaColor: '#7d7666', btnCursor: 'default',
           };
         }
         return { ...e, upcoming: true,
@@ -2032,7 +2209,7 @@ class Component extends DCLogic {
           btnBorder: reg ? 'rgba(213,183,124,0.5)' : 'rgba(255,255,255,0.2)',
           btnColor: reg ? '#e6d3a8' : '#b9b1a0',
           dateBg: 'rgba(213,183,124,0.1)', dateBorder: 'rgba(213,183,124,0.3)',
-          dateColor: '#e6d3a8', monthColor: '#b89758', titleColor: '#ece5d5', metaColor: '#9a927f', btnCursor: 'pointer',
+          dateColor: '#e6d3a8', monthColor: '#b89758', titleColor: '#efe9dc', metaColor: '#9a927f', btnCursor: 'pointer',
         };
       }),
       journalDraft: s.journalDraft,
@@ -2061,7 +2238,7 @@ class Component extends DCLogic {
       roleVolBorder: s.suRole === 'volunteer' ? 'rgba(213,183,124,0.6)' : 'rgba(255,255,255,0.15)',
       roleVolColor: s.suRole === 'volunteer' ? '#e6d3a8' : '#b9b1a0',
       syncLabel: (s.syncState === 'ok' ? '⟳ ' : s.syncState === 'busy' ? '◌ ' : '⚠ ') + (s.syncNote || 'Sync history'),
-      syncColor: s.syncState === 'ok' ? '#9a927f' : s.syncState === 'busy' ? '#a89f8c' : '#d5b77c',
+      syncColor: s.syncState === 'ok' ? '#9a927f' : s.syncState === 'busy' ? '#9a927f' : '#d5b77c',
       syncNow: () => this.cloudPull(this.session()),
       donateOpen: s.donateOpen,
       openDonate: () => this.setState({ donateOpen: true, donStatus: '' }),
@@ -2080,9 +2257,9 @@ class Component extends DCLogic {
       donButtonLabel: s.donBusy ? 'Opening Stripe…' : 'Donate securely with Stripe',
       donHasStatus: !!s.donStatus,
       donStatus: s.donStatus,
-      donStatusColor: s.donOk ? '#a8d5a2' : '#e0a3a3',
-      becomeVolunteer: () => this.becomeVolunteer(),
-      volLabel: s.volState === 'done' ? 'You are a volunteer ✓' : s.volState === 'busy' ? 'Registering…' : 'Become a volunteer →',
+      donStatusColor: s.donOk ? '#a9dfb8' : '#e0a3a3',
+      becomeVolunteer: () => { window.location.href = '/volunteer'; },
+      volLabel: s.volState === 'done' ? 'You are a volunteer ✓' : 'Volunteer with us →',
       suName: s.suName, suEmail: s.suEmail, suHoney: s.suHoney,
       onSuName: (e) => this.setState({ suName: e.target.value }),
       onSuEmail: (e) => this.setState({ suEmail: e.target.value }),
@@ -2094,7 +2271,7 @@ class Component extends DCLogic {
       suButtonLabel: s.suBusy ? 'Joining…' : 'Join free',
       suHasStatus: !!s.suStatus,
       suStatus: s.suStatus,
-      suStatusColor: s.suOk ? '#a8d5a2' : '#e0a3a3',
+      suStatusColor: s.suOk ? '#a9dfb8' : '#e0a3a3',
       chatInput: s.chatInput,
       onChatInput: (e) => this.setState({ chatInput: e.target.value }),
       onChatKey: (e) => { if (e.key === 'Enter') this.sendChat(); },
@@ -2119,8 +2296,13 @@ class Component extends DCLogic {
       sessionOpen: s.sessionOpen,
       breathScale: s.breathPhase === 'in' ? 1.16 : 0.8,
       breathSecs: s.breathPhase === 'in' ? 4 : 6,
-      breathLabel: s.sessPaused ? 'Held' : (s.breathPhase === 'in' ? 'Breathe in…' : 'Let go…'),
-      guidance: [
+      breathLabel: s.sessPaused ? 'Held' : (s.goalHit ? 'Your sit is complete.' : (s.breathPhase === 'in' ? 'Breathe in…' : 'Let go…')),
+      goalHit: !!s.goalHit,
+      goalText: s.goalHit ? 'goal ' + s.sessGoal + ' min · reached' : 'goal ' + String(s.sessGoal).padStart(2, '0') + ':00',
+      goalColor: s.goalHit ? '#a9dfb8' : '#b9b1a0',
+      goalDoneChip: s.sessGoal + ' minutes complete',
+      ringColor: s.goalHit ? 'rgba(126,203,143,0.85)' : 'rgba(213,183,124,0.6)',
+      guidance: s.goalHit && !s.sessPaused ? 'The bell has sounded. Sit on as long as you like, or close the sit below.' : [
         'Settle into your seat — let the body be still.',
         'Rest your attention where the breath touches the nostrils.',
         'Thoughts will come. Watch them pass like clouds.',

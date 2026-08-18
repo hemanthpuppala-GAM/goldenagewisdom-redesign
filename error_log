@@ -36,3 +36,33 @@
 [05-Aug-2026 07:59:24 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
 [05-Aug-2026 07:59:26 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
 [06-Aug-2026 14:17:08 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[07-Aug-2026 02:10:33 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[08-Aug-2026 14:30:29 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[08-Aug-2026 14:30:32 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[08-Aug-2026 14:30:32 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[08-Aug-2026 14:30:33 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[08-Aug-2026 14:30:33 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[09-Aug-2026 10:20:00 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[09-Aug-2026 10:20:19 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[09-Aug-2026 10:20:21 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[09-Aug-2026 10:20:23 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[09-Aug-2026 10:20:37 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 06:23:09 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 14:10:16 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 14:10:30 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:06:54 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:07:02 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:07:03 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:07:06 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:07:08 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:09:58 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:10:14 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:11:28 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:12:26 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:13:29 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:15:46 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:19:12 UTC] GAW signup: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:24:19 UTC] GAW signup sqlite: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:24:23 UTC] GAW signup storage: sqlite failed: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:56:21 UTC] GAW signup sqlite: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant
+[10-Aug-2026 16:56:28 UTC] GAW signup storage: sqlite failed: SQLSTATE[HY000]: General error: 1 default value of column [created_at] is not constant

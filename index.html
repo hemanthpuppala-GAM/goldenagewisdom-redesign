@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="gaw-build" content="2026-08-10-a">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free daily live meditation &amp; Upanishadic wisdom · Golden Age Wisdom</title>
 <meta name="description" content="Free live meditation twice daily, guided by Dr Hari Krishna, MD — 25 years of practice. Ancient wisdom explained with scientific clarity. Join free.">
@@ -31,25 +32,25 @@
 <script defer src="pwa.js"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"NGO","@id":"https://goldenagewisdom.org/#org","name":"Golden Age Wisdom","alternateName":"Golden Age Spiritual Movement","url":"https://goldenagewisdom.org/","logo":"https://goldenagewisdom.org/assets/logo-128.webp","email":"info@goldenagewisdom.org","founder":{"@id":"https://goldenagewisdom.org/#founder"},"sameAs":["https://www.youtube.com/@GoldenAgeGurus","https://www.instagram.com/golden.age.spiritual.movement","https://facebook.com/share/1JSPUE4kMV"]},
+{"@type":"NGO","@id":"https://goldenagewisdom.org/#org","name":"Golden Age Wisdom","alternateName":"Golden Age Spiritual Movement","url":"https://goldenagewisdom.org/","logo":"https://goldenagewisdom.org/assets/logo-128.webp","email":"goldenageguruteachings@gmail.com","founder":{"@id":"https://goldenagewisdom.org/#founder"},"sameAs":["https://www.youtube.com/@GoldenAgeGurus","https://www.instagram.com/golden.age.spiritual.movement","https://facebook.com/share/1JSPUE4kMV"]},
 {"@type":"Person","@id":"https://goldenagewisdom.org/#founder","name":"Dr Hari Krishna","honorificPrefix":"Dr","jobTitle":"Founder and meditation teacher","hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"degree","name":"MD in Anaesthesiology, postgraduate"},"knowsAbout":["Meditation","Anaesthesiology","Upanishadic philosophy"]},
 {"@type":"WebSite","@id":"https://goldenagewisdom.org/#site","url":"https://goldenagewisdom.org/","name":"Golden Age Wisdom","publisher":{"@id":"https://goldenagewisdom.org/#org"}},
 {"@type":"Event","name":"Daily group meditation","startDate":"2026-07-27T20:00:00+05:30","endDate":"2026-07-27T21:00:00+05:30","eventSchedule":{"@type":"Schedule","repeatFrequency":"P1D","byDay":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"startTime":"20:00:00","endTime":"21:00:00","scheduleTimezone":"Asia/Kolkata"},"eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","location":{"@type":"VirtualLocation","url":"https://www.youtube.com/@GoldenAgeGurus/streams"},"organizer":{"@id":"https://goldenagewisdom.org/#org"},"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"INR","availability":"https://schema.org/InStock","url":"https://goldenagewisdom.org/"}}
 ]}
 </script>
-<script src="./support.js"></script>
+<script src="./support.js?v=20260810"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;500&family=Noto+Sans+Telugu:wght@300;500&family=Noto+Sans+Kannada:wght@300;500&family=Noto+Sans+Tamil:wght@300;500&display=swap" rel="stylesheet">
-<script src="./gaw-i18n.js"></script>
-<script src="./gaw-phrases.js"></script>
-<script src="./gaw-config.js"></script>
-<script src="./telemetry.js"></script>
+<script src="./gaw-i18n.js?v=20260810"></script>
+<script src="./gaw-phrases.js?v=20260810"></script>
+<script src="./gaw-config.js?v=20260810"></script>
+<script src="./telemetry.js?v=20260810"></script>
 <style>
   html, body { margin: 0; padding: 0; background: #0d0a1c; height: 100%; }
   :root {
@@ -70,6 +71,8 @@
   .t-rail { position: relative; flex: 0 0 auto; min-height: 112px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
   .t-track { display: flex; gap: 10px; width: max-content; animation: tDrift 64s linear infinite; }
   .t-rail:hover .t-track, .t-rail:focus-within .t-track { animation-play-state: paused; }
+  /* Last rail in a section: clear the floating Go Back pill and footer band. */
+  .m-view .t-rail:last-child { margin-bottom: 46px; }
   @keyframes tDrift { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 5px)); } }
   @media (prefers-reduced-motion: reduce) { .t-track { animation: none; } .t-rail { overflow-x: auto; } }
 
@@ -87,6 +90,9 @@
   @keyframes viewIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
   @keyframes lotusSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   @keyframes ripple { 0% { transform: scale(0.5); opacity: 0; } 12% { opacity: 0.55; } 100% { transform: scale(2.6); opacity: 0; } }
+  /* The sky breathes on the practice's own 10s cycle: 4s in, 6s out. */
+  @keyframes starDim { 0%, 100% { opacity: 0.16; transform: scale(1); } 40% { opacity: 0.4; transform: scale(1.15); } }
+  @keyframes starLit { 0%, 100% { opacity: 0.5; transform: scale(1); } 40% { opacity: 1; transform: scale(1.32); } }
   @keyframes featherIn { 0% { opacity: 0; filter: blur(22px); transform: scale(1.05); } 60% { opacity: 1; } 100% { opacity: 1; filter: none; transform: none; } }
   ::view-transition-old(root) { animation: 200ms ease-out both vtOut; }
   ::view-transition-new(root) { animation: 260ms ease-out both vtIn; }
@@ -109,6 +115,29 @@
   .m-view::-webkit-scrollbar { width: 6px; }
   .m-view::-webkit-scrollbar-thumb { background: rgba(213,183,124,0.3); border-radius: 3px; }
   .m-view::-webkit-scrollbar-track { background: transparent; }
+  /* flex items default to min-width:auto, so a wide child forced the view past the
+     viewport and the whole page scrolled sideways on phones. */
+  .m-view, .m-view > *, .m-grid-2 > *, .m-answers > * { min-width: 0 !important; }
+  .m-view { max-width: 100% !important; overflow-wrap: anywhere; }
+  /* Hero framing: the bottom-anchored upscale lifts the subject as the viewport
+     gets taller, so ease the scale and push him down on narrower aspects. */
+  @media (max-aspect-ratio: 16/10) { .m-bg { transform: scale(0.96) translateY(4%) !important; } }
+  @media (max-aspect-ratio: 4/3)   { .m-bg { transform: scale(0.9) translateY(-3%) !important; }
+    .m-hub { margin-left: 38px !important; margin-top: 68px !important; } }
+  @media (max-aspect-ratio: 1/1)   { .m-bg { transform: scale(0.86) translateY(-6%) !important; } }
+  /* On narrow aspects the figure sits behind the mandala — veil it so the ring stays the focus. */
+  @media (max-aspect-ratio: 4/3), (max-height: 620px) {
+    .m-scrim { background:
+      radial-gradient(ellipse 52% 60% at 50% 62%, rgba(13,10,28,0.62) 0%, rgba(13,10,28,0.34) 55%, rgba(13,10,28,0) 78%),
+      radial-gradient(ellipse 46% 82% at 50% 42%, rgba(38,34,96,0.55) 0%, rgba(14,12,42,0.72) 55%, rgba(10,8,30,0.9) 80%, rgba(8,6,24,0.98) 100%),
+      linear-gradient(180deg, rgba(11,8,24,0.88) 0%, rgba(11,8,24,0.66) 17%, rgba(11,8,24,0.38) 32%, rgba(13,10,28,0.14) 43%, rgba(13,10,28,0) 52%) !important; }
+  }
+  @media (max-aspect-ratio: 1/1) {
+    .m-scrim { background:
+      radial-gradient(ellipse 58% 64% at 50% 64%, rgba(13,10,28,0.76) 0%, rgba(13,10,28,0.46) 55%, rgba(13,10,28,0) 80%),
+      radial-gradient(ellipse 46% 82% at 50% 42%, rgba(38,34,96,0.55) 0%, rgba(14,12,42,0.72) 55%, rgba(10,8,30,0.9) 80%, rgba(8,6,24,0.98) 100%),
+      linear-gradient(180deg, rgba(11,8,24,0.88) 0%, rgba(11,8,24,0.66) 17%, rgba(11,8,24,0.38) 32%, rgba(13,10,28,0.14) 43%, rgba(13,10,28,0) 52%) !important; }
+  }
   @media (max-width: 640px) { .m-answers { grid-template-columns: 1fr !important; } }
   @media (max-width: 820px) { .m-posture { display: none !important; } }
   @media (max-width: 1180px) {
@@ -120,28 +149,64 @@
     .m-tagline { order: 3 !important; width: 100% !important; justify-content: center !important; }
     .m-tag-line { flex: 1 1 auto !important; width: auto !important; max-width: 120px !important; }
   }
-  @media (max-height: 700px) {
+  /* Content defines the footer's height. A fixed min-height silently eats the space the
+     mandala needs to stay below the chin. */
+  footer { min-height: 0 !important; }
+  main { padding-bottom: 4px !important; }
+  @media (max-height: 940px) {
     .m-vp-sub { display: none !important; }
     .m-vp-cred { display: block !important; }
-    .m-hub { --orbit-r: clamp(96px, min(calc(38dvh - 62px), calc(50vw - 62px)), 118px) !important; }
-    .m-node-ring { width: 44px !important; height: 44px !important; }
-    .m-node-label { font-size: 11.5px !important; }
-    .m-orb { width: 62px !important; height: 62px !important; gap: 0 !important; overflow: visible !important; }
-    .m-orb-cap { position: absolute !important; top: calc(100% + 7px) !important; left: 50% !important; transform: translateX(-50%) !important; font-size: 10.5px !important; letter-spacing: 0.16em !important; text-shadow: 0 2px 12px rgba(8,6,20,0.95) !important; }
+    .m-vp-line { font-size: clamp(22px, 2.4vw, 29px) !important; }
+  }
+  @media (max-height: 700px) {
+    .m-vp-sub { display: none !important; }
+    /* The pills carry this line's job, and its height is budget the wheel needs. */
+    .m-vp-cred { display: none !important; }
+    .m-hub-wrap { gap: 4px !important; }
+    .m-caption { display: none !important; }
+    footer { padding-top: 4px !important; padding-bottom: 6px !important; gap: 4px !important; font-size: 11px !important; }
+    .m-orb { gap: 0 !important; overflow: visible !important; }
+  }
+  @media (max-width: 760px) {
+    .m-vp-cred { font-size: 11.5px !important; }
   }
   @media (max-width: 560px) {
     .m-vp-sub { display: none !important; }
     .m-vp-cred { display: block !important; }
-    .m-hub { --orbit-r: clamp(96px, calc(50vw - 58px), 150px) !important; }
+    .m-hub { --orbit-r: clamp(96px, calc(50vw - 58px), 150px); }
   }
-  @media (max-width: 900px) { .m-lang-name { display: none !important; } }
+  /* A small orb cannot hold legible ring text — fall back to a straight caption. */
+
+  /* Laptop heights: the headline, his face and the wheel are all competing for the same
+     column of pixels. Tighten the copy so the face is not the thing that loses. */
+  @media (max-height: 940px) {
+    .m-vp-line { font-size: clamp(21px, 2.3vw, 28px) !important; }
+    .m-vp { gap: 6px !important; }
+  }
+  /* Phones: the buttons leave the flow and sit above the footer, so the wheel gets the
+     whole middle band instead of the ~40% the copy stack was leaving it. */
+  @media (max-width: 560px) {
+    .m-hub-wrap { position: relative !important; }
+    /* .m-vp is position:relative, so it would be the containing block and the bar would
+       pin to the BOTTOM OF THE COPY — i.e. straight back onto the headline. */
+    .m-vp { position: static !important; }
+    .m-action { position: absolute !important; left: 0 !important; right: 0 !important; bottom: 2px !important; }
+  }
+  /* Phones: the whole pill is the link, so its trailing call to action is repetition that
+     costs a second line — and a second line costs the wheel. */
+  @media (max-width: 560px) {
+    .m-pill-cta { display: none !important; }
+    .m-vp > a { font-size: 12px !important; padding: 6px 14px !important; }
+  }
   @media (max-width: 760px) {
     .m-grid-2 { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 640px) {
-    .m-brand-t { display: none !important; }
+    .m-brand-t { font-size: 13px !important; letter-spacing: 0.04em !important; }
+    .m-nav img { width: 32px !important; height: 32px !important; }
     nav { padding: 10px 14px !important; }
   }
+  @media (max-width: 380px) { .m-brand-t { font-size: 11.5px !important; } }
   @media (max-width: 860px) {
     .m-tag-text { font-size: 10.5px !important; letter-spacing: 0.22em !important; text-shadow: 0 0 12px rgba(213,183,124,0.5); }
     .m-tagline { gap: 10px !important; }
@@ -162,17 +227,29 @@
 <script>window.addEventListener('pointerdown', function () { try { if (!window.__gawCtx) window.__gawCtx = new (window.AudioContext || window.webkitAudioContext)(); if (window.__gawCtx.state !== 'running') window.__gawCtx.resume(); } catch (e) {} }, true);</script>
 </helmet>
 <div style="height: 100dvh; background: #0d0a1c; overflow: hidden; display: flex; flex-direction: column; position: relative">
-  <img src="assets/meditator-clear.webp" alt="" data-bg="1" width="2560" height="1525" fetchPriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; transform: scale(1.22); transform-origin: 50% 100%; opacity: {{ bgOpacity }}; transition: opacity 0.6s ease; view-transition-name: mbg">
-  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 46% 82% at 50% 42%, rgba(38,34,96,0.55) 0%, rgba(14,12,42,0.72) 55%, rgba(10,8,30,0.9) 80%, rgba(8,6,24,0.98) 100%), linear-gradient(180deg, rgba(13,10,28,0.7) 0%, rgba(13,10,28,0) 14%); view-transition-name: mbg2"></div>
+  <!-- Wrapper carries the runtime lift (computeLayout) so the img keeps its own
+       per-aspect scale rules untouched. -->
+  <div class="m-bg-wrap" aria-hidden="true" style="position: absolute; inset: 0; transform: translateY({{ bgLift }}px); transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)">
+  <img src="assets/hero-hari-day.png?v=13" alt="" data-bg="1" class="m-bg" width="2560" height="1525" fetchPriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; transform: scale(0.98); transform-origin: 50% 100%; opacity: {{ bgOpacity }}; transition: opacity 0.6s ease; view-transition-name: mbg">
+  </div>
+  <div class="m-scrim" style="position: absolute; inset: 0; background: radial-gradient(ellipse 46% 82% at 50% 42%, rgba(38,34,96,0.55) 0%, rgba(14,12,42,0.72) 55%, rgba(10,8,30,0.9) 80%, rgba(8,6,24,0.98) 100%), linear-gradient(180deg, rgba(11,8,24,0.88) 0%, rgba(11,8,24,0.62) 17%, rgba(11,8,24,0.28) 30%, rgba(13,10,28,0.08) 41%, rgba(13,10,28,0) 50%); view-transition-name: mbg2"></div>
   <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 60% at 50% 40%, rgba(52,46,110,0.5) 0%, rgba(24,20,58,0.3) 55%, transparent 80%); opacity: {{ subGlowOpacity }}; transition: opacity 0.6s ease"></div>
   <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 170px; pointer-events: none; z-index: 1; background: linear-gradient(to top, rgba(9,7,24,0.96) 0%, rgba(9,7,24,0.7) 45%, rgba(9,7,24,0) 100%)"></div>
+  <!-- THE SKY: one point per meditator, 8 in every 100 lit — the 8% goal at ambient
+       scale. Breathes on the practice's 10s cycle; draws inward and brightens while a
+       sit is live. Background layer only: costs no layout space. -->
+  <div class="m-sky" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 2; transform: {{ skyTransform }}; filter: {{ skyFilter }}; transition: transform 9s ease, filter 4s ease">
+    <sc-for list="{{ stars }}" as="s" hint-placeholder-count="60">
+      <span style="position: absolute; left: {{ s.left }}; top: {{ s.top }}; width: {{ s.size }}; height: {{ s.size }}; border-radius: 50%; background: {{ s.bg }}; box-shadow: {{ s.glow }}; animation: {{ s.anim }}"></span>
+    </sc-for>
+  </div>
   <a class="skip-link" href="#main">Skip to content</a>
   <h1 class="m-sr" style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0">Golden Age Wisdom — free daily live meditation and Upanishadic wisdom, taught by Dr Hari Krishna, MD</h1>
   <!-- TOP BAR -->
   <nav class="m-nav" style="position: relative; z-index: 50; margin: 16px auto 0; width: min(1180px, calc(100% - 32px)); display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 20px; border-radius: 999px; background: rgba(20,15,40,0.55); backdrop-filter: blur(18px); border: 1px solid rgba(213,183,124,0.18); flex-shrink: 0">
     <button onClick="{{ goHub }}" style="flex: 1; display: flex; align-items: center; justify-content: flex-start; gap: 10px; background: none; border: none; cursor: pointer; padding: 0">
       <img src="assets/logo-128.webp" alt="Golden Age Wisdom" width="44" height="44" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.6); box-shadow: 0 0 18px rgba(213,183,124,0.3)">
-      <span class="m-brand-t" style="font-family: var(--font-display); font-size: 18px; line-height: 1; letter-spacing: 0.06em; color: #ecdcb4; white-space: nowrap">GOLDEN AGE WISDOM</span>
+      <span class="m-brand-t" style="font-family: var(--font-display); font-size: 21px; line-height: 1; letter-spacing: 0.09em; background: linear-gradient(115deg, #f6e7c1 10%, #d5b77c 48%, #b89758 90%); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; filter: drop-shadow(0 0 14px rgba(213,183,124,0.35))">GOLDEN AGE WISDOM</span>
     </button>
     <div class="m-tagline" style="flex-shrink: 0; display: flex; align-items: center; gap: 14px; min-width: 0">
       <span class="m-tag-line" style="width: clamp(18px, 4vw, 54px); height: 1px; background: linear-gradient(90deg, transparent, rgba(213,183,124,0.55))"></span>
@@ -180,25 +257,11 @@
       <span class="m-tag-line" style="width: clamp(18px, 4vw, 54px); height: 1px; background: linear-gradient(90deg, rgba(213,183,124,0.55), transparent)"></span>
     </div>
     <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: nowrap">
-      <div class="m-langs" style="position: relative; flex-shrink: 0">
-        <button onClick="{{ toggleLangs }}" aria-label="Choose language" aria-haspopup="listbox" title="Language" style="display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: #d8d2c4; cursor: pointer; font-family: var(--font-body); font-size: 13px; white-space: nowrap" style-hover="border-color: rgba(213,183,124,0.6); color: #f2e9d8">
-          <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; flex-shrink: 0"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18" fill="none" stroke="currentColor" stroke-width="1.2"></path></svg>
-          <span class="m-lang-name">{{ langCurrent }}</span>
-          <span style="font-size: 9px; opacity: 0.7">▾</span>
-        </button>
-        <sc-if value="{{ langsOpen }}" hint-placeholder-val="{{ false }}">
-          <div role="listbox" style="position: absolute; top: calc(100% + 8px); right: 0; z-index: 80; min-width: 158px; padding: 6px; border-radius: 16px; background: rgba(23,17,48,0.97); backdrop-filter: blur(14px); border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 18px 46px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 2px">
-            <sc-for list="{{ langs }}" as="l" hint-placeholder-count="5">
-              <button onClick="{{ l.pick }}" role="option" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 12px; border-radius: 12px; border: none; cursor: pointer; text-align: left; font-family: var(--font-body); font-size: 13.5px; white-space: nowrap; background: {{ l.bg }}; color: {{ l.color }}">{{ l.name }}<span style="font-size: 11px; opacity: 0.75">{{ l.tick }}</span></button>
-            </sc-for>
-          </div>
-        </sc-if>
-      </div>
       <sc-if value="{{ signedOut }}" hint-placeholder-val="{{ true }}">
         <a href="Member Flow.dc.html" style="display: inline-block; padding: 9px 22px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 14px" style-hover="color: #241b06">{{ tJoinFree }}</a>
       </sc-if>
       <sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
-        <a href="Member Flow.dc.html" title="Open your dashboard" style="display: inline-flex; align-items: center; gap: 9px; padding: 6px 16px 6px 7px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.4); background: rgba(20,15,40,0.55); color: #e6d3a8; font-weight: 500; font-size: 13.5px; white-space: nowrap" style-hover="border-color: rgba(230,211,168,0.85); color: #f7f1e3"><span style="width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 12.5px">{{ memberInitial }}</span>{{ memberFirstName }}</a>
+        <a href="Member Flow.dc.html" title="Open your dashboard" style="display: inline-flex; align-items: center; gap: 9px; padding: 7px 18px 7px 8px; border-radius: 999px; border: 1px solid rgba(230,211,168,0.65); background: linear-gradient(135deg, rgba(213,183,124,0.18), rgba(20,15,40,0.6)); color: #f2e2b8; font-weight: 500; font-size: 13px; white-space: nowrap; box-shadow: 0 0 18px rgba(213,183,124,0.22)" style-hover="border-color: rgba(246,231,193,0.95); color: #fdf6e4; box-shadow: 0 0 26px rgba(213,183,124,0.4)"><span style="width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 11.5px">{{ memberInitial }}</span>{{ memberFirstName }}</a>
       </sc-if>
     </div>
   </nav>
@@ -209,40 +272,56 @@
     <sc-if value="{{ viewHub }}" hint-placeholder-val="{{ true }}">
       <div data-screen-label="Mandala hub" class="m-hub-wrap" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: clamp(8px, 2vh, 20px); min-height: 0">
         <div class="m-vp" style="display: flex; position: relative; z-index: 8; width: min(760px, 100%); margin: 0 auto; flex-direction: column; align-items: center; gap: 9px; text-align: center; pointer-events: none">
-          <div class="m-vp-line" style="font-family: var(--font-display); font-size: clamp(19px, 2.5vw, 30px); line-height: 1.25; color: #f7f1e3; text-shadow: 0 2px 22px rgba(8,6,20,0.85)">{{ vpHead }}</div>
-          <div class="m-vp-sub" style="max-width: 520px; font-size: clamp(12.5px, 1.3vw, 14.5px); font-weight: 300; line-height: 1.55; color: #cfc8ba; text-shadow: 0 2px 16px rgba(8,6,20,0.9)">{{ vpSub }}</div>
-          <div class="m-vp-cred" style="display: none; max-width: 420px; font-size: 12px; font-weight: 300; line-height: 1.45; color: #cfc8ba; text-shadow: 0 2px 16px rgba(8,6,20,0.9)">{{ vpCred }}</div>
-          <div style="display: flex; align-items: center; gap: 9px; flex-wrap: wrap; justify-content: center; pointer-events: auto; margin-top: 2px">
-            <a href="{{ liveHref }}" target="{{ liveTarget }}" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 999px; border: 1px solid {{ liveBorder }}; background: {{ liveBg }}; color: #f2e9d8; font-size: 13px; white-space: nowrap; backdrop-filter: blur(8px)" style-hover="border-color: rgba(230,211,168,0.9)"><span style="width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: {{ liveDot }}; animation: {{ liveAnim }}"></span>{{ liveLine }}</a>
+          <a href="/peace" style="display: inline-flex; align-items: center; gap: 9px; flex-wrap: wrap; justify-content: center; max-width: 100%; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.6); background: linear-gradient(135deg, rgba(230,211,168,0.22), rgba(184,151,88,0.12)); color: #f7ecd0; font-size: 12.5px; line-height: 1.5; text-align: center; pointer-events: auto; backdrop-filter: blur(8px)" style-hover="border-color: rgba(230,211,168,0.95); color: #f7ecd0"><span style="width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: {{ peaceDot }}; animation: {{ peaceAnim }}"></span><span style="letter-spacing: 0.14em; text-transform: uppercase; font-size: 10.5px; color: #e6d3a8">Free mass meditation</span><span style="opacity: 0.45">·</span>Mon–Sat, {{ peaceLocal }}<span class="m-pill-cta" style="display: inline-flex; align-items: center; gap: 5px; margin-left: 3px; padding-left: 11px; border-left: 1px solid rgba(230,211,168,0.3); color: #e6d3a8; font-weight: 500">Join the sit <span style="font-size: 11px">→</span></span></a>
+          <div class="m-vp-line" style="font-family: 'Cormorant Garamond', var(--font-display); font-weight: 600; font-size: clamp(24px, 3vw, 38px); line-height: 1.18; letter-spacing: 0.005em; color: #f7f1e3; text-shadow: 0 2px 22px rgba(8,6,20,0.85)">{{ vpHead }}</div>
+          <!-- The subline and the two doors sit with the headline: they are what the claim
+               above them asks the visitor to do, and below the wheel they were eating the
+               space the wheel needs to clear his face. -->
+          <div class="m-action" style="flex-shrink: 0; position: relative; z-index: 8; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; pointer-events: auto">
+          <div class="m-vp-sub" style="max-width: 520px; font-size: clamp(12.5px, 1.3vw, 14.5px); font-weight: 300; line-height: 1.5; color: #cfc8ba; text-shadow: 0 2px 16px rgba(8,6,20,0.9)">{{ vpSub }}</div>
+          <div style="display: flex; align-items: center; gap: 9px; flex-wrap: wrap; justify-content: center">
+            <button onClick="{{ goFilm }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #f2e9d8; font-family: var(--font-body); font-size: 13px; white-space: nowrap; cursor: pointer; backdrop-filter: blur(8px)" style-hover="border-color: rgba(230,211,168,0.9)"><span style="font-size: 10px">▶</span>{{ tBeginHere }}</button>
           </div>
         </div>
-      <div class="m-hub" style="--orbit-r: clamp(88px, min(calc(46dvh - 130px), calc(50vw - 70px)), 185px); position: relative; width: 100%; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; transform: translate({{ hubTx }}px, {{ hubTy }}px); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)">
+      </div>
+      <div class="m-hub" style="--orbit-r: {{ orbitR }}; position: relative; width: 100%; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; transform: translate({{ hubTx }}px, {{ hubTy }}px); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)">
         <div class="m-ring2" style="position: absolute; width: calc(var(--orbit-r) * 2.24); height: calc(var(--orbit-r) * 2.24); border-radius: 50%; border: 1px solid rgba(213,183,124,0.14); animation: ringPulse 9s ease-in-out infinite"></div>
         <div class="m-ring1" style="position: absolute; width: calc(var(--orbit-r) * 1.52); height: calc(var(--orbit-r) * 1.52); border-radius: 50%; border: 1px dashed rgba(213,183,124,0.26); animation: ringPulse 7s ease-in-out infinite reverse"></div>
-        <div style="position: absolute; width: calc(var(--orbit-r) * 0.72); height: calc(var(--orbit-r) * 0.72); border-radius: 50%; border: 1.5px solid rgba(230,211,168,0.55); box-shadow: 0 0 30px rgba(213,183,124,0.25), inset 0 0 24px rgba(213,183,124,0.18); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) infinite; pointer-events: none"></div>
-        <div style="position: absolute; width: calc(var(--orbit-r) * 0.72); height: calc(var(--orbit-r) * 0.72); border-radius: 50%; border: 1px solid rgba(230,211,168,0.4); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) 2s infinite; pointer-events: none"></div>
-        <div style="position: absolute; width: calc(var(--orbit-r) * 0.72); height: calc(var(--orbit-r) * 0.72); border-radius: 50%; border: 1px solid rgba(230,211,168,0.3); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) 4s infinite; pointer-events: none"></div>
-        <button onClick="{{ goFilm }}" class="m-orb" style="position: relative; top: -4px; z-index: 5; width: min(180px, calc(var(--orbit-r) * 0.72)); height: min(180px, calc(var(--orbit-r) * 0.72)); border-radius: 50%; border: 1px solid rgba(213,183,124,0.55); background: radial-gradient(circle at 38% 34%, rgba(230,211,168,0.45), rgba(184,151,88,0.15) 60%, rgba(20,15,40,0.4)); backdrop-filter: blur(10px); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; animation: breathe 6s ease-in-out infinite; box-shadow: 0 0 90px rgba(213,183,124,0.35)">
-          <svg viewBox="0 0 100 100" style="width: min(58px, calc(var(--orbit-r) * 0.27)); height: min(58px, calc(var(--orbit-r) * 0.27)); display: block; filter: drop-shadow(0 2px 16px rgba(230,211,168,0.7))">
+        <div style="position: absolute; width: calc(var(--orbit-r) * 0.86); height: calc(var(--orbit-r) * 0.86); border-radius: 50%; border: 1.5px solid rgba(230,211,168,0.55); box-shadow: 0 0 30px rgba(213,183,124,0.25), inset 0 0 24px rgba(213,183,124,0.18); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) infinite; pointer-events: none"></div>
+        <div style="position: absolute; width: calc(var(--orbit-r) * 0.86); height: calc(var(--orbit-r) * 0.86); border-radius: 50%; border: 1px solid rgba(230,211,168,0.4); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) 2s infinite; pointer-events: none"></div>
+        <div style="position: absolute; width: calc(var(--orbit-r) * 0.86); height: calc(var(--orbit-r) * 0.86); border-radius: 50%; border: 1px solid rgba(230,211,168,0.3); animation: ripple 6s cubic-bezier(0.2, 0.6, 0.4, 1) 4s infinite; pointer-events: none"></div>
+        <!-- CENTRE OF THE MANDALA — the daily sit for world peace. The six nodes are the
+             paths; this is what they are for. Time-aware: counts down, then goes live. -->
+        <a href="/peace" class="m-orb" title="Mass meditation for global peace" style="position: relative; top: -4px; z-index: 5; width: clamp(84px, calc(var(--orbit-r) * 0.86), 180px); height: clamp(84px, calc(var(--orbit-r) * 0.86), 180px); border-radius: 50%; border: 1px solid {{ peaceBorder }}; background: radial-gradient(circle at 38% 34%, rgba(230,211,168,0.45), rgba(184,151,88,0.15) 60%, rgba(20,15,40,0.4)); backdrop-filter: blur(10px); cursor: pointer; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; animation: breathe 6s ease-in-out infinite; box-shadow: 0 0 90px {{ peaceGlow }}">
+          <svg viewBox="0 0 100 100" style="width: 46%; height: 46%; flex-shrink: 0; display: block; filter: drop-shadow(0 2px 16px rgba(230,211,168,0.7))">
             <polygon points="50,8 86,71 14,71" fill="none" stroke="#f7f1e3" stroke-width="3" stroke-linejoin="round"></polygon>
             <polygon points="50,92 14,29 86,29" fill="none" stroke="#f7f1e3" stroke-width="3" stroke-linejoin="round"></polygon>
           </svg>
-          <span class="m-orb-cap" style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #efdcae; white-space: nowrap; text-shadow: 0 1px 4px rgba(13,10,28,0.9)">{{ tBeginHere }}</span>
-        </button>
+          <span class="m-orb-flat" style="display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #e6d3a8; white-space: nowrap; text-shadow: 0 2px 12px rgba(8,6,20,0.95)">Mass Meditation</span>
+          <svg class="m-orb-cap" viewBox="0 0 200 200" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none">
+            <defs>
+              <path id="orbCapArc" d="M100,100 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0" fill="none"></path>
+            </defs>
+            <text style="font-family: var(--font-body); font-size: 25px; font-weight: 500; text-transform: uppercase; fill: #e6d3a8; filter: drop-shadow(0 1px 4px rgba(13,10,28,0.95))">
+              <textPath href="#orbCapArc" startOffset="0%" ref="{{ orbCapRef }}">Mass Meditation · </textPath>
+            </text>
+          </svg>
+        </a>
         <sc-for list="{{ hubNodes }}" as="n" hint-placeholder-count="5">
           <div class="m-node" style="position: absolute; z-index: 6; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate({{ n.angle }}deg) translateY(calc(-1 * var(--orbit-r) * {{ n.rf }})) rotate({{ n.unangle }}deg)">
             <button onClick="{{ n.go }}" style="display: flex; flex-direction: column; align-items: center; gap: 7px; background: none; border: none; cursor: pointer; animation: nodeFloat {{ n.dur }}s ease-in-out infinite">
-              <span class="m-node-ring" style="position: relative; width: clamp(64px, calc(var(--orbit-r) * 0.55), 92px); height: clamp(64px, calc(var(--orbit-r) * 0.55), 92px); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 38% 32%, rgba(38,32,72,0.55), rgba(20,16,44,0.5) 62%, rgba(14,11,34,0.45)); backdrop-filter: blur(14px); border: 1.5px solid {{ n.color }}a6; box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 34px {{ n.color }}4d, inset 0 0 22px rgba(255,255,255,0.04); transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease" style-hover="border-color: {{ n.color }}cc; box-shadow: 0 10px 44px rgba(0,0,0,0.45), 0 0 40px {{ n.color }}59, 0 0 54px rgba(230,211,168,0.5)">
+              <span class="m-node-ring" style="position: relative; width: clamp(38px, calc(var(--orbit-r) * 0.44), 92px); height: clamp(38px, calc(var(--orbit-r) * 0.44), 92px); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 38% 32%, rgba(38,32,72,0.55), rgba(20,16,44,0.5) 62%, rgba(14,11,34,0.45)); backdrop-filter: blur(14px); border: 1.5px solid {{ n.color }}a6; box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 34px {{ n.color }}4d, inset 0 0 22px rgba(255,255,255,0.04); transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease" style-hover="border-color: {{ n.color }}cc; box-shadow: 0 10px 44px rgba(0,0,0,0.45), 0 0 40px {{ n.color }}59, 0 0 54px rgba(230,211,168,0.5)">
                 <span class="m-node-aura" aria-hidden="true" style="position: absolute; inset: -42%; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, rgba(255,246,220,0.2), rgba(230,211,168,0.1) 46%, transparent 100%); filter: blur(12px)"></span>
-                <span style="font-family: var(--font-display); font-size: clamp(19px, calc(var(--orbit-r) * 0.15), 27px); color: {{ n.color }}; text-shadow: 0 0 20px {{ n.color }}b3, 0 0 40px {{ n.color }}4d">{{ n.glyph }}</span>
+                <span style="display: flex; align-items: center; justify-content: center; font-size: clamp(15px, calc(var(--orbit-r) * 0.17), 27px)">{{ n.icon }}</span>
               </span>
-              <span class="m-node-label" style="font-family: var(--font-body); font-size: clamp(14px, calc(var(--orbit-r) * 0.085), 15.5px); font-weight: 500; letter-spacing: 0.04em; color: #f2ecdd; text-shadow: 0 1px 4px rgba(13,10,28,0.9), 0 2px 16px rgba(13,10,28,0.9); text-align: center; max-width: 140px">{{ n.label }}</span>
+              <span class="m-node-label" style="font-family: var(--font-body); font-size: clamp(12.5px, calc(var(--orbit-r) * 0.085), 15.5px); font-weight: 500; letter-spacing: 0.04em; color: #f2ecdd; text-shadow: 0 1px 4px rgba(13,10,28,0.9), 0 2px 16px rgba(13,10,28,0.9); text-align: center; max-width: 140px">{{ n.label }}</span>
             </button>
           </div>
         </sc-for>
 
       </div>
       </div>
+
     </sc-if>
 
     <!-- MEDITATION -->
@@ -382,7 +461,7 @@
         <div id="film-embed" style="position: relative; width: min(100%, calc((100dvh - 330px) * 1.7778)); margin: 0 auto; border-radius: 16px; overflow: hidden; border: 1px solid rgba(213,183,124,0.26); box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 60px rgba(213,183,124,0.1); background: #332c63">
           <div style="padding-top: 56.25%"></div>
           <button onClick="{{ fsFilm }}" class="m-fs-toggle" title="Full screen" style="position: absolute; top: 14px; right: 14px; z-index: 50; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(213,183,124,0.45); background: rgba(13,10,28,0.55); backdrop-filter: blur(10px); color: #e6d3a8; font-size: 16px; cursor: pointer" style-hover="background: rgba(213,183,124,0.2); border-color: rgba(230,211,168,0.8)"><span class="fs-ic-open">⛶</span><span class="fs-ic-exit" style="display: none">✕</span></button>
-          <x-import component-from-global-scope="IntroFilm" from="./tweaks-panel.jsx ./animations-v2.jsx ./intro-film.jsx" embed="true" style="position: absolute; inset: 0" hint-size="100%,100%"></x-import>
+          <x-import component-from-global-scope="IntroFilm" from="./tweaks-panel.jsx ./animations-v2.jsx?v=3 ./intro-film.jsx?v=8" embed="true" style="position: absolute; inset: 0" hint-size="100%,100%"></x-import>
         </div>
         <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 18px"><button onClick="{{ goHub }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.5); background: rgba(20,15,40,0.4); color: #e6d3a8; font-family: var(--font-body); font-size: 12px; letter-spacing: 0.12em; cursor: pointer" style-hover="background: rgba(213,183,124,0.12)">✡ Go Back</button></div>
       </div>
@@ -691,7 +770,7 @@
           </div>
           <div style="flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; align-items: stretch">
             <span style="display: inline-flex; justify-content: center; padding: 10px 20px; border-radius: 999px; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-weight: 600; font-size: 13px">View invitation ↗</span>
-            <span style="text-align: center; font-size: 11px; color: #9a927f">Questions? info@goldenagewisdom.org</span>
+            <span style="text-align: center; font-size: 11px; color: #9a927f">Questions? goldenageguruteachings@gmail.com</span>
           </div>
         </a>
         </sc-if>
@@ -699,7 +778,7 @@
         <div style="padding: 30px 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
           <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap">
             <h2 style="font-family: var(--font-display); font-size: 25px; margin: 0; color: #f2e9d8">Daily live sessions</h2>
-            <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758; white-space: nowrap">Mon–Sat · Sunday rest</span>
+            <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #b89758; white-space: nowrap">Monday – Saturday · Sunday rest</span>
           </div>
           <sc-for list="{{ sessions }}" as="s" hint-placeholder-count="3">
             <div style="display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1)" style-hover="border-color: rgba(213,183,124,0.4)">
@@ -728,6 +807,9 @@
         </div>
         <div style="padding: 30px 28px; border-radius: 24px; background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 16px">
           <h2 style="font-family: var(--font-display); font-size: 25px; margin: 0; color: #f2e9d8">Upcoming gatherings</h2>
+          <sc-if value="{{ noUpcoming }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.6; color: #9a927f">No gatherings on the calendar right now — the free live sessions run Monday to Saturday. New retreats and satsangs are announced here first.</p>
+          </sc-if>
           <sc-if value="{{ hasUpcoming }}" hint-placeholder-val="{{ true }}">
           <sc-for list="{{ upcomingEvents }}" as="e" hint-placeholder-count="2">
             <div style="display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1)">
@@ -830,19 +912,20 @@
     </button>
   </sc-if>
     <sc-if value="{{ viewHub }}" hint-placeholder-val="{{ true }}"><div class="m-caption" style="font-size: 12.5px; letter-spacing: 0.1em; color: #7d7666">{{ tCaption }}</div></sc-if>
+    <sc-if value="{{ viewHub }}" hint-placeholder-val="{{ true }}">
     <div style="display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap">
-    <span style="font-family: var(--font-display); letter-spacing: 0.08em; color: #d5b77c">GOLDEN AGE WISDOM</span>
+    <a href="/volunteer">Volunteer</a>
     <span>{{ tNonProfit }}</span>
-    <a href="mailto:info@goldenagewisdom.org">info@goldenagewisdom.org</a>
-    <a href="Privacy.dc.html">{{ tPrivacy }}</a>
+    <a href="/privacy">{{ tPrivacy }}</a>
     </div>
+    </sc-if>
   </footer>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { view: 'hub', lang: (window.GAW_LANG || 'en'), langsOpen: false, detoxTab: 0, hubTx: 0, hubTy: 60, secPad: 104, member: null, consentSeen: false, depth: 'simple' };
-  // anchor the wheel to the figure: chin sits at y=778 (of 1525) and midline at x=1280 (of 2560)
+  state = { view: 'hub', lang: 'en', detoxTab: 0, hubTx: 0, hubTy: 60, secPad: 104, member: null, consentSeen: false, depth: 'simple', bgLift: 0, orbitR: 'clamp(88px, min(calc(46dvh - 130px), calc(50vw - 70px)), 185px)' };
+  // anchor the wheel to the figure: chin sits at y=646 (of 1525) and midline at x=1280 (of 2560)
   // in the background image; replicate the CSS cover-crop math to find them on screen.
   computeLayout() {
     const vw = window.innerWidth, vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
@@ -851,26 +934,195 @@ class Component extends DCLogic {
     if (!main) return;
     const mb = main.getBoundingClientRect();
     if (mb.height < 40) return;
-    const r = Math.max(110, Math.min(vh / 2 - 150, vw / 2 - 70, 185));
-    const node = Math.max(64, Math.min(r * 0.55, 92));
+    // Measure the wheel that is actually drawn. --orbit-r and .m-node-ring are set in
+    // CSS (and overridden per breakpoint), so recomputing them here silently desyncs
+    // the chin-anchoring and drops the mandala over the face. offsetWidth ignores the
+    // rings' pulse transform, so these are layout sizes, not animated ones.
+    const ring2 = document.querySelector('.m-ring2');
+    const ringEl = document.querySelector('.m-node-ring');
+    const measuredR = ring2 ? ring2.offsetWidth / 2.24 : 0;
+    const r = measuredR > 20 ? measuredR : Math.max(110, Math.min(vh / 2 - 150, vw / 2 - 70, 185));
+    const node = (ringEl && ringEl.offsetWidth > 20) ? ringEl.offsetWidth : Math.max(64, Math.min(r * 0.55, 92));
     const scale = Math.max(vw / 2560, vh / 1525);
     const cropTop = Math.max(0, (1525 * scale - vh) * 0.42); // matches object-position 50% 42%
     const cropLeft = Math.max(0, (2560 * scale - vw) * 0.5);
-    const zoom = 1.22; // img transform: scale(1.22) anchored bottom-center
-    const chinY = vh - (vh - (778 * scale - cropTop)) * zoom;
+    // Read the figure's real transform — .m-bg is overridden per aspect ratio, so a
+    // hard-coded zoom here desyncs the chin anchor from the image on screen.
+    const bg = document.querySelector('.m-bg');
+    let zoom = 0.98, bgShiftY = 0;
+    if (bg) {
+      const m = new DOMMatrixReadOnly(getComputedStyle(bg).transform);
+      if (m.d > 0.1) { zoom = m.d; bgShiftY = m.f; }
+    }
+    const chinY = vh - (vh - (646 * scale - cropTop)) * zoom + bgShiftY + this.state.bgLift;
     const midX = vw / 2 + ((1280 * scale - cropLeft) - vw / 2) * zoom;
-    const topExtent = 0.78 * r + node / 2 + 14;
-    const bottomExtent = 0.78 * r + node / 2 + 38; // node + label below
+    // True radial distance of a node from the wheel centre, measured — the old 0.78
+    // constant no longer matches the template's rf values.
+    const orbEl = document.querySelector('.m-orb');
+    // Measure .m-node (the positioned wrapper), never the button inside it: nodeFloat
+    // animates the button by ±8px, so rects taken there jitter every frame, the solve
+    // never settles, and placement — solved last — is the thing that gets starved.
+    const nodeEls = document.querySelectorAll('.m-node');
+    let radial = 0.93 * r;
+    if (orbEl && nodeEls.length) {
+      const orr = orbEl.getBoundingClientRect();
+      const ocy0 = orr.top + orr.height / 2;
+      let d = 0;
+      nodeEls.forEach(el => {
+        const b = el.getBoundingClientRect();
+        const dd = Math.abs((b.top + b.height / 2) - ocy0); if (dd > d) d = dd;
+      });
+      if (d > 20) radial = d;
+    }
+    const FLOAT = 8; // nodeFloat keyframe amplitude — static gaps must exceed it
+    // Measure the wheel's real extents (rings above, LABELS below) rather than guessing
+    // with constants: the labels hang past the rings and were landing on the footer.
+    const oc = orbEl ? orbEl.getBoundingClientRect() : null;
+    const ocy = oc ? oc.top + oc.height / 2 : 0;
+    let topExtent = radial + node / 2 + FLOAT + 6;
+    let bottomExtent = radial + node / 2 + FLOAT + 30;
+    if (oc) {
+      let topGap = 0, maxBot = 0;
+      nodeEls.forEach(el => {
+        const b = el.getBoundingClientRect();
+        const t = ocy - b.top; if (t > topGap) topGap = t;
+        const bb = b.bottom - ocy; if (bb > maxBot) maxBot = bb;
+      });
+      if (topGap > 20) topExtent = topGap + FLOAT + 6;
+      if (maxBot > 20) bottomExtent = maxBot + FLOAT + 6;
+    }
     const footerTop = footer ? footer.getBoundingClientRect().top : vh - 52;
-    const minCenter = mb.top + topExtent + 4;
-    const maxCenter = Math.min(footerTop - 6, vh - 8) - bottomExtent;
-    const cy = Math.max(Math.min(chinY - 64 + topExtent, maxCenter), Math.min(minCenter, maxCenter));
-    const halfW = 0.78 * r + node / 2 + 12;
-    const cx = Math.min(Math.max(midX - 16, halfW + 8), vw - halfW - 8);
-    const hubTy = Math.round(cy - (mb.top + mb.height / 2));
-    const hubTx = Math.round(cx - vw / 2);
+    const vpEl = document.querySelector('.m-vp');
+    const actEl = document.querySelector('.m-action');
+    // The action bar is part of the copy when it sits above the wheel, and a floor when a
+    // breakpoint pins it to the bottom. Decide from where it actually is.
+    const actR = actEl ? actEl.getBoundingClientRect() : null;
+    const actIsFloor = !!actR && actR.top > vh * 0.5;
+    const vpBottom = Math.max(
+      vpEl ? vpEl.getBoundingClientRect().bottom : mb.top,
+      actR && !actIsFloor ? actR.bottom : 0);
+    const lowerTop = actIsFloor ? actR.top : footerTop;
+    // The wheel must clear BOTH the chin (the design's rule: begin at the neck, never
+    // across the face) and the copy above it.
+    // Optical nudge, folded into the SOLVE (not added to the committed translate): the
+    // wheel sitting 25px lower is 25px of clearance the radius solve must pay for, or the
+    // labels ride over the action bar on every nodeFloat cycle.
+    const NUDGE_Y = 134, NUDGE_X = 15; // wheel starts at the neck: chin + this nudge
+    // At 4:3 and narrower the design veils him and puts the wheel in front on purpose:
+    // there is no face to clear, and the chin is not a boundary the wheel must respect.
+    // The new hero keeps the face visible well below 4:3, so only true portrait
+    // aspects (phones) veil him and free the wheel from the chin bound.
+    const veiledAspect = (vw / vh) <= 0.95 || vh <= 620;
+    // On space-constrained viewports the solve is bottom-bound, so cy = maxCenter and a
+    // nudge folded only into the upper bound is discarded. Let it spend the cushion below
+    // the wheel instead — capped so real label clearance never drops under FLOAT + 4.
+    const nudgeSpend = Math.max(0, Math.min(NUDGE_Y, 10));
+    // Extents as a function of radius: a part that scales with r (the node's orbit) and a
+    // fixed part (ring, label, float cushion). Measured this pass, so breakpoint overrides
+    // to the ring and label sizes are already in the numbers.
+    const aT = radial / Math.max(r, 1), bT = Math.max(0, topExtent - radial);
+    const aB = radial / Math.max(r, 1), bB = Math.max(0, bottomExtent - radial);
+    const floorY = Math.min(lowerTop - 8 + nudgeSpend, footerTop - 6, vh - 8);
+    // Where his crown and chin would sit with no lift at all.
+    const crown0 = vh - (vh - (275 * scale - cropTop)) * zoom + bgShiftY;
+    const chin0 = vh - (vh - (646 * scale - cropTop)) * zoom + bgShiftY;
+    // The smallest downward push that gets his face out from under the copy. His face is
+    // the thing the page is about; the wheel pays for it by shrinking.
+    // Signed: positive clears his face from under the copy, negative closes the gap of
+    // empty sky between the copy and his hair. Either way his crown lands just below it.
+    // Crown target raised 40px per review — his head rides higher, slightly into the
+    // copy's breathing room rather than strictly below it.
+    const wantLift = (vpBottom - 28) - crown0;
+    // With that lift, the largest wheel whose top clears the chin and whose labels clear
+    // the action bar: chin + nudge + topExtent(r) + bottomExtent(r) <= floorY.
+    const room = floorY - Math.max(chin0 + wantLift, vpBottom + 12) - NUDGE_Y - bT - bB;
+    // Small phones give the wheel a band of ~250px between the copy and the pinned buttons.
+    // The node rings clamp at 38px regardless, so touch targets survive the smaller orbit.
+    // Small phones leave the wheel a band of ~180px between his chin and the pinned
+    // buttons; the node rings clamp at 38px regardless, so touch targets survive.
+    const R_MIN = vw <= 480 ? 96 : 88;
+    const rFit = room / Math.max(aT + aB, 0.01);
+    // The band with the chin bound dropped — what the wheel gets where the figure is
+    // veiled and the chin-bound solve came up infeasible.
+    const roomFree = floorY - (vpBottom + 12) - NUDGE_Y - bT - bB;
+    const rFree = roomFree / Math.max(aT + aB, 0.01);
+    // Infeasible even at the smallest wheel? Then the chin stops being a bound — the
+    // figure is veiled (rule above) and the wheel takes the middle band by design.
+    // Favour his face at the boundary: rFit lands EXACTLY on the floor when the below-chin
+    // band just fits, and measurement slop of a fraction of a px was flipping the bound off
+    // and growing the wheel over his mouth. Same constant as the floor, never a duplicate.
+    const chinBinds = rFit >= R_MIN - 8 || !veiledAspect;
+    const upperY = (chinBinds ? Math.max(chinY, vpBottom + 12) : vpBottom + 12) + NUDGE_Y;
+    const minCenter = upperY + topExtent;
+    const maxCenter = floorY - bottomExtent;
+    // Two-sided clamp: neither the chin above nor the action bar below may be ignored.
+    const cy = maxCenter >= minCenter ? minCenter : maxCenter;
+    const halfW = radial + node / 2 + 12;
+    const cx = Math.min(Math.max(midX - 16 + NUDGE_X, halfW + 8), vw - halfW - 8);
+    // Position by CORRECTION, not by assumption: per-aspect rules add margins to .m-hub
+    // (e.g. margin-top: 68px below 4/3), so deriving the offset from main's centre puts
+    // the wheel wherever those margins happen to leave it.
+    // Subtract the translate CURRENTLY PAINTED (read from the computed matrix, not from
+    // state) to get the orb's untransformed centre. .m-hub transitions transform over
+    // 0.35s, so a rect measured mid-flight against the committed state value double-counts
+    // the remainder every frame and walks the wheel off-screen.
+    const hubEl = document.querySelector('.m-hub');
+    let hubTy, hubTx;
+    if (oc && hubEl) {
+      const hm = new DOMMatrixReadOnly(getComputedStyle(hubEl).transform);
+      hubTy = Math.round(cy - ((oc.top + oc.height / 2) - hm.f));
+      hubTx = Math.round(cx - ((oc.left + oc.width / 2) - hm.e));
+    } else {
+      hubTy = Math.round(cy - (mb.top + mb.height / 2));
+      hubTx = Math.round(cx - vw / 2);
+    }
     const secPad = Math.round(Math.max(24, Math.min(cy - topExtent - mb.top, vh * 0.34)));
-    if (Math.abs(hubTy - this.state.hubTy) > 1 || Math.abs(hubTx - this.state.hubTx) > 1 || Math.abs(secPad - this.state.secPad) > 1) this.setState({ hubTx, hubTy, secPad });
+    const avail = Math.min(lowerTop - 8, footerTop - 6) - upperY;
+    const need = topExtent + bottomExtent;
+    // Lift the figure into the dead band under the headline: every px his crown rises is
+    // a px the wheel gains below his chin. Crown sits at img y≈275. Upward only — pushing
+    // him down would put the wheel back across his face.
+    const crownY = vh - (vh - (275 * scale - cropTop)) * zoom + bgShiftY + this.state.bgLift;
+    // Downward too. Upward-only was written when the copy sat below the wheel; with the
+    // headline above the figure, the only way to clear his face is to move him down, as
+    // far as the wheel can still follow without being clamped back up into it.
+    // Push him down only as far as clearing the copy needs, and only if a wheel of at
+    // least the floor radius can still sit under his chin. Otherwise the screen is too
+    // short for both and the wheel keeps its place.
+    const lift = Math.round(Math.max(-vh * 0.35, Math.min(vh * 0.35, wantLift)));
+    // Solve the radius from the space actually measured. Damped linear: node ring, label
+    // and float margins are a fixed part of `need`, so a proportional scale over-shrinks.
+    // d(need)/dr ≈ 1.5, so stepping 60% of the px gap converges without overshoot. The 88px
+    // floor is legibility — chakra glyphs and labels scale from --orbit-r.
+    let orbitR = this.state.orbitR;
+    if (r > 20 && isFinite(rFit)) {
+      const rWidth = ((vw / 2 - 20) - node / 2) / Math.max(aT, 0.01);
+      // Must agree with chinBinds above — placement and size deciding differently about
+      // the chin leaves the wheel sized for one plan and placed for the other.
+      const rVert = (rFit >= R_MIN - 8 || !veiledAspect) ? rFit : rFree;
+      const target = Math.max(R_MIN, Math.min(185, rVert, rWidth));
+      if (Math.abs(target - r) > 1.5) orbitR = target.toFixed(1) + 'px';
+    }
+    // Write lift, radius and placement TOGETHER. As separate early-returning solvers they
+    // shared one pass budget and placement — the last of them — got starved, leaving the
+    // wheel at a stale offset across the headline.
+    const changed = Math.abs(lift - this.state.bgLift) > 2 || orbitR !== this.state.orbitR
+      || Math.abs(hubTy - this.state.hubTy) > 2 || Math.abs(hubTx - this.state.hubTx) > 2
+      || Math.abs(secPad - this.state.secPad) > 2;
+    if (changed) {
+      this.setState({ bgLift: lift, orbitR, hubTx, hubTy, secPad }, () => {
+        if ((this._layoutPass = (this._layoutPass || 0) + 1) < 24) requestAnimationFrame(() => this.computeLayout());
+        else {
+          // Budget expired mid-flight (the wrap and hub transition over 0.35–0.7s, so rects
+          // lag the committed state). The solve is deterministic now, so one settle pass
+          // after the transitions end always lands it.
+          clearTimeout(this._layoutSettle);
+          this._layoutSettle = setTimeout(() => { this._layoutPass = 0; this.computeLayout(); }, 750);
+        }
+      });
+    } else {
+      this._layoutPass = 0;
+    }
   }
   DETOX = [
     { label: 'Satvik Diet', glyph: '⚘', title: 'Eat close to nature', desc: 'Sattva means purity, harmony, clarity. The diet is less about restriction, more about refinement — natural, simple, minimally processed food for a calm mind and light body.',
@@ -887,25 +1139,55 @@ class Component extends DCLogic {
       items: ['Morning — plain water, light walk (fasting)', '12 PM — break the fast with one detox smoothie', '5–7 PM — one satvik salad bowl', '8 PM — the fast begins again · water only'] },
   ];
   lang() { return this.state.lang || window.GAW_LANG || 'en'; }
-  // Sessions are Monday-Saturday IST: 4:10 AM, 8 PM and 9 PM.
+  // Sessions run Monday–Saturday IST (Sunday rest): 4:10 AM, 8 PM and 9 PM.
   nextSession() {
     const ist = new Date(Date.now() + (330 + new Date().getTimezoneOffset()) * 60000);
-    const mins = ist.getHours() * 60 + ist.getMinutes(), sunday = ist.getDay() === 0;
+    const mins = ist.getHours() * 60 + ist.getMinutes();
+    const day = ist.getDay();
     const list = [{ from: 250, to: 310 }, { from: 1200, to: 1260 }, { from: 1260, to: 1320 }];
     const fmtLocal = (fromIST) => {
       const ms = Date.UTC(ist.getFullYear(), ist.getMonth(), ist.getDate()) - 330 * 60000 + fromIST * 60000;
       try { return new Date(ms).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; }
     };
-    if (sunday) return { line: this.t('liveRest'), dot: 'rgba(255,255,255,0.28)', border: 'rgba(255,255,255,0.16)', bg: 'rgba(20,15,40,0.5)', live: false };
-    const live = list.find(s => mins >= s.from && mins < s.to);
+    const live = day !== 0 && list.find(s => mins >= s.from && mins < s.to);
     if (live) return { line: this.t('liveNow'), dot: '#e08484', border: 'rgba(224,132,132,0.7)', bg: 'rgba(224,132,132,0.14)', live: true };
-    const next = list.find(s => mins < s.from) || list[0];
-    const away = next.from > mins ? next.from - mins : (1440 - mins) + next.from;
+    // Next session, skipping the Sunday rest day (IST wall clock).
+    let dayOff = 0, nextFrom;
+    if (day === 0) { dayOff = 1; nextFrom = list[0].from; }
+    else {
+      const n = list.find(s => mins < s.from);
+      if (n) nextFrom = n.from;
+      else { dayOff = day === 6 ? 2 : 1; nextFrom = list[0].from; }
+    }
+    const away = dayOff === 0 ? nextFrom - mins : dayOff * 1440 - mins + nextFrom;
     const hh = Math.floor(away / 60), mm = away % 60;
     const inTxt = (hh ? hh + 'h ' : '') + mm + 'm';
-    return { line: this.t('liveIn') + ' ' + inTxt + ' · ' + fmtLocal(next.from), dot: '#d5b77c', border: 'rgba(213,183,124,0.45)', bg: 'rgba(20,15,40,0.5)', live: false };
+    return { line: this.t('liveIn') + ' ' + inTxt + ' · ' + fmtLocal(nextFrom), dot: '#d5b77c', border: 'rgba(213,183,124,0.45)', bg: 'rgba(20,15,40,0.5)', live: false };
   }
   t(key) { return window.GAW_T ? window.GAW_T(key, this.lang()) : key; }
+  // Traditional chakra symbols as line-art SVG, in each node's own hue.
+  // Petal counts follow the tradition: 4 root, 6 sacral, 10 solar, 16 throat,
+  // 2 brow, many-petalled crown. (The heart's 12-petal shatkona is the orb.)
+  chakraIcon(kind, color) {
+    const e = React.createElement, c = 22;
+    const petals = (n, opts) => {
+      const { cy = 6.4, rx = 3.1, ry = 6.2, angles = null } = opts || {};
+      const list = angles || Array.from({ length: n }, (_, i) => i * 360 / n);
+      return list.map((a, i) => e('g', { key: 'p' + i, transform: `rotate(${a} ${c} ${c})` },
+        e('ellipse', { cx: c, cy, rx, ry, fill: 'none', stroke: color, strokeWidth: 1.1 })));
+    };
+    const circle = (r, key) => e('circle', { key, cx: c, cy: c, r, fill: 'none', stroke: color, strokeWidth: 1.2 });
+    const triDown = (r, key) => e('path', { key, d: `M${(c - r * 0.866).toFixed(1)} ${(c - r / 2).toFixed(1)} L${(c + r * 0.866).toFixed(1)} ${(c - r / 2).toFixed(1)} L${c} ${(c + r).toFixed(1)} Z`, fill: 'none', stroke: color, strokeWidth: 1.2, strokeLinejoin: 'round' });
+    let kids = [];
+    if (kind === 'muladhara') kids = [...petals(4, { rx: 4, ry: 6.8, cy: 6.8 }), circle(12.6, 'c'), e('rect', { key: 'sq', x: c - 7.6, y: c - 7.6, width: 15.2, height: 15.2, fill: 'none', stroke: color, strokeWidth: 1.1 }), triDown(5.6, 't')];
+    else if (kind === 'svadhisthana') kids = [...petals(6), circle(12.6, 'c'), e('path', { key: 'cr', d: `M${c - 6.4} ${c + 0.5} a6.4 6.4 0 0 0 12.8 0`, fill: 'none', stroke: color, strokeWidth: 1.2, strokeLinecap: 'round' }), circle(3.4, 'c2')];
+    else if (kind === 'manipura') kids = [...petals(10, { rx: 2.9, ry: 5.9 }), circle(12.6, 'c'), triDown(7.8, 't')];
+    else if (kind === 'vishuddha') kids = [...petals(16, { rx: 2.4, ry: 5.6, cy: 6.2 }), circle(12.6, 'c'), triDown(7.8, 't'), circle(4.2, 'c2')];
+    else if (kind === 'ajna') kids = [...petals(2, { rx: 3.6, ry: 6.6, cy: 7, angles: [90, 270] }), circle(12.6, 'c'), triDown(7, 't')];
+    else kids = [...petals(20, { rx: 2.2, ry: 5.8, cy: 6.2 }), circle(12.6, 'c'), circle(4.6, 'c2')];
+    return e('svg', { viewBox: '0 0 44 44', 'aria-hidden': true,
+      style: { width: '1.9em', height: '1.9em', display: 'block', filter: `drop-shadow(0 0 7px ${color}b3)` } }, kids);
+  }
   SECTIONS = ['hub', 'home', 'practice', 'film', 'events', 'health', 'wellness', 'guru', 'wisdom', 'mission'];
   sectionFromUrl() {
     try {
@@ -924,11 +1206,8 @@ class Component extends DCLogic {
     window.addEventListener('popstate', this.onPop);
     this.onKey = (e) => {
       if (e.key !== 'Escape') return;
-      if (this.state.langsOpen) { this.setState({ langsOpen: false }); return; }
       if (this.state.view !== 'hub') this.go('hub');
     };
-    this.onDocClick = (e) => { if (this.state.langsOpen && !e.target.closest('.m-langs')) this.setState({ langsOpen: false }); };
-    document.addEventListener('click', this.onDocClick);
     window.addEventListener('keydown', this.onKey);
     this.tick = setInterval(() => this.forceUpdate(), 30000);
     this.onResize = () => this.computeLayout();
@@ -969,18 +1248,34 @@ class Component extends DCLogic {
       return new Date(t.getTime() + diff).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     } catch (e) { return ''; }
   }
+  // The daily sit for world peace — 8:30–9:00 PM IST, Monday–Saturday (Sunday rest). ONE global
+  // moment, so it is anchored to IST; "zone specific" means each visitor is shown that
+  // instant on their own clock (peaceWhen), never a different sit per zone.
+  PEACE = { offsetMin: 330, at: [20, 30], mins: 30, days: [1, 2, 3, 4, 5, 6] };
+  peaceNext() {
+    const now = Date.now(), shift = this.PEACE.offsetMin * 60000;
+    const wall = new Date(now + shift);
+    for (let d = 0; d < 9; d++) {
+      const base = Date.UTC(wall.getUTCFullYear(), wall.getUTCMonth(), wall.getUTCDate() + d);
+      if (!this.PEACE.days.includes(new Date(base).getUTCDay())) continue;
+      const start = base + (this.PEACE.at[0] * 60 + this.PEACE.at[1]) * 60000 - shift;
+      const end = start + this.PEACE.mins * 60000;
+      if (now < end) return { start, end, live: now >= start };
+    }
+    return null;
+  }
   sessions() {
     let showLocal = false;
     try { showLocal = Intl.DateTimeFormat().resolvedOptions().timeZone !== 'Asia/Kolkata'; } catch (e) {}
     return [
       { time: '4:10 – 5:10 AM', title: 'Brahmamuhurtham meditation', desc: 'The sacred pre-dawn hour — deepest stillness', s: [4, 10], e: [5, 10] },
-      { time: '8:00 – 9:00 PM', title: 'Online meditation', desc: 'Live guided group meditation', s: [20, 0], e: [21, 0] },
+      { time: '8:00 – 8:30 PM', title: 'Online meditation', desc: 'Live guided group meditation', s: [20, 0], e: [20, 30] },
+      { time: '8:30 – 9:00 PM', title: 'The world sits together', desc: 'One mass meditation for world peace — thousands in one silence; same room, stay on', s: [20, 30], e: [21, 0] },
       { time: '9:00 – 10:00 PM', title: 'Wisdom session · Dr. Hari', desc: 'Knowledge, living Upanishads and open Q&A', s: [21, 0], e: [22, 0] },
     ].map(x => ({ ...x, showLocal, local: showLocal ? this.istLocal(x.s[0], x.s[1]) + ' – ' + this.istLocal(x.e[0], x.e[1]) + ' your time' : '' }));
   }
   GATHERINGS = [
     { day: '26', month: 'JUL', year: 2026, title: 'Awakening Hyderabad', meta: '11 AM–6 PM · 9 Convention, Sanath Nagar, Hyderabad', ends: '2026-07-26T18:00:00+05:30', featured: true },
-    { day: '15', month: 'AUG', year: 2026, title: '7-Day Silent Retreat', meta: 'All day · Rishikesh', ends: '2026-08-21T23:59:00+05:30' },
   ];
   splitGatherings() {
     const now = Date.now();
@@ -1028,17 +1323,48 @@ class Component extends DCLogic {
       if (t) document.title = t + ' · Golden Age Wisdom';
     } catch (e) {}
   }
+  // The sky. Built once from a fixed seed so the 30s tick never reshuffles it.
+  // 8 of every 100 points are lit — the same 8% the Mission view draws as a dot grid.
+  buildStars() {
+    let seed = 20260804;
+    const rand = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const out = [];
+    for (let i = 0; i < 100; i++) {
+      const x = 2 + rand() * 96, y = 3 + rand() * 90;
+      // Keep clear of the centre column, where the mandala and the copy live.
+      if (Math.abs(x - 50) < 17 && Math.abs(y - 50) < 30) continue;
+      out.push({ x, y, jitter: rand() * 1.2, delay: (-rand() * 10).toFixed(2) });
+    }
+    // Decide lit AFTER the centre rejection, or the displayed fraction is arbitrary.
+    // GOAL_PCT is the same 8% the Mission view draws as a 100-dot grid.
+    const GOAL_PCT = 8;
+    const len = out.length;
+    const count = Math.max(1, Math.round(len * GOAL_PCT / 100));
+    const litIdx = new Set();
+    for (let k = 0; k < count; k++) litIdx.add(Math.round(k * len / count));
+    return out.map((s, i) => {
+      const lit = litIdx.has(i);
+      const px = (lit ? 2.2 : 1.4) + s.jitter;
+      return {
+        left: s.x.toFixed(2) + '%', top: s.y.toFixed(2) + '%',
+        size: px.toFixed(1) + 'px',
+        bg: lit ? '#f0dcaf' : 'rgba(226,220,240,0.75)',
+        glow: lit ? '0 0 7px rgba(230,211,168,0.95)' : 'none',
+        anim: (lit ? 'starLit' : 'starDim') + ' 10s ease-in-out ' + s.delay + 's infinite',
+      };
+    });
+  }
   renderVals() {
     const v = this.state.view;
     const nodes = [
       // rotate(a) translateY(-R): a=0 is TOP, clockwise. Welcome at top, rest evenly.
       // seven chakras, seven mandalas — crown at the top, root at the base, heart at the center
-      { key: 'guru', label: this.t('nAbout'), glyph: '✦', angle: 0, color: '#c9a6f0', petals: 48 },
-      { key: 'wisdom', label: this.t('nWisdom'), glyph: '◎', angle: 60, color: '#9d8fe0', petals: 2 },
-      { key: 'health', label: this.t('nWellness'), glyph: '❋', angle: 120, color: '#eda06a', petals: 6 },
-      { key: 'practice', label: this.t('nMeditate'), glyph: '▽', angle: 180, color: '#e08a8a', petals: 4 },
-      { key: 'events', label: this.t('nEvents'), glyph: '☾', angle: 240, color: '#7fb0e0', petals: 16 },
-      { key: 'mission', label: this.t('nMission'), glyph: '△', angle: 300, color: '#e6c96a', petals: 10 },
+      { key: 'guru', label: this.t('nAbout'), glyph: '✦', kind: 'sahasrara', angle: 0, color: '#c9a6f0', petals: 48 },
+      { key: 'wisdom', label: this.t('nWisdom'), glyph: '◎', kind: 'ajna', angle: 60, color: '#9d8fe0', petals: 2 },
+      { key: 'health', label: this.t('nWellness'), glyph: '❋', kind: 'svadhisthana', angle: 120, color: '#eda06a', petals: 6 },
+      { key: 'practice', label: this.t('nMeditate'), glyph: '▽', kind: 'muladhara', angle: 180, color: '#e08a8a', petals: 4 },
+      { key: 'events', label: this.t('nEvents'), glyph: '☾', kind: 'vishuddha', angle: 240, color: '#7fb0e0', petals: 16 },
+      { key: 'mission', label: this.t('nMission'), glyph: '△', kind: 'manipura', angle: 300, color: '#e6c96a', petals: 10 },
     ];
     const mb = this.state.member;
     return {
@@ -1075,16 +1401,6 @@ class Component extends DCLogic {
         { glyph: '◎', glyphColor: '#8fb8f0', title: 'Where the energy comes from', body: 'Some use a pyramid as a conductor. Some sit in groups, where consciousness pools higher. Some connect straight to the universe and give energy away like transformers. Guided meditation is another door.' },
         { glyph: '☀', glyphColor: '#f0c98f', title: 'The ultimate truth', body: 'It depends on what you seek — joy for one, wisdom for another, self-discovery for the next. Come to know yourself through your own journey. See you on the other side, friend.' },
       ],
-      langs: (window.GAW_LANGS || []).map(l => ({
-        label: l.label, name: l.name,
-        tick: this.lang() === l.code ? '✓' : '',
-        pick: () => { if (window.GAW_SET_LANG) window.GAW_SET_LANG(l.code); this.setState({ lang: l.code, langsOpen: false }); },
-        bg: this.lang() === l.code ? 'rgba(213,183,124,0.16)' : 'transparent',
-        color: this.lang() === l.code ? '#f7f1e3' : '#b9b1a0',
-      })),
-      langCurrent: ((window.GAW_LANGS || []).find(l => l.code === this.lang()) || { name: 'English' }).name,
-      langsOpen: !!this.state.langsOpen,
-      toggleLangs: () => this.setState({ langsOpen: !this.state.langsOpen }),
       tMovement: this.t('movement'), tSignIn: this.t('signIn'), tBeginHere: this.t('beginHere'),
       tGoBack: this.t('goBack'), tCaption: this.t('caption'), tScanJoin: this.t('scanJoin'),
       tFreeMember: this.t('freeMember'), tNonProfit: this.t('nonProfit'), tPrivacy: this.t('privacy'),
@@ -1094,16 +1410,41 @@ class Component extends DCLogic {
       liveHref: this.state.sessionUser ? 'Member Flow.dc.html' : 'https://www.youtube.com/@GoldenAgeGurus/streams',
       liveTarget: this.state.sessionUser ? '_self' : '_blank',
       ...(() => {
-        const li = this.nextSession();
+        const p = this.peaceNext();
+        if (!p) return {};
+        if (!this.stars) this.stars = this.buildStars();
         return {
-          liveLine: li.line, liveDot: li.dot, liveBorder: li.border, liveBg: li.bg,
-          liveAnim: li.live ? 'sndRing 2.4s ease-out infinite' : 'none',
+          stars: this.stars,
+          // While the sit runs, the whole field draws inward and wakes up.
+          skyTransform: p.live ? 'scale(0.965)' : 'scale(1)',
+          skyFilter: p.live ? 'brightness(1.75)' : 'brightness(1)',
+          // Outside India, show the sit on the visitor's own clock; inside it, plain IST.
+          peaceWhen: (() => {
+            let local = false;
+            try { local = Intl.DateTimeFormat().resolvedOptions().timeZone !== 'Asia/Kolkata'; } catch (e) {}
+            const a = local ? this.istLocal(20, 30) : '';
+            return a ? a + ' your time · 8:30 PM IST' : '8:30 PM IST';
+          })(),
+          // The pill above the headline shows the visitor's own clock only — IST is noise there.
+          peaceLocal: (() => {
+            let local = false;
+            try { local = Intl.DateTimeFormat().resolvedOptions().timeZone !== 'Asia/Kolkata'; } catch (e) {}
+            const a = local ? this.istLocal(20, 30) : '';
+            return a ? a + ' your time' : '8:30 PM IST';
+          })(),
+          peaceDot: p.live ? '#7ecb8f' : '#d5b77c',
+          peaceAnim: p.live ? 'sndRing 2.4s ease-out infinite' : 'none',
+          peaceBorder: p.live ? 'rgba(126,203,143,0.7)' : 'rgba(213,183,124,0.55)',
+          peaceGlow: p.live ? 'rgba(126,203,143,0.4)' : 'rgba(213,183,124,0.35)',
         };
+      })(),
+      ...(() => {
+        return {};
       })(),
       bgOpacity: v === 'hub' ? 1 : 0,
       subGlowOpacity: v === 'hub' ? 0 : 1,
       showJoinQR: v === 'hub' && !mb,
-      hubTx: this.state.hubTx, hubTy: this.state.hubTy,
+      hubTx: this.state.hubTx, hubTy: this.state.hubTy, orbitR: this.state.orbitR, bgLift: this.state.bgLift,
       mainPadTop: 12,
       viewHub: v === 'hub', viewHome: v === 'home', viewPractice: v === 'practice',
       viewFilm: v === 'film', viewEvents: v === 'events',
@@ -1165,7 +1506,7 @@ class Component extends DCLogic {
       healthBenefits: [
         { glyph: '𑁍', title: 'Meditation', body: 'Calm the mind, connect with your soul — the foundation of all healing.' },
         { glyph: '☀', title: 'Sun gazing', body: 'Absorb natural sunlight — energize your body and mind.' },
-        { glyph: '𓂀', title: 'Earth gazing', body: 'Walk barefoot on the earth — stay grounded and recharge naturally.' },
+        { glyph: '𓂀', title: 'Earthing', body: 'Walk barefoot on the earth — stay grounded and recharge naturally.' },
         { glyph: '⚘', title: '41-day health diet program', body: 'A guided detox cycle, repeated every 6 months — download the full program below.' },
         { glyph: '☵', title: 'Alkaline water', body: 'Stay hydrated with alkaline water for better health and balance.' },
       ],
@@ -1181,6 +1522,24 @@ class Component extends DCLogic {
       },
       pauseFilm: () => window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' })),
       goFilm: () => { try { window.GAW_UNLOCK && window.GAW_UNLOCK(); } catch (e) {} this.go('film'); },
+      // Set as textContent: an interpolation hole inside SVG renders a span and lays out
+      // no glyphs. textLength spreads the letters evenly around the whole circle.
+      orbCapRef: (el) => {
+        if (!el) return;
+        el.textContent = 'Mass Meditation ·';
+        const p = el.ownerDocument.getElementById('orbCapArc');
+        if (p) { el.setAttribute('textLength', p.getTotalLength()); el.setAttribute('lengthAdjust', 'spacing'); }
+        // The SVG scales with the orb, so a fixed font-size renders at a different px size
+        // on every screen — and larger than the node labels beside it. Solve back from the
+        // label's real size so the whole mandala reads at one weight.
+        const orb = el.ownerDocument.querySelector('.m-orb');
+        const lab = el.ownerDocument.querySelector('.m-node-label');
+        const w = orb ? orb.getBoundingClientRect().width : 0;
+        if (w > 20 && lab) {
+          const target = parseFloat(getComputedStyle(lab).fontSize) || 14;
+          if (el.parentElement) el.parentElement.style.fontSize = (target * 200 / w).toFixed(2) + 'px';
+        }
+      },
       goDetox: () => this.go('wellness'),
       goHealth: () => this.go('health'),
       detoxTabs: this.DETOX.map((t, i) => ({
@@ -1206,8 +1565,10 @@ class Component extends DCLogic {
         fill: ring.fill, stroke: ring.stroke,
       }))),
       hubNodes: nodes.map((n, i) => ({
-        label: n.label, glyph: n.glyph, angle: n.angle, unangle: -n.angle,
-        rf: n.key === 'guru' ? 0.78 : n.key === 'practice' ? 0.78 : 1.05, // crown clears the face, root clears the footer
+        label: n.label, glyph: n.glyph, icon: this.chakraIcon(n.kind, n.color), angle: n.angle, unangle: -n.angle,
+        // At the radius floor, 0.78 put the crown node's label on top of the orb — its ring
+        // sits on the same radius as the rest now, and the solver pays for the extra reach.
+        rf: n.key === 'practice' ? 0.95 : 1.05,
         color: n.color,
         segA: (180 / n.petals).toFixed(2), segB: (360 / n.petals).toFixed(2),
         dur: 5 + i * 0.7,
@@ -1225,9 +1586,9 @@ class Component extends DCLogic {
       upcomingEvents: this.splitGatherings().up,
       pastEvents: this.splitGatherings().past,
       hasUpcoming: this.splitGatherings().up.length > 0,
+      noUpcoming: this.splitGatherings().up.length === 0,
       hasPast: this.splitGatherings().past.length > 0,
       events: [
-        { day: '15', month: 'AUG', title: '7-Day Silent Retreat', meta: 'All day · Rishikesh' },
       ],
     };
   }

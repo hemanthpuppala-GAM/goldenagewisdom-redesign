@@ -29,6 +29,9 @@
     /* Practice history (sits, journal, event registrations) keyed by email,
        so a member's streak follows them across phone, tablet and laptop. */
     practiceGet: (email) => rpc('gaw_practice_get', { p_email: email || '' }),
+    /* Full member list for the Admin Panel — requires the private registry
+       key (admin_keys table). Wrong key returns {ok:false}. */
+    membersList: (key) => rpc('gaw_members_list', { p_key: key || '' }),
     practicePut: (email, data) => rpc('gaw_practice_put', { p_email: email || '', p_data: data || {} }),
   };
 })();

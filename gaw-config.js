@@ -18,7 +18,7 @@ window.GAW_CONFIG = {
   // Telemetry retention (days) kept in the browser until the backend takes over.
   telemetryRetentionDays: 90,
 
-  privacyEmail: 'info@goldenagewisdom.org',
+  privacyEmail: 'goldenageguruteachings@gmail.com',
 
   // Real Google OAuth for 'Continue with Google' (Google Cloud Console client ID).
   googleClientId: '927688395054-3b3praeptn0muruff5v90hr5t6n121lk.apps.googleusercontent.com',

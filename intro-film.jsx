@@ -1,7 +1,7 @@
 /* Scene list, playback and tweak defaults live with the film itself — the
    landing page must not declare a timeline (it makes the editor show a scrubber). */
-window.OM_SCENES = window.OM_SCENES || '[{"name":"Opening","dur":6.4},{"name":"Silence","dur":6},{"name":"Breath","dur":5.5},{"name":"Kundalini","dur":5.1},{"name":"Oneness","dur":5.2},{"name":"FortyDays","dur":5.3},{"name":"Within","dur":3.3},{"name":"SatyaYugam","dur":4.6},{"name":"Invitation","dur":8.6}]';
-window.OM_PLAYBACK = window.OM_PLAYBACK || '{"mode":"loop"}';
+const FILM_SCENES = '[{"name":"Opening","dur":6.4},{"name":"Silence","dur":6},{"name":"Breath","dur":5.5},{"name":"Kundalini","dur":5.1},{"name":"Oneness","dur":5.2},{"name":"FortyDays","dur":5.3},{"name":"Within","dur":3.3},{"name":"SatyaYugam","dur":4.6},{"name":"Invitation","dur":8.6}]';
+const FILM_PLAYBACK = '{"mode":"times","count":1}';
 window.TWEAK_DEFAULTS = window.TWEAK_DEFAULTS || {"captions":true,"music":true,"omChant":false,"impacts":false,"narration":false,"motionEditor":false};
 window.OM_HIDE_PLAYBAR = true;
 /* Intro film — "What Meditation Awakens" — built on animations-v2 SceneStage */
@@ -226,14 +226,14 @@ function SceneOneness() {
 function SceneFortyDays() {
   const { progress } = useScene();
   const o = MOTION.fade(progress, 0.03, 0.12, 0.9, 0.98);
-  const count = Math.max(1, Math.round(40 * MOTION.smooth((progress - 0.08) / 0.6)));
+  const count = Math.max(1, Math.round(41 * MOTION.smooth((progress - 0.08) / 0.6)));
   return (
     <div style={{ position: 'absolute', inset: 0 }}>
       <Backdrop />
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 34, opacity: o }}>
         <div style={{ fontFamily: 'Marcellus, serif', fontSize: 150, lineHeight: 1, color: GOLD, textShadow: '0 0 80px rgba(232,200,119,0.45)' }}>{count}<span style={{ fontSize: 40, color: '#c4bcab', marginLeft: 14 }}>days</span></div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(10, 18px)', gap: 12 }}>
-          {Array.from({ length: 40 }, (_, i) => (
+          {Array.from({ length: 41 }, (_, i) => (
             <div key={i} style={{ width: 18, height: 18, borderRadius: '50%', border: '1px solid rgba(232,200,119,0.45)', background: i < count ? GOLD : 'rgba(232,200,119,0.06)', boxShadow: i < count ? '0 0 10px rgba(232,200,119,0.5)' : 'none' }} />
           ))}
         </div>
@@ -354,7 +354,7 @@ const NARRATION = [
   { t: 17.6, text: 'Prana is received through the sahasrara — the thousand-petaled crown.' },
   { t: 24.6, text: 'Kundalini awakens. The dormant energy rises, chakra by chakra, to the crown.' },
   { t: 31.4, text: 'You meet the universe as yourself. Oneness. Stillness. Boundless peace.' },
-  { t: 36.6, text: 'Give us forty days. A thirty minute sit in silence. No kriyas, no techniques. Close your eyes, and watch the breath.' },
+  { t: 36.6, text: 'Give us forty-one days. A thirty minute sit in silence. No kriyas, no techniques. Close your eyes, and watch the breath.' },
   { t: 42.6, text: 'Real happiness is within — and what you radiate heals you, and your family.' },
   { t: 48.6, text: 'Become a member. Meditate live with experienced masters, through the quantum field.' },
   { t: 54.6, text: 'Satya Yugam is dawning. The golden age of truth, where dharma stands on all four legs.' },
@@ -503,8 +503,16 @@ function FilmScore({ src, enabled, volume = 1 }) {
 function FilmClockBridge() {
   const tl = window.useTimeline();
   window.__filmTL = tl;
+  // The last scene exits to black; when a run ends, park just before the
+  // fade so the film holds a real frame instead of an empty one.
+  React.useEffect(() => {
+    if (!tl.playing && tl.duration > 0 && tl.time > tl.duration - 0.05) {
+      try { tl.setTime(tl.duration - 0.6); } catch (e) {}
+    }
+  }, [tl.playing, tl.time, tl.duration]);
   return null;
 }
+// (Removed: floating pause/replay control — the playback bar carries transport.)
 window.IntroFilm = function IntroFilm(props) {
   const [t, setTweak] = useTweaks(window.TWEAK_DEFAULTS);
   SHOW_CAPTIONS = t.captions;
@@ -541,8 +549,8 @@ window.IntroFilm = function IntroFilm(props) {
   };
   return (
     <div style={{ position: 'relative', width: '100%', height: (props && props.embed) ? '100%' : 'calc(100vh - 64px)', minHeight: (props && props.embed) ? 0 : 420, background: BG }}>
-      <SceneStage width={1280} height={720} bg={BG} autoplay={false} scenes={window.OM_SCENES} playback={window.OM_PLAYBACK}
-                  persistent={<React.Fragment><FilmScore src="assets/narration-master-50s.wav" enabled={t.music} volume={1.0} /><FilmScore src="assets/om-scroll.mp3" enabled={t.omChant} volume={0.5} /><FilmScore src="assets/impacts.wav" enabled={t.impacts} volume={0.9} /><FilmVoice enabled={t.narration} /><CinematicFrame /><SoundUnlock /><FilmClockBridge /></React.Fragment>}>
+      <SceneStage width={1280} height={720} bg={BG} autoplay={!!(props && props.embed)} scenes={FILM_SCENES} playback={FILM_PLAYBACK}
+                  persistent={<React.Fragment><FilmScore src="assets/narration-master-50s-v3.wav" enabled={t.music} volume={1.0} /><FilmScore src="assets/om-scroll.mp3" enabled={t.omChant} volume={0.5} /><FilmScore src="assets/impacts.wav" enabled={t.impacts} volume={0.9} /><FilmVoice enabled={t.narration} /><CinematicFrame /><SoundUnlock /><FilmClockBridge /></React.Fragment>}>
         {{
           Opening: SceneOpening, Silence: SceneSilence, Breath: SceneBreath,
           Crown: SceneCrown, Kundalini: SceneKundalini, Oneness: SceneOneness,

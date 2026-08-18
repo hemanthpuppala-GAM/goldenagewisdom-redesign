@@ -13,16 +13,18 @@ window.GAW_LANGS = [
 window.GAW_STRINGS = {
   movement:  { en: 'A Spiritual Movement', hi: 'एक आध्यात्मिक आंदोलन', te: 'ఒక ఆధ్యాత్మిక ఉద్యమం', kn: 'ಒಂದು ಆಧ್ಯಾತ್ಮಿಕ ಆಂದೋಲನ', ta: 'ஒரு ஆன்மீக இயக்கம்' },
   signIn:    { en: 'Sign in', hi: 'प्रवेश करें', te: 'ప్రవేశించండి', kn: 'ಪ್ರವೇಶಿಸಿ', ta: 'உள்நுழைக' },
-  beginHere: { en: 'Begin here', hi: 'यहाँ से आरंभ', te: 'ఇక్కడ ప్రారంభించండి', kn: 'ಇಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸಿ', ta: 'இங்கே தொடங்குங்கள்' },
+  beginHere: { en: 'Watch the intro', hi: 'यहाँ से आरंभ', te: 'ఇక్కడ ప్రారంభించండి', kn: 'ಇಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸಿ', ta: 'இங்கே தொடங்குங்கள்' },
   goBack:    { en: 'Go Back', hi: 'वापस', te: 'వెనుకకు', kn: 'ಹಿಂದೆ', ta: 'பின் செல்' },
   caption:   { en: 'Choose a path · the center breathes with you', hi: 'अपना मार्ग चुनें · केंद्र आपके साथ श्वास लेता है', te: 'మార్గాన్ని ఎంచుకోండి · కేంద్రం మీతో శ్వాసిస్తుంది', kn: 'ಮಾರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ · ಕೇಂದ್ರ ನಿಮ್ಮೊಂದಿಗೆ ಉಸಿರಾಡುತ್ತದೆ', ta: 'பாதையைத் தேர்ந்தெடுங்கள் · மையம் உங்களுடன் சுவாசிக்கிறது' },
   scanJoin:  { en: 'Scan to join', hi: 'जुड़ने के लिए स्कैन करें', te: 'చేరడానికి స్కాన్ చేయండి', kn: 'ಸೇರಲು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ', ta: 'இணைய ஸ்கேன் செய்யுங்கள்' },
   freeMember:{ en: 'Free membership · /join', hi: 'निःशुल्क सदस्यता · /join', te: 'ఉచిత సభ్యత్వం · /join', kn: 'ಉಚಿತ ಸದಸ್ಯತ್ವ · /join', ta: 'இலவச உறுப்பினர் · /join' },
 
   joinFree:  { en: 'Join free', hi: 'निःशुल्क जुड़ें', te: 'ఉచితంగా చేరండి', kn: 'ಉಚಿತವಾಗಿ ಸೇರಿ', ta: 'இலவசமாக இணையுங்கள்' },
-  vpHead:    { en: 'Free live meditation, twice every day', hi: 'निःशुल्क सजीव ध्यान — प्रतिदिन दो बार', te: 'ఉచిత ప్రత్యక్ష ధ్యానం — ప్రతిరోజూ రెండుసార్లు', kn: 'ಉಚಿತ ನೇರ ಧ್ಯಾನ — ಪ್ರತಿದಿನ ಎರಡು ಬಾರಿ', ta: 'இலவச நேரடி தியானம் — தினமும் இருமுறை' },
-  vpSub:     { en: 'Ancient wisdom explained with scientific clarity — by Dr Hari Krishna, MD, 25 years of practice. Free, forever.', hi: 'प्राचीन ज्ञान, वैज्ञानिक स्पष्टता के साथ — डॉ. हरि कृष्ण, एमडी, 25 वर्षों की साधना। सदा निःशुल्क।', te: 'ప్రాచీన జ్ఞానం, శాస్త్రీయ స్పష్టతతో — డా. హరి కృష్ణ, MD, 25 సంవత్సరాల సాధన. ఎప్పటికీ ఉచితం.', kn: 'ಪ್ರಾಚೀನ ಜ್ಞಾನ, ವೈಜ್ಞಾನಿಕ ಸ್ಪಷ್ಟತೆಯೊಂದಿಗೆ — ಡಾ. ಹರಿ ಕೃಷ್ಣ, MD, 25 ವರ್ಷಗಳ ಸಾಧನೆ. ಎಂದೆಂದಿಗೂ ಉಚಿತ.', ta: 'பழமையான ஞானம், அறிவியல் தெளிவுடன் — டாக்டர் ஹரி கிருஷ்ணா, MD, 25 ஆண்டு சாதனை. எப்போதும் இலவசம்.' },
-  vpCred:    { en: 'Dr Hari Krishna, MD · 25 years of practice · free, forever', hi: 'डॉ. हरि कृष्ण, एमडी · 25 वर्षों की साधना · सदा निःशुल्क', te: 'డా. హరి కృష్ణ, MD · 25 సంవత్సరాల సాధన · ఎప్పటికీ ఉచితం', kn: 'ಡಾ. ಹರಿ ಕೃಷ್ಣ, MD · 25 ವರ್ಷಗಳ ಸಾಧನೆ · ಎಂದೆಂದಿಗೂ ಉಚಿತ', ta: 'டாக்டர் ஹரி கிருஷ்ணா, MD · 25 ஆண்டு சாதனை · எப்போதும் இலவசம்' },
+  // TODO before launch: hi/te/kn/ta below still say "free live meditation twice daily" —
+  // the world-peace headline needs a native-speaker rendering in each. English is live.
+  vpHead:    { en: 'Peace begins within — together we radiate it across the world', hi: 'निःशुल्क सजीव ध्यान — प्रतिदिन दो बार', te: 'ఉచిత ప్రత్యక్ష ధ్యానం — ప్రతిరోజూ రెండుసార్లు', kn: 'ಉಚಿತ ನೇರ ಧ್ಯಾನ — ಪ್ರತಿದಿನ ಎರಡು ಬಾರಿ', ta: 'இலவச நேரடி தியானம் — தினமும் இருமுறை' },
+  vpSub:     { en: 'When we transform ourselves through meditation, that peace expands into our families, communities and nations — a shared field of peace, harmony and universal consciousness. Free live meditation twice daily and ancient wisdom with scientific clarity, by Dr Hari Krishna, MD.', hi: 'प्राचीन ज्ञान, वैज्ञानिक स्पष्टता के साथ — डॉ. हरि कृष्ण, एमडी, 25 वर्षों की साधना। सदा निःशुल्क।', te: 'ప్రాచీన జ్ఞానం, శాస్త్రీయ స్పష్టతతో — డా. హరి కృష్ణ, MD, 25 సంవత్సరాల సాధన. ఎప్పటికీ ఉచితం.', kn: 'ಪ್ರಾಚೀನ ಜ್ಞಾನ, ವೈಜ್ಞಾನಿಕ ಸ್ಪಷ್ಟತೆಯೊಂದಿಗೆ — ಡಾ. ಹರಿ ಕೃಷ್ಣ, MD, 25 ವರ್ಷಗಳ ಸಾಧನೆ. ಎಂದೆಂದಿಗೂ ಉಚಿತ.', ta: 'பழமையான ஞானம், அறிவியல் தெளிவுடன் — டாக்டர் ஹரி கிருஷ்ணா, MD, 25 ஆண்டு சாதனை. எப்போதும் இலவசம்.' },
+  vpCred:    { en: 'Half an hour of silence, every evening at 8:30 IST · free · Dr Hari Krishna, MD', hi: 'डॉ. हरि कृष्ण, एमडी · 25 वर्षों की साधना · सदा निःशुल्क', te: 'డా. హరి కృష్ణ, MD · 25 సంవత్సరాల సాధన · ఎప్పటికీ ఉచితం', kn: 'ಡಾ. ಹರಿ ಕೃಷ್ಣ, MD · 25 ವರ್ಷಗಳ ಸಾಧನೆ · ಎಂದೆಂದಿಗೂ ಉಚಿತ', ta: 'டாக்டர் ஹரி கிருஷ்ணா, MD · 25 ஆண்டு சாதனை · எப்போதும் இலவசம்' },
   liveNow:   { en: 'Live now — join the session', hi: 'अभी सजीव — सत्र में जुड़ें', te: 'ఇప్పుడు ప్రత్యక్షం — సెషన్‌లో చేరండి', kn: 'ಈಗ ನೇರ — ಸೆಷನ್‌ಗೆ ಸೇರಿ', ta: 'இப்போது நேரடி — அமர்வில் இணையுங்கள்' },
   liveIn:    { en: 'Next live session in', hi: 'अगला सजीव सत्र', te: 'తదుపరి ప్రత్యక్ష సెషన్', kn: 'ಮುಂದಿನ ನೇರ ಸೆಷನ್', ta: 'அடுத்த நேரடி அமர்வு' },
   liveRest:  { en: 'Sunday is rest · sit on your own', hi: 'रविवार विश्राम · स्वयं बैठें', te: 'ఆదివారం విశ్రాంతి · మీ స్వంతంగా కూర్చోండి', kn: 'ಭಾನುವಾರ ವಿಶ್ರಾಂತಿ · ನೀವೇ ಕೂರಿ', ta: 'ஞாயிறு ஓய்வு · நீங்களே அமருங்கள்' },
@@ -31,6 +33,9 @@ window.GAW_STRINGS = {
   nWellness: { en: 'Wellness', hi: 'स्वास्थ्य', te: 'ఆరోగ్యం', kn: 'ಆರೋಗ್ಯ', ta: 'நலம்' },
   nMeditate: { en: 'Meditation', hi: 'ध्यान', te: 'ధ్యానం', kn: 'ಧ್ಯಾನ', ta: 'தியானம்' },
   nEvents:   { en: 'Events', hi: 'कार्यक्रम', te: 'కార్యక్రమాలు', kn: 'ಕಾರ್ಯಕ್ರಮಗಳು', ta: 'நிகழ்வுகள்' },
+  watchIntro:{ en: 'Watch the intro', hi: 'परिचय देखें', te: 'పరిచయం చూడండి', kn: 'ಪರಿಚಯ ನೋಡಿ', ta: 'அறிமுகத்தைப் பாருங்கள்' },
+  nPeaceRing:{ en: 'Mass Meditation ·', hi: 'सामूहिक ध्यान ·', te: 'సామూహిక ధ్యానం ·', kn: 'ಸಾಮೂಹಿಕ ಧ್ಯಾನ ·', ta: 'கூட்டு தியானம் ·' },
+  nPeace:    { en: 'Mass Meditation for Global Peace', hi: 'वैश्विक शांति हेतु सामूहिक ध्यान', te: 'ప్రపంచ శాంతి కోసం సామూహిక ధ్యానం', kn: 'ವಿಶ್ವ ಶಾಂತಿಗಾಗಿ ಸಾಮೂಹಿಕ ಧ್ಯಾನ', ta: 'உலக அமைதிக்கான கூட்டு தியானம்' },
   nMission:  { en: 'Our Mission', hi: 'हमारा लक्ष्य', te: 'మా లక్ష్యం', kn: 'ನಮ್ಮ ಗುರಿ', ta: 'எங்கள் நோக்கம்' },
 
   medEyebrow:{ en: 'The Path · Meditation 101', hi: 'साधना · ध्यान 101', te: 'సాధన · ధ్యానం 101', kn: 'ಸಾಧನೆ · ಧ್ಯಾನ 101', ta: 'சாதனை · தியானம் 101' },

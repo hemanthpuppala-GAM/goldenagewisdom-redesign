@@ -39,6 +39,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="./gaw-config.js"></script>
+<script src="./gaw-backend.js"></script>
 <script src="./telemetry.js"></script>
 <style>
   html, body { margin: 0; padding: 0; background: #0d0a1c; }
@@ -65,14 +66,14 @@
 </style>
 </helmet>
 
-<div class="a-shell" style="display: flex; height: 100vh; overflow: hidden; background: radial-gradient(ellipse 70% 60% at 18% 0%, #171130 0%, #0d0a1c 55%, #080614 100%)">
+<div class="a-shell" style="display: flex; height: 100vh; overflow: hidden; background: radial-gradient(ellipse 70% 60% at 18% 0%, #141029 0%, #0d0a1c 55%, #080614 100%)">
 
   <sc-if value="{{ allowed }}" hint-placeholder-val="{{ false }}">
   <aside class="a-side a-scroll" style="width: 232px; flex-shrink: 0; height: 100vh; overflow-y: auto; padding: 24px 16px; display: flex; flex-direction: column; gap: 6px; background: rgba(255,255,255,0.03); border-right: 1px solid rgba(255,255,255,0.1)">
     <a href="Member Flow.dc.html" style="display: flex; align-items: center; gap: 10px; padding: 0 8px 20px">
       <img src="assets/logo-128.webp" alt="" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
       <span style="display: flex; flex-direction: column; gap: 1px">
-        <span style="font-family: 'Marcellus', serif; font-size: 14px; letter-spacing: 0.05em; color: #ecdcb4">GOLDEN AGE</span>
+        <span style="font-family: 'Marcellus', serif; font-size: 14px; letter-spacing: 0.05em; color: #e6d3a8">GOLDEN AGE</span>
         <span style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">Admin</span>
       </span>
     </a>
@@ -156,7 +157,7 @@
                 </sc-for>
               </div>
               <sc-if value="{{ noData }}" hint-placeholder-val="{{ false }}">
-                <div style="font-size: 12.5px; font-weight: 300; color: #c9b98a">No visits recorded yet. Telemetry starts the moment a visitor accepts analytics — nothing is collected before consent.</div>
+                <div style="font-size: 12.5px; font-weight: 300; color: #d5b77c">No visits recorded yet. Telemetry starts the moment a visitor accepts analytics — nothing is collected before consent.</div>
               </sc-if>
             </div>
 
@@ -211,12 +212,25 @@
         <!-- MEMBERS -->
         <sc-if value="{{ tabMembers }}" hint-placeholder-val="{{ false }}">
           <div style="display: flex; flex-direction: column; gap: 16px">
+            <sc-if value="{{ regNeedsKey }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 16px 18px; border-radius: 24px; border: 1px solid rgba(213,183,124,0.3); background: rgba(213,183,124,0.06); display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+                <span style="flex: 1 1 260px; font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #cfc8ba">Without the registry key this list shows only sign-ins from this browser. Enter the key once to see every member — it is set in Supabase (backend/admin-list.sql) and should be kept private.</span>
+                <input value="{{ keyInput }}" onChange="{{ onKeyInput }}" onKeyDown="{{ onKeyEnter }}" type="password" placeholder="Registry key" style="flex: 0 1 200px; padding: 10px 15px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 13px; outline: none">
+                <button onClick="{{ connectRegistry }}" style="padding: 9px 18px; border-radius: 999px; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 12.5px; cursor: pointer">Connect</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ hasRegNote }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+                <span style="font-size: 12px; color: {{ regColor }}">{{ regNote }}</span>
+                <button onClick="{{ refreshRegistry }}" style="padding: 5px 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: none; color: #d8d2c4; font-family: 'Outfit', sans-serif; font-size: 11.5px; cursor: pointer">Refresh</button>
+              </div>
+            </sc-if>
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
               <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="Search name, email or GAW id…" style="flex: 1 1 260px; padding: 11px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #efe9dc; font-family: 'Outfit', sans-serif; font-size: 13.5px; outline: none">
               <span style="font-size: 12.5px; color: #9a927f">{{ memberCount }}</span>
             </div>
             <sc-if value="{{ noMembers }}" hint-placeholder-val="{{ false }}">
-              <div style="padding: 26px; border-radius: 24px; border: 1px dashed rgba(213,183,124,0.26); font-size: 13.5px; font-weight: 300; color: #b9b1a0">No members registered on this device yet. Every OAuth sign-in adds a row here; the Laravel backend will make the list global.</div>
+              <div style="padding: 26px; border-radius: 24px; border: 1px dashed rgba(213,183,124,0.26); font-size: 13.5px; font-weight: 300; color: #b9b1a0">No members visible yet. Connect the live registry above to see every sign-up, or wait for sign-ins on this device.</div>
             </sc-if>
             <sc-for list="{{ members }}" as="u" hint-placeholder-count="3">
               <div style="padding: 16px 18px; border-radius: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
@@ -234,13 +248,13 @@
                   <span style="font-size: 13px; color: #cfc8ba">{{ u.practice }}</span>
                 </span>
                 <span style="padding: 4px 11px; border-radius: 999px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; background: {{ u.roleBg }}; color: {{ u.roleColor }}">{{ u.role }}</span>
-                <span style="display: flex; gap: 7px; flex-wrap: wrap">
+                <sc-if value="{{ u.local }}" hint-placeholder-val="{{ true }}"><span style="display: flex; gap: 7px; flex-wrap: wrap">
                   <button onClick="{{ u.clean }}" title="Trim empty journal entries and duplicate sits" style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: none; color: #d8d2c4; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">Clean up</button>
-                  <button onClick="{{ u.reset }}" title="Erase this member's practice history on this device" style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(224,132,132,0.4); background: none; color: #e8a9a9; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">Reset data</button>
+                  <button onClick="{{ u.reset }}" title="Erase this member's practice history on this device" style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(224,132,132,0.4); background: none; color: #e0a3a3; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">Reset data</button>
                   <sc-if value="{{ superUser }}" hint-placeholder-val="{{ false }}">
                     <button onClick="{{ u.remove }}" title="Remove the profile and its stored data" style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(224,132,132,0.55); background: rgba(224,132,132,0.1); color: #f0c4c4; font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer">Remove</button>
                   </sc-if>
-                </span>
+                </span></sc-if>
               </div>
             </sc-for>
           </div>
@@ -267,12 +281,12 @@
             </sc-for>
             <sc-if value="{{ superUser }}" hint-placeholder-val="{{ false }}">
               <div style="padding: 18px 20px; border-radius: 24px; border: 1px solid rgba(224,132,132,0.35); background: rgba(224,132,132,0.06); display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
-                <span style="flex: 1 1 240px; font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #c9b98a">Danger zone — clears every telemetry event stored in this browser. Member profiles and journals are untouched.</span>
+                <span style="flex: 1 1 240px; font-size: 12.5px; font-weight: 300; line-height: 1.55; color: #d5b77c">Danger zone — clears every telemetry event stored in this browser. Member profiles and journals are untouched.</span>
                 <button onClick="{{ wipeTelemetry }}" style="padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(224,132,132,0.55); background: rgba(224,132,132,0.12); color: #f0c4c4; font-family: 'Outfit', sans-serif; font-size: 12.5px; cursor: pointer">Erase telemetry</button>
               </div>
             </sc-if>
             <sc-if value="{{ hasNote }}" hint-placeholder-val="{{ false }}">
-              <div style="font-size: 12.5px; color: #a8d5a2">{{ note }}</div>
+              <div style="font-size: 12.5px; color: #a9dfb8">{{ note }}</div>
             </sc-if>
           </div>
         </sc-if>
@@ -331,10 +345,11 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1280px&quot;,&quot;height&quot;:&quot;820px&quot;}}">
 class Component extends DCLogic {
-  state = { tab: 'insights', query: '', tick: 0, note: '' };
+  state = { tab: 'insights', query: '', tick: 0, note: '', reg: 'idle', remote: null, keyInput: '' };
 
   componentDidMount() {
     this.timer = setInterval(() => this.setState(s => ({ tick: s.tick + 1 })), 30000);
+    this.pullRegistry();
   }
   componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.noteT); }
 
@@ -346,6 +361,26 @@ class Component extends DCLogic {
   }
   registry() { try { return JSON.parse(localStorage.getItem('gaw_users') || '[]'); } catch (e) { return []; } }
   saveRegistry(l) { try { localStorage.setItem('gaw_users', JSON.stringify(l)); } catch (e) {} }
+  /* ---------- live registry (Supabase) ---------- */
+  adminKey() { try { return localStorage.getItem('gaw_admin_key') || ''; } catch (e) { return ''; } }
+  async pullRegistry() {
+    const key = this.adminKey();
+    if (!key) { this.setState({ reg: 'none', remote: null }); return; }
+    if (!window.GAW_BACKEND || !window.GAW_BACKEND.membersList) { this.setState({ reg: 'old', remote: null }); return; }
+    this.setState({ reg: 'busy' });
+    let r = null;
+    try { r = await window.GAW_BACKEND.membersList(key); } catch (e) {}
+    if (r && r.ok && Array.isArray(r.members)) this.setState({ reg: 'ok', remote: r.members });
+    else if (r && r.ok === false) { this.setState({ reg: 'bad', remote: null }); try { localStorage.removeItem('gaw_admin_key'); } catch (e) {} }
+    else this.setState({ reg: 'down', remote: null });
+  }
+  connectRegistry() {
+    const k = String(this.state.keyInput || '').trim();
+    if (!k) return;
+    try { localStorage.setItem('gaw_admin_key', k); } catch (e) {}
+    this.setState({ keyInput: '' });
+    this.pullRegistry();
+  }
   dataKey(id) { return 'gaw_data_' + id; }
   memberData(id) {
     try { const d = JSON.parse(localStorage.getItem(this.dataKey(id)) || 'null'); return (d && d.sits) ? d : { sits: [], journal: [] }; }
@@ -379,7 +414,7 @@ class Component extends DCLogic {
     if (dupes.length) items.push({
       key: 'dupe', icon: '⧉', title: dupes.length + ' duplicated email' + (dupes.length === 1 ? '' : 's'),
       detail: 'The same person holds more than one member ID: ' + dupes.join(', '),
-      action: 'Merge to earliest ID', border: 'rgba(224,132,132,0.4)', color: '#e8a9a9',
+      action: 'Merge to earliest ID', border: 'rgba(224,132,132,0.4)', color: '#e0a3a3',
       fix: () => {
         const l = this.registry(), seen = {}, keep = [];
         l.sort((a, b) => (a.joined || 0) - (b.joined || 0)).forEach(u => {
@@ -471,7 +506,21 @@ class Component extends DCLogic {
     const hours = T ? T.byHour() : [];
     const hourMax = Math.max(1, ...hours.map(h => h.views));
     const peak = hours.reduce((a, b) => (b.views > a.views ? b : a), { hour: 0, views: 0 });
-    const users = this.registry();
+    const localUsers = this.registry(), remote = s.remote;
+    let users;
+    if (remote) {
+      const byEmail = {};
+      localUsers.forEach(u => { const e = String(u.email || '').toLowerCase(); if (e) byEmail[e] = u; });
+      users = remote.map(m => {
+        const l = byEmail[String(m.email || '').toLowerCase()];
+        return Object.assign({}, m, { local: !!l, name: m.name || (l && l.name) || '' });
+      });
+      const seen = {};
+      remote.forEach(m => { seen[String(m.email || '').toLowerCase()] = true; });
+      localUsers.forEach(u => { if (!seen[String(u.email || '').toLowerCase()]) users.push(Object.assign({ local: true }, u)); });
+    } else {
+      users = localUsers.map(u => Object.assign({ local: true }, u));
+    }
 
     const week = (from, to) => daily.slice(from, to).reduce((n, d) => n + d.views, 0);
     const thisWeek = week(7, 14), lastWeek = week(0, 7);
@@ -515,7 +564,8 @@ class Component extends DCLogic {
         return {
           name: u.name || 'Seeker', email: u.email || '—', memberId: u.memberId,
           initial: (String(u.name || 'S').trim()[0] || 'S').toUpperCase(),
-          practice: d.sits.length ? d.sits.length + ' sits · ' + mins + ' min' : 'no sits yet',
+          practice: d.sits.length ? d.sits.length + ' sits · ' + mins + ' min' : (u.local ? 'no sits yet' : '—'),
+          local: !!u.local,
           role: chip.label, roleBg: chip.bg, roleColor: chip.color,
           clean: () => this.cleanMember(u.memberId),
           reset: () => this.resetMember(u.memberId),
@@ -563,7 +613,7 @@ class Component extends DCLogic {
         { label: 'Views · 24h', value: totals.last24, delta: totals.views + ' all time', deltaColor: '#7d7666' },
         { label: 'Unique visitors', value: totals.visitors, delta: 'device-scoped, no cookies', deltaColor: '#7d7666' },
         { label: 'Members', value: users.length, delta: satMembers + ' have sat', deltaColor: '#7fbf9a' },
-        { label: 'Week on week', value: (growth > 0 ? '+' : '') + growth + '%', delta: thisWeek + ' views this week', deltaColor: growth >= 0 ? '#7fbf9a' : '#e8a9a9' },
+        { label: 'Week on week', value: (growth > 0 ? '+' : '') + growth + '%', delta: thisWeek + ' views this week', deltaColor: growth >= 0 ? '#7fbf9a' : '#e0a3a3' },
         { label: 'Stillness logged', value: sitTotals, delta: 'minutes across all members', deltaColor: '#7d7666' },
       ],
       gridLines: [0.25, 0.5, 0.75, 1].map(f => ({ y: Math.round(200 * f) - 2 })),
@@ -583,7 +633,25 @@ class Component extends DCLogic {
 
       query: s.query,
       onQuery: (e) => this.setState({ query: e.target.value }),
-      members: list, memberCount: list.length + ' of ' + users.length + ' profiles', noMembers: !users.length,
+      members: list,
+      memberCount: list.length + ' of ' + users.length + (remote ? ' · live registry' : ' · this device only'),
+      noMembers: !users.length,
+      regNeedsKey: s.reg === 'none' || s.reg === 'bad',
+      hasRegNote: s.reg === 'ok' || s.reg === 'busy' || s.reg === 'down' || s.reg === 'old' || s.reg === 'bad',
+      regNote: {
+        ok: '⟳ Connected to the live registry — ' + (remote ? remote.length : 0) + ' members',
+        busy: '◌ Connecting to the live registry…',
+        bad: '⚠ Key not recognised — enter it again',
+        down: '⚠ Registry unreachable — showing this device only',
+        old: '⚠ Old cached code — hard-refresh this page',
+        none: '', idle: '',
+      }[s.reg] || '',
+      regColor: (s.reg === 'ok' || s.reg === 'busy') ? '#9a927f' : '#e0a3a3',
+      keyInput: s.keyInput,
+      onKeyInput: (e) => this.setState({ keyInput: e.target.value }),
+      onKeyEnter: (e) => { if (e.key === 'Enter') this.connectRegistry(); },
+      connectRegistry: () => this.connectRegistry(),
+      refreshRegistry: () => this.pullRegistry(),
 
       cleanupItems, cleanClear: !cleanupItems.length,
       wipeTelemetry: () => { if (T) T.clearAll(); this.flash('Telemetry erased.'); this.setState(x => ({ tick: x.tick + 1 })); },
@@ -597,7 +665,7 @@ class Component extends DCLogic {
 
       consentState: consent ? (consent.analytics ? 'Analytics accepted' : 'Analytics declined') : 'Not asked yet',
       consentBg: consent ? (consent.analytics ? 'rgba(127,191,154,0.18)' : 'rgba(224,132,132,0.16)') : 'rgba(255,255,255,0.08)',
-      consentColor: consent ? (consent.analytics ? '#a8d5a2' : '#e8a9a9') : '#b9b1a0',
+      consentColor: consent ? (consent.analytics ? '#a9dfb8' : '#e0a3a3') : '#b9b1a0',
       consentWhen: consent ? new Date(consent.at).toLocaleString() : 'the banner appears on first visit',
       revokeConsent: () => { if (T) T.setConsent(false); this.flash('Analytics revoked and erased.'); this.setState(x => ({ tick: x.tick + 1 })); },
       retention: (window.GAW_CONFIG && window.GAW_CONFIG.telemetryRetentionDays) || 90,

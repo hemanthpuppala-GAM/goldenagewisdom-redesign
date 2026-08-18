@@ -46,7 +46,7 @@ curl_close($ch);
 $j = json_decode($res, true);
 if ($http !== 200 || empty($j['url'])) {
   error_log('GAW donate: HTTP ' . $http . ' ' . substr((string)$res, 0, 500));
-  http_response_code(502); echo json_encode(['ok'=>false,'error'=>'Could not start the payment. Please try again or email info@goldenagewisdom.org.']); exit;
+  http_response_code(502); echo json_encode(['ok'=>false,'error'=>'Could not start the payment. Please try again or email goldenageguruteachings@gmail.com.']); exit;
 }
 // Record the donor (reuses the member record if the email exists)
 try {

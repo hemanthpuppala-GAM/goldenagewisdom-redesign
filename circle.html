@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #09071a; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; -webkit-font-smoothing: antialiased; }
+  a { color: #d5b77c; text-decoration: none; }
+  a:hover { color: #e6d3a8; }
+  * { box-sizing: border-box; }
+  ::selection { background: rgba(213,183,124,0.28); }
+  @keyframes qBreathe { 0%,100% { transform: scale(0.88); opacity: 0.3; } 45% { transform: scale(1.12); opacity: 0.62; } }
+  @keyframes qPulse { 0%,100% { opacity: 0.45; } 50% { opacity: 1; } }
+  @keyframes qIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
+  .q-scroll::-webkit-scrollbar { width: 5px; }
+  .q-scroll::-webkit-scrollbar-thumb { background: rgba(213,183,124,0.28); border-radius: 99px; }
+  :focus-visible { outline: 2px solid rgba(213,183,124,0.85); outline-offset: 2px; border-radius: 999px; }
+  @media (max-width: 900px) {
+    .q-2col { grid-template-columns: 1fr !important; }
+    .q-panel { max-height: none !important; }
+    .q-hide { display: none !important; }
+  }
+  @media (max-width: 700px) {
+    .q-tap { min-height: 40px !important; padding-left: 15px !important; padding-right: 15px !important; }
+  }
+</style>
+</helmet>
+<div style="position: relative; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; background: #09071a">
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(780px 620px at 32% 46%, rgba(96,84,166,0.30), transparent 68%), radial-gradient(900px 560px at 78% 108%, rgba(213,183,124,0.10), transparent 72%)"></div>
+
+  <nav style="position: relative; z-index: 20; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 15px clamp(16px, 4vw, 40px) 8px">
+    <a href="/" title="Golden Age Wisdom" class="q-tap" style="display: flex; align-items: center; gap: 10px; min-height: 40px" style-hover="opacity: 0.85">
+      <img src="assets/logo-128.webp" alt="Golden Age Wisdom" width="26" height="26" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; opacity: 0.92">
+      <span class="q-hide" style="font-family: 'Marcellus', serif; font-size: 11.5px; letter-spacing: 0.22em; color: rgba(242,227,187,0.72)">GOLDEN AGE WISDOM</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 9px">
+      <span style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 999px; border: 1px solid rgba(126,203,143,0.32); background: rgba(20,16,41,0.55); font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: #a9dfb8">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #7ecb8f; box-shadow: 0 0 9px #7ecb8f; animation: qPulse 2.6s ease-in-out infinite"></span>{{ liveChip }}
+      </span>
+      <a href="/" class="q-tap" style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.65); background: linear-gradient(135deg, rgba(230,211,168,0.22), rgba(184,151,88,0.12)); color: #e6d3a8; font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; box-shadow: 0 0 18px rgba(184,151,88,0.18)" style-hover="border-color: rgba(230,211,168,0.95); color: #f7f1e3"><span aria-hidden="true" style="font-size: 13px; line-height: 1">←</span>Go back</a>
+      <button onClick="{{ goHours }}" class="q-tap" style="padding: 6px 13px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.3); background: rgba(20,16,41,0.5); color: rgba(230,211,168,0.9); font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.65); color: #e6d3a8">My times</button>
+    </div>
+  </nav>
+
+  <main style="position: relative; z-index: 10; flex: 1; min-height: 0; display: flex; flex-direction: column">
+
+    <!-- ══ THE CIRCLE ══ -->
+    <sc-if value="{{ viewChain }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="The circle" class="q-scroll" style="height: 100%; overflow-y: auto; padding: 0 clamp(16px, 4vw, 40px) 18px; animation: qIn 0.5s ease">
+        <div class="q-2col" style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(16px, 3vw, 40px); align-items: center; min-height: 100%">
+
+          <!-- RING -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 8px 0">
+            <div style="text-align: center">
+              <div style="font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; color: #b89758">The Unbroken Circle</div>
+              <h1 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(21px, 2.7vw, 31px); line-height: 1.15; margin: 7px 0 0; color: #f7f1e3; text-wrap: balance">Someone, somewhere, is always sitting.</h1>
+              <p style="max-width: 430px; margin: 8px auto 0; font-size: 13px; font-weight: 300; line-height: 1.6; color: rgba(207,200,186,0.85); text-wrap: pretty">We are trying to fill all 24 hours of the day with meditation — so that at any moment, anywhere on earth, someone is sitting. Your sit fills one hour.</p>
+            </div>
+
+            <div style="position: relative; width: min(58vh, 100%, 420px); aspect-ratio: 1; margin: 28px 0">
+              <span aria-hidden="true" style="position: absolute; inset: 16%; border-radius: 50%; background: radial-gradient(circle, rgba(96,84,166,0.28), transparent 70%); animation: qBreathe 11s ease-in-out infinite"></span>
+
+              <svg viewBox="0 0 400 400" style="position: relative; width: 100%; height: 100%; display: block; overflow: visible">
+                <sc-for list="{{ segments }}" as="s" hint-placeholder-count="24">
+                  <path d="{{ s.d }}" fill="{{ s.fill }}"></path>
+                </sc-for>
+                <sc-for list="{{ mineTicks }}" as="m" hint-placeholder-count="3">
+                  <path d="{{ m.d }}" fill="rgba(169,223,184,0.85)"></path>
+                </sc-for>
+                <sc-for list="{{ chainLinks }}" as="k" hint-placeholder-count="6">
+                  <path d="{{ k.d }}" fill="none" stroke="rgba(216,196,143,0.7)" stroke-width="1.5" stroke-linecap="round"></path>
+                </sc-for>
+                <sc-for list="{{ chainFolk }}" as="f" hint-placeholder-count="24">
+                  <g transform="{{ f.tf }}">
+                    <circle cx="0" cy="-9.6" r="3" fill="{{ f.col }}"></circle>
+                    <path d="M-7.6 4.8 Q-6.4 -3.2 0 -4.6 Q6.4 -3.2 7.6 4.8 Z" fill="{{ f.col }}"></path>
+                  </g>
+                </sc-for>
+                <circle cx="200" cy="200" r="118" fill="none" stroke="rgba(213,183,124,0.10)" stroke-width="1"></circle>
+                <line x1="200" y1="200" x2="{{ handX }}" y2="{{ handY }}" stroke="rgba(255,255,255,0.42)" stroke-width="1"></line>
+                <circle cx="{{ handX }}" cy="{{ handY }}" r="3.4" fill="#fff" style="filter: drop-shadow(0 0 6px rgba(255,255,255,0.9))"></circle>
+              </svg>
+
+              <sc-for list="{{ ringLabels }}" as="l" hint-placeholder-count="4">
+                <span style="position: absolute; left: {{ l.left }}; top: {{ l.top }}; transform: translate(-50%,-50%); font-size: 10px; letter-spacing: 0.16em; white-space: nowrap; color: rgba(185,177,160,0.62); pointer-events: none">{{ l.t }}</span>
+              </sc-for>
+
+              <div style="position: absolute; inset: 26%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-align: center; pointer-events: none">
+                <div style="font-family: 'Marcellus', serif; font-size: clamp(38px, 7vw, 62px); line-height: 0.95; color: #f7f1e3; font-variant-numeric: tabular-nums; text-shadow: 0 0 26px rgba(213,183,124,0.4)">{{ sittingNow }}</div>
+                <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">sitting right now</div>
+                <div style="font-size: 12px; font-weight: 300; color: rgba(207,200,186,0.8); margin-top: 3px">{{ countriesLine }}</div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; font-size: 11.5px; font-weight: 300; color: rgba(185,177,160,0.9)">
+              <span style="display: inline-flex; align-items: center; gap: 7px"><span style="width: 9px; height: 9px; border-radius: 2px; background: rgba(213,183,124,0.8)"></span>Someone was sitting</span>
+              <span style="display: inline-flex; align-items: center; gap: 7px"><span style="width: 9px; height: 9px; border-radius: 2px; background: rgba(255,255,255,0.14)"></span>Nobody was</span>
+              <span style="display: inline-flex; align-items: center; gap: 7px"><span style="width: 9px; height: 9px; border-radius: 2px; background: rgba(169,223,184,0.85)"></span>Your hours</span>
+            </div>
+            <div style="font-size: 11px; font-weight: 300; color: rgba(154,146,127,0.9); text-align: center">The wheel is one full day on your own clock. Each slice is one hour. The ring of figures around it is the human chain — it breaks wherever nobody is sitting.</div>
+          </div>
+
+          <!-- PANEL -->
+          <div class="q-panel q-scroll" style="display: flex; flex-direction: column; gap: 11px; max-height: 80vh; overflow-y: auto; padding-right: 4px">
+
+            <div style="padding: 15px 18px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.035); display: flex; flex-direction: column; gap: 11px">
+              <div style="font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">How it works</div>
+              <div style="display: flex; align-items: flex-start; gap: 11px">
+                <span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.4); font-size: 11px; color: #e6d3a8">1</span>
+                <span style="font-size: 13px; font-weight: 300; line-height: 1.5; color: rgba(216,210,196,0.95)">Sit wherever you are, for as long as you like. Nothing to set up.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 11px">
+                <span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.4); font-size: 11px; color: #e6d3a8">2</span>
+                <span style="font-size: 13px; font-weight: 300; line-height: 1.5; color: rgba(216,210,196,0.95)">Your hour lights up on the wheel. Nobody sees or hears you — only that someone was there.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 11px">
+                <span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(213,183,124,0.4); font-size: 11px; color: #e6d3a8">3</span>
+                <span style="font-size: 13px; font-weight: 300; line-height: 1.5; color: rgba(216,210,196,0.95)">Come back at the same time each day and that hour stays lit.</span>
+              </div>
+            </div>
+
+            <sc-if value="{{ hasGap }}" hint-placeholder-val="{{ true }}">
+              <div style="padding: 16px 18px; border-radius: 22px; border: 1px solid rgba(213,183,124,0.4); background: linear-gradient(140deg, rgba(213,183,124,0.14), rgba(255,255,255,0.03)); display: flex; flex-direction: column; gap: 8px">
+                <div style="font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #e6d3a8">The biggest gap in the day</div>
+                <div style="font-family: 'Marcellus', serif; font-size: 19px; line-height: 1.25; color: #f7f1e3">{{ gapHeadline }}</div>
+                <div style="font-size: 12.5px; font-weight: 300; line-height: 1.55; color: rgba(207,200,186,0.9)">{{ gapBody }}</div>
+                <button onClick="{{ claimGap }}" style="align-self: flex-start; margin-top: 3px; padding: 9px 19px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.7); background: rgba(213,183,124,0.16); color: #e6d3a8; font-family: 'Outfit', sans-serif; font-size: 12.5px; letter-spacing: 0.04em; cursor: pointer" style-hover="background: rgba(213,183,124,0.3)">I'll take this hour</button>
+              </div>
+            </sc-if>
+
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 4px 4px 0">
+              <div style="font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">Sitting near you</div>
+              <div style="font-size: 11px; font-weight: 300; color: rgba(154,146,127,0.9)">Now · {{ localNow }} your time</div>
+            </div>
+
+            <sc-for list="{{ liveSits }}" as="v" hint-placeholder-count="3">
+              <button onClick="{{ v.join }}" style="text-align: left; padding: 13px 15px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); cursor: pointer; display: flex; align-items: center; gap: 13px; font-family: 'Outfit', sans-serif" style-hover="border-color: rgba(213,183,124,0.5); background: rgba(213,183,124,0.09)">
+                <span style="position: relative; width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 36% 32%, rgba(213,183,124,0.35), rgba(96,84,166,0.25)); border: 1px solid rgba(213,183,124,0.35); font-family: 'Marcellus', serif; font-size: 13px; color: #e6d3a8">{{ v.initial }}</span>
+                <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+                  <span style="font-size: 13.5px; color: #f2e9d8">{{ v.who }}</span>
+                  <span style="font-size: 11.5px; font-weight: 300; color: rgba(154,146,127,0.95)">{{ v.detail }}</span>
+                </span>
+                <span style="flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 3px">
+                  <span style="font-size: 11px; color: #a9dfb8">{{ v.left }}</span>
+                  <span style="font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(213,183,124,0.75)">sit along</span>
+                </span>
+              </button>
+            </sc-for>
+
+            <sc-if value="{{ noneLive }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 20px 18px; border-radius: 20px; border: 1px dashed rgba(213,183,124,0.3); background: rgba(255,255,255,0.025); text-align: center">
+                <div style="font-family: 'Marcellus', serif; font-size: 17px; color: #f2e9d8">Nobody is sitting near you.</div>
+                <div style="font-size: 12.5px; font-weight: 300; line-height: 1.55; color: rgba(185,177,160,0.9); margin-top: 5px">Start now and you are the first. Others in your area will see that someone has begun.</div>
+              </div>
+            </sc-if>
+
+            <div style="position: sticky; bottom: -1px; margin-top: 2px; padding: 12px 2px 6px; display: flex; flex-direction: column; gap: 7px; background: linear-gradient(to top, #09071a 62%, rgba(9,7,26,0.92) 82%, rgba(9,7,26,0))">
+              <button onClick="{{ goOpen }}" style="padding: 15px 20px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.6); background: linear-gradient(135deg, rgba(213,183,124,0.24), rgba(96,84,166,0.2)); color: #f7ecd0; font-family: 'Marcellus', serif; font-size: 16px; letter-spacing: 0.04em; cursor: pointer" style-hover="background: linear-gradient(135deg, rgba(213,183,124,0.38), rgba(96,84,166,0.28))">Start sitting</button>
+              <div style="font-size: 11px; font-weight: 300; line-height: 1.5; color: rgba(154,146,127,0.9); text-align: center; padding: 0 10px">Free. No camera, no microphone, no talking. Just you and a bell.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══ START A SIT ══ -->
+    <sc-if value="{{ viewOpen }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Start a sit" class="q-scroll" style="height: 100%; overflow-y: auto; padding: 6px clamp(16px, 4vw, 40px) 24px; animation: qIn 0.4s ease">
+        <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px">
+          <div style="text-align: center">
+            <button onClick="{{ goChain }}" style="padding: 0; border: none; background: none; color: rgba(154,146,127,0.9); font-family: 'Outfit', sans-serif; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer" style-hover="color: #e6d3a8">← back to the circle</button>
+            <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); margin: 10px 0 0; color: #f7f1e3">Sit quietly and watch your breath</h2>
+            <p style="max-width: 470px; margin: 7px auto 0; font-size: 13px; font-weight: 300; line-height: 1.6; color: rgba(207,200,186,0.85)">That is the whole practice — the one Dr. Hari teaches: <span style="font-family: 'Marcellus', serif; color: #e6d3a8">gammuga kurcho</span>, sit still. Don't count, don't try. A bell starts it and a bell ends it.</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 9px">
+            <div style="font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758; text-align: center">Pick a sound · tap to hear it</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 9px">
+              <sc-for list="{{ sounds }}" as="sd" hint-placeholder-count="5">
+                <button onClick="{{ sd.pick }}" style="text-align: left; padding: 13px 15px; border-radius: 18px; border: 1px solid {{ sd.border }}; background: {{ sd.bg }}; cursor: pointer; display: flex; align-items: center; gap: 11px; font-family: 'Outfit', sans-serif" style-hover="border-color: rgba(213,183,124,0.6)">
+                  <span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 36% 32%, rgba(213,183,124,0.28), rgba(96,84,166,0.22)); border: 1px solid {{ sd.ringBorder }}; font-size: 14px; color: {{ sd.glyphColor }}">{{ sd.glyph }}</span>
+                  <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+                    <span style="font-size: 14px; color: #f2e9d8">{{ sd.title }}</span>
+                    <span style="font-size: 11.5px; font-weight: 300; line-height: 1.4; color: rgba(185,177,160,0.95)">{{ sd.body }}</span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; padding-top: 2px">
+            <span style="font-size: 11.5px; font-weight: 300; color: rgba(154,146,127,0.95); margin-right: 4px">How long?</span>
+            <sc-for list="{{ durations }}" as="d" hint-placeholder-count="4">
+              <button onClick="{{ d.pick }}" style="padding: 9px 18px; border-radius: 999px; border: 1px solid {{ d.border }}; background: {{ d.bg }}; color: {{ d.color }}; font-family: 'Outfit', sans-serif; font-size: 12.5px; cursor: pointer">{{ d.label }}</button>
+            </sc-for>
+          </div>
+
+          <div style="padding: 15px 18px; border-radius: 20px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.09); display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+            <div style="flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 3px">
+              <div style="font-size: 13px; color: #f2e9d8">Let people near me know I've started</div>
+              <div style="font-size: 11.5px; font-weight: 300; line-height: 1.5; color: rgba(154,146,127,0.95)">{{ nudgeNote }}</div>
+            </div>
+            <button onClick="{{ toggleNudge }}" role="switch" aria-checked="{{ nudgeOn }}" aria-label="Let people near me know I've started" style="flex-shrink: 0; width: 48px; height: 27px; border-radius: 999px; border: 1px solid {{ nudgeBorder }}; background: {{ nudgeTrack }}; cursor: pointer; padding: 2px; display: flex; justify-content: {{ nudgeJustify }}">
+              <span style="width: 21px; height: 21px; border-radius: 50%; background: {{ nudgeKnob }}"></span>
+            </button>
+          </div>
+
+          <button onClick="{{ beginSit }}" style="padding: 16px 24px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.7); background: linear-gradient(135deg, rgba(213,183,124,0.26), rgba(96,84,166,0.2)); color: #f7ecd0; font-family: 'Marcellus', serif; font-size: 17px; letter-spacing: 0.05em; cursor: pointer" style-hover="background: linear-gradient(135deg, rgba(213,183,124,0.4), rgba(96,84,166,0.3))">{{ beginLabel }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══ SITTING ══ -->
+    <sc-if value="{{ viewSit }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Sitting" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 0 clamp(16px, 4vw, 40px) 20px; animation: qIn 0.7s ease">
+        <div style="position: relative; width: min(56vh, 90vw, 380px); aspect-ratio: 1; display: flex; align-items: center; justify-content: center">
+          <span aria-hidden="true" style="position: absolute; inset: 4%; border-radius: 50%; border: 1px solid rgba(213,183,124,0.2); animation: qBreathe 11s ease-in-out infinite"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 19%; border-radius: 50%; border: 1px solid rgba(157,143,224,0.18); animation: qBreathe 11s ease-in-out infinite; animation-delay: -2.7s"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 34%; border-radius: 50%; background: radial-gradient(circle, rgba(213,183,124,0.16), transparent 72%); animation: qBreathe 11s ease-in-out infinite; animation-delay: -3.8s"></span>
+          <svg viewBox="0 0 400 400" style="position: absolute; inset: 0; width: 100%; height: 100%">
+            <circle cx="200" cy="200" r="190" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"></circle>
+            <circle cx="200" cy="200" r="190" fill="none" stroke="rgba(213,183,124,0.75)" stroke-width="2" stroke-linecap="round" stroke-dasharray="{{ progDash }}" transform="rotate(-90 200 200)"></circle>
+          </svg>
+          <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center">
+            <div style="font-family: 'Marcellus', serif; font-size: clamp(40px, 8vw, 64px); line-height: 1; color: #f7f1e3; font-variant-numeric: tabular-nums">{{ remaining }}</div>
+            <div style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #b89758">{{ sitPractice }}</div>
+          </div>
+        </div>
+        <div style="font-family: 'Marcellus', serif; font-size: clamp(16px, 2.2vw, 21px); line-height: 1.35; color: #a9dfb8; text-align: center; text-wrap: balance">{{ withYou }}</div>
+        <div style="font-size: 12px; font-weight: 300; color: rgba(154,146,127,0.9); text-align: center; max-width: 400px; text-wrap: pretty">{{ withYouSub }}</div>
+        <sc-if value="{{ hasAudio }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 2px; display: flex; align-items: center; gap: 12px; padding: 8px 15px 8px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.035)">
+            <button onClick="{{ toggleMute }}" aria-label="Mute" style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; border: 1px solid rgba(213,183,124,0.3); background: rgba(213,183,124,0.1); color: {{ muteColor }}; font-size: 13px; cursor: pointer">{{ muteGlyph }}</button>
+            <input type="range" min="0" max="100" step="1" value="{{ volSlider }}" onChange="{{ setVol }}" onInput="{{ setVol }}" aria-label="Volume" style="width: 130px; accent-color: #d5b77c; background: transparent; cursor: pointer">
+            <span style="font-size: 11px; font-variant-numeric: tabular-nums; color: rgba(185,177,160,0.9); min-width: 32px; text-align: right">{{ volPct }}</span>
+          </div>
+        </sc-if>
+        <button onClick="{{ endSit }}" style="margin-top: 4px; padding: 10px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.04); color: rgba(207,200,186,0.85); font-family: 'Outfit', sans-serif; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer" style-hover="border-color: rgba(213,183,124,0.5); color: #e6d3a8">I'm done</button>
+      </div>
+    </sc-if>
+
+    <!-- ══ MY TIMES ══ -->
+    <sc-if value="{{ viewHours }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="My times" class="q-scroll" style="height: 100%; overflow-y: auto; padding: 6px clamp(16px, 4vw, 40px) 24px; animation: qIn 0.4s ease">
+        <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px">
+          <div style="text-align: center">
+            <button onClick="{{ goChain }}" style="padding: 0; border: none; background: none; color: rgba(154,146,127,0.9); font-family: 'Outfit', sans-serif; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer" style-hover="color: #e6d3a8">← back to the circle</button>
+            <h2 style="font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); margin: 10px 0 0; color: #f7f1e3">The times I usually sit</h2>
+            <p style="max-width: 470px; margin: 7px auto 0; font-size: 13px; font-weight: 300; line-height: 1.6; color: rgba(207,200,186,0.85)">Tap the hours you normally meditate. We'll only ever nudge you inside those hours — never at any other time. Times are shown in your own clock.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); gap: 7px">
+            <sc-for list="{{ hourCells }}" as="hc" hint-placeholder-count="24">
+              <button onClick="{{ hc.toggle }}" style="padding: 10px 6px; border-radius: 14px; border: 1px solid {{ hc.border }}; background: {{ hc.bg }}; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; font-family: 'Outfit', sans-serif">
+                <span style="font-size: 13.5px; color: {{ hc.color }}; font-variant-numeric: tabular-nums">{{ hc.label }}</span>
+                <span style="font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ hc.subColor }}">{{ hc.sub }}</span>
+              </button>
+            </sc-for>
+          </div>
+
+          <div style="padding: 16px 18px; border-radius: 20px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.09); display: flex; flex-direction: column; gap: 6px">
+            <div style="font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">Your part</div>
+            <div style="font-family: 'Marcellus', serif; font-size: 18px; line-height: 1.3; color: #f7f1e3">{{ pledgeLine }}</div>
+            <div style="font-size: 12.5px; font-weight: 300; line-height: 1.55; color: rgba(185,177,160,0.95)">{{ pledgeBody }}</div>
+          </div>
+
+          <button onClick="{{ goChain }}" style="padding: 14px 22px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.6); background: rgba(213,183,124,0.16); color: #e6d3a8; font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.04em; cursor: pointer" style-hover="background: rgba(213,183,124,0.28)">Save my times</button>
+        </div>
+      </div>
+    </sc-if>
+
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;gapCallout&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Circle&quot;}}">
+const RING_EMPTY = '#1e1930';
+const RING_GOLD = ['#5b4a2b', '#8a7040', '#b8935a', '#e0bd7c'];
+const RING_LIVE = '#f7ecd0';
+const FOLK_EMPTY = '#3a3547';
+const FOLK_GOLD = ['#6b5731', '#8f7443', '#b89660', '#e2c994'];
+const FOLK_LIVE = '#fbf1d8';
+const TIER = c => c < 0.25 ? 0 : c < 0.5 ? 1 : c < 0.75 ? 2 : 3;
+const COVER = [0.55,0.72,0.86,0.42,0.18,0.0,0.0,0.08,0.0,0.16,0.36,0.52,0.62,0.78,0.5,0.34,0.42,0.56,0.74,0.52,0.3,0.24,0.4,0.5];
+const SOUNDS = [
+  { key:'silence', glyph:'○', glyphColor:'#efe9dc', title:'Silence',      body:'Just the two bells.' },
+  { key:'drone',   glyph:'≈', glyphColor:'#e6d3a8', title:'Deep drone',   body:'One low, steady note.' },
+  { key:'rain',    glyph:'⋰', glyphColor:'#9fb8d8', title:'Rain',         body:'Soft rain, no thunder.' },
+  { key:'ocean',   glyph:'∿', glyphColor:'#8fb4c8', title:'Ocean',        body:'Slow waves, in and out.' },
+  { key:'bowl',    glyph:'◠', glyphColor:'#d8c48f', title:'Singing bowl', body:'One strike every few minutes.' },
+  { key:'om',      glyph:'ॐ', glyphColor:'#c9a4dc', title:'Om chant',     body:'Voices, slow and repeating.', src:'assets/aum-chant.wav' }
+];
+const DURS = [10, 20, 40, 60];
+const LIVE = [
+  { who:'Ramesh K.',  city:'Hyderabad',  sound:'Silence',      started:23, of:40 },
+  { who:'Anitha S.',  city:'Bengaluru',  sound:'Ocean',        started:8,  of:20 },
+  { who:'Deepak M.',  city:'Pune',       sound:'Singing bowl', started:4,  of:60 }
+];
+
+class Component extends DCLogic {
+  state = { view:'chain', now:Date.now(), sound:0, dur:20, nudge:true, sitStart:null, hours:[1,2,13], vol:0.6, muted:false };
+
+  componentDidMount() {
+    this.t = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this.audio = new Audio();
+    this.audio.loop = true;
+    this.audio.volume = this.state.vol;
+  }
+  componentWillUnmount() { clearInterval(this.t); this.stopAll(); this.audio = null; }
+
+  level() { return this.state.muted ? 0 : this.state.vol; }
+
+  stopAll() {
+    if (this.audio) this.audio.pause();
+    clearInterval(this.bowlTimer); this.bowlTimer = null;
+    (this.nodes || []).forEach(n => { try { n.stop(); } catch (e) {} try { n.disconnect(); } catch (e) {} });
+    this.nodes = [];
+    if (this.master) { try { this.master.disconnect(); } catch (e) {} this.master = null; }
+  }
+
+  setLevel(v) {
+    if (this.audio) this.audio.volume = v;
+    if (this.master) this.master.gain.value = v;
+  }
+
+  applyAudio(idx, playing) {
+    const s = SOUNDS[idx];
+    this.stopAll();
+    if (!playing || !s || s.key === 'silence') return;
+    if (s.src) {
+      if (!this.audio) return;
+      const want = new URL(s.src, location.href).href;
+      if (this.audio.src !== want) { this.audio.src = s.src; this.audio.currentTime = 0; }
+      this.audio.volume = this.level();
+      const p = this.audio.play();
+      if (p && p.catch) p.catch(() => {});
+      return;
+    }
+    this.startSynth(s.key);
+  }
+
+  startSynth(key) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    if (!this.ctx) this.ctx = new AC();
+    const ctx = this.ctx;
+    if (ctx.state === 'suspended') ctx.resume();
+
+    const master = ctx.createGain();
+    master.gain.setValueAtTime(0.0001, ctx.currentTime);
+    master.gain.linearRampToValueAtTime(this.level(), ctx.currentTime + 2.5);
+    master.connect(ctx.destination);
+    this.master = master;
+    this.nodes = [];
+
+    if (key === 'rain' || key === 'ocean') {
+      const len = Math.floor(4 * ctx.sampleRate);
+      const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      let last = 0;
+      for (let i = 0; i < len; i++) {
+        const w = Math.random() * 2 - 1;
+        last = (last + 0.02 * w) / 1.02;
+        data[i] = key === 'ocean' ? last * 3.2 : w * 0.45;
+      }
+      const src = ctx.createBufferSource();
+      src.buffer = buf; src.loop = true;
+      const f = ctx.createBiquadFilter();
+      if (key === 'rain') { f.type = 'bandpass'; f.frequency.value = 1300; f.Q.value = 0.55; }
+      else { f.type = 'lowpass'; f.frequency.value = 400; }
+      const g = ctx.createGain();
+      g.gain.value = key === 'rain' ? 0.55 : 0.85;
+      if (key === 'ocean') {
+        const lfo = ctx.createOscillator(); lfo.frequency.value = 0.085;
+        const la = ctx.createGain(); la.gain.value = 0.5;
+        lfo.connect(la); la.connect(g.gain); lfo.start();
+        this.nodes.push(lfo);
+      }
+      src.connect(f); f.connect(g); g.connect(master); src.start();
+      this.nodes.push(src);
+    }
+
+    if (key === 'drone') {
+      const lp = ctx.createBiquadFilter();
+      lp.type = 'lowpass'; lp.frequency.value = 700; lp.connect(master);
+      [[110, 0.3], [110.6, 0.24], [164.8, 0.12], [220.4, 0.06]].forEach(([hz, amp]) => {
+        const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = hz;
+        const g = ctx.createGain(); g.gain.value = amp;
+        o.connect(g); g.connect(lp); o.start();
+        this.nodes.push(o);
+      });
+      const lfo = ctx.createOscillator(); lfo.frequency.value = 0.07;
+      const la = ctx.createGain(); la.gain.value = 120;
+      lfo.connect(la); la.connect(lp.frequency); lfo.start();
+      this.nodes.push(lfo);
+    }
+
+    if (key === 'bowl') {
+      this.strike();
+      this.bowlTimer = setInterval(() => this.strike(), 40000);
+    }
+  }
+
+  strike() {
+    const ctx = this.ctx, master = this.master;
+    if (!ctx || !master) return;
+    const t = ctx.currentTime;
+    [[1, 0.5, 15], [2.76, 0.18, 9], [5.4, 0.07, 5]].forEach(([mult, amp, dec]) => {
+      const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = 196 * mult;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.linearRampToValueAtTime(amp, t + 0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dec);
+      o.connect(g); g.connect(master);
+      o.start(t); o.stop(t + dec + 0.2);
+    });
+  }
+
+  seg(a0, a1, r0, r1) {
+    const P = (a, r) => [(200 + r * Math.cos(a * Math.PI / 180)).toFixed(2), (200 + r * Math.sin(a * Math.PI / 180)).toFixed(2)];
+    const p1 = P(a0, r1), p2 = P(a1, r1), p3 = P(a1, r0), p4 = P(a0, r0);
+    return `M${p1} A${r1},${r1} 0 0 1 ${p2} L${p3} A${r0},${r0} 0 0 0 ${p4} Z`;
+  }
+
+  renderVals() {
+    const d = new Date(this.state.now);
+    const utcH = d.getUTCHours(), utcM = d.getUTCMinutes();
+    const gapCallout = this.props.gapCallout ?? true;
+    const hours = this.state.hours;
+
+    // The wheel is drawn on the viewer's own clock: every UTC hour is rotated by
+    // their offset, so the hand matches the time on their phone. Half-hour zones
+    // (India, Nepal) fall out of this for free.
+    const ROT = -(new Date(this.state.now).getTimezoneOffset() / 60) * 15;
+
+    const segments = COVER.map((c, i) => {
+      const a0 = i * 15 - 90 + 0.9 + ROT, a1 = (i + 1) * 15 - 90 - 0.9 + ROT;
+      const live = i === utcH;
+      const r1 = 168 + (live ? 7 : 0);
+      const r0 = 168 - 20 - c * 16;
+      const fill = c < 0.04 ? RING_EMPTY : (live ? RING_LIVE : RING_GOLD[TIER(c)]);
+      return { d: this.seg(a0, a1, r0, r1), fill };
+    });
+
+    const mineTicks = hours.map(i => ({ d: this.seg(i * 15 - 90 + 2.5 + ROT, (i + 1) * 15 - 90 - 2.5 + ROT, 178, 183) }));
+
+    // Human chain: one seated figure per hour, centred on its own slice so the
+    // outer ring reads as the same 24 units the wheel is divided into. Hands join
+    // across held hours; the arc simply stops where nobody sits.
+    const RAD = Math.PI / 180, RF = 197, RA = 195.5;
+    const heldH = COVER.map(c => c >= 0.04);
+    const chainFolk = COVER.map((c, i) => {
+      const deg = i * 15 - 90 + 7.5 + ROT;
+      const a = deg * RAD;
+      return {
+        tf: `translate(${(200 + Math.cos(a) * RF).toFixed(2)} ${(200 + Math.sin(a) * RF).toFixed(2)}) rotate(${(deg + 90).toFixed(2)})`,
+        col: i === utcH ? FOLK_LIVE : heldH[i] ? FOLK_GOLD[TIER(c)] : FOLK_EMPTY
+      };
+    });
+    const chainLinks = [];
+    const arcPt = (deg) => [(200 + Math.cos(deg * RAD) * RA).toFixed(2), (200 + Math.sin(deg * RAD) * RA).toFixed(2)];
+    if (heldH.every(Boolean)) {
+      chainLinks.push({ d: `M${arcPt(-90)[0]} ${arcPt(-90)[1]}A${RA} ${RA} 0 1 1 ${arcPt(-89.99)[0]} ${arcPt(-89.99)[1]}` });
+    } else {
+      let i = 0;
+      while (i < 24) {
+        if (!heldH[i]) { i++; continue; }
+        let len = 0;
+        while (len < 24 && heldH[(i + len) % 24]) len++;
+        const d0 = i * 15 - 90 + 7.5 + ROT, d1 = (i + len - 1) * 15 - 90 + 7.5 + ROT;
+        if (d1 > d0) {
+          const [x0, y0] = arcPt(d0), [x1, y1] = arcPt(d1);
+          chainLinks.push({ d: `M${x0} ${y0}A${RA} ${RA} 0 ${d1 - d0 > 180 ? 1 : 0} 1 ${x1} ${y1}` });
+        }
+        i += len;
+      }
+    }
+
+    const handA = (utcH + utcM / 60) * 15 - 90 + ROT;
+    const handX = (200 + 128 * Math.cos(handA * Math.PI / 180)).toFixed(2);
+    const handY = (200 + 128 * Math.sin(handA * Math.PI / 180)).toFixed(2);
+    const ringLabels = [[0,'12 AM'],[6,'6 AM'],[12,'12 PM'],[18,'6 PM']].map(([h, t]) => {
+      const a = (h * 15 - 90) * Math.PI / 180;
+      return {
+        t,
+        left: (50 + 56 * Math.cos(a)).toFixed(2) + '%',
+        top: (50 + 56 * Math.sin(a)).toFixed(2) + '%'
+      };
+    });
+
+    let gapStart = -1, gapLen = 0, run = 0, runStart = 0;
+    for (let k = 0; k < 48; k++) {
+      const i = k % 24;
+      if (COVER[i] < 0.04) { if (run === 0) runStart = i; run++; if (run > gapLen) { gapLen = run; gapStart = runStart; } }
+      else run = 0;
+    }
+    const pad = n => String(n).padStart(2, '0');
+    const hoursUntil = ((gapStart - utcH) + 24) % 24;
+
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+    const regionName = (tz.split('/')[1] || tz).replace(/_/g, ' ');
+    const localOf = utcHour => {
+      const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), utcHour, 0));
+      return t.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    };
+    const gapEndLocal = localOf((gapStart + gapLen) % 24);
+
+    const sitting = 47 + (utcH % 7) * 9;
+    const sound = SOUNDS[this.state.sound];
+
+    const liveSits = LIVE.map(v => ({
+      who: v.who, initial: v.who[0], detail: `${v.city} · ${v.of} min · ${v.sound}`,
+      left: `${v.of - v.started} min left`,
+      join: () => this.setState({ view: 'sit', sitStart: Date.now(), dur: v.of - v.started }, () => this.applyAudio(this.state.sound, true))
+    }));
+
+    const hourCells = [];
+    for (let L = 0; L < 24; L++) {
+      const b = new Date(this.state.now); b.setHours(L, 0, 0, 0);
+      const i = b.getUTCHours();
+      const on = hours.includes(i);
+      const held = COVER[i] >= 0.04;
+      hourCells.push({
+        label: b.toLocaleTimeString([], { hour: 'numeric' }),
+        sub: on ? 'mine' : (held ? 'covered' : 'empty'),
+        border: on ? 'rgba(169,223,184,0.65)' : (held ? 'rgba(213,183,124,0.22)' : 'rgba(255,255,255,0.09)'),
+        bg: on ? 'rgba(126,203,143,0.16)' : 'rgba(255,255,255,0.03)',
+        color: on ? '#a9dfb8' : '#efe9dc',
+        subColor: on ? 'rgba(169,223,184,0.92)' : (held ? 'rgba(226,201,148,0.95)' : 'rgba(207,200,186,0.92)'),
+        toggle: () => this.setState(s => ({ hours: s.hours.includes(i) ? s.hours.filter(x => x !== i) : [...s.hours, i].sort((a, b) => a - b) }))
+      });
+    }
+
+    const elapsed = this.state.sitStart ? (this.state.now - this.state.sitStart) / 1000 : 0;
+    const total = this.state.dur * 60;
+    const left = Math.max(0, total - elapsed);
+    const frac = Math.min(1, elapsed / total);
+    const C = 2 * Math.PI * 190;
+
+    const darkCount = COVER.filter(c => c < 0.04).length;
+
+    return {
+      viewChain: this.state.view === 'chain', viewOpen: this.state.view === 'open',
+      viewSit: this.state.view === 'sit', viewHours: this.state.view === 'hours',
+      goChain: () => { if (this.state.view !== 'sit') this.stopAll(); this.setState({ view: 'chain' }); },
+      goOpen: () => this.setState({ view: 'open' }),
+      goHours: () => { this.stopAll(); this.setState({ view: 'hours' }); },
+
+      segments, mineTicks, handX, handY, ringLabels, chainFolk, chainLinks,
+      sittingNow: sitting,
+      countriesLine: `in ${12 + (utcH % 5)} countries`,
+      liveChip: `${sitting} sitting`,
+
+      hasGap: gapCallout && gapLen > 0,
+      gapHeadline: `${localOf(gapStart)} – ${gapEndLocal}, your time`,
+      gapBody: `Every day for ${gapLen} hours, nobody anywhere is sitting. It comes around again in ${hoursUntil} hours. ${darkCount} of the 24 hours are still empty — sit in one and you hold it for the whole world.`,
+      claimGap: () => this.setState(s => ({ view: 'hours', hours: s.hours.includes(gapStart) ? s.hours : [...s.hours, gapStart].sort((a, b) => a - b) })),
+
+      regionName,
+      localNow: d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+      liveSits, noneLive: false, hourCells,
+
+      sounds: SOUNDS.map((p, i) => ({
+        ...p,
+        border: i === this.state.sound ? 'rgba(213,183,124,0.7)' : 'rgba(255,255,255,0.1)',
+        bg: i === this.state.sound ? 'rgba(213,183,124,0.12)' : 'rgba(255,255,255,0.04)',
+        ringBorder: i === this.state.sound ? 'rgba(213,183,124,0.65)' : 'rgba(213,183,124,0.25)',
+        pick: () => this.setState({ sound: i }, () => this.applyAudio(i, true))
+      })),
+      durations: DURS.map(n => ({
+        label: `${n} min`,
+        border: n === this.state.dur ? 'rgba(213,183,124,0.7)' : 'rgba(255,255,255,0.12)',
+        bg: n === this.state.dur ? 'rgba(213,183,124,0.16)' : 'rgba(255,255,255,0.03)',
+        color: n === this.state.dur ? '#e6d3a8' : 'rgba(207,200,186,0.85)',
+        pick: () => this.setState({ dur: n })
+      })),
+      nudgeOn: this.state.nudge,
+      nudgeNote: this.state.nudge
+        ? `${18 + utcH % 9} people near ${regionName} usually sit at this hour. They'll see one line: someone has started.`
+        : 'You sit quietly, with no one told. Your hour still counts.',
+      nudgeTrack: this.state.nudge ? 'rgba(126,203,143,0.3)' : 'rgba(255,255,255,0.06)',
+      nudgeBorder: this.state.nudge ? 'rgba(126,203,143,0.6)' : 'rgba(255,255,255,0.14)',
+      nudgeKnob: this.state.nudge ? '#a9dfb8' : 'rgba(207,200,186,0.55)',
+      nudgeJustify: this.state.nudge ? 'flex-end' : 'flex-start',
+      toggleNudge: () => this.setState(s => ({ nudge: !s.nudge })),
+      beginLabel: `Start · ${this.state.dur} min · ${sound.title.toLowerCase()}`,
+      beginSit: () => this.setState({ view: 'sit', sitStart: Date.now() }, () => this.applyAudio(this.state.sound, true)),
+      volSlider: Math.round((this.state.muted ? 0 : this.state.vol) * 100),
+      volPct: `${Math.round((this.state.muted ? 0 : this.state.vol) * 100)}%`,
+      muteGlyph: this.state.muted || this.state.vol === 0 ? '⊘' : '♪',
+      muteColor: this.state.muted ? 'rgba(207,200,186,0.5)' : '#e6d3a8',
+      hasAudio: sound.key !== 'silence',
+      setVol: e => {
+        const v = Number(e.target.value) / 100;
+        this.setState({ vol: v, muted: false });
+        this.setLevel(v);
+      },
+      toggleMute: () => this.setState(s => {
+        const m = !s.muted;
+        this.setLevel(m ? 0 : s.vol);
+        return { muted: m };
+      }),
+
+      remaining: `${Math.floor(left / 60)}:${pad(Math.floor(left % 60))}`,
+      progDash: `${(C * frac).toFixed(1)} ${C.toFixed(1)}`,
+      sitPractice: sound.title,
+      withYou: `${sitting} other people are sitting with you right now.`,
+      withYouSub: `No one can see or hear you. Just watch your breath — don't count, don't try. A bell will tell you when the time is up.`,
+      endSit: () => { this.applyAudio(this.state.sound, false); this.setState({ view: 'chain', sitStart: null }); },
+
+      pledgeLine: hours.length === 0 ? 'You haven\u2019t picked any times yet.' : `You sit at ${hours.length} of the 24 hours.`,
+      pledgeBody: hours.length === 0
+        ? 'Pick at least one hour so we know when to reach you.'
+        : 'At those times each day we look for you. Take an empty hour and, for a while, you are the only person in the world sitting.'
+    };
+  }
+}
+
+</script>
+</body>
+</html>
