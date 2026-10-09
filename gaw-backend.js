@@ -33,5 +33,14 @@
        key (admin_keys table). Wrong key returns {ok:false}. */
     membersList: (key) => rpc('gaw_members_list', { p_key: key || '' }),
     practicePut: (email, data) => rpc('gaw_practice_put', { p_email: email || '', p_data: data || {} }),
+    /* Support Desk — core team signs in with phone + own password (backend/support-desk.sql).
+       Every call RPC takes the session token returned by supportLogin. */
+    supportLogin: (phone, password) => rpc('gaw_support_login', { p_phone: phone || '', p_password: password || '' }),
+    supportSetPassword: (phone, password, email) => rpc('gaw_support_set_password', { p_phone: phone || '', p_password: password || '', p_email: email || '' }),
+    supportLogout: (token) => rpc('gaw_support_logout', { p_token: token || '' }),
+    supportList: (token) => rpc('gaw_support_list', { p_token: token || '' }),
+    supportPut: (token, call) => rpc('gaw_support_put', { p_token: token || '', p_call: call || {} }),
+    supportResolve: (token, id) => rpc('gaw_support_resolve', { p_token: token || '', p_id: id }),
+    supportDelete: (token, id) => rpc('gaw_support_delete', { p_token: token || '', p_id: id }),
   };
 })();
