@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="./gaw-config.js"></script>
+<script src="./gaw-backend.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #0d0a1c; }
+  body { font-family: 'Outfit', sans-serif; color: #efe9dc; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #d5b77c; text-decoration: none; } a:hover { color: #e6d3a8; }
+  input, select, textarea { font-family: 'Outfit', sans-serif; color: #f2e9d8; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 11px 13px; font-size: 14px; width: 100%; }
+  input::placeholder, textarea::placeholder { color: #7d7666; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(213,183,124,0.6); box-shadow: 0 0 0 3px rgba(213,183,124,0.12); }
+  input[readonly] { color: #9a927f; }
+  select option { background: #171130; color: #f2e9d8; }
+  textarea { resize: vertical; min-height: 96px; line-height: 1.55; }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px) { .sd-grid { grid-template-columns: 1fr !important; } .sd-two { grid-template-columns: 1fr !important; } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: radial-gradient(ellipse 70% 60% at 18% 0%, #141029 0%, #0d0a1c 55%, #080614 100%)">
+
+  <sc-if value="{{ denied }}" hint-placeholder-val="{{ false }}">
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px">
+      <form onSubmit="{{ signIn }}" style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 18px; padding: 32px 30px; border-radius: 28px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 40px rgba(0,0,0,0.4)">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <img src="assets/logo-128.webp" alt="" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
+          <span style="display: flex; flex-direction: column; gap: 1px">
+            <span style="font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.05em; color: #e6d3a8">GOLDEN AGE</span>
+            <span style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">Support desk</span>
+          </span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-family: 'Marcellus', serif; font-size: 24px; color: #f2e9d8">{{ authTitle }}</span>
+          <sc-if value="{{ settingPassword }}" hint-placeholder-val="{{ false }}">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f; margin-top: 8px">Your email<input type="email" value="{{ a.email }}" data-k="email" onChange="{{ editAuth }}" autoComplete="email" placeholder="So the team can reach you"></label>
+          </sc-if>
+          <span style="font-size: 13.5px; font-weight: 300; line-height: 1.6; color: #9a927f; text-wrap: pretty">{{ authSub }}</span>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Phone<input value="{{ a.phone }}" data-k="phone" onChange="{{ editAuth }}" inputMode="tel" placeholder="98765 43210" autoComplete="username" readOnly="{{ settingPassword }}" required></label>
+        <sc-if value="{{ enteringPassword }}" hint-placeholder-val="{{ true }}">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Password<input type="password" value="{{ a.password }}" data-k="password" onChange="{{ editAuth }}" autoComplete="current-password" placeholder="••••••••"></label>
+        </sc-if>
+        <sc-if value="{{ settingPassword }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 14px; animation: riseIn .35s ease-out">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Choose a password<input type="password" value="{{ a.password }}" data-k="password" onChange="{{ editAuth }}" autoComplete="new-password" placeholder="At least 6 characters" required></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Repeat it<input type="password" value="{{ a.password2 }}" data-k="password2" onChange="{{ editAuth }}" autoComplete="new-password" required></label>
+          </div>
+        </sc-if>
+        <sc-if value="{{ authError }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(224,132,132,0.3); background: rgba(224,132,132,0.08); font-size: 13px; color: #e8a9a9">{{ authError }}</div>
+        </sc-if>
+        <button type="submit" disabled="{{ authBusy }}" style="padding: 13px; border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; opacity: {{ authOpacity }}; box-shadow: 0 0 30px rgba(213,183,124,0.25)">{{ authButton }}</button>
+        <sc-if value="{{ settingPassword }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ cancelSet }}" style="background: none; border: none; padding: 0; font-size: 13px; cursor: pointer; font-family: inherit; color: #7d7666">← Different phone</button>
+        </sc-if>
+        <span style="font-size: 12px; font-weight: 300; line-height: 1.55; color: #7d7666; text-wrap: pretty">Core team only. Your phone must be added by an admin before you can sign in. Forgot your password? Ask an admin to reset it.</span>
+      </form>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ allowed }}" hint-placeholder-val="{{ true }}">
+  <header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 18px 28px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02)">
+    <a href="Member Flow.dc.html" style="display: flex; align-items: center; gap: 10px">
+      <img src="assets/logo-128.webp" alt="" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(213,183,124,0.5)">
+      <span style="display: flex; flex-direction: column; gap: 1px">
+        <span style="font-family: 'Marcellus', serif; font-size: 14px; letter-spacing: 0.05em; color: #e6d3a8">GOLDEN AGE</span>
+        <span style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #b89758">Support desk</span>
+      </span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap">
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(213,183,124,0.28); background: rgba(213,183,124,0.06); font-size: 12.5px; color: #e6d3a8"><span style="width: 7px; height: 7px; border-radius: 50%; background: #7fbf9a"></span>Support line · {{ supportPhone }}</span>
+      <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px">
+        <span style="font-size: 13px; color: #f2e9d8">{{ whoName }}</span>
+        <span style="font-size: 11px; font-weight: 300; color: #9a927f">{{ whoSub }}</span>
+      </span>
+      <button type="button" onClick="{{ signOut }}" style="background: none; border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 7px 14px; font-size: 12.5px; cursor: pointer; font-family: inherit; color: #9a927f" style-hover="color: #f2e9d8; border-color: rgba(255,255,255,0.3)">Sign out</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1180px; margin: 0 auto; padding: 36px 28px 80px; display: flex; flex-direction: column; gap: 28px">
+    <div style="display: flex; flex-direction: column; gap: 8px; max-width: 640px">
+      <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #b89758">Offline help · phone calls</span>
+      <h1 style="margin: 0; font-family: 'Marcellus', serif; font-weight: 400; font-size: clamp(26px, 3vw, 34px); color: #f2e9d8; line-height: 1.2">Log a seeker's call</h1>
+      <p style="margin: 0; font-size: 14.5px; font-weight: 300; line-height: 1.65; color: #b9b1a0; text-wrap: pretty">Online questions go to WhatsApp. This is for calls to the support line — record who called, what they needed and how it was resolved, so the next person on the phone has the story.</p>
+    </div>
+
+    <div class="sd-grid" style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; align-items: start">
+
+      <form onSubmit="{{ save }}" style="display: flex; flex-direction: column; gap: 22px; padding: 26px; border-radius: 26px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1)">
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #b89758">The seeker</span>
+          <div class="sd-two" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Name *<input value="{{ f.name }}" data-k="name" onChange="{{ edit }}" placeholder="As they introduced themselves" required></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Phone *<input value="{{ f.phone }}" data-k="phone" onChange="{{ edit }}" inputMode="tel" placeholder="98765 43210" required style="border-color: {{ phoneBorder }}"></label>
+          </div>
+          <sc-if value="{{ known }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(127,191,154,0.3); background: rgba(127,191,154,0.08); font-size: 13px; color: #a8d5a2">{{ knownText }}</div>
+          </sc-if>
+          <div class="sd-two" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Language<select value="{{ f.lang }}" data-k="lang" onChange="{{ edit }}"><option>Telugu</option><option>Hindi</option><option>Tamil</option><option>Kannada</option><option>English</option><option>Other</option></select></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">City / place<input value="{{ f.place }}" data-k="place" onChange="{{ edit }}" placeholder="Optional"></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Member?<select value="{{ f.member }}" data-k="member" onChange="{{ edit }}"><option>Not yet</option><option>Yes</option><option>Unsure</option></select></label>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #b89758">The call</span>
+          <div class="sd-two" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">When<input type="datetime-local" value="{{ f.at }}" data-k="at" onChange="{{ edit }}"></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Duration (min)<input type="number" min="1" value="{{ f.mins }}" data-k="mins" onChange="{{ edit }}" placeholder="10"></label>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 12px; color: #9a927f">Topic *</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{ topics }}" as="t" hint-placeholder-count="6">
+                <button type="button" data-t="{{ t.label }}" onClick="{{ pickTopic }}" style="padding: 8px 14px; border-radius: 999px; font-size: 13px; cursor: pointer; font-family: inherit; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.color }}; transition: all .25s">{{ t.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">What they asked *<textarea value="{{ f.asked }}" data-k="asked" onChange="{{ edit }}" placeholder="In their words, briefly" required></textarea></label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">How you helped *<textarea value="{{ f.helped }}" data-k="helped" onChange="{{ edit }}" placeholder="What was explained, sent or arranged" required></textarea></label>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #b89758">Who is helping the seeker</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{ helpers }}" as="h" hint-placeholder-count="2">
+              <button type="button" data-h="{{ h.key }}" onClick="{{ pickHelper }}" style="padding: 9px 16px; border-radius: 999px; font-size: 13px; cursor: pointer; font-family: inherit; border: 1px solid {{ h.border }}; background: {{ h.bg }}; color: {{ h.color }}; transition: all .25s">{{ h.label }}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ helperIsVolunteer }}" hint-placeholder-val="{{ false }}">
+            <div class="sd-two" style="display: grid; grid-template-columns: 1.2fr 1fr 1.3fr; gap: 14px; animation: riseIn .35s ease-out">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Volunteer name *<input value="{{ f.volName }}" data-k="volName" onChange="{{ edit }}" placeholder="Who will guide them"></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Volunteer phone *<input value="{{ f.volPhone }}" data-k="volPhone" onChange="{{ edit }}" inputMode="tel" placeholder="98765 43210"></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Volunteer email<input type="email" value="{{ f.volEmail }}" data-k="volEmail" onChange="{{ edit }}" placeholder="Optional"></label>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #b89758">Outcome</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{ outcomes }}" as="o" hint-placeholder-count="3">
+              <button type="button" data-o="{{ o.label }}" onClick="{{ pickOutcome }}" style="padding: 9px 16px; border-radius: 999px; font-size: 13px; cursor: pointer; font-family: inherit; border: 1px solid {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; transition: all .25s">{{ o.label }}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ needsFollow }}" hint-placeholder-val="{{ false }}">
+            <div class="sd-two" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; animation: riseIn .35s ease-out">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Follow up on<input type="date" value="{{ f.followDate }}" data-k="followDate" onChange="{{ edit }}"></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #9a927f">Follow-up note<input value="{{ f.followNote }}" data-k="followNote" onChange="{{ edit }}" placeholder="e.g. send Zoom link Monday"></label>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.08)">
+          <span style="display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; font-weight: 300; color: #7d7666"><span>Logged by <span style="color: #cfc8ba">{{ whoName }}</span> · {{ whoSub }}</span><span style="font-size: 11.5px">{{ whoEmailLine }}</span></span>
+          <div style="display: flex; gap: 10px">
+            <button type="button" onClick="{{ clear }}" style="padding: 12px 18px; border-radius: 999px; font-size: 13.5px; cursor: pointer; font-family: inherit; border: 1px solid rgba(255,255,255,0.16); background: transparent; color: #b9b1a0" style-hover="border-color: rgba(255,255,255,0.3); color: #f2e9d8">Clear</button>
+            <button type="submit" style="padding: 12px 22px; border-radius: 999px; font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: inherit; border: none; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; box-shadow: 0 0 30px rgba(213,183,124,0.25)" style-hover="box-shadow: 0 0 40px rgba(213,183,124,0.45)">Save call</button>
+          </div>
+        </div>
+      </form>
+
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px">
+          <div style="padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Marcellus', serif; font-size: 24px; color: #f2e9d8">{{ statToday }}</span><span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7d7666">Today</span></div>
+          <div style="padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Marcellus', serif; font-size: 24px; color: #f2e9d8">{{ statWeek }}</span><span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7d7666">This week</span></div>
+          <div style="padding: 14px 16px; border-radius: 18px; background: rgba(224,132,132,0.06); border: 1px solid rgba(224,132,132,0.25); display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Marcellus', serif; font-size: 24px; color: #e8a9a9">{{ statFollow }}</span><span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #b98080">Follow-ups due</span></div>
+        </div>
+
+        <sc-if value="{{ syncNote }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(213,183,124,0.28); background: rgba(213,183,124,0.06); font-size: 12.5px; color: #e6d3a8; display: flex; justify-content: space-between; gap: 10px; align-items: center; flex-wrap: wrap"><span>{{ syncNote }}</span><button type="button" onClick="{{ retrySync }}" style="background: none; border: none; padding: 0; font-size: 12.5px; cursor: pointer; font-family: inherit; color: #d5b77c">Retry</button></div>
+        </sc-if>
+        <div style="display: flex; gap: 10px; align-items: center">
+          <input value="{{ query }}" onChange="{{ setQuery }}" placeholder="Search name, phone or topic" style="flex: 1">
+          <button type="button" onClick="{{ exportCsv }}" title="Download as CSV" style="padding: 11px 14px; border-radius: 12px; font-size: 13px; cursor: pointer; font-family: inherit; border: 1px solid rgba(255,255,255,0.16); background: transparent; color: #b9b1a0; white-space: nowrap" style-hover="border-color: rgba(213,183,124,0.5); color: #e6d3a8">↓ CSV</button>
+        </div>
+
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 26px; border-radius: 24px; border: 1px dashed rgba(213,183,124,0.26); font-size: 13.5px; font-weight: 300; color: #b9b1a0; text-wrap: pretty">{{ emptyText }}</div>
+        </sc-if>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{ calls }}" as="c" hint-placeholder-count="3">
+            <div style="padding: 16px 18px; border-radius: 20px; background: rgba(255,255,255,0.035); border: 1px solid {{ c.border }}; display: flex; flex-direction: column; gap: 10px; animation: riseIn .35s ease-out">
+              <div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap">
+                <div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+                  <span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #d5b77c, #b89758); color: #241b06; font-family: 'Marcellus', serif; font-size: 15px">{{ c.initial }}</span>
+                  <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+                    <span style="font-size: 14.5px; color: #f2e9d8">{{ c.name }}</span>
+                    <span style="font-size: 12px; font-weight: 300; color: #9a927f">{{ c.meta }}</span>
+                  </span>
+                </div>
+                <span style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center">
+                  <span style="padding: 4px 10px; border-radius: 999px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(255,255,255,0.08); color: #b9b1a0">{{ c.topic }}</span>
+                  <span style="padding: 4px 10px; border-radius: 999px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: {{ c.oBg }}; color: {{ c.oColor }}">{{ c.outcome }}</span>
+                </span>
+              </div>
+              <div style="font-size: 13.5px; font-weight: 300; line-height: 1.55; color: #cfc8ba"><span style="color: #9a927f">Asked · </span>{{ c.asked }}</div>
+              <div style="font-size: 13.5px; font-weight: 300; line-height: 1.55; color: #cfc8ba"><span style="color: #9a927f">Helped · </span>{{ c.helped }}</div>
+              <div style="font-size: 12.5px; font-weight: 300; line-height: 1.5; color: #b9b1a0"><span style="color: #9a927f">Helper · </span>{{ c.helperText }}</div>
+              <sc-if value="{{ c.hasFollow }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; justify-content: space-between; gap: 10px; align-items: center; flex-wrap: wrap; padding: 9px 12px; border-radius: 12px; border: 1px solid rgba(224,132,132,0.25); background: rgba(224,132,132,0.06); font-size: 12.5px; color: #e8a9a9">
+                  <span>↻ {{ c.followText }}</span>
+                  <button type="button" data-id="{{ c.id }}" onClick="{{ resolve }}" style="padding: 5px 12px; border-radius: 999px; font-size: 12px; cursor: pointer; font-family: inherit; border: 1px solid rgba(127,191,154,0.4); background: transparent; color: #a8d5a2" style-hover="background: rgba(127,191,154,0.12)">Mark done</button>
+                </div>
+              </sc-if>
+              <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 11.5px; color: #7d7666">
+                <span>Logged by {{ c.byText }}<sc-if value="{{ c.pending }}" hint-placeholder-val="{{ false }}"><span style="color: #b89758"> · not synced yet</span></sc-if></span>
+                <button type="button" data-id="{{ c.id }}" onClick="{{ remove }}" style="background: none; border: none; padding: 0; font-size: 11.5px; cursor: pointer; font-family: inherit; color: #7d7666" style-hover="color: #e08484">Delete</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 14px 22px; border-radius: 999px; background: #171130; border: 1px solid rgba(213,183,124,0.35); color: #f2e9d8; font-size: 14px; box-shadow: 0 8px 40px rgba(0,0,0,0.4); animation: riseIn .3s ease-out; white-space: nowrap">{{ toast }}</div>
+  </sc-if>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;supportPhone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+91 98765 43210&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Desk&quot;},&quot;defaultLanguage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Telugu&quot;,&quot;options&quot;:[&quot;Telugu&quot;,&quot;Hindi&quot;,&quot;Tamil&quot;,&quot;Kannada&quot;,&quot;English&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Desk&quot;}}">
+class Component extends DCLogic {
+  /* Auth + storage live in Supabase (backend/support-desk.sql). Session token is
+     kept in localStorage 'gaw_support_session'; the call list is cached in
+     'gaw_support_cache' and saves made offline queue in 'gaw_support_pending'. */
+  TOPICS = ['How to begin', 'Live session timings', 'Zoom / member login', 'Experiences during meditation', 'Detox diet', 'Events & gatherings', 'Volunteering', 'Other'];
+  OUTCOMES = ['Resolved', 'Needs follow-up', 'Referred to Dr Hari'];
+  blank() {
+    const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    return { name: '', phone: '', lang: this.props.defaultLanguage ?? 'Telugu', place: '', member: 'Not yet', at: d.toISOString().slice(0, 16), mins: '', topic: '', asked: '', helped: '', outcome: 'Resolved', followDate: '', followNote: '',
+      helper: 'self', volName: '', volPhone: '', volEmail: '' };
+  }
+  state = { auth: this.ls('gaw_support_session', null), a: { phone: '', password: '', password2: '', email: '' }, authMode: 'login', authError: '', authBusy: false,
+    f: this.blank(), calls: this.ls('gaw_support_cache', []), pending: this.ls('gaw_support_pending', []), query: '', toast: '', sync: 'idle' };
+  ls(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } }
+  put(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  B() { return window.GAW_BACKEND || {}; }
+  clean(p) { return String(p || '').replace(/\D/g, '').replace(/^91(?=\d{10}$)/, ''); }
+  flash(m) { this.setState({ toast: m }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 3000); }
+  fmt(iso) { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); }
+  componentDidMount() { if (this.state.auth) this.sync(); }
+
+  async sync() {
+    const { auth } = this.state; if (!auth || !this.B().supportList) return;
+    this.setState({ sync: 'busy' });
+    // flush offline saves first
+    let pending = this.state.pending;
+    for (const c of [...pending]) { const r = await this.B().supportPut(auth.token, c); if (r && r.ok) pending = pending.filter(x => x !== c); else if (r && r.error === 'auth') return this.expire(); else break; }
+    this.setState({ pending }); this.put('gaw_support_pending', pending);
+    const r = await this.B().supportList(auth.token);
+    if (r && r.ok) { this.setState({ calls: r.calls, sync: 'ok' }); this.put('gaw_support_cache', r.calls); }
+    else if (r && r.error === 'auth') this.expire();
+    else this.setState({ sync: 'down' });
+  }
+  expire() { this.put('gaw_support_session', null); this.setState({ auth: null, sync: 'idle', authError: 'Your session ended — sign in again.' }); }
+
+  async signIn(e) {
+    e.preventDefault();
+    const { a, authMode } = this.state, phone = this.clean(a.phone);
+    if (phone.length !== 10) return this.setState({ authError: 'Enter a 10-digit phone number.' });
+    if (!this.B().supportLogin) return this.setState({ authError: 'Backend not loaded — check gaw-backend.js.' });
+    this.setState({ authBusy: true, authError: '' });
+    let r;
+    if (authMode === 'set') {
+      if (a.password.length < 6) return this.setState({ authBusy: false, authError: 'Password needs at least 6 characters.' });
+      if (a.password !== a.password2) return this.setState({ authBusy: false, authError: 'The two passwords don\u2019t match.' });
+      r = await this.B().supportSetPassword(phone, a.password, a.email);
+    } else r = await this.B().supportLogin(phone, a.password);
+    if (!r) return this.setState({ authBusy: false, authError: 'Can\u2019t reach the server. Check your connection and try again.' });
+    if (r.ok) { const auth = { token: r.token, name: r.name, phone: r.phone, email: r.email || '' }; this.put('gaw_support_session', auth);
+      this.setState({ auth, authBusy: false, a: { phone: '', password: '', password2: '', email: '' }, authMode: 'login' }); this.sync(); return; }
+    if (r.error === 'set_password') return this.setState({ authBusy: false, authMode: 'set', a: { ...a, name: r.name || '', password: '', password2: '' }, authError: '' });
+    if (r.error === 'already_set') return this.setState({ authBusy: false, authMode: 'login', authError: 'A password is already set for this phone — sign in with it.' });
+    this.setState({ authBusy: false, authError: authMode === 'set' ? 'Couldn\u2019t set the password.' : 'Phone not recognised or wrong password.' });
+  }
+  signOut() { const t = this.state.auth && this.state.auth.token; if (t && this.B().supportLogout) this.B().supportLogout(t);
+    this.put('gaw_support_session', null); this.put('gaw_support_cache', null); this.setState({ auth: null, calls: [], authError: '' }); }
+
+  async saveCall(rec) {
+    const { auth } = this.state;
+    const r = this.B().supportPut ? await this.B().supportPut(auth.token, rec) : null;
+    if (r && r.ok) { this.flash(`Saved — ${rec.name}\u2019s call is on the log.`); this.sync(); return; }
+    if (r && r.error === 'auth') return this.expire();
+    const pending = [{ ...rec, id: 'p' + Date.now(), by: auth.name, byPhone: auth.phone, byEmail: auth.email, pending: true }, ...this.state.pending];
+    this.setState({ pending, sync: 'down' }); this.put('gaw_support_pending', pending);
+    this.flash('Saved on this device — will sync when you\u2019re back online.');
+  }
+
+  renderVals() {
+    const s = this.state, { f, a, auth, query } = s;
+    const calls = [...s.pending.map(c => ({ ...c, pending: true })), ...s.calls];
+    const p = this.clean(f.phone), phoneOk = p.length === 10;
+    const prior = phoneOk ? calls.filter(c => this.clean(c.phone) === p) : [];
+    const q = query.trim().toLowerCase();
+    const today = new Date().toDateString(), weekAgo = Date.now() - 7 * 86400000;
+    const oStyle = o => o === 'Resolved' ? ['rgba(127,191,154,0.15)', '#a8d5a2'] : o === 'Needs follow-up' ? ['rgba(224,132,132,0.15)', '#e8a9a9'] : ['rgba(143,127,214,0.2)', '#c9bdf5'];
+    const pill = on => on ? { border: 'rgba(213,183,124,0.6)', bg: 'rgba(213,183,124,0.16)', color: '#f2e3bb' } : { border: 'rgba(255,255,255,0.14)', bg: 'transparent', color: '#b9b1a0' };
+    const view = calls.filter(c => !q || [c.name, c.phone, c.topic, c.place].join(' ').toLowerCase().includes(q)).map(c => {
+      const [oBg, oColor] = oStyle(c.outcome);
+      const hasFollow = c.outcome === 'Needs follow-up' && !c.followDone;
+      const due = hasFollow && c.followDate && new Date(c.followDate) <= new Date();
+      const vol = c.helper === 'volunteer';
+      return { ...c, initial: (c.name || '?').trim()[0].toUpperCase(),
+        helperText: vol ? `Volunteer ${c.volName || '—'} · ${c.volPhone || ''}${c.volEmail ? ' · ' + c.volEmail : ''}` : `${c.by} (support desk)`,
+        byText: `${c.by}${c.byPhone ? ' · +91 ' + c.byPhone : ''}${c.byEmail ? ' · ' + c.byEmail : ''}`,
+        meta: `${c.phone}${c.place ? ' · ' + c.place : ''} · ${c.lang || ''} · ${this.fmt(c.at)}${c.mins ? ' · ' + c.mins + ' min' : ''}`,
+        oBg, oColor, hasFollow, pending: !!c.pending, border: due ? 'rgba(224,132,132,0.4)' : 'rgba(255,255,255,0.1)',
+        followText: `Follow up${c.followDate ? ' by ' + new Date(c.followDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : ''}${c.followNote ? ' — ' + c.followNote : ''}` };
+    });
+    const set = (k, v) => this.setState(st => ({ f: { ...st.f, [k]: v } }));
+    const setting = s.authMode === 'set';
+    return {
+      allowed: !!auth, denied: !auth,
+      a, authError: s.authError, authBusy: s.authBusy, authOpacity: s.authBusy ? 0.6 : 1,
+      settingPassword: setting, enteringPassword: !setting,
+      authTitle: setting ? 'Welcome, ' + (a.name || 'friend') : 'Sign in',
+      authSub: setting ? 'First time here — choose a password for this phone. You\u2019ll use it from now on.' : 'Phone number and the password you chose. First time? Enter just your phone.',
+      authButton: s.authBusy ? 'One moment…' : setting ? 'Set password & sign in' : 'Continue',
+      editAuth: e => { const k = e.currentTarget.dataset.k; this.setState(st => ({ a: { ...st.a, [k]: e.target.value }, authError: '' })); },
+      signIn: e => this.signIn(e), signOut: () => this.signOut(),
+      cancelSet: () => this.setState({ authMode: 'login', a: { phone: '', password: '', password2: '', email: '' }, authError: '' }),
+      whoName: auth ? auth.name : '', whoSub: auth ? '+91 ' + auth.phone : '', whoEmailLine: auth && auth.email ? auth.email : '',
+      helpers: [{ key: 'self', label: 'Me (support desk)' }, { key: 'volunteer', label: 'A volunteer' }].map(h => ({ ...h, ...pill(f.helper === h.key) })),
+      helperIsVolunteer: f.helper === 'volunteer',
+      pickHelper: e => set('helper', e.currentTarget.dataset.h),
+      supportPhone: this.props.supportPhone ?? '+91 98765 43210',
+      f, query, toast: s.toast,
+      phoneBorder: f.phone && !phoneOk ? 'rgba(224,132,132,0.6)' : 'rgba(255,255,255,0.12)',
+      known: prior.length > 0, knownText: prior.length ? `Called ${prior.length} time${prior.length > 1 ? 's' : ''} before — last about \u201c${prior[0].topic}\u201d on ${this.fmt(prior[0].at)}.` : '',
+      topics: this.TOPICS.map(t => ({ label: t, ...pill(f.topic === t) })),
+      outcomes: this.OUTCOMES.map(o => ({ label: o, ...pill(f.outcome === o) })),
+      needsFollow: f.outcome === 'Needs follow-up',
+      calls: view, empty: !view.length,
+      emptyText: s.sync === 'busy' ? 'Loading the call log…' : 'No calls logged yet. The first one you save appears here — and on every core-team member\u2019s desk.',
+      syncNote: s.sync === 'down' ? (s.pending.length ? `${s.pending.length} call${s.pending.length > 1 ? 's' : ''} waiting to sync — showing the last copy from this device.` : 'Offline — showing the last copy from this device.') : '',
+      retrySync: () => this.sync(),
+      statToday: calls.filter(c => new Date(c.at).toDateString() === today).length,
+      statWeek: calls.filter(c => new Date(c.at).getTime() >= weekAgo).length,
+      statFollow: calls.filter(c => c.outcome === 'Needs follow-up' && !c.followDone).length,
+      edit: e => set(e.currentTarget.dataset.k, e.target.value),
+      pickTopic: e => set('topic', e.currentTarget.dataset.t),
+      pickOutcome: e => set('outcome', e.currentTarget.dataset.o),
+      setQuery: e => this.setState({ query: e.target.value }),
+      clear: () => this.setState({ f: this.blank() }),
+      save: e => { e.preventDefault();
+        if (!f.name.trim() || !phoneOk || !f.topic || !f.asked.trim() || !f.helped.trim()) return this.flash('Name, 10-digit phone, topic, what they asked and how you helped are required.');
+        if (f.helper === 'volunteer' && (!f.volName.trim() || this.clean(f.volPhone).length !== 10)) return this.flash('Volunteer name and 10-digit phone are required.');
+        const rec = { ...f, phone: p, at: new Date(f.at).toISOString(), volPhone: f.helper === 'volunteer' ? this.clean(f.volPhone) : '', volName: f.helper === 'volunteer' ? f.volName.trim() : '', volEmail: f.helper === 'volunteer' ? f.volEmail.trim() : '' };
+        this.setState({ f: this.blank() }); this.saveCall(rec); },
+      resolve: async e => { const id = Number(e.currentTarget.dataset.id); const r = await this.B().supportResolve(auth.token, id);
+        if (r && r.ok) { this.flash('Follow-up marked done.'); this.sync(); } else this.flash('Couldn\u2019t reach the server.'); },
+      remove: async e => { const id = e.currentTarget.dataset.id; if (!confirm('Delete this call record?')) return;
+        if (String(id).startsWith('p')) { const pending = s.pending.filter(c => c.id !== id); this.setState({ pending }); this.put('gaw_support_pending', pending); return; }
+        const r = await this.B().supportDelete(auth.token, Number(id)); if (r && r.ok) this.sync(); else this.flash('Couldn\u2019t reach the server.'); },
+      exportCsv: () => { if (!calls.length) return this.flash('Nothing to export yet.');
+        const cols = ['at', 'name', 'phone', 'lang', 'place', 'member', 'mins', 'topic', 'asked', 'helped', 'helper', 'volName', 'volPhone', 'volEmail', 'outcome', 'followDate', 'followNote', 'followDone', 'by', 'byPhone', 'byEmail'];
+        const esc = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+        const csv = [cols.join(','), ...calls.map(c => cols.map(k => esc(c[k])).join(','))].join('\n');
+        const el = document.createElement('a'); el.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); el.download = `gaw-support-calls-${new Date().toISOString().slice(0, 10)}.csv`; el.click(); },
+    };
+  }
+}
+</script>
+</body>
+</html>
