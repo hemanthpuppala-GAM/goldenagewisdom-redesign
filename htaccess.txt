@@ -21,7 +21,17 @@ RewriteCond %{THE_REQUEST} \s/Launch\.dc\.html [NC]
 RewriteRule ^ /launch [R=301,L]
 RewriteCond %{THE_REQUEST} \s/Privacy\.dc\.html [NC]
 RewriteRule ^ /privacy [R=301,L]
-RewriteCond %{THE_REQUEST} \s/Peace\.dc\.html [NC]
+RewriteCond %{THE_REQUEST} \s/mass-meditation\.html [NC]
+RewriteRule ^ /peace [R=301,L]
+RewriteCond %{THE_REQUEST} \s/circle\.html [NC]
+RewriteRule ^ /circle [R=301,L]
+RewriteCond %{THE_REQUEST} \s/volunteer\.html [NC]
+RewriteRule ^ /volunteer [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Quantum(%20|\+|\s)Chain\.dc\.html [NC]
+RewriteRule ^ /circle [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Mass(%20|\+|\s)Meditation\.dc\.html [NC]
+RewriteRule ^ /peace [R=301,L]
+RewriteCond %{THE_REQUEST} \s/Peace(%20|\+|\s)v5\.dc\.html [NC]
 RewriteRule ^ /peace [R=301,L]
 RewriteCond %{THE_REQUEST} \s/Demo\.dc\.html [NC]
 RewriteRule ^ /demo [R=301,L]
@@ -33,11 +43,13 @@ RewriteRule ^film/?$ "Intro Film.dc.html" [L]
 RewriteRule ^join/?$ "Member Flow.dc.html" [L]
 RewriteRule ^launch/?$ "Launch.dc.html" [L]
 RewriteRule ^privacy/?$ "Privacy.dc.html" [L]
-RewriteRule ^peace/?$ "Peace.dc.html" [L]
+RewriteRule ^peace/?$ "mass-meditation.html" [L]
+RewriteRule ^circle/?$ "circle.html" [L]
 RewriteRule ^volunteer/?$ "volunteer.html" [L]
 RewriteRule ^demo/?$ "Demo.dc.html" [L]
 RewriteRule ^demo-video/?$ "Demo Video.dc.html" [L]
 RewriteRule ^$ "index.html" [L]
+RewriteRule ^desk/?$ "Support Desk.dc.html" [L]
 
 # --- Branded 404 ---
 ErrorDocument 404 /404.html
@@ -56,7 +68,7 @@ ErrorDocument 404 /404.html
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>
   # Images, fonts and audio never change in place — safe to freeze.
-  <FilesMatch "\.(webp|png|jpe?g|svg|ico|woff2?|mp3|wav|m4a)$">
+  <FilesMatch "\.(webp|png|jpe?g|svg|ico|woff2?|mp3|wav|m4a|mp4|webm)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   # Code must be able to change: an hour, revalidated. No hashed filenames yet.
@@ -76,6 +88,7 @@ ErrorDocument 404 /404.html
 
 # --- Correct types ---
 <IfModule mod_mime.c>
+  AddType video/mp4 .mp4
   AddType image/webp .webp
   AddType application/json .json
   AddType font/woff2 .woff2
