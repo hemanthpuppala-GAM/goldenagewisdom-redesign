@@ -1,0 +1,59 @@
+name: Backup live site
+
+# Nightly copy of public_html/goldenagewisdom.org (live site + staging, minus
+# staging's PHP vendor/ folder) kept as an encrypted artifact for 30 days.
+# This repo is public, so the archive is encrypted with BACKUP_PASSPHRASE —
+# without that secret the job fails rather than publish an unencrypted copy.
+# Restore:  gpg -d goldenagewisdom-*.tar.gz.gpg | tar -xz
+on:
+  schedule:
+    - cron: "17 9 * * *"   # 09:17 UTC daily (about 4 AM US Central)
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the encryption passphrase
+        env:
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          if [ -z "$BACKUP_PASSPHRASE" ]; then
+            echo "::error::Add the BACKUP_PASSPHRASE repository secret first."
+            exit 1
+          fi
+
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Download site over FTPS
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          mkdir site
+          # Shared-hosting certificates rarely match the FTP hostname, so the
+          # certificate is not verified (same as the deploy action's default).
+          lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; \
+            set ssl:verify-certificate no; set net:max-retries 3; set net:timeout 30; \
+            open -u \"$FTP_USERNAME\" --env-password \"$FTP_SERVER\"; \
+            mirror --parallel=4 -X staging/backend/vendor/ -X staging/backend/storage/framework/ ./ site"
+          echo "files: $(find site -type f | wc -l)  size: $(du -sh site | cut -f1)"
+
+      - name: Encrypt
+        env:
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          STAMP=$(date -u +%Y-%m-%d)
+          echo "STAMP=$STAMP" >> "$GITHUB_ENV"
+          tar -czf - site | gpg --batch --yes --pinentry-mode loopback \
+            --passphrase "$BACKUP_PASSPHRASE" --symmetric --cipher-algo AES256 \
+            -o "goldenagewisdom-$STAMP.tar.gz.gpg"
+          ls -la goldenagewisdom-*.gpg
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goldenagewisdom-backup-${{ env.STAMP }}
+          path: goldenagewisdom-*.tar.gz.gpg
+          retention-days: 30

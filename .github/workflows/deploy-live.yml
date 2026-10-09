@@ -1,0 +1,51 @@
+name: Deploy live site
+
+# Manual only. Uploads the site to public_html/goldenagewisdom.org over FTPS.
+# "dry-run" (default) lists what would change without touching the server.
+# Never deletes files it did not upload itself, so staging/, .well-known/,
+# data/ and server-only assets are left alone.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run = show what would change · deploy = upload"
+        type: choice
+        options: [dry-run, deploy]
+        default: dry-run
+
+concurrency:
+  group: deploy-live
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Site checks
+        run: python3 tools/check_site.py
+
+      - name: Stage site files
+        run: |
+          mkdir _site
+          git archive HEAD | tar -x -C _site
+          cd _site
+          # Repo tooling, docs and stray duplicates never go to the server.
+          rm -rf .github .claude tools .gitignore .thumbnail error_log download \
+                 *.md "READ ME FIRST.txt" "READ ME.txt" UPLOAD-INSTRUCTIONS.txt \
+                 "index (3).html" "Home Mandala.dc (1).html" "intro-film (1).jsx"
+          mv htaccess.txt .htaccess
+          ls -la
+
+      - name: Upload to cPanel (${{ inputs.mode }})
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: _site/
+          # The FTP account's home is public_html/goldenagewisdom.org.
+          server-dir: ./
+          dry-run: ${{ inputs.mode != 'deploy' }}
